@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+.top_button {
+	display: inline-block;
+	cursor: pointer;
+	color: #FFFFFF;
+	font-family: Arial;
+	font-size: 23px;
+	border-radius: 5px;
+	border: ridge 1px #ffffff;
+	text-shadow: 1px 1px 0px #528ecc;
+	box-shadow: inset 1px 1px 0px -50px #bbdaf7;
+	width: 100px;
+	height: 90px;
+}
+
+.top_button:active {
+	position: relative;
+	top: 1px;
+}
+
+.top_button-icon {
+	border-radius: 5px 5px 0 0;
+	display: block;
+	text-align: center;
+	font-size: 46px;
+	padding: 0px 0px;
+}
+
+.top_button-icon i {
+	position: relative;
+	top: 5px;
+}
+
+.btn_home {
+	background: linear-gradient(180deg, #7169e0 5%, #967dda 100%);
+}
+
+.tbtn_home:hover {
+	background: linear-gradient(180deg, #967dda 5%, #7169e0 100%);
+}
+
+.btn_home-text {
+	display: block;
+	text-align: center;
+	padding: 16px 50px;
+}
+
+.btn_board {
+	background: linear-gradient(180deg, #4bc8d6 5%, #4fa1e4 100%);
+}
+
+.btn_board:hover {
+	background: linear-gradient(180deg, #4fa1e4 5%, #4bc8d6 100%);
+}
+
+.btn_board-text {
+	display: block;
+	text-align: center;
+	padding: 16px 32px;
+}
+
+.btn_approval {
+	background: linear-gradient(180deg, #61bafe 5%, #368bfb 100%);
+}
+
+.btn_approval:hover {
+	background: linear-gradient(180deg, #368bfb 5%, #61bafe 100%);
+}
+
+.btn_approval-text {
+	display: block;
+	text-align: center;
+	padding: 14px 19px;
+}
+
+.btn_poll {
+	background: linear-gradient(180deg, #6a8afb 5%, #72ade4 100%);
+}
+
+.btn_poll:hover {
+	background: linear-gradient(180deg, #72ade4 5%, #6a8afb 100%);
+}
+
+.btn_poll-text {
+	display: block;
+	text-align: center;
+	padding: 16px 39px;
+}
+
+.btn_통계 {
+	background: linear-gradient(180deg, #ba85fa 5%, #5b61c7 100%);
+}
+
+.btn_통계:hover {
+	background: linear-gradient(180deg, #5b61c7 5%, #ba85fa 100%);
+}
+
+.btn_통계-text {
+	display: block;
+	text-align: center;
+	padding: 16px 39px;
+}
+
+.btn_근태 {
+	background: linear-gradient(180deg, #5993fe 5%, #7bace4 100%);
+}
+
+.btn_근태:hover {
+	background: linear-gradient(180deg, #7bace4 5%, #5993fe 100%);
+}
+
+.btn_근태-text {
+	display: block;
+	text-align: center;
+	padding: 16px 39px;
+}
+
+.btn_채팅 {
+	background: linear-gradient(180deg, #46cfd9 5%, #48b8c7 100%);
+}
+
+.btn_채팅:hover {
+	background: linear-gradient(180deg, #48b8c7 5%, #46cfd9 100%);
+}
+
+.btn_채팅-text {
+	display: block;
+	text-align: center;
+	padding: 16px 39px;
+}
+
+.btn_my {
+	background: linear-gradient(180deg, #63e2ed 5%, #7ac9cf 100%);
+}
+
+.btn_my:hover {
+	background: linear-gradient(180deg, #7ac9cf 5%, #63e2ed 100%);
+}
+
+.btn_my-text {
+	display: block;
+	text-align: center;
+	padding: 16px 39px;
+}
