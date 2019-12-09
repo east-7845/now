@@ -11,25 +11,22 @@
 
 </head>
 <style>
-.container_content {
+.container_footer {
 	width: 80vw;
-	height: 650px;
+	height: 100px;
 	text-align: center;
 	padding-right: 0px;
 	padding-left: 0px;
 	margin-left: auto;
 	margin-right: auto;
-	background-color: black;
+	background-color: red;
 }
 
-/* .top_menu { */
-/* 	display: inline-block; */
-/* 	margin-left: 15px; */
-/* } */
+
 </style>
 
 <body>
-	<div class="container_content">
+	<div class="container_footer">
 		
 	</div>
 </body>
