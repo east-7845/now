@@ -11,7 +11,7 @@
 	text-shadow: 1px 1px 0px #528ecc;
 	box-shadow: inset 1px 1px 0px -50px #bbdaf7;
 	width: 100px;
-	height: 100px;
+	height: 90px;
 }
 
 .top_button:active {
@@ -36,7 +36,7 @@
 	background: linear-gradient(180deg, #7169e0 5%, #967dda 100%);
 }
 
-.tbtn_home:hover {
+.btn_home:hover {
 	background: linear-gradient(180deg, #967dda 5%, #7169e0 100%);
 }
 
