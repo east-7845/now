@@ -8,11 +8,10 @@
 </head>
 <body>
 	<div class="container">
-		<%-- <%@include file="/WEB-INF/inc/top_menu.jsp"%> --%>
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
-		<!-- <div class="page-header">
-			<h1>온 걸 환영</h1>
-		</div> -->
 	</div>
+<!-- 	<div class="container_content"> -->
+<%-- 		<%@include file="/WEB-INF/inc/now_content.jsp"%> --%>
+<!-- 	</div> -->
 </body>
 </html>
