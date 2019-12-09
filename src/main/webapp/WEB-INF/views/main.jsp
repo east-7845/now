@@ -4,15 +4,17 @@
 <html lang="ko">
 <head>
 <%@include file="/WEB-INF/inc/common_header.jsp"%>
-<title>자유 게시판</title>
+<title>now</title>
 </head>
 <body>
 	<div class="container">
-		<%-- <%@include file="/WEB-INF/inc/top_menu.jsp"%> --%>
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
-		<!-- <div class="page-header">
-			<h1>온 걸 환영</h1>
-		</div> -->
+	</div>
+	<div class="container_content">
+		<%@include file="/WEB-INF/inc/now_content.jsp"%>
+	</div>
+	<div class="container_footer">
+		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
 </body>
 </html>
