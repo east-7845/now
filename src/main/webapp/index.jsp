@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
 <%@include file="/WEB-INF/inc/common_header.jsp"%>
-<title>자유 게시판</title>
+<title>now</title>
 </head>
 <body>
 	<div class="container">
