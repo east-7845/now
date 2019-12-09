@@ -12,21 +12,30 @@
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
-	<!-- <resources mapping="/resources/**" location="/resources/" /> -->
-	<resources mapping="/bootstrap-3.3.2/**" location="/bootstrap-3.3.2/" />
-	<resources mapping="/js/**" location="/js/" />
-	<resources mapping="/images/**" location="/images/" />
-	<resources mapping="/css/**" location="/css/" />
-
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<resources mapping="/bootstrap-3.3.2/**"  location="/bootstrap-3.3.2/" />
+	<resources mapping="/js/**"  location="/js/" />
+	<resources mapping="/images/**"  location="/images/" />
+	<resources mapping="/css/**"  location="/css/" />
+    
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.now" />
+	<context:component-scan base-package="com.now" use-default-filters="false" >
+		<context:include-filter type="annotation" 
+		                        expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 	
-	
+	<beans:bean id="multipartResolver" 
+	            class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 	
 </beans:beans>
+
+
+
+
+
+
+
+
