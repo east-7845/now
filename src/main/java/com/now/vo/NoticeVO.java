@@ -1,4 +1,4 @@
-package com.now.noticeboard.vo;
+package com.now.vo;
 
 public class NoticeVO {
 	                                                              

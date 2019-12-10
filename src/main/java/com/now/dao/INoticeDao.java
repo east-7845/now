@@ -1,6 +1,6 @@
-package com.test.noticeboard.dao;
+package com.now.dao;
 
-import com.now.noticeboard.vo.NoticeVO;
+import com.now.vo.NoticeVO;
 
 public interface INoticeDao {
 

@@ -1,8 +1,8 @@
-package com.now.freeboard.vo;
+package com.now.vo;
 
 public class FreeBoardVO {
 	
-	private int fr_no; /* 작성자 */
+	private int fr_no; /* 게시글 */
 	private String fr_title = "";
 	private String fr_parent_no = ""; /* 작성자 */
 	private String fr_pass = ""; /* 비밀번호 */

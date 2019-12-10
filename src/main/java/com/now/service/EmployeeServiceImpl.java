@@ -1,10 +1,10 @@
-package com.now.employee.service;
+package com.now.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.now.employee.dao.IEmployeeDao;
-import com.now.employee.vo.EmployeeVO;
+import com.now.dao.IEmployeeDao;
+import com.now.vo.EmployeeVO;
 
 @Service
 public class EmployeeServiceImpl implements IEmployeeService {

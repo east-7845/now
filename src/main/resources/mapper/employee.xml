@@ -3,9 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.now.employee.dao.IEmployeeDao">
+<mapper namespace="com.now.dao.IEmployeeDao">
 
-	<select id="selectTest" resultType="com.now.employee.vo.EmployeeVO">
+	<select id="selectTest" resultType="com.now.vo.EmployeeVO">
 		SELECT *
 		  FROM EMPLOYEE
 	</select>
