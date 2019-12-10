@@ -1,4 +1,4 @@
-package com.now.web.freeboard;
+package com.now.web;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.now.service.freeboard.IFreeBoardService;
-import com.now.vo.freeboard.FreeBoardVO;
+import com.now.service.IFreeBoardService;
+import com.now.vo.FreeBoardVO;
 
 @Controller
 public class FreeBoardController {

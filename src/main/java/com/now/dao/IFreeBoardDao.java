@@ -1,10 +1,13 @@
-package com.now.service.freeboard;
+package com.now.dao;
 
 import java.util.List;
+import org.apache.ibatis.annotations.Mapper;
 
-import com.now.vo.freeboard.FreeBoardVO;
+import com.now.vo.FreeBoardVO;
 
-public interface IFreeBoardService {
+@Mapper
+public interface IFreeBoardDao {
+
 	/**
 	 * 자유게시판 전체 검색
 	 * @return

@@ -1,4 +1,4 @@
-package com.now.vo.freeboard;
+package com.now.vo;
 
 public class FreeBoardVO {
 	

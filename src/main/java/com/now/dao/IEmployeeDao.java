@@ -1,8 +1,8 @@
-package com.now.dao.employee;
+package com.now.dao;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.now.vo.employee.EmployeeVO;
+import com.now.vo.EmployeeVO;
 
 @Mapper
 public interface IEmployeeDao {

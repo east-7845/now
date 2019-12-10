@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="com.now.dao.freeboard.IFreeBoardDao">
+<mapper namespace="com.now.dao.IFreeBoardDao">
 	<sql id="PAGING_PREFIX">
 		SELECT * 
 		  FROM ( SELECT rownum rnum, a.* 
@@ -18,7 +18,7 @@
 	    ]]>
 	</sql>
 	
-	<select id="selectFreeBoardList" resultType="com.now.vo.freeboard.FreeBoardVO">
+	<select id="selectFreeBoardList" resultType="com.now.vo.FreeBoardVO">
 		<!-- <include refid="PAGING_PREFIX"/> -->
 		SELECT
 			   FR_NO
@@ -37,7 +37,7 @@
 		<!-- <include refid="PAGING_SUFFIX"/> -->
 	</select>
 	
-	<select id="selectFreeBoard" resultType="com.now.vo.freeboard.FreeBoardVO">
+	<select id="selectFreeBoard" resultType="com.now.vo.FreeBoardVO">
 		SELECT
 			   FR_NO
 			 , FR_TITLE

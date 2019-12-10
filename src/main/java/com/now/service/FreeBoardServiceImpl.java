@@ -1,12 +1,12 @@
-package com.now.service.freeboard;
+package com.now.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.now.dao.freeboard.IFreeBoardDao;
-import com.now.vo.freeboard.FreeBoardVO;
+import com.now.dao.IFreeBoardDao;
+import com.now.vo.FreeBoardVO;
 
 @Service
 public class FreeBoardServiceImpl implements IFreeBoardService{

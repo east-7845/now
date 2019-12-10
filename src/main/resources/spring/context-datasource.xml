@@ -32,7 +32,7 @@
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" >
-		<property name="basePackage" value="com.now.dao.*" />
+		<property name="basePackage" value="com.now.dao" />
 		<property name="annotationClass" value="org.apache.ibatis.annotations.Mapper" />		
 	</bean>
 
