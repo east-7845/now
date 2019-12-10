@@ -31,7 +31,13 @@
 	margin-left: 15px;
 }
 </style>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	document.getElementsByClassName("top_menu")[1].onclick = function(){
+		location.href="freeBoardList";
+	}
+});
+</script>
 <body>
 	<div class="container">
 		<div style="border: 1px solid black; height: 70px;">
