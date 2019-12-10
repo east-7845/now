@@ -27,7 +27,6 @@
 
 <body>
 	<div class="container_footer">
-		
 	</div>
 </body>
 </html>

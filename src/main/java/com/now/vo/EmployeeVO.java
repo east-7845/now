@@ -2,162 +2,173 @@ package com.now.vo;
 
 import java.util.Date;
 
+
 public class EmployeeVO {
 	
-	private String EMP_NO;
-	private String EMP_ID;
-	private String EMP_PASS;
-	private String EMP_NAME;
-	private int EMP_REGNO1;
-	private int EMP_REGNO2;
-	private int EMP_ZIP;
-	private String EMP_ADD1;
-	private String EMP_ADD2;
-	private String EMP_HP;
-	private String EMP_HP_SUB;
-	private String EMP_MAIL;
-	private String EMP_IMG;
-	private String EMP_BANKNAME;
-	private String EMP_BANKNUM;
-	private String EMP_SALARY;
-	private int EMP_VACATION;
-	private String EMP_RANK;
-	private String EMP_DEPARTMENT;
-	private Date EMP_HIREDATE;
-	private Date EMP_FIREDATE;
-	private String EMP_YN;
+	private String emp_no;
+	private String emp_id;
+	private String emp_pass;
+	private String emp_name;
+	private int emp_regno1;
+	private int emp_regno2;
+	private int emp_zip;
+	private String emp_add1;
+	private String emp_add2;
+	private String emp_hp;
+	private String emp_hp_sub;
+	private String emp_mail;
+	private String emp_img;
+	private String emp_bankname;
+	private String emp_banknum;
+	private String emp_salary;
+	private int emp_vacation;
+	private String emp_rank;
+	private String emp_department;
+	private Date emp_hiredate;
+	private Date emp_firedate;
+	private String emp_yn;
 	
-	public String getEMP_NO() {
-		return EMP_NO;
+	private String message;
+	
+	public String getMessage() {
+		return message;
 	}
-	public void setEMP_NO(String eMP_NO) {
-		EMP_NO = eMP_NO;
+	public EmployeeVO setMessage(String message) {
+		this.message = message;
+		return this;
 	}
-	public String getEMP_ID() {
-		return EMP_ID;
+	
+	public String getEmp_no() {
+		return emp_no;
 	}
-	public void setEMP_ID(String eMP_ID) {
-		EMP_ID = eMP_ID;
+	public void setEmp_no(String emp_no) {
+		this.emp_no = emp_no;
 	}
-	public String getEMP_PASS() {
-		return EMP_PASS;
+	public String getEmp_id() {
+		return emp_id;
 	}
-	public void setEMP_PASS(String eMP_PASS) {
-		EMP_PASS = eMP_PASS;
+	public void setEmp_id(String emp_id) {
+		this.emp_id = emp_id;
 	}
-	public String getEMP_NAME() {
-		return EMP_NAME;
+	public String getEmp_pass() {
+		return emp_pass;
 	}
-	public void setEMP_NAME(String eMP_NAME) {
-		EMP_NAME = eMP_NAME;
+	public void setEmp_pass(String emp_pass) {
+		this.emp_pass = emp_pass;
 	}
-	public int getEMP_REGNO1() {
-		return EMP_REGNO1;
+	public String getEmp_name() {
+		return emp_name;
 	}
-	public void setEMP_REGNO1(int eMP_REGNO1) {
-		EMP_REGNO1 = eMP_REGNO1;
+	public void setEmp_name(String emp_name) {
+		this.emp_name = emp_name;
 	}
-	public int getEMP_REGNO2() {
-		return EMP_REGNO2;
+	public int getEmp_regno1() {
+		return emp_regno1;
 	}
-	public void setEMP_REGNO2(int eMP_REGNO2) {
-		EMP_REGNO2 = eMP_REGNO2;
+	public void setEmp_regno1(int emp_regno1) {
+		this.emp_regno1 = emp_regno1;
 	}
-	public int getEMP_ZIP() {
-		return EMP_ZIP;
+	public int getEmp_regno2() {
+		return emp_regno2;
 	}
-	public void setEMP_ZIP(int eMP_ZIP) {
-		EMP_ZIP = eMP_ZIP;
+	public void setEmp_regno2(int emp_regno2) {
+		this.emp_regno2 = emp_regno2;
 	}
-	public String getEMP_ADD1() {
-		return EMP_ADD1;
+	public int getEmp_zip() {
+		return emp_zip;
 	}
-	public void setEMP_ADD1(String eMP_ADD1) {
-		EMP_ADD1 = eMP_ADD1;
+	public void setEmp_zip(int emp_zip) {
+		this.emp_zip = emp_zip;
 	}
-	public String getEMP_ADD2() {
-		return EMP_ADD2;
+	public String getEmp_add1() {
+		return emp_add1;
 	}
-	public void setEMP_ADD2(String eMP_ADD2) {
-		EMP_ADD2 = eMP_ADD2;
+	public void setEmp_add1(String emp_add1) {
+		this.emp_add1 = emp_add1;
 	}
-	public String getEMP_HP() {
-		return EMP_HP;
+	public String getEmp_add2() {
+		return emp_add2;
 	}
-	public void setEMP_HP(String eMP_HP) {
-		EMP_HP = eMP_HP;
+	public void setEmp_add2(String emp_add2) {
+		this.emp_add2 = emp_add2;
 	}
-	public String getEMP_HP_SUB() {
-		return EMP_HP_SUB;
+	public String getEmp_hp() {
+		return emp_hp;
 	}
-	public void setEMP_HP_SUB(String eMP_HP_SUB) {
-		EMP_HP_SUB = eMP_HP_SUB;
+	public void setEmp_hp(String emp_hp) {
+		this.emp_hp = emp_hp;
 	}
-	public String getEMP_MAIL() {
-		return EMP_MAIL;
+	public String getEmp_hp_sub() {
+		return emp_hp_sub;
 	}
-	public void setEMP_MAIL(String eMP_MAIL) {
-		EMP_MAIL = eMP_MAIL;
+	public void setEmp_hp_sub(String emp_hp_sub) {
+		this.emp_hp_sub = emp_hp_sub;
 	}
-	public String getEMP_IMG() {
-		return EMP_IMG;
+	public String getEmp_mail() {
+		return emp_mail;
 	}
-	public void setEMP_IMG(String eMP_IMG) {
-		EMP_IMG = eMP_IMG;
+	public void setEmp_mail(String emp_mail) {
+		this.emp_mail = emp_mail;
 	}
-	public String getEMP_BANKNAME() {
-		return EMP_BANKNAME;
+	public String getEmp_img() {
+		return emp_img;
 	}
-	public void setEMP_BANKNAME(String eMP_BANKNAME) {
-		EMP_BANKNAME = eMP_BANKNAME;
+	public void setEmp_img(String emp_img) {
+		this.emp_img = emp_img;
 	}
-	public String getEMP_BANKNUM() {
-		return EMP_BANKNUM;
+	public String getEmp_bankname() {
+		return emp_bankname;
 	}
-	public void setEMP_BANKNUM(String eMP_BANKNUM) {
-		EMP_BANKNUM = eMP_BANKNUM;
+	public void setEmp_bankname(String emp_bankname) {
+		this.emp_bankname = emp_bankname;
 	}
-	public String getEMP_SALARY() {
-		return EMP_SALARY;
+	public String getEmp_banknum() {
+		return emp_banknum;
 	}
-	public void setEMP_SALARY(String eMP_SALARY) {
-		EMP_SALARY = eMP_SALARY;
+	public void setEmp_banknum(String emp_banknum) {
+		this.emp_banknum = emp_banknum;
 	}
-	public int getEMP_VACATION() {
-		return EMP_VACATION;
+	public String getEmp_salary() {
+		return emp_salary;
 	}
-	public void setEMP_VACATION(int eMP_VACATION) {
-		EMP_VACATION = eMP_VACATION;
+	public void setEmp_salary(String emp_salary) {
+		this.emp_salary = emp_salary;
 	}
-	public String getEMP_RANK() {
-		return EMP_RANK;
+	public int getEmp_vacation() {
+		return emp_vacation;
 	}
-	public void setEMP_RANK(String eMP_RANK) {
-		EMP_RANK = eMP_RANK;
+	public void setEmp_vacation(int emp_vacation) {
+		this.emp_vacation = emp_vacation;
 	}
-	public String getEMP_DEPARTMENT() {
-		return EMP_DEPARTMENT;
+	public String getEmp_rank() {
+		return emp_rank;
 	}
-	public void setEMP_DEPARTMENT(String eMP_DEPARTMENT) {
-		EMP_DEPARTMENT = eMP_DEPARTMENT;
+	public void setEmp_rank(String emp_rank) {
+		this.emp_rank = emp_rank;
 	}
-	public Date getEMP_HIREDATE() {
-		return EMP_HIREDATE;
+	public String getEmp_department() {
+		return emp_department;
 	}
-	public void setEMP_HIREDATE(Date eMP_HIREDATE) {
-		EMP_HIREDATE = eMP_HIREDATE;
+	public void setEmp_department(String emp_department) {
+		this.emp_department = emp_department;
 	}
-	public Date getEMP_FIREDATE() {
-		return EMP_FIREDATE;
+	public Date getEmp_hiredate() {
+		return emp_hiredate;
 	}
-	public void setEMP_FIREDATE(Date eMP_FIREDATE) {
-		EMP_FIREDATE = eMP_FIREDATE;
+	public void setEmp_hiredate(Date emp_hiredate) {
+		this.emp_hiredate = emp_hiredate;
 	}
-	public String getEMP_YN() {
-		return EMP_YN;
+	public Date getEmp_firedate() {
+		return emp_firedate;
 	}
-	public void setEMP_YN(String eMP_YN) {
-		EMP_YN = eMP_YN;
+	public void setEmp_firedate(Date emp_firedate) {
+		this.emp_firedate = emp_firedate;
+	}
+	public String getEmp_yn() {
+		return emp_yn;
+	}
+	public void setEmp_yn(String emp_yn) {
+		this.emp_yn = emp_yn;
 	}
 	
 }
