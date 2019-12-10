@@ -6,13 +6,11 @@ public class NoticeVO {
 		private String nt_title = "";
 		private String	nt_content = "";
 		private int nt_hit;
-		private int nt_reg_date;
-		private int nt_mod_date;
+		private String nt_reg_date;
+		private String nt_mod_date;
 		private String nt_class;
 		private String nt_writer;
 		private String	 nt_del_yn;
-		
-		
 		public int getNt_no() {
 			return nt_no;
 		}
@@ -25,10 +23,10 @@ public class NoticeVO {
 		public int getNt_hit() {
 			return nt_hit;
 		}
-		public int getNt_reg_date() {
+		public String getNt_reg_date() {
 			return nt_reg_date;
 		}
-		public int getNt_mod_date() {
+		public String getNt_mod_date() {
 			return nt_mod_date;
 		}
 		public String getNt_class() {
@@ -52,10 +50,10 @@ public class NoticeVO {
 		public void setNt_hit(int nt_hit) {
 			this.nt_hit = nt_hit;
 		}
-		public void setNt_reg_date(int nt_reg_date) {
+		public void setNt_reg_date(String nt_reg_date) {
 			this.nt_reg_date = nt_reg_date;
 		}
-		public void setNt_mod_date(int nt_mod_date) {
+		public void setNt_mod_date(String nt_mod_date) {
 			this.nt_mod_date = nt_mod_date;
 		}
 		public void setNt_class(String nt_class) {
@@ -68,4 +66,6 @@ public class NoticeVO {
 			this.nt_del_yn = nt_del_yn;
 		}
 
+		
+		
 }

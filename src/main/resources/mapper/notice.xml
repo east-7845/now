@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.now.dao.noticeboard.INoticeDao">
+	<select id="selectNoticeList" resultType="com.now.vo.noticeboard.NoticeVO">	
+			SELECT nt_no,
+		         nt_title,
+		         nt_content,
+		         nt_hit,
+					    nt_reg_date,
+					    nt_mod_date,
+					    nt_class,
+					    nt_del_yn,
+					    nt_writer
+	   	FROM notice	
+	  WHERE nt_del_yn = 'N'
+	
+	</select>
+
+</mapper>

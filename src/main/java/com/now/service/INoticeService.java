@@ -1,16 +1,12 @@
-package com.now.dao;
+package com.now.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.now.vo.NoticeVO;
 
-@Mapper
-public interface INoticeDao {
+public interface INoticeService {
 	
-		public List<NoticeVO> selectNoticeList() throws Exception;
-
+	 public List<NoticeVO> selectNoticeList() throws Exception;
 		
 		public NoticeVO selectNotice(int nt_no) throws Exception;
 
@@ -22,5 +18,4 @@ public interface INoticeDao {
 
 
 		public int deleteNotice (NoticeVO noticeVO) throws Exception;
-
 }
