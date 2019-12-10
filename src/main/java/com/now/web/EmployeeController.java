@@ -9,6 +9,6 @@ import com.now.service.IEmployeeService;
 public class EmployeeController {
 	
 	@Autowired
-	IEmployeeService employee_service;
+	IEmployeeService employeeService;
 	
 }
