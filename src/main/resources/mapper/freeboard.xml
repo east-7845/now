@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.now.dao.freeboard.IFreeBoardDao">
+	<sql id="PAGING_PREFIX">
+		SELECT * 
+		  FROM ( SELECT rownum rnum, a.* 
+		           FROM (
+	</sql>
+	
+	<sql id="PAGING_SUFFIX">
+		<![CDATA[
+	                    ) a WHERE rownum <= #{endRow} 
+	           ) b 
+	      WHERE rnum >= #{startRow}
+	    ]]>
+	</sql>
+	
+	<select id="selectFreeBoardList" resultType="com.now.vo.freeboard.FreeBoardVO">
+		<!-- <include refid="PAGING_PREFIX"/> -->
+		SELECT
+			   FR_NO
+			 , FR_TITLE
+			 , FR_PARENT_NO
+			 , FR_PASS
+			 , FR_CONTENT
+			 , FR_HIT
+			 , FR_IP
+			 , TO_CHAR(FR_REG_DATE, 'yyyy-mm-dd') AS FR_REG_DATE
+			 , TO_CHAR(FR_MOD_DATE, 'yyyy-mm-dd') AS FR_MOD_DATE
+			 , FR_DEL_YN
+			 , FR_CLASS
+		  FROM FREEBOARD
+		WHERE FR_DEL_YN = 'N'
+		<!-- <include refid="PAGING_SUFFIX"/> -->
+	</select>
+	
+	<select id="selectFreeBoard" resultType="com.now.vo.freeboard.FreeBoardVO">
+		SELECT
+			   FR_NO
+			 , FR_TITLE
+			 , FR_PARENT_NO
+			 , FR_PASS
+			 , FR_CONTENT
+			 , FR_HIT
+			 , FR_IP
+			 , TO_CHAR(FR_REG_DATE, 'yyyy-mm-dd') AS FR_REG_DATE,
+			 , TO_CHAR(FR_MOD_DATE, 'yyyy-mm-dd') AS FR_MOD_DATE,
+			 , FR_DEL_YN
+			 , FR_CLASS
+		  FROM FREEBOARD
+		WHERE FR_NO = #{FR_NO}
+	</select>
+	
+	<insert id="insertFreeBoard">
+		<selectKey keyProperty="fr_no" resultType="int"
+			order="BEFORE">
+			select seq_freeboard.nextval from dual
+		</selectKey>
+		INSERT INTO FREEBOARD(
+			   FR_NO, FR_TITLE
+			 , FR_PARENT_NO, FR_PASS
+			 , FR_CONTENT, FR_HIT
+			 , FR_IP, TO_CHAR(FR_REG_DATE, 'yyyy-mm-dd') AS FR_REG_DATE
+			 , TO_CHAR(FR_MOD_DATE, 'yyyy-mm-dd') AS FR_MOD_DATE, FR_DEL_YN, FR_CLASS
+		)VALUES (
+			#{FR_NO}, #{FR_TITLE}
+			,#{FR_PARENT_NO}, #{FR_PASS}
+			,#{FR_CONTENT}, #{FR_HIT}
+			,'0.0.0.0.0.1', SYSDATE
+			,'null','null'
+		) 
+	</insert>
+	
+</mapper>

@@ -1,4 +1,4 @@
-package com.now.employee.vo;
+package com.now.vo.employee;
 
 import java.util.Date;
 

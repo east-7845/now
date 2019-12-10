@@ -1,9 +1,9 @@
-package com.now.employee.web;
+package com.now.web.employee;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import com.now.employee.service.IEmployeeService;
+import com.now.service.employee.IEmployeeService;
 
 @Controller
 public class EmployeeController {

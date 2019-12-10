@@ -1,6 +1,6 @@
-package com.now.employee.service;
+package com.now.service.employee;
 
-import com.now.employee.vo.EmployeeVO;
+import com.now.vo.employee.EmployeeVO;
 
 public interface IEmployeeService {
 
