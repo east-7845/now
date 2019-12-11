@@ -36,7 +36,12 @@ $(document).ready(function(){
 	document.getElementsByClassName("top_menu")[1].onclick = function(){
 		location.href="freeBoardList";
 	}
+	
+	document.getElementsByClassName("top_menu")[7].onclick = function(){
+		location.href="myPage";
+	}
 });
+
 </script>
 <body>
 	<div class="container">
