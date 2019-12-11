@@ -61,13 +61,13 @@
 		</selectKey>
 		INSERT INTO FREEBOARD(
 			   FR_NO, FR_TITLE
-			 , FR_PARENT_NO, FR_PASS
+			 , FR_PARENT_NO
 			 , FR_CONTENT, FR_HIT
 			 , FR_IP, TO_CHAR(FR_REG_DATE, 'yyyy-mm-dd') AS FR_REG_DATE
 			 , TO_CHAR(FR_MOD_DATE, 'yyyy-mm-dd') AS FR_MOD_DATE, FR_DEL_YN, FR_CLASS
 		)VALUES (
 			#{FR_NO}, #{FR_TITLE}
-			,#{FR_PARENT_NO}, #{FR_PASS}
+			,#{FR_PARENT_NO}
 			,#{FR_CONTENT}, #{FR_HIT}
 			,'0.0.0.0.0.1', SYSDATE
 			,'null','null'
@@ -75,15 +75,20 @@
 	</insert>
 	
 	<update id="updateFreeBoard" parameterType="com.now.vo.FreeBoardVO">
-		UPDATE SET
-			   FR_TITLE     = #{FR_TITLE}
-			 , FR_PASS      = #{FR_PASS}
-			 , FR_CONTENT   = #{FR_CONTENT}
-			 , FR_MOD_DATE  = SYSTEM
+		UPDATE freeboard 
+			SET
+			   FR_TITLE     = #{fr_title}
+			 , FR_CONTENT   = #{fr_content}
+			 , FR_MOD_DATE  = SYSDATE
 			 , FR_DEL_YN    = 'N'
 			 , FR_CLASS     = 'NULL'
-		  FROM FREEBOARD
-	  	 WHERE FR_NO = #{BO_NO}
+	  	 WHERE FR_NO = #{fr_no}
+	</update>
+	
+	<update id="increaseBoardCount" parameterType="int">
+		UPDATE freeboard
+		SET fr_hit = fr_hit + 1
+		WHERE fr_no = #{fr_no}
 	</update>
 	
 </mapper>

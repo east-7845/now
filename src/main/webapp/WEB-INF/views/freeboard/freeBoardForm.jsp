@@ -18,7 +18,7 @@
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
 	<div class="container_content">
-		<form:form action="freeBoardInsert.do" >
+		<form:form action="freeBoardRegist" >
 			<table>
 				<colgroup>
 					<col width="">

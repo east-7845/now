@@ -30,13 +30,14 @@ public class FreeBoardServiceImpl implements IFreeBoardService{
 
 	@Override
 	public int updateFreeBoard(FreeBoardVO freeVO) throws Exception{
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt = boardDao.updateFreeBoard(freeVO);
+		
+		return cnt;
 	}
 
 	@Override
 	public int insertFreeBoard(FreeBoardVO freeVO) throws Exception{
-		// TODO Auto-generated method stub
+		int cnt = boardDao.insertFreeBoard(freeVO);
 		return 0;
 	}
 

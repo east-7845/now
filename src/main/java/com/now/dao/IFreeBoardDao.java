@@ -2,7 +2,6 @@ package com.now.dao;
 
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
-
 import com.now.vo.FreeBoardVO;
 
 @Mapper
@@ -38,4 +37,10 @@ public interface IFreeBoardDao {
 	 * @return
 	 */
 	public int deleteFreeBoard(int fr_no) throws Exception;
+	
+	/**
+	 * 조회수 증가
+	 * @throws Exception
+	 */
+	public void increaseBoardCount(int bo_no) throws Exception;
 }

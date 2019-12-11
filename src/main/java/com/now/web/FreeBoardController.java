@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.now.service.IFreeBoardService;
 import com.now.vo.FreeBoardVO;
@@ -18,8 +19,6 @@ public class FreeBoardController {
 	
 	@Autowired
 	private IFreeBoardService boardService;
-	
-	
 	
 	/**
 	 * 
@@ -58,7 +57,7 @@ public class FreeBoardController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/freeBoardModfiy")
+	@RequestMapping(value = "/freeBoardModfiy", method = RequestMethod.POST)
 	public String freeBoardModify(HttpServletRequest req
 				,@ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
 		String view = "";
@@ -68,12 +67,12 @@ public class FreeBoardController {
 		//BeanUtils.populate(searchVO, req.getParameterMap());
 		int freeBoardList = boardService.updateFreeBoard(freeVO);
 		System.out.println("수정하자 " + freeBoardList);
-		if(freeBoardList != 1) {
-			return "forward:/freeBoardEdit?fr_no="+ freeVO.getFr_no();
+		if(freeBoardList >= 1) {
+			return "redirect:/freeBoardEdit?fr_no="+ freeVO.getFr_no();
 		}
 		
 		//return "freeboard/freeBoardList";
-		return "freeboard/freeBoardList";
+		return "redirect:/freeBoardEdit?fr_no="+ freeVO.getFr_no();
 	}
 	
 	/**
