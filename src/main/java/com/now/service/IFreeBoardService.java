@@ -5,6 +5,7 @@ import java.util.List;
 import com.now.vo.FreeBoardVO;
 
 public interface IFreeBoardService {
+	
 	/**
 	 * 자유게시판 전체 검색
 	 * @return
