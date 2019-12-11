@@ -18,12 +18,12 @@
 	    ]]>
 	</sql>
 	
-	<select id="selectFreeBoardList" resultType="com.now.vo.FreeBoardVO">
+	<select id="selectFreeBoardList" parameterType="com.now.vo.FreeBoardVO" resultType="com.now.vo.FreeBoardVO">
 		<!-- <include refid="PAGING_PREFIX"/> -->
 		SELECT
 			   FR_NO
 			 , FR_TITLE
-			 , FR_PARENT_NO
+			 , (select emp_name from employee) as FR_PARENT_NO
 			 , FR_PASS
 			 , FR_CONTENT
 			 , FR_HIT
@@ -37,7 +37,7 @@
 		<!-- <include refid="PAGING_SUFFIX"/> -->
 	</select>
 	
-	<select id="selectFreeBoard" resultType="com.now.vo.FreeBoardVO">
+	<select id="selectFreeBoard" parameterType="int" resultType="com.now.vo.FreeBoardVO">
 		SELECT
 			   FR_NO
 			 , FR_TITLE
@@ -46,8 +46,8 @@
 			 , FR_CONTENT
 			 , FR_HIT
 			 , FR_IP
-			 , TO_CHAR(FR_REG_DATE, 'yyyy-mm-dd') AS FR_REG_DATE,
-			 , TO_CHAR(FR_MOD_DATE, 'yyyy-mm-dd') AS FR_MOD_DATE,
+			 , TO_CHAR(FR_REG_DATE, 'yyyy-mm-dd') AS FR_REG_DATE
+			 , TO_CHAR(FR_MOD_DATE, 'yyyy-mm-dd') AS FR_MOD_DATE
 			 , FR_DEL_YN
 			 , FR_CLASS
 		  FROM FREEBOARD
@@ -71,7 +71,19 @@
 			,#{FR_CONTENT}, #{FR_HIT}
 			,'0.0.0.0.0.1', SYSDATE
 			,'null','null'
-		) 
+		)
 	</insert>
+	
+	<update id="updateFreeBoard" parameterType="com.now.vo.FreeBoardVO">
+		UPDATE SET
+			   FR_TITLE     = #{FR_TITLE}
+			 , FR_PASS      = #{FR_PASS}
+			 , FR_CONTENT   = #{FR_CONTENT}
+			 , FR_MOD_DATE  = SYSTEM
+			 , FR_DEL_YN    = 'N'
+			 , FR_CLASS     = 'NULL'
+		  FROM FREEBOARD
+	  	 WHERE FR_NO = #{BO_NO}
+	</update>
 	
 </mapper>

@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>자유게시판</title>
+<title>부트스트랩 101 템플릿</title>
 
 </head>
 <body>
@@ -18,33 +18,39 @@
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
 	<div class="container_content">
-		<table>
-			<colgroup>
-				<col width="10%%">
-				<col width="50%">
-				<col width="15%">
-				<col width="15%">
-				<col width="10%">
-			</colgroup>
-			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>작성자</th>
-				<th>작성일</th>
-				<th>조회수</th>
-			</tr>
-
-			<c:forEach var="board" items="${freeBoardList}">
+		<form:form commandName="board" action="freeBoardModfiy">
+			<table>
+				<colgroup>
+					<col width="10%">
+					<col width="50%">
+					<col width="15%">
+					<col width="15%">
+				</colgroup>
 				<tr>
-					<td>${board.fr_no}</td>
-					<td><a href="freeBoardView?fr_no=${board.fr_no}">${board.fr_title}</a></td>
-					<td>${board.fr_parent_no}</td>
-					<td>${board.fr_reg_date}</td>
-					<td>${board.fr_hit}</td>
+					<td>제목</td>
+					<td>
+						<form:input path="fr_title"/>
+					</td>
 				</tr>
-			</c:forEach>
-
-		</table>
+				<tr>
+					<td>작성자</td>
+					<td>${board.fr_parent_no}</td>
+					<td>작성일</td>
+					<td>${board.fr_reg_date}</td>
+				</tr>
+				<tr>
+					<td>내용</td>
+					<td colspan="3">
+						<form:textarea path="fr_content"/>
+					</td>
+				</tr>
+			</table>
+			<div class="row">
+				<a href="freeBoardList" class="btn btn-default btn-sm">회원 목록</a> 
+				<button type="submit" class="btn btn-sm btn-success">수정</button>
+			</div>
+		</form:form>
+		
 	</div>
 	<div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
