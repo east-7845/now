@@ -18,7 +18,7 @@
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
 	<div class="container_content">
-		<form:form action="freeBoardInsert.do" >
+		<form:form commandName="board" action="freeBoardRegist" method="post" >
 			<table>
 				<colgroup>
 					<col width="">
@@ -35,6 +35,11 @@
 					<td>
 						<form:textarea path="fr_content"/>
 					</td>
+				</tr>
+				<tr>
+				<td colspan="4"><a href="freeBoardList"
+						class="btn btn-default btn-sm">글 목록</a>
+						<button type="submit" class="btn btn-sm btn-success">등록</button></td>
 				</tr>
 			</table>
 		</form:form>		

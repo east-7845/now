@@ -2,6 +2,7 @@ package com.now.service;
 
 import java.util.List;
 
+import com.now.vo.FreeBoardSearchVO;
 import com.now.vo.FreeBoardVO;
 
 public interface IFreeBoardService {
@@ -10,7 +11,7 @@ public interface IFreeBoardService {
 	 * 자유게시판 전체 검색
 	 * @return
 	 */
-	public List<FreeBoardVO> selectFreeBoardList(FreeBoardVO freeVO) throws Exception;
+	public List<FreeBoardVO> selectFreeBoardList(FreeBoardSearchVO freeSearchVO) throws Exception;
 	
 	/**
 	 * 자유게시판 상세정보
