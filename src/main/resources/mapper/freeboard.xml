@@ -18,8 +18,38 @@
 	    ]]>
 	</sql>
 	
-	<select id="selectFreeBoardList" parameterType="com.now.vo.FreeBoardVO" resultType="com.now.vo.FreeBoardVO">
-		<!-- <include refid="PAGING_PREFIX"/> -->
+	<sql id="searchCondition">
+		<if
+			test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchWord)">
+			<choose>
+				<when test='searchType == "T"'>
+					AND fr_title LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test='searchType.equals("W")'>
+					AND fr_parent_no LIKE '%' || (select emp_no from EMPLOYEE where emp_name = #{searchWord}) || '%'
+				</when>
+				<when test='searchType eq "C"'>
+					AND fr_content LIKE '%' || #{searchWord} || '%'
+				</when>
+				<otherwise>
+					AND ( fr_title LIKE '%' || #{searchWord} || '%'
+					OR fr_parent_no LIKE '%' || (select emp_no from EMPLOYEE where emp_name = #{searchWord}) || '%'
+					OR fr_content LIKE '%' || #{searchWord} || '%'
+					)
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
+	<!-- OR fr_writer LIKE '%' || #{searchWord} || '%' -->
+	<select id="selectFreeBoardCount"
+		parameterType="com.now.vo.FreeBoardSearchVO" resultType="int">
+		SELECT count(*) as cnt
+		FROM freeboard
+		WHERE fr_del_yn = 'N'
+	</select>
+	
+	<select id="selectFreeBoardList" parameterType="com.now.vo.FreeBoardSearchVO" resultType="com.now.vo.FreeBoardVO">
+		<include refid="PAGING_PREFIX"/>
 		SELECT
 			   FR_NO
 			 , FR_TITLE
@@ -34,7 +64,8 @@
 			 , FR_CLASS
 		  FROM FREEBOARD
 		WHERE FR_DEL_YN = 'N'
-		<!-- <include refid="PAGING_SUFFIX"/> -->
+		<include refid="searchCondition"/>
+		<include refid="PAGING_SUFFIX"/>
 	</select>
 	
 	<select id="selectFreeBoard" parameterType="int" resultType="com.now.vo.FreeBoardVO">
@@ -63,14 +94,13 @@
 			   FR_NO, FR_TITLE
 			 , FR_PARENT_NO
 			 , FR_CONTENT, FR_HIT
-			 , FR_IP, TO_CHAR(FR_REG_DATE, 'yyyy-mm-dd') AS FR_REG_DATE
-			 , TO_CHAR(FR_MOD_DATE, 'yyyy-mm-dd') AS FR_MOD_DATE, FR_DEL_YN, FR_CLASS
-		)VALUES (
-			#{FR_NO}, #{FR_TITLE}
-			,#{FR_PARENT_NO}
-			,#{FR_CONTENT}, #{FR_HIT}
-			,'0.0.0.0.0.1', SYSDATE
-			,'null','null'
+			 , FR_IP,  FR_DEL_YN, FR_CLASS
+		) VALUES (
+			#{fr_no}, #{fr_title}
+			,#{fr_parent_no}
+			,#{fr_content}, #{fr_hit}
+			,'null'
+			,'N' ,'null'
 		)
 	</insert>
 	

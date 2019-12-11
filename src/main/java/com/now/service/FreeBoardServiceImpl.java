@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.now.dao.IFreeBoardDao;
+import com.now.vo.FreeBoardSearchVO;
 import com.now.vo.FreeBoardVO;
 
 @Service
@@ -15,9 +16,13 @@ public class FreeBoardServiceImpl implements IFreeBoardService{
 	private IFreeBoardDao boardDao;
 	
 	@Override
-	public List<FreeBoardVO> selectFreeBoardList(FreeBoardVO freeVO) throws Exception {
+	public List<FreeBoardVO> selectFreeBoardList(FreeBoardSearchVO freeSearchVO) throws Exception {
 		
-		List<FreeBoardVO> list = boardDao.selectFreeBoardList(freeVO);
+		int rowCount = boardDao.selectFreeBoardCount(freeSearchVO);
+		freeSearchVO.setTotalRowCount(rowCount);
+		freeSearchVO.pageSetting();
+		
+		List<FreeBoardVO> list = boardDao.selectFreeBoardList(freeSearchVO);
 		
 		return list;
 	}
