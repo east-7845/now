@@ -25,11 +25,11 @@ public class NoticeController {
 	@Autowired
 	private INoticeService noticeService;
 	
-	@RequestMapping("/notice/list")
+	@RequestMapping("/notice/noticeList")
 	public String list(Model model) throws Exception {
 		List<NoticeVO> r = noticeService.selectNoticeList();
 		model.addAttribute("noticeList", r);
-		return "notice/list";
+		return "notice/noticeList";
 	}
 	
 	
