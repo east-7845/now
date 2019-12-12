@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.now.dao.IReplyDao">
+	<select id="selectReplyCount" >
+		select count(*) cnt
+		from reply
+		where re_category = #{re_category}
+		  and re_parent_no = #{re_parent_no}
+	</select>
+	
+	<select id="selectReplyList" parameterType="com.now.vo.ReplySearchVO"
+		resultType="com.now.vo.ReplyVO">
+		select * from reply
+	</select>
+	
+	<select id="selectReply">
+	
+	</select>
+</mapper>
+
+
+
+
+
+
+
+  
+  
+  
