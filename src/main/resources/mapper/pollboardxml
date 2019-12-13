@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.now.dao.IFreeBoardDao">
+	<sql id="PAGING_PREFIX">
+		SELECT * 
+		  FROM ( SELECT rownum rnum, a.* 
+		           FROM (
+	</sql>
+	
+	<sql id="PAGING_SUFFIX">
+		<![CDATA[
+	                    ) a WHERE rownum <= #{endRow} 
+	           ) b 
+	      WHERE rnum >= #{startRow}
+	    ]]>
+	</sql>
+	
+	<select id="selectPollBoardList" parameterType="com.now.vo.PollBoardVO" resultType="com.now.vo.PollBoardVO">
+		<!-- <include refid="PAGING_PREFIX"/> -->
+		SELECT PO_NO
+			 , PO_TITLE
+			 , PO_TOPIC
+			 , (select emp_name from employee) as PO_WRITER
+			 , PO_PASS
+			 , PO_GROUP
+			 , PO_CONTENT
+			 , PO_HIT
+			 , PO_IP
+			 , PO_REG_DATE
+			 , PO_MOD_DATE
+			 , PO_DUE_DATE
+			 , PO_COMP_YN
+			 , PO_DEL_YN
+			 , PO_VAILD_YN
+			 , PO_RESULT
+		  FROM pollboard
+		 WHERE PO_DEL_YN = 'N'
+		<!-- <include refid="PAGING_SUFFIX"/> -->
+	</select>
+	
+	<select id="selectPollBoard" parameterType="int" resultType="com.now.vo.PollBoardVO">
+		SELECT PO_NO
+			 , PO_TITLE
+			 , PO_TOPIC
+			 , (select emp_name from employee) as PO_WRITER
+			 , PO_PASS
+			 , PO_GROUP
+			 , PO_CONTENT
+			 , PO_HIT
+			 , PO_IP
+			 , PO_REG_DATE
+			 , PO_MOD_DATE
+			 , PO_DUE_DATE
+			 , PO_COMP_YN
+			 , PO_DEL_YN
+			 , PO_VAILD_YN
+			 , PO_RESULT
+		  FROM pollboard
+		 WHERE PO_DEL_YN = 'N'
+	</select>
+	
+	<insert id="insertFreeBoard">
+		<selectKey keyProperty="fr_no" resultType="int"
+			order="BEFORE">
+			select seq_freeboard.nextval from dual
+		</selectKey>
+		INSERT INTO FREEBOARD(
+			   FR_NO, FR_TITLE
+			 , FR_PARENT_NO, FR_PASS
+			 , FR_CONTENT, FR_HIT
+			 , FR_IP, TO_CHAR(FR_REG_DATE, 'yyyy-mm-dd') AS FR_REG_DATE
+			 , TO_CHAR(FR_MOD_DATE, 'yyyy-mm-dd') AS FR_MOD_DATE, FR_DEL_YN, FR_CLASS
+		)VALUES (
+			#{FR_NO}, #{FR_TITLE}
+			,#{FR_PARENT_NO}, #{FR_PASS}
+			,#{FR_CONTENT}, #{FR_HIT}
+			,'0.0.0.0.0.1', SYSDATE
+			,'null','null'
+		)
+	</insert>
+	
+	<update id="updateFreeBoard" parameterType="com.now.vo.FreeBoardVO">
+		UPDATE SET
+			   FR_TITLE     = #{FR_TITLE}
+			 , FR_PASS      = #{FR_PASS}
+			 , FR_CONTENT   = #{FR_CONTENT}
+			 , FR_MOD_DATE  = SYSTEM
+			 , FR_DEL_YN    = 'N'
+			 , FR_CLASS     = 'NULL'
+		  FROM FREEBOARD
+	  	 WHERE FR_NO = #{BO_NO}
+	</update>
+	
+</mapper>
