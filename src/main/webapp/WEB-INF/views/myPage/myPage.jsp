@@ -124,10 +124,17 @@
 						</td>
 					</tr>
 					<tr>
-						<td>직급</td>
+						<td>부서</td>
 						<td>
 							${employee.emp_department }
 							<form:hidden path="emp_department"/>
+						</td>
+					</tr>
+					<tr>
+						<td>직급</td>
+						<td>
+							${employee.emp_rank }
+							<form:hidden path="emp_rank"/>
 						</td>
 					</tr>
 					<tr>

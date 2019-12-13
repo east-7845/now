@@ -17,9 +17,20 @@
 			, EMP_MAIL = #{emp_mail}
 			, EMP_BANKNAME = #{emp_bankname}
 			, EMP_BANKNUM = #{emp_banknum}
+			, EMP_YN = #{emp_yn}
 		<choose>
 			<when test="emp_id != null">
 			, EMP_ID = #{emp_id}
+			</when>
+		</choose>
+		<choose>
+			<when test="emp_rank != null">
+			, EMP_RANK = #{emp_rank}
+			</when>
+		</choose>
+		<choose>
+			<when test="emp_department != null">
+			, EMP_DEPARTMENT = #{emp_department}
 			</when>
 		</choose>
 		 WHERE EMP_NO = #{emp_no}
@@ -42,13 +53,45 @@
 			 , EMP_BANKNUM
 			 , EMP_SALARY
 			 , EMP_VACATION
-			 , EMP_RANK
-			 , EMP_DEPARTMENT
-			 , EMP_HIREDATE
-			 , EMP_FIREDATE
+			 , (SELECT COM_NAME FROM COMMON WHERE EMP_RANK = COM_CD) EMP_RANK
+			 , (SELECT COM_NAME FROM COMMON WHERE EMP_DEPARTMENT = COM_CD) EMP_DEPARTMENT
+			 , TO_CHAR(EMP_HIREDATE, 'YYYY-MM-DD') EMP_HIREDATE
+			 , TO_CHAR(EMP_FIREDATE, 'YYYY-MM-DD') EMP_FIREDATE
 			 , EMP_YN
 		 FROM EMPLOYEE
 		WHERE EMP_YN = 'N'
 	</select>
+	
+	<select id="selectEmpCom" parameterType="String" resultType="com.now.vo.CommonVO">
+		SELECT COM_CD
+			 , COM_NAME
+			 , COM_PARENT
+		 FROM COMMON
+		WHERE COM_PARENT = #{com_cd}
+	</select>
+	
+	<select id="selectEmpNo" resultType="String">
+		SELECT 'NOW' || TRIM(TO_CHAR(SEQ_EMP_NO.NEXTVAL, '0000000'))
+		  FROM DUAL
+	</select>
+	
+	<insert id="insertEmp" parameterType="com.now.vo.EmployeeVO">
+		INSERT INTO EMPLOYEE(EMP_NO
+							 , EMP_NAME
+							 , EMP_PASS
+							 , EMP_SALARY
+							 , EMP_RANK
+							 , EMP_DEPARTMENT
+							 , EMP_HIREDATE
+					  )
+					  	VALUES(#{emp_no}
+					  		 , #{emp_name}
+					  		 , #{emp_no}
+					  		 , #{emp_salary}
+					  		 , #{emp_rank}
+					  		 , #{emp_department}
+					  		 , SYSDATE
+					  	)
+	</insert>
 
 </mapper>
