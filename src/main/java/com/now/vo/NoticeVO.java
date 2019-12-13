@@ -10,13 +10,9 @@ public class NoticeVO {
 		private String nt_mod_date;
 		private String nt_class;
 		private String nt_writer;
-<<<<<<< HEAD
+
 		private String	 nt_del_yn;
-=======
-		private String  nt_del_yn;
-		
-		
->>>>>>> refs/heads/master
+
 		public int getNt_no() {
 			return nt_no;
 		}
