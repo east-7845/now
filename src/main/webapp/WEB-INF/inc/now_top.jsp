@@ -37,10 +37,6 @@ $(document).ready(function(){
 		location.href="freeBoardList";
 	}
 	
-	document.getElementsByClassName("top_menu")[3].onclick = function(){
-		location.href="pollBoardList";
-	}
-	
 	document.getElementsByClassName("top_menu")[7].onclick = function(){
 		location.href="myPage";
 	}

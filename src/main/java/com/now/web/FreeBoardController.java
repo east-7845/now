@@ -4,13 +4,16 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.now.service.IFreeBoardService;
+import com.now.vo.FreeBoardSearchVO;
 import com.now.vo.FreeBoardVO;
 
 @Controller
@@ -19,14 +22,12 @@ public class FreeBoardController {
 	@Autowired
 	private IFreeBoardService boardService;
 	
-	
-	
 	/**
 	 * 
 	 * @param req
 	 * @return
 	 */
-	@RequestMapping(value = "/freeBoardView", params = "fr_no")
+	@RequestMapping(value = "/freeboard/freeBoardView", params = "fr_no")
 	public String freeBoardView(HttpServletRequest req, int fr_no) throws Exception {
 		FreeBoardVO boardVO = new FreeBoardVO();
 		//BeanUtils.populate(searchVO, req.getParameterMap());
@@ -42,12 +43,14 @@ public class FreeBoardController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/freeBoardList")
+	@RequestMapping(value = "/freeboard/freeBoardList")
 	public String freeBoardList(HttpServletRequest req) throws Exception {
-		FreeBoardVO boardVO = new FreeBoardVO();
-		//BeanUtils.populate(searchVO, req.getParameterMap());
-		List<FreeBoardVO> freeBoardList = boardService.selectFreeBoardList(boardVO);
+		FreeBoardSearchVO searchVO = new FreeBoardSearchVO();
+		BeanUtils.populate(searchVO, req.getParameterMap());
+		
+		List<FreeBoardVO> freeBoardList = boardService.selectFreeBoardList(searchVO);
 		req.setAttribute("freeBoardList", freeBoardList);
+		req.setAttribute("searchVO", searchVO);
 		
 		return "freeboard/freeBoardList";
 	}
@@ -58,22 +61,19 @@ public class FreeBoardController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/freeBoardModfiy")
+	@RequestMapping(value = "/freeboard/freeBoardModfiy", method = RequestMethod.POST)
 	public String freeBoardModify(HttpServletRequest req
 				,@ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
 		String view = "";
 		
-		System.out.println(freeVO.getFr_no());
-		System.out.println(freeVO.getFr_parent_no());
 		//BeanUtils.populate(searchVO, req.getParameterMap());
 		int freeBoardList = boardService.updateFreeBoard(freeVO);
-		System.out.println("수정하자 " + freeBoardList);
-		if(freeBoardList != 1) {
-			return "forward:/freeBoardEdit?fr_no="+ freeVO.getFr_no();
+		if(freeBoardList >= 1) {
+			return "redirect:/freeboard/freeBoardList";
 		}
 		
 		//return "freeboard/freeBoardList";
-		return "freeboard/freeBoardList";
+		return "redirect:/freeboard/freeBoardEdit?fr_no="+ freeVO.getFr_no();
 	}
 	
 	/**
@@ -82,14 +82,10 @@ public class FreeBoardController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/freeBoardForm")
-	public String freeBoardForm(HttpServletRequest req) throws Exception {
-		FreeBoardVO boardVO = new FreeBoardVO();
-		//BeanUtils.populate(searchVO, req.getParameterMap());
-		List<FreeBoardVO> freeBoardList = boardService.selectFreeBoardList(boardVO);
-		req.setAttribute("freeBoardList", freeBoardList);
-		
-		return "freeboard/freeBoardList";
+	@RequestMapping(value = "/freeboard/freeBoardForm")
+	public String freeBoardForm(HttpServletRequest req,@ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
+				
+		return "freeboard/freeBoardForm";
 	}
 	
 	/**
@@ -98,7 +94,7 @@ public class FreeBoardController {
 	 * @return
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/freeBoardEdit", params = "fr_no")
+	@RequestMapping(value = "/freeboard/freeBoardEdit", params = "fr_no")
 	public String freeBoardEdit(HttpServletRequest req, int fr_no,Model model) throws Exception {
 		FreeBoardVO boardVO = new FreeBoardVO();
 		//BeanUtils.populate(searchVO, req.getParameterMap());
@@ -106,6 +102,27 @@ public class FreeBoardController {
 		//req.setAttribute("board", boardList);
 		model.addAttribute("board", boardList);
 		return "freeboard/freeBoardEdit";
+	}
+	
+	/**
+	 * 등록하기
+	 * @param req
+	 * @return
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "/freeboard/freeBoardRegist", method = RequestMethod.POST)
+	public String freeBoardRegist(HttpServletRequest req
+				,@ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
+		String view = "";
+		freeVO.setFr_parent_no("NOW0000005");
+		//BeanUtils.populate(searchVO, req.getParameterMap());
+		int cnt = boardService.insertFreeBoard(freeVO);
+//		if( cnt >= 1) {
+//			return "redirect:/freeBoardList?fr_no="+ freeVO.getFr_no();
+//		}
+		
+		//return "freeboard/freeBoardList";
+		return "redirect:/freeboard/freeBoardList";
 	}
 	
 	
