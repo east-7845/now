@@ -1,5 +1,7 @@
 package com.now.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,7 +31,7 @@ public class MyPageController {
 		EmployeeVO sessionVO = (EmployeeVO) session.getAttribute("sessionEmp");
 		System.out.println("세션확인!! : " + sessionVO.getEmp_no());
 		
-		if(sessionVO.getEmp_no().equals("NOW0000001")) return "forward:/myPage/myPageAdmin";
+		if(sessionVO.getEmp_no().equals("NOW0000001")) return "forward:/myPage/myPageEmpList";
 		
 		EmployeeVO employeeVO = loginService.selectEmp(sessionVO);
 		req.setAttribute("employee", employeeVO);
@@ -66,11 +68,14 @@ public class MyPageController {
 		return view;
 	}
 	
-	@RequestMapping(value = "/myPage/myPageAdmin")
-	public String myPageAdmin(HttpServletRequest req, EmployeeVO employeeVO) throws Exception {
-		String view = "myPage/myPageAdmin";
-		System.out.println("/myPage/myPageAdmin : myPageConttroller");
+	@RequestMapping(value = "/myPage/myPageEmpList")
+	public String myPageAdmin(HttpServletRequest req) throws Exception {
+		String view = "myPage/myPageEmpList";
+		System.out.println("/myPage/myPageEmpList : myPageConttroller");
 		
+		List<EmployeeVO> employeeList = myPageService.selectEmp();
+		
+		req.setAttribute("employee", employeeList);
 		
 		return view;
 	}
