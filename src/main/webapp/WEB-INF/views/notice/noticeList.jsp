@@ -51,7 +51,7 @@
 										<td><input type="checkbox" name="bo_nos" value="${notice.nt_no}"> </td>
 										<td>${notice.nt_no}</td>
 											<td class="text-left">
-													<a href="boardView?nt_no=${notice.nt_no}">
+													<a href="noticeView?nt_no=${notice.nt_no}">
 																${notice.nt_title}
 													</a>
 											</td>

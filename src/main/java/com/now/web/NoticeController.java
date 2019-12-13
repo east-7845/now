@@ -3,14 +3,25 @@ package com.now.web;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.groups.Default;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.now.service.INoticeService;
 import com.now.vo.NoticeVO;
+import com.study.board.vo.BoardVO;
+import com.study.common.valid.ModifyType;
+
 @Controller
 public class NoticeController {
 
@@ -28,7 +39,7 @@ public class NoticeController {
 	private INoticeService noticeService;
 	
 	@RequestMapping("/notice/noticeList")
-	public String list(Model model) throws Exception {
+	public String noticeList(Model model) throws Exception {
 		List<NoticeVO> r = noticeService.selectNoticeList();
 		model.addAttribute("noticeList", r);
 		return "notice/noticeList";
@@ -40,7 +51,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/notice/noticeView", params = "nt_no")
-	public String noticeView (HttpServletRequest req, int nt_no) throws Exception {
+	public String noticeView(HttpServletRequest req, int nt_no) throws Exception {
 		
 		NoticeVO vo = noticeService.selectNotice(nt_no, true);
 		req.setAttribute("notice", vo);
@@ -48,5 +59,24 @@ public class NoticeController {
 		return "notice/noticeView";
 		
 	}
+	@RequestMapping(value="/notice/noticeRegist")
+	public String noticeRegist(HttpServletRequest req
+            , ModelMap model
+            , @ModelAttribute("notice") NoticeVO notice
+         ) throws Exception {
+
+			return "notice/noticeList";
+	}
+	
+	@RequestMapping(value = "/notice/noticeEdit", params = "nt_no")
+	public String boardEdit(ModelMap model, @RequestParam("nt_no") int nt_no) throws Exception {
+		String view = "notice/noticeEdit";
+
+		NoticeVO vo = noticeService.selectNotice(nt_no, false);
+		model.addAttribute("notice", vo);
+
+		return view;
+	}
+		
 	
 }

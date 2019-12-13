@@ -8,10 +8,10 @@
 	<%@include file="/WEB-INF/inc/now_top.jsp"%>
 </head>
 <body>
-<div class="page-header">
+	<div class="container_content">
 <h3>글 작성</h3>
 </div>
-<form action="noticeRegist.do" method="post">
+<form action="noticeRegist" method="post">
 		<table class="table">
 				<colgroup>
 						<col width="15%" />
@@ -51,12 +51,12 @@
 		<tr>
 			<th>글내용</th>
 			<td colspan="3">
-				<textarea rows="10" cols="60" name="bo_content">${notice.nt_content}</textarea>
+				<textarea rows="10" cols="60" name="nt_content">${notice.nt_content}</textarea>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4">
-				<a href="noticeList.jsp" class="btn btn-sm btn-default">글목록</a>
+				<a href="noticeList" class="btn btn-sm btn-default">글목록</a>
 				<button type="submit" class="btn btn-sm btn-success">등록</button>
 		</td>
 		</tr>
