@@ -58,52 +58,52 @@ public class PollBoardController {
 	 * @throws Exception 
 	 */
 	
-	// 이해못하고 그냥하는중
-	@RequestMapping(value = "pollboard/pollBoardRegist", method = RequestMethod.POST)
-	public String boardRegist(HttpServletRequest req, ModelMap model,
-			@ModelAttribute("PollBoard") @Validated(value = { RegistType.class, Default.class }) BoardVO board,
-			BindingResult errors) throws Exception {
-		// BindingResult는 ModelAttribute뒤에 들어가야함
-		String view = "common/message";
-
-		// 1. Spring Validator 구현체로 검증
-//		new BoardRegistValidator().validate(board, errors);
-
-		// 2. @Valid를 통해 자동으로 검증
-		if (errors.hasErrors()) {
-			return "board/boardForm";
-		}
-
-		// 접근한 사용자 ip 를 vo에 설정
-		board.setBo_ip(req.getRemoteAddr());
-		boardServie.insertBoard(board);
-
-		// 메세지 필요없이 바로 상세보기로 이동하고자 함
-		// forward: 또는 redirect: 를 사용 가능
-		// view = "forward:/board/boardView.do?bo_no=" + board.getBo_no();
-		ResultMessageVO messageVO = new ResultMessageVO();
-		messageVO.setResult(true).setTitle("글 등록 성공").setMessage("해당 글을 등록완료했습니다.").setUrlTitle("상세보기")
-				.setUrl("/board/boardView.do?bo_no" + board.getBo_no());
-		// .setUrlTitle("목록으로")
-		// .setUrl("/board/boardList.do");
-
-		// req.setAttribute("resultMessage", messageVO);
-		model.addAttribute("resultMessage", messageVO);
-
-		return view;
-	}
-	
-	/**
-	 * <b>글 내용 수정<br>
-	 * @throws Exception 
-	 */
-	
-//	여기 이해 못하고 그냥 함
-	@RequestMapping(value = "pollboard/pollBoardEdit", params = "po_no")
-	public String pollBoradEdit(ModelMap model, @RequestParam("po_no") int po_no) throws Exception {
-		PollBoardVO vo = boardService.selectPollBoard(po_no);
-		model.addAttribute("PollBoard", vo);
-	
-		return "pollboard/pollBoardEdit";
-	}
+//	// 이해못하고 그냥하는중
+//	@RequestMapping(value = "pollboard/pollBoardRegist", method = RequestMethod.POST)
+//	public String boardRegist(HttpServletRequest req, ModelMap model,
+//			@ModelAttribute("PollBoard") @Validated(value = { RegistType.class, Default.class }) BoardVO board,
+//			BindingResult errors) throws Exception {
+//		// BindingResult는 ModelAttribute뒤에 들어가야함
+//		String view = "common/message";
+//
+//		// 1. Spring Validator 구현체로 검증
+////		new BoardRegistValidator().validate(board, errors);
+//
+//		// 2. @Valid를 통해 자동으로 검증
+//		if (errors.hasErrors()) {
+//			return "board/boardForm";
+//		}
+//
+//		// 접근한 사용자 ip 를 vo에 설정
+//		board.setBo_ip(req.getRemoteAddr());
+//		boardServie.insertBoard(board);
+//
+//		// 메세지 필요없이 바로 상세보기로 이동하고자 함
+//		// forward: 또는 redirect: 를 사용 가능
+//		// view = "forward:/board/boardView.do?bo_no=" + board.getBo_no();
+//		ResultMessageVO messageVO = new ResultMessageVO();
+//		messageVO.setResult(true).setTitle("글 등록 성공").setMessage("해당 글을 등록완료했습니다.").setUrlTitle("상세보기")
+//				.setUrl("/board/boardView.do?bo_no" + board.getBo_no());
+//		// .setUrlTitle("목록으로")
+//		// .setUrl("/board/boardList.do");
+//
+//		// req.setAttribute("resultMessage", messageVO);
+//		model.addAttribute("resultMessage", messageVO);
+//
+//		return view;
+//	}
+//	
+//	/**
+//	 * <b>글 내용 수정<br>
+//	 * @throws Exception 
+//	 */
+//	
+////	여기 이해 못하고 그냥 함
+//	@RequestMapping(value = "pollboard/pollBoardEdit", params = "po_no")
+//	public String pollBoradEdit(ModelMap model, @RequestParam("po_no") int po_no) throws Exception {
+//		PollBoardVO vo = boardService.selectPollBoard(po_no);
+//		model.addAttribute("PollBoard", vo);
+//	
+//		return "pollboard/pollBoardEdit";
+//	}
 }
