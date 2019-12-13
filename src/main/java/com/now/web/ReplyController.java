@@ -23,31 +23,61 @@ public class ReplyController {
 	
 	@RequestMapping(path = "/reply/replyList")
 	@ResponseBody
-	public Map<String, Object> selectReplyList(ReplySearchVO reVO) throws Exception{
-		
+	public Map<String, Object> replyList(ReplySearchVO reVO) throws Exception{
+		System.out.println("댓글리스");
 		Map<String,Object> map = new HashMap<String, Object>();
 		int cnt = replyService.selectReplyCount(reVO);
+		System.out.println("댓글 갯수 -- " + cnt);
 		reVO.setTotalPageCount(cnt);
 		reVO.pageSetting();
 		
-		List<ReplyVO> list = replyService.selectReplyList(reVO);
+		if(cnt >= 1) {
+			List<ReplyVO> list = replyService.selectReplyList(reVO);
 		
-		map.put("result", true);
-		map.put("msg", "목록조회성공");
-		map.put("data", list);
-		map.put("count", list.size());
-		map.put("totalRow", reVO.getTotalRowCount());
-		
+			map.put("result", true);
+			map.put("msg", "목록조회성공");
+			map.put("data", list);
+			map.put("count", list.size());
+			map.put("totalRow", reVO.getTotalRowCount());
+		}else {
+			map.put("result", false);
+		}
 		return map;
 	}
 	
 	@RequestMapping(path = "/reply/replyRegist")
 	@ResponseBody
 	public Map<String, Object> selectReplyRegist(ReplyVO reVO,  HttpServletRequest req) throws Exception{
-		
+		System.out.println("댓글등록");
 		Map<String,Object> map = new HashMap<String, Object>();
 		int cnt = replyService.insertReply(reVO);
 
+		return map;
+	}
+	
+	@RequestMapping(path = "/reply/replyRegistUpdate")
+	@ResponseBody
+	public Map<String, Object> replyRegistUpdate(ReplyVO reVO,  HttpServletRequest req) throws Exception{
+		System.out.println("댓글 수정들어옴");
+		
+		  int re_no = Integer.parseInt(req.getParameter("re_no")); 
+		  String re_content = req.getParameter("re_content"); 
+		  int re_parent_no = Integer.parseInt(req.getParameter("re_parent_no"));
+		  
+		  System.out.println(""+re_no); 
+		  System.out.println(""+re_content);
+		  System.out.println(""+re_parent_no);
+		  
+		  reVO.setRe_no(re_no); 
+		  reVO.setRe_content(re_content);
+		  reVO.setRe_parent_no(re_parent_no);
+		 
+		  //System.out.println(reVO.getRe_no());
+		
+		
+		
+		Map<String,Object> map = new HashMap<String, Object>();
+		int cnt = replyService.updateReply(reVO);
 		
 		return map;
 	}
