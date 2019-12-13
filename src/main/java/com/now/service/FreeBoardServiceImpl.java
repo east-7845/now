@@ -10,7 +10,7 @@ import com.now.vo.FreeBoardVO;
 
 @Service
 public class FreeBoardServiceImpl implements IFreeBoardService{
-	
+	   
 	@Autowired
 	private IFreeBoardDao boardDao;
 	
