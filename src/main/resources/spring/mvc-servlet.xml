@@ -11,8 +11,6 @@
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-	
-	<default-servlet-handler/>
 
 	<resources mapping="/bootstrap-3.3.2/**"  location="/bootstrap-3.3.2/" />
 	<resources mapping="/js/**"  location="/js/" />
