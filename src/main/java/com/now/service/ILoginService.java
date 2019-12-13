@@ -4,6 +4,8 @@ import com.now.vo.EmployeeVO;
 
 public interface ILoginService {
 
-	public EmployeeVO loginCheck(EmployeeVO employee);
+	public EmployeeVO selectEmp(EmployeeVO employee);
+
+	public EmployeeVO session(String emp_no);
 
 }

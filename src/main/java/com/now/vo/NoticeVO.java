@@ -4,13 +4,13 @@ public class NoticeVO {
 	                                                              
 		private int nt_no; 
 		private String nt_title = "";
-		private String	nt_content = "";
+		private String nt_content = "";
 		private int nt_hit;
 		private int nt_reg_date;
 		private int nt_mod_date;
 		private String nt_class;
 		private String nt_writer;
-		private String	 nt_del_yn;
+		private String  nt_del_yn;
 		
 		
 		public int getNt_no() {
