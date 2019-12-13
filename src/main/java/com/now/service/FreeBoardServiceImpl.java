@@ -14,7 +14,7 @@ public class FreeBoardServiceImpl implements IFreeBoardService{
 	   
 	@Autowired
 	private IFreeBoardDao boardDao;
-	
+	    
 	@Override
 	public List<FreeBoardVO> selectFreeBoardList(FreeBoardSearchVO freeSearchVO) throws Exception {
 		
