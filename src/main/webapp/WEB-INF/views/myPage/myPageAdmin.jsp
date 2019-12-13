@@ -11,7 +11,7 @@
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
 	<div class="container_content">
-		<%@include file="/WEB-INF/inc/now_content.jsp"%>
+		admin!!!!!!!!!!!!!!
 	</div>
 	<div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>

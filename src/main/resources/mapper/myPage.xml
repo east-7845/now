@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.now.dao.IMyPageDao">
+
+	<update id="updateMyPage" parameterType="com.now.vo.EmployeeVO">
+		UPDATE EMPLOYEE
+		  SET EMP_REGNO1 = #{emp_regno1}
+			, EMP_REGNO2 = #{emp_regno2}
+			, EMP_ZIP = #{emp_zip}
+			, EMP_ADD1 = #{emp_add1}
+			, EMP_ADD2 = #{emp_add2}
+			, EMP_HP = #{emp_hp}
+			, EMP_HP_SUB = #{emp_hp_sub}
+			, EMP_MAIL = #{emp_mail}
+			, EMP_BANKNAME = #{emp_bankname}
+			, EMP_BANKNUM = #{emp_banknum}
+		<choose>
+			<when test="emp_id != null">
+			, EMP_ID = #{emp_id}
+			</when>
+		</choose>
+		 WHERE EMP_NO = #{emp_no}
+	</update>
+
+</mapper>

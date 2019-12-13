@@ -13,10 +13,14 @@ public class LoginServiceImpl implements ILoginService {
 	ILoginDao loginDao;
 
 	@Override
-	public EmployeeVO loginCheck(EmployeeVO employee) {
+	public EmployeeVO selectEmp(EmployeeVO employee) {
 		System.out.println("loginServiceImpl");
-		return loginDao.loginCheck(employee);
+		return loginDao.selectEmp(employee);
 	}
-	
+
+	@Override
+	public EmployeeVO session(String emp_no) {
+		return loginDao.session(emp_no);
+	}
 
 }
