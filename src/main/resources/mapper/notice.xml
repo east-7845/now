@@ -18,5 +18,21 @@
 	  WHERE nt_del_yn = 'N'
 	
 	</select>
+	
+		<insert id="insertNotice"
+		parameterType="com.now.vo.NoticeVO">
+		<selectKey keyProperty="nt_no" resultType="int" order="BEFORE">
+			select seq_notice.nextval from dual
+		</selectKey>
+		INSERT INTO notice (
+		nt_no, nt_title, nt_writer,
+		nt_content, nt_hit, nt_reg_date,
+		nt_mod_date, nt_del_yn
+		) VALUES (
+		#{nt_no}, #{nt_title}, #{nt_writer},
+		#{nt_content}, 0, sysdate, 
+		null, 'N'
+		)
+	</insert>
 
 </mapper>

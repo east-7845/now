@@ -4,7 +4,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
-	<%@include file="/WEB-INF/inc/now_top.jsp"%>
+<%@include file="/WEB-INF/inc/common_header.jsp"%>
 <head>
 
 <style type="text/css">
@@ -17,7 +17,7 @@
 }
 </style>
 </head>
-
+	<%@include file="/WEB-INF/inc/now_top.jsp"%>
 <body>
 	<div class="container">
 <%-- 		<%@include file="/WEB-INF/inc/top_menu.jsp"%> --%>

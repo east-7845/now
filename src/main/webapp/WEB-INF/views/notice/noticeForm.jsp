@@ -5,13 +5,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-	<%@include file="/WEB-INF/inc/now_top.jsp"%>
+<%@include file="/WEB-INF/inc/common_header.jsp"%>
 </head>
 <body>
+	<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	<div class="container_content">
 <h3>글 작성</h3>
-</div>
-<form action="noticeRegist" method="post">
+
+<form action="noticeRegist" method="post" >
 		<table class="table">
 				<colgroup>
 						<col width="15%" />
@@ -62,7 +63,7 @@
 		</tr>
 	</table>
 </form>
-
+</div>
 		<div class="container_footer">
 				<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 		</div>
