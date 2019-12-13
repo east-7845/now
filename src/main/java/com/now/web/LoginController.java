@@ -36,6 +36,7 @@ public class LoginController {
 		System.out.println("session");
 		HttpSession session = req.getSession();
 		EmployeeVO vo = loginService.session(employee.getEmp_no());
+		
 		session.setAttribute("sessionEmp", vo);
 
 		return view;

@@ -1,6 +1,6 @@
 package com.now.vo;
 
-public class EmployeeVO {
+public class EmployeeVO extends CommonVO {
 	
 	private String emp_no;
 	private String emp_id;
