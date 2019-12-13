@@ -1,17 +1,14 @@
 package com.now.vo;
 
-import java.util.Date;
-
-
-public class EmployeeVO {
+public class EmployeeVO extends CommonVO {
 	
 	private String emp_no;
 	private String emp_id;
 	private String emp_pass;
 	private String emp_name;
-	private int emp_regno1;
-	private int emp_regno2;
-	private int emp_zip;
+	private String emp_regno1;
+	private String emp_regno2;
+	private String emp_zip;
 	private String emp_add1;
 	private String emp_add2;
 	private String emp_hp;
@@ -24,8 +21,8 @@ public class EmployeeVO {
 	private int emp_vacation;
 	private String emp_rank;
 	private String emp_department;
-	private Date emp_hiredate;
-	private Date emp_firedate;
+	private String emp_hiredate;
+	private String emp_firedate;
 	private String emp_yn;
 	
 	private String message;
@@ -62,22 +59,22 @@ public class EmployeeVO {
 	public void setEmp_name(String emp_name) {
 		this.emp_name = emp_name;
 	}
-	public int getEmp_regno1() {
+	public String getEmp_regno1() {
 		return emp_regno1;
 	}
-	public void setEmp_regno1(int emp_regno1) {
+	public void setEmp_regno1(String emp_regno1) {
 		this.emp_regno1 = emp_regno1;
 	}
-	public int getEmp_regno2() {
+	public String getEmp_regno2() {
 		return emp_regno2;
 	}
-	public void setEmp_regno2(int emp_regno2) {
+	public void setEmp_regno2(String emp_regno2) {
 		this.emp_regno2 = emp_regno2;
 	}
-	public int getEmp_zip() {
+	public String getEmp_zip() {
 		return emp_zip;
 	}
-	public void setEmp_zip(int emp_zip) {
+	public void setEmp_zip(String emp_zip) {
 		this.emp_zip = emp_zip;
 	}
 	public String getEmp_add1() {
@@ -152,16 +149,16 @@ public class EmployeeVO {
 	public void setEmp_department(String emp_department) {
 		this.emp_department = emp_department;
 	}
-	public Date getEmp_hiredate() {
+	public String getEmp_hiredate() {
 		return emp_hiredate;
 	}
-	public void setEmp_hiredate(Date emp_hiredate) {
+	public void setEmp_hiredate(String emp_hiredate) {
 		this.emp_hiredate = emp_hiredate;
 	}
-	public Date getEmp_firedate() {
+	public String getEmp_firedate() {
 		return emp_firedate;
 	}
-	public void setEmp_firedate(Date emp_firedate) {
+	public void setEmp_firedate(String emp_firedate) {
 		this.emp_firedate = emp_firedate;
 	}
 	public String getEmp_yn() {
