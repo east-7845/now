@@ -10,13 +10,13 @@ import com.now.vo.PollBoardVO;
 public interface IPollBoardDao {
 
 	/**
-	 * 투표 게시판 글 검색
+	 * 투표 게시판 글 보기
 	 * @return
 	 */
 	public List<PollBoardVO> selectPollBoardList(PollBoardVO pollVO) throws Exception;
 	
 	/**
-	 * 투표 게시판 글 보기
+	 * 투표 게시판 글내용 보기
 	 * @return
 	 */
 	public PollBoardVO selectPollBoard(int po_no) throws Exception;

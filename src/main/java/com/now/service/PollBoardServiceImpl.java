@@ -23,8 +23,7 @@ public class PollBoardServiceImpl implements IPollBoardService{
 
 	@Override
 	public PollBoardVO selectPollBoard(int po_no) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectPollBoard(po_no);
 	}
 
 	@Override
@@ -35,8 +34,7 @@ public class PollBoardServiceImpl implements IPollBoardService{
 
 	@Override
 	public int updatePollBoard(PollBoardVO pollBoard) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.updatePollBoard(pollBoard);
 	}
 
 	@Override

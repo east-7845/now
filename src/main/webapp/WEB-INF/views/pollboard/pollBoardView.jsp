@@ -18,28 +18,42 @@
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
 	<div class="container_content">
-		<table>
+		<table class="table table-bordered">
 			<colgroup>
-				<col width="10%%">
-				<col width="50%">
-				<col width="15%">
-				<col width="15%">
+				<col width="15%" />
+				<col />
+				<col width="15%" />
+				<col />
 			</colgroup>
 			<tr>
-				<td>제목</td>
-				<td>${board.po_title}</td>
+				<th>글 제목</th>
+				<!-- PollBoard : Controller에서 준 이름 -->
+				<td>${PollBoard.po_title}</td>
+				<th>조회수</th>
+				<td>${PollBoard.po_hit}</td>
 			</tr>
 			<tr>
-				<td>작성자</td>
-				<!-- TODO 여기 다시 생각해보기 -->
-				<td>${board.po_writer}</td>
-				<td>작성일</td>
-				<td>${board.po_reg_date}</td>
+				<th>작성자</th>
+				<td>${PollBoard.po_writer}</td>
+				<th>작성자 IP</th>
+				<td>${PollBoard.po_ip}</td>
+			</tr>
+			<tr>
+				<th>작성일</th>
+				<td>${PollBoard.po_reg_date}</td>
+				<th>수정일</th>
+				<td>${PollBoard.po_mod_date}</td>
+			</tr>
+			<tr>
+				<th>글내용</th>
+				<pre>
+					<td colspan="3">${PollBoard.po_content}</td>
+				</pre>
 			</tr>
 		</table>
 		<div class="row">
 			<a href="pollBoardList" class="btn btn-default btn-sm">글 목록</a> 
-			<a href="freeBoardEdit?fr_no=${board.po_no}"
+			<a href="pollBoardEdit?po_no=${PollBoard.po_no}"
 				class="btn btn-primary btn-sm"> 
 				<span class="glyphicon glyphicon-pencil" aria-hidden="true"> 수정</span>
 			</a>

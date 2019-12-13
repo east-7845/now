@@ -41,7 +41,8 @@
 				<tr>
 					<td>${board.po_no}</td>
 					<td>${board.po_topic}</td>
-					<td>${board.po_title}</td>
+					<!-- a태그로 제목 클릭시 해당글로 이동 -->
+					<td class="text-left"><a href="pollBoardView?po_no=${board.po_no}">${board.po_title}</a></td>
 					<td>${board.po_writer}</td>
 					<td>${board.po_comp_yn}</td>
 					<td>${board.po_hit}</td>
