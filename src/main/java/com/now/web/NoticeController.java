@@ -38,6 +38,7 @@ public class NoticeController {
 		model.addAttribute("noticeList", r);
 		return "notice/noticeList";
 	}
+
 	
 	@RequestMapping(value = "/notice/noticeForm")
 	public String noticeForm(NoticeVO noticeVO)  {
@@ -51,8 +52,10 @@ public class NoticeController {
 		req.setAttribute("notice", vo);
 		
 		return "notice/noticeView";
-		
 	}
+	
+
+	
 	@RequestMapping(value="/notice/noticeRegist")
 	public String noticeRegist(HttpServletRequest req
             , ModelMap model

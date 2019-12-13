@@ -35,6 +35,13 @@
 		)
 	</insert>
 	
+	<update id="increaseNoticeCount" parameterType="int">
+		UPDATE notice
+		SET nt_hit = nt_hit + 1
+		WHERE nt_no = #{nt_no}
+	</update>
+	
+	
 		<select id="selectNotice" parameterType="int"
 		resultType="com.now.vo.NoticeVO">
 		SELECT nt_no,

@@ -23,7 +23,7 @@
 			<h3>공지사항</h3>
 
 
-		<div class="panel panel-default">
+		<div class="panel panel-default" style="width: 60vw; margin-left: 20vw;">
 		</div>
 					<form name="frm_board_list" action="" method="post">
 						<table class="table table-striped table-bordered table-ellipsis">

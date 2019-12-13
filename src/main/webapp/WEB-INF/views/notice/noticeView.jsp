@@ -20,13 +20,13 @@
 			</colgroup>
 				<tr>
 					<th>제목</th>
-					<td>${noticeVO.nt_title}</td>
+					<td>${notice.nt_title}</td>
 					<th>조회수</th>
-					<td>${noticeVO.nt_hit}</td>
+					<td>${notice.nt_hit}</td>
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td>${noticeVO.nt_writer}</td>
+					<td>${notice.nt_writer}</td>
 				</tr>
 <%-- 				<tr>
 					<th>구분</th>
@@ -41,11 +41,11 @@
 
 				<tr>
 					<th>글내용</th>
-					<td colspan="3">${noticeVO.nt_content}</td>
+					<td colspan="3">${notice.nt_content}</td>
 				</tr>
 		</table>
 			</div>
-		<c:if test="${noticeVO != null }">
+		<c:if test="${notice != null }">
 			<div class="row">
 				<a href="noticeList.do" class="btn btn-default btn-sm">회원 목록</a> <a
 					href="noticeEdit.do?nt_no=${noticeVO.nt_no}"
