@@ -24,6 +24,7 @@
 	text-align: center;
 	padding-right: 0px;
 	padding-left: 0px;
+	overflow: auto;
 }
 
 .top_menu {
@@ -36,14 +37,19 @@ $(document).ready(function(){
 	document.getElementsByClassName("top_menu")[1].onclick = function(){
 		location.href="freeBoardList";
 	}
+	
+	document.getElementsByClassName("top_menu")[7].onclick = function(){
+		location.href="myPage/myPage";
+	}
 });
+
 </script>
 <body>
 	<div class="container">
 		<div style="border: 1px solid black; height: 70px;">
 			<a href="#"> <img alt="" style="width: 100px; height: 65px;"
 				src="${pageContext.request.contextPath }/images/logo.png">
-			</a> <span> 한수민 - 신입(인턴1년 6개월) </span>
+			</a> <span> ${sessionEmp.emp_name } - 신입(인턴1년 6개월) </span>
 		</div>
 		<div class="top_menu">
 			<a class="top_button btn_home"> <span class="top_button-icon"><i
