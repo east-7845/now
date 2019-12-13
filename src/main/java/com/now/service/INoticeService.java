@@ -8,7 +8,7 @@ public interface INoticeService {
 	
 	 public List<NoticeVO> selectNoticeList() throws Exception;
 		
-		public NoticeVO selectNotice(int nt_no) throws Exception;
+		public NoticeVO selectNotice(int nt_no, boolean incrementHit) throws Exception;
 
 		
 		public int insertNotice(NoticeVO noticeVO) throws Exception;

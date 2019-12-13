@@ -4,15 +4,14 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
-	<%@include file="/WEB-INF/inc/now_top.jsp"%>
 <head>
-
+	<%@include file="/WEB-INF/inc/now_top.jsp"%>
 </head>
 <body>
 <div class="page-header">
-<h3>글작성</h3>
+<h3>글 작성</h3>
 </div>
-<form action="boardRegist.do" method="post">
+<form action="noticeRegist.do" method="post">
 		<table class="table">
 				<colgroup>
 						<col width="15%" />
@@ -23,21 +22,21 @@
 		<tr>
 			<th>글제목</th>
 			<td colspan="3"><input type="text" name="nt_title" value="${notice.nt_title}">
-			<span>${errors.nt_title}</span>
+			<%-- <span>${errors.nt_title}</span> --%>
 			</td>
 		</tr>
 		<tr>
 			<th>작성자</th>
 			<td><input type="text" name="nt_writer" value="${notice.nt_writer}">
-				<span>${errors.nt_writer}</span>
+				<%-- <span>${errors.nt_writer}</span> --%>
 			</td>
-			<th>패스워드 </th>
-			<td><input type="password" name="nt_pass" value=""
-			           placeholder="수정 및 삭제시 필요">
-			    <span>${errors.bo_pass}</span>
-			</td>
+				<%-- 			<th>패스워드 </th>
+							<td><input type="password" name="nt_pass" value=""
+							           placeholder="수정 및 삭제시 필요">
+							    <span>${errors.bo_pass}</span>
+							</td> --%>
 		</tr>
-		<tr>
+<%-- 		<tr>
 			<th>분류</th>
 			<td colspan="3">
 				<select name="bo_class">
@@ -46,9 +45,9 @@
 							<option value="${code.com_cd}">${code.com_nm}</option>
 						</c:forEach>	
 				</select>
-				<span>${errors.bo_class}</span>
+				<span>${errors.nt_class}</span>
 			</td>
-		</tr>
+		</tr> --%>
 		<tr>
 			<th>글내용</th>
 			<td colspan="3">

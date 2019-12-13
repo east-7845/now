@@ -2,6 +2,8 @@ package com.now.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,5 +34,19 @@ public class NoticeController {
 		return "notice/noticeList";
 	}
 	
+	@RequestMapping(value = "/notice/noticeForm")
+	public String noticeForm(NoticeVO noticeVO)  {
+		return "notice/noticeForm";
+	}
+	
+	@RequestMapping(value = "/notice/noticeView", params = "nt_no")
+	public String noticeView (HttpServletRequest req, int nt_no) throws Exception {
+		
+		NoticeVO vo = noticeService.selectNotice(nt_no, true);
+		req.setAttribute("notice", vo);
+		
+		return "notice/noticeView";
+		
+	}
 	
 }

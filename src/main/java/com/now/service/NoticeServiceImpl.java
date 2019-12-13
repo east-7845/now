@@ -20,8 +20,7 @@ public class NoticeServiceImpl implements INoticeService{
 		return noticeDao.selectNoticeList();
 	}
 
-	@Override
-	public NoticeVO selectNotice(int nt_no) throws Exception {
+	public NoticeVO selectBoard(int nt_no, boolean incrementHit) throws Exception{	
 		return noticeDao.selectNotice(nt_no);
 	}
 
@@ -38,6 +37,12 @@ public class NoticeServiceImpl implements INoticeService{
 	@Override
 	public int deleteNotice(NoticeVO noticeVO) throws Exception {
 		return noticeDao.deleteNotice(noticeVO);
+	}
+
+	@Override
+	public NoticeVO selectNotice(int nt_no, boolean b) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
