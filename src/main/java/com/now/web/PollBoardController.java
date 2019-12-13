@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.now.service.IPollBoardService;
 import com.now.vo.PollBoardVO;
-import com.study.board.vo.BoardVO;
-import com.study.common.valid.RegistType;
-import com.study.common.vo.ResultMessageVO;
 
 @Controller
 public class PollBoardController {
@@ -30,7 +27,7 @@ public class PollBoardController {
 	 * <b> 전체 글목록 조회<br>
 	 * @throws Exception 
 	 */
-	@RequestMapping(value = "/pollBoardList")
+	@RequestMapping(value = "/pollboard/pollBoardList")
 	public String pollBoardList(ModelMap model) throws Exception {
 		model.addAttribute("pollBoardList", boardService.selectPollBoardList(null));
 		/*
@@ -46,7 +43,7 @@ public class PollBoardController {
 	 * @throws Exception 
 	 */
 
-	@RequestMapping(value = "/pollBoardView", params = "po_no")
+	@RequestMapping(value = "pollboard/pollBoardView", params = "po_no")
 	public String pollBoradView(HttpServletRequest req, int po_no) throws Exception {
 		
 		// TODO : true 뭐지 : 조회수 증가 
@@ -62,7 +59,7 @@ public class PollBoardController {
 	 */
 	
 	// 이해못하고 그냥하는중
-	@RequestMapping(value = "/pollBoardRegist", method = RequestMethod.POST)
+	@RequestMapping(value = "pollboard/pollBoardRegist", method = RequestMethod.POST)
 	public String boardRegist(HttpServletRequest req, ModelMap model,
 			@ModelAttribute("PollBoard") @Validated(value = { RegistType.class, Default.class }) BoardVO board,
 			BindingResult errors) throws Exception {
@@ -102,7 +99,7 @@ public class PollBoardController {
 	 */
 	
 //	여기 이해 못하고 그냥 함
-	@RequestMapping(value = "/pollBoardEdit", params = "po_no")
+	@RequestMapping(value = "pollboard/pollBoardEdit", params = "po_no")
 	public String pollBoradEdit(ModelMap model, @RequestParam("po_no") int po_no) throws Exception {
 		PollBoardVO vo = boardService.selectPollBoard(po_no);
 		model.addAttribute("PollBoard", vo);
