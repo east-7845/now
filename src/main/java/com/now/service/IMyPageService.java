@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 package com.now.service;
 
 import java.util.List;
@@ -13,4 +11,3 @@ public interface IMyPageService {
 	public List<EmployeeVO> selectEmp();
 
 }
->>>>>>> refs/heads/master

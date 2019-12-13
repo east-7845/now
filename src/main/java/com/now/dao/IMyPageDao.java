@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 package com.now.dao;
 
 import java.util.List;
@@ -16,4 +14,3 @@ public interface IMyPageDao {
 	public List<EmployeeVO> selectEmp();
 
 }
->>>>>>> refs/heads/master

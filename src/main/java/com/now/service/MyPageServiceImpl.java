@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 package com.now.service;
 
 import java.util.List;
@@ -27,4 +25,3 @@ public class MyPageServiceImpl implements IMyPageService {
 	}
 	
 }
->>>>>>> refs/heads/master
