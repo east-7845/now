@@ -19,11 +19,9 @@
 </head>
 	<%@include file="/WEB-INF/inc/now_top.jsp"%>
 <body>
-	<div class="container">
-<%-- 		<%@include file="/WEB-INF/inc/top_menu.jsp"%> --%>
-		<div class="page-header">
+		<div class="container_content">
 			<h3>공지사항</h3>
-		</div>
+
 
 		<div class="panel panel-default">
 		</div>
@@ -32,11 +30,11 @@
 							<colgroup>
 									<col width="5%" />
 									<col width="5%" />
-									<col width="100%" />
-									<col />
-									<col width="10%" />
-									<col width="15%" />
-									<col width="10%" />
+									<col width="60%" />
+				<%-- 					<col /> --%>
+									<col width="30%" />
+									<col width="20%" />
+<%-- 									<col width="10%" /> --%>
 							</colgroup>
 							<tr>
 							<tr class="text-center">
@@ -62,6 +60,8 @@
 						</table>
 						</form>
 		</div>
+	
+
 	<%-- 	<nav class="text-center">
 		  <ul class="pagination">
 		<!--  이전 페이지 -->

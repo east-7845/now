@@ -9,8 +9,8 @@
 		         nt_title,
 		         nt_content,
 		         nt_hit,
-					    nt_reg_date,
-					    nt_mod_date,
+					    TO_CHAR(nt_reg_date, 'yyyy-mm-dd')as nt_reg_date,
+					    TO_CHAR(nt_mod_date, 'yyyy-mm-dd')as nt_mod_date,
 					    nt_class,
 					    nt_del_yn,
 					    nt_writer
@@ -34,5 +34,20 @@
 		null, 'N'
 		)
 	</insert>
+	
+		<select id="selectNotice" parameterType="int"
+		resultType="com.now.vo.NoticeVO">
+		SELECT nt_no,
+		nt_title,
+		nt_writer,
+		nt_content,
+		nt_hit,
+		TO_CHAR(nt_reg_date, 'YYYY.MM.DD') AS NT_reg_date,
+		TO_CHAR(nt_mod_date, 'YYYY.MM.DD') AS NT_mod_date,
+		nt_del_yn,
+		nt_class
+		FROM notice
+		WHERE nt_no = #{nt_no}
+	</select>
 
 </mapper>
