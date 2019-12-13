@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.now.dao.IPollBoardDao">
+		
+	<select id="selectPollBoardList" parameterType="com.now.vo.PollBoardVO" 
+	resultType="com.now.vo.PollBoardVO">
+		<!-- <include refid="PAGING_PREFIX"/> -->
+		SELECT PO_NO
+			 , PO_TITLE
+			 , (select com_name from common where com_cd = po_topic) as PO_TOPIC
+			 , (select emp_name from employee where emp_no = po_writer) as PO_WRITER
+			 , PO_PASS
+			 , PO_GROUP
+			 , PO_CONTENT
+			 , PO_HIT
+			 , PO_IP
+			 , PO_REG_DATE
+			 , PO_MOD_DATE
+			 , PO_DUE_DATE
+			 , PO_COMP_YN
+			 , PO_DEL_YN
+			 , PO_VAILD_YN
+			 , PO_RESULT
+		  FROM poll_board
+		  
+		 WHERE PO_DEL_YN = 'N'
+		<!-- <include refid="PAGING_SUFFIX"/> -->
+	</select>
+
+	<select id="selectPollBoard" parameterType="int"
+		resultType="com.now.vo.PollBoardVO">
+		SELECT PO_NO
+			 , PO_TITLE
+			 , (select com_name from common where com_cd = po_topic) as PO_TOPIC
+			 , (select emp_name from employee where emp_no = po_writer) as PO_WRITER
+			 , PO_PASS
+			 , PO_GROUP
+			 , PO_CONTENT
+			 , PO_HIT
+			 , PO_IP
+			 , PO_REG_DATE
+			 , PO_MOD_DATE
+			 , PO_DUE_DATE
+			 , PO_COMP_YN
+			 , PO_DEL_YN
+			 , PO_VAILD_YN
+			 , PO_RESULT
+		  FROM poll_board
+		 WHERE po_no = #{po_no}
+	</select>
+	
+	<update id="upadatePollBoard" parameterType="com.now.vo.PollBoardVO">
+		UPDATE poll_board
+		   SET PO_TITLE
+		     , (select com_name from common where com_cd = po_topic) as PO_TOPIC
+			 , (select emp_name from employee where emp_no = po_writer) as PO_WRITER
+			 , PO_PASS
+			 , PO_GROUP
+			 , PO_CONTENT
+		  	 , PO_MOD_DATE
+			 , PO_DUE_DATE
+	  	 WHERE po_no   = #{po_no}
+	  	   AND po_pass = #{po_pass}
+	</update>
+
+</mapper>

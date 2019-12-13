@@ -3,62 +3,34 @@ package com.now.vo;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 public class CommonVO {
-	private String COM_CD = "";     /* 공통코드 */
-	private String COM_NAME = "";   /* 공통명   */
-	private String COM_DEL = "";    /* 삭제여부 */
-	private String COM_PARENT = ""; /* 부모코드 */
-	
-	
-	public CommonVO() {
+	private String com_cd = "";     /* 공통코드 */
+	private String com_name = "";   /* 공통명   */
+	private String com_del = "";    /* 삭제여부 */
+	private String com_parent = ""; /* 부모코드 */
+
+	public String getCom_cd() {
+		return com_cd;
 	}
-
-
-	public CommonVO(String cOM_CD, String cOM_NAME, String cOM_DEL, String cOM_PARENT) {
-		super();
-		COM_CD = cOM_CD;
-		COM_NAME = cOM_NAME;
-		COM_DEL = cOM_DEL;
-		COM_PARENT = cOM_PARENT;
+	public void setCom_cd(String com_cd) {
+		this.com_cd = com_cd;
 	}
-
-
-	public String getCOM_CD() {
-		return COM_CD;
+	public String getCom_name() {
+		return com_name;
 	}
-
-
-	public void setCOM_CD(String cOM_CD) {
-		COM_CD = cOM_CD;
+	public void setCom_name(String com_name) {
+		this.com_name = com_name;
 	}
-
-
-	public String getCOM_NAME() {
-		return COM_NAME;
+	public String getCom_del() {
+		return com_del;
 	}
-
-
-	public void setCOM_NAME(String cOM_NAME) {
-		COM_NAME = cOM_NAME;
+	public void setCom_del(String com_del) {
+		this.com_del = com_del;
 	}
-
-
-	public String getCOM_DEL() {
-		return COM_DEL;
+	public String getCom_parent() {
+		return com_parent;
 	}
-
-
-	public void setCOM_DEL(String cOM_DEL) {
-		COM_DEL = cOM_DEL;
-	}
-
-
-	public String getCOM_PARENT() {
-		return COM_PARENT;
-	}
-
-
-	public void setCOM_PARENT(String cOM_PARENT) {
-		COM_PARENT = cOM_PARENT;
+	public void setCom_parent(String com_parent) {
+		this.com_parent = com_parent;
 	}
 
 	// ToStringBuilder

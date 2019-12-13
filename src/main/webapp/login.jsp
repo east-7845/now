@@ -29,7 +29,7 @@
 </style>
 </head>
 <body>
-	<form:form action="now" method="post" commandName="resultMessage">
+	<form:form action="loginCheck" method="post" commandName="resultMessage">
 		<div class="login_div">
 			<table class="login_table">
 				<tr>
