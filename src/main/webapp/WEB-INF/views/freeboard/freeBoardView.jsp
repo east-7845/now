@@ -18,36 +18,245 @@
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
 	<div class="container_content">
-		<table>
-			<colgroup>
-				<col width="10%%">
-				<col width="50%">
-				<col width="15%">
-				<col width="15%">
-			</colgroup>
-			<tr>
-				<td>제목</td>
-				<td>${board.fr_title}</td>
-			</tr>
-			<tr>
-				<td>작성자</td>
-				<td>${board.fr_parent_no}</td>
-				<td>작성일</td>
-				<td>${board.fr_reg_date}</td>
-			</tr>
-		</table>
-		<div class="row">
-			<a href="freeBoardList" class="btn btn-default btn-sm">회원 목록</a> 
-			<a href="freeBoardEdit?fr_no=${board.fr_no}"
-				class="btn btn-primary btn-sm"> 
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"> 수정</span>
-			</a>
+		<div class="panel panel-default"
+			style="width: 60vw; margin-left: 20vw;">
+			<table class="table table-striped table-bordered table-ellipsis">
+				<colgroup>
+					<col width="10%%">
+					<col width="50%">
+					<col width="15%">
+					<col width="15%">
+				</colgroup>
+				<tr class="text-center">
+					<td>제목</td>
+					<td colspan="3">${board.fr_title}</td>
+				</tr>
+				<tr class="text-center">
+					<td>작성자</td>
+					<td>${board.fr_parent_no}</td>
+					<td>작성일</td>
+					<td>${board.fr_reg_date}</td>
+				</tr>
+				<tr class="text-center">
+					<td>작성내용</td>
+					<td colspan="3" class="text-left">${board.fr_content}</td>
+				</tr>
+			</table>
+		</div>
+		<div class="panel panel-default"
+			style="width: 60vw; margin-left: 20vw;">
+			<div class="panel-body form-horizontal">
+				<div class="form-group">
+					<a href="freeBoardList" class="btn btn-default btn-sm">회원 목록</a> <a
+						href="freeBoardEdit?fr_no=${board.fr_no}"
+						class="btn btn-primary btn-sm"> <span
+						class="glyphicon glyphicon-plus" aria-hidden="true"> 수정</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default" style="width: 60vw; margin-left: 20vw;">
+			<div class="panel-body form-horizontal">
+				<div id="id_reply_list_area">
+		
+				</div>
+			</div>
+		</div>
+		<div class="panel panel-default" style="width: 60vw; margin-left: 20vw;">
+			<div class="panel-body form-horizontal">
+				<form name="frm_reply" action="<c:url value='/reply/replyRegist'/>"
+					method="post" onclick="return false;">
+					<input type="hidden" name="re_parent_no" value="${board.fr_no}">
+					<input type="hidden" name="re_mem_id" value="${board.fr_parent_no}">
+					<input type="hidden" name="re_category" value="freeboard">
+					<div class="form-group">
+						<label class="col-sm-2 control-label">댓글</label>
+						<div class="col-sm-8">
+							<textarea rows="3" name="re_content" class="form-control"></textarea>
+						</div>
+						<div class="col-sm-2">
+							<button type="button" id="btn_reply_regist"
+								class="btn btn-sm btn-info">등록</button>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 	<div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
+	<script type="text/javascript">
+		var curPage = 1;
+		var screenListSize = 10;
+		// 페이지 로딩된 후
+		$(document).ready(function(){
+			var params = {};
+			var p_parent = "";
+			var edit_btn = "";
+			
+			
+			
+			function updateBtn(re_parent_no, fr_no){
+				//var parent0 = $(this).parent().parent();
+				var data_val = $("button[data-re-no]");
+				//var data_val = $("button[data-re-no]").parent().parent();
+				console.log("들어옴"+data_val);
+				/* $.ajax({
+					type : "get", // 요청메소드
+					data : {
+						   "re_parent_no" : fr_no,
+						   "re_no" : p_num ,
+						   "re_content": parentText
+						},
+					url : "<c:url value='/reply/replyRegistUpdate'/>",
+					dataType: "json",
+					success:function(result){ // 성공
+						
+					},
+					error:function(a,b,c){ // 통신 실패
+						
+					}
+				}); */
+			}
+			
+			
+			// 댓글 리스트
+			function fn_newReply(){
+				params = {"curPage" : curPage,
+						  "screentListSize" : screenListSize,
+						  "re_category" : "freeboard",
+						  "re_parent_no" : ${board.fr_no}
+						 }
+				var v_str =""
+				params = $("form[name=frm_reply]").serialize();
+				$.ajax({
+					type : "GET", // 요청메소드
+					data : params,
+					url : "<c:url value='/reply/replyList'/>",
+					dataType: "json",
+					success:function(data){ // 성공
+						
+						if(data.result){
+							
+							$.each(data.data, function(index, item){
+								v_str += "<div class='row'>";
+								v_str += "<div class='col-sm-2'>"+ item.re_mem_name +"</div>";
+								v_str += "<div class='col-sm-5'>"+ item.re_content +"</div>";
+								v_str += "<div class='col-sm-2'>"+ item.re_reg_date+"</div>";
+								v_str += "<div class='col-sm-3'>";
+								//if(item.re_mem_id == '${sessionScope.LOGIN_INFO.mem_id}'){
+									v_str += "<button name ='btn_reply_edit' type='button' class='btn btn-sm btn-info'>수정</button>";
+									v_str += "<button name ='btn_reply_delete' type='button' data-re-no ='"+ item.re_no +"'  class='btn btn-sm btn-info'>삭제</button>";
+								//}
+								v_str += "</div>";
+								v_str += "</div>";	
+								
+							});
+							$("#id_reply_list_area").append(v_str);
+							
+							// 댓글 수정 함수
+							/* $("button[name=btn_reply_edit]").click(function(){
+								var parent0 = $(this).parent().parent(); // 현재 div class row 에 들어가 있는음
+								
+						        var areatest = "<textarea rows='3' name='re_content' class='form-control'>"+ parent0.children()[1].innerText +"</textarea>";
+						        parent0.children()[1].innerHTML = areatest;
+						        p_parent = parent0;
+						        console.log("댓글 텍스트" +parent0.children()[1].textContent );
+						        
+						        $(this).attr("onclick","updateBtn("+parseInt(parent0.children()[3].getElementsByTagName("button")[1].getAttribute("data-re-no"))+","+ ${board.fr_no} +")");
+						        
+						        //ajaxBtn(parent0,parseInt(parent0.children()[3].getElementsByTagName("button")[1].getAttribute("data-re-no")) );
+							}); */
+						}
+					},
+					error:function(a,b,c){ // 통신 실패
+						
+					}
+					
+				});
+			}
+			
+			
+			
+			
+			function ajaxBtn(num){
+				p_parent.children()[1].getElementsByTagName("textarea")[0].value;
+				$("#updateBtn").click(function(){
+		        	ajaxTrans(num);
+		        });
+			}
+			
+			function ajaxTrans(p_num){
+				console.log(p_parent);
+				var parentText = p_parent.children()[1].getElementsByTagName("textarea")[0].value;
+				console.log(parentText);
+				
+// 				var ajaxparam = {
+// 						"re_parent_no=" : ${board.fr_no},
+// 						 "re_no=" : p_num ,
+// 						 "re_content=": p_text
+// 					}
+				$.ajax({
+					type : "get", // 요청메소드
+					data : {
+						   "re_parent_no" : ${board.fr_no},
+						   "re_no" : p_num ,
+						   "re_content": parentText
+						},
+						
+					
+						//ajaxparam,
+// 							   "re_parent_no=" + ${board.fr_no},
+// 							   "re_no=" + p_num ,
+// 							   "re_content=" + p_text,
+					url : "<c:url value='/reply/replyRegistUpdate'/>",
+					dataType: "json",
+					success:function(result){ // 성공
+						
+					},
+					error:function(a,b,c){ // 통신 실패
+						
+					}
+				});
+			}
+			
+			// 댓글 등록
+			$("#btn_reply_regist").click(function(){
+				params = $("form[name=frm_reply]").serialize();
+				$.ajax({
+					type : "POST", // 요청메소드
+					data : params,
+					url : "<c:url value='/reply/replyRegist'/>",
+					dataType: "json",
+					success:function(result){ // 성공
+						
+					},
+					error:function(a,b,c){ // 통신 실패
+						
+					}
+				});
+			});
+			
+			$("button[name=btn_reply_edit]").click(function(){
+				var parent0 = $(this).parent().parent(); // 현재 div class row 에 들어가 있는음
+				console.log("수정클릭");
+// 		        var areatest = "<textarea rows='3' name='re_content' class='form-control'>"+ parent0.children()[1].innerText +"</textarea>";
+// 		        parent0.children()[1].innerHTML = areatest;
+// 		        p_parent = parent0;
+// 		        console.log("댓글 텍스트" +parent0.children()[1].textContent );
+		        
+// 		        $(this).attr("onclick","updateBtn("+parseInt(parent0.children()[3].getElementsByTagName("button")[1].getAttribute("data-re-no"))+","+ ${board.fr_no} +")");
+		        
+		        //ajaxBtn(parent0,parseInt(parent0.children()[3].getElementsByTagName("button")[1].getAttribute("data-re-no")) );
+			});
+			
+			
+			fn_newReply();
+		});
+	</script>	
 </body>
+
 </html>
 
 

@@ -5,12 +5,47 @@
   
 <mapper namespace="com.now.dao.ILoginDao">
 
-	<select id="loginCheck" parameterType="com.now.vo.EmployeeVO" resultType="com.now.vo.EmployeeVO">
+	<select id="selectEmp" parameterType="com.now.vo.EmployeeVO" resultType="com.now.vo.EmployeeVO">
 		SELECT EMP_NO
+			 , EMP_ID
 			 , EMP_PASS
+			 , EMP_NAME
+			 , EMP_REGNO1
+			 , EMP_REGNO2
+			 , EMP_ZIP
+			 , EMP_ADD1
+			 , EMP_ADD2
+			 , EMP_HP
+			 , EMP_HP_SUB
+			 , EMP_MAIL
+			 , EMP_IMG
+			 , EMP_BANKNAME
+			 , EMP_BANKNUM
+			 , EMP_SALARY
+			 , EMP_VACATION
+			 , (SELECT COM_NAME FROM COMMON WHERE EMP_RANK = COM_CD) EMP_RANK
+			 , (SELECT COM_NAME FROM COMMON WHERE EMP_DEPARTMENT = COM_CD) EMP_DEPARTMENT
+			 , TO_CHAR(EMP_HIREDATE, 'YYYY-MM-DD') EMP_HIREDATE
+			 , TO_CHAR(EMP_FIREDATE, 'YYYY-MM-DD') EMP_FIREDATE
+			 , EMP_YN
 		 FROM EMPLOYEE
 		WHERE EMP_NO = #{emp_no}
+		  AND EMP_YN = 'N'
+		<choose>
+			<when test="emp_pass != null">
 		  AND EMP_PASS = #{emp_pass}
+			</when>
+		</choose>
 	</select>
+	
+	<select id="session" parameterType="String" resultType="com.now.vo.EmployeeVO">
+		SELECT EMP_NO
+			 , EMP_ID
+			 , EMP_NAME
+		 FROM EMPLOYEE
+		WHERE EMP_NO = #{emp_no}
+	</select>
+	
+	
 
 </mapper>
