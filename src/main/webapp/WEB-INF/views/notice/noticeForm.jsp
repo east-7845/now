@@ -31,11 +31,6 @@
 			<td><input type="text" name="nt_writer" value="${notice.nt_writer}">
 				<%-- <span>${errors.nt_writer}</span> --%>
 			</td>
-				<%-- 			<th>패스워드 </th>
-							<td><input type="password" name="nt_pass" value=""
-							           placeholder="수정 및 삭제시 필요">
-							    <span>${errors.bo_pass}</span>
-							</td> --%>
 		</tr>
 <%-- 		<tr>
 			<th>분류</th>
@@ -50,14 +45,14 @@
 			</td>
 		</tr> --%>
 		<tr>
-			<th>글내용</th>
+			<th>내용</th>
 			<td colspan="3">
 				<textarea rows="10" cols="60" name="nt_content">${notice.nt_content}</textarea>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4">
-				<a href="noticeList" class="btn btn-sm btn-default">글목록</a>
+				<a href="noticeList" class="btn btn-sm btn-default">목록</a>
 				<button type="submit" class="btn btn-sm btn-success">등록</button>
 		</td>
 		</tr>

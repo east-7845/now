@@ -22,8 +22,11 @@ public class NoticeServiceImpl implements INoticeService{
 
 	@Override
 	public NoticeVO selectNotice(int nt_no, boolean incrementHit) throws Exception {
-		if NoticeVO != null &&  = 
-		return noticeDao.selectNotice(nt_no);
+		NoticeVO vo = noticeDao.selectNotice(nt_no);
+		if (vo != null && incrementHit) {
+			noticeDao.increamentNoticeHit(nt_no);
+		}
+		return vo;
 	}
 	
 	@Override
@@ -40,7 +43,6 @@ public class NoticeServiceImpl implements INoticeService{
 	public int deleteNotice(NoticeVO noticeVO) throws Exception {
 		return noticeDao.deleteNotice(noticeVO);
 	}
-
 
 
 }

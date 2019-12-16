@@ -22,5 +22,8 @@ public interface INoticeDao {
 
 
 		public int deleteNotice (NoticeVO noticeVO) throws Exception;
+		
+		
+		public int increamentNoticeHit(int nt_no)throws Exception;
 
 }

@@ -19,12 +19,10 @@
 </head>
 	<%@include file="/WEB-INF/inc/now_top.jsp"%>
 <body>
-		<div class="container_content">
+			<div class="panel panel-default"
+			style="width: 60vw; margin-left: 20vw;">
 			<h3>공지사항</h3>
 
-
-		<div class="panel panel-default" style="width: 60vw; margin-left: 20vw;">
-		</div>
 					<form name="frm_board_list" action="" method="post">
 						<table class="table table-striped table-bordered table-ellipsis">
 							<colgroup>
@@ -59,7 +57,7 @@
 							</c:forEach>
 						</table>
 						</form>
-		</div>
+
 	
 
 	<%-- 	<nav class="text-center">
@@ -96,6 +94,7 @@
 					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 글 작성
 			</a>
 	</div>
+			</div>
 		<div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%></div>
 </body>

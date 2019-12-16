@@ -4,17 +4,22 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <!DOCTYPE html>
 <html>
-	<%@include file="/WEB-INF/inc/now_top.jsp"%>
+<%@include file="/WEB-INF/inc/common_header.jsp"%>
+
 <title>게시판 수정</title>
 </head>
 <body>
+	<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	<div class="container">
+		<div class="panel panel-default"
+			style="width: 60vw; margin-left: 20vw;">
+
 		<h3>게시판 수정 페이지</h3>
-		<form:form name="frm_notice" commandName="notice" action="noticeModify.do" method="post" enctype="multipart/form-data">
+		<form:form name="frm_notice" commandName="notice" action="noticeModify" method="post">
 			<form:hidden path="nt_no"/>
 			<table class="table table-striped">
 				<colgroup>
-					<col width="15%" />
+					<col width="10%" />
 					<col width="35%" />
 					<col width="15%" />
 					<col />
@@ -64,15 +69,16 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="4"><a href="noticeList.do"
+					<td colspan="4"><a href="noticeList"
 						class="btn btn-default btn-sm">목록</a>
 						<button type="submit" class="btn btn-sm btn-success">수정</button>
-						 	<a href="noticeList.do?nt_no=${notice.nt_no}&nt_del=Y" class="btn btn-default btn-sm" />삭제
+						 	<a href="noticeList?nt_no=${notice.nt_no}&nt_del=Y" class="btn btn-default btn-sm" />삭제
 						</button>
 					</td>
 				</tr>
 			</table>
 		</form:form>
+	</div>
 	</div>
 </body>
 </html>

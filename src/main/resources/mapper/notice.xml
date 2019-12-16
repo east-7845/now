@@ -35,12 +35,22 @@
 		)
 	</insert>
 	
-	<update id="increaseNoticeCount" parameterType="int">
+	<update id="increamentNoticeHit" parameterType="int">
 		UPDATE notice
 		SET nt_hit = nt_hit + 1
 		WHERE nt_no = #{nt_no}
 	</update>
 	
+	<update id="updateNotice"
+		parameterType="com.now.vo.NoticeVO">
+		UPDATE notice
+		SET nt_title = #{nt_title}
+		, nt_writer = #{nt_writer}
+		, nt_content = #{nt_content}
+		, nt_mod_date = sysdate
+		, nt_class = #{nt_class}
+		WHERE nt_no = #{nt_no}
+	</update>
 	
 		<select id="selectNotice" parameterType="int"
 		resultType="com.now.vo.NoticeVO">
@@ -56,5 +66,12 @@
 		FROM notice
 		WHERE nt_no = #{nt_no}
 	</select>
+
+	<delete id="deleteNotice"
+		parameterType="com.now.vo.NoticeVO">
+		DELETE FROM notice
+		WHERE nt_no = #{nt_no}
+	</delete>
+
 
 </mapper>

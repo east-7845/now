@@ -5,22 +5,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="/WEB-INF/inc/common_header.jsp"%>
-<title>공지사항</title>
+	<%@include file="/WEB-INF/inc/common_header.jsp"%>
+	<title>공지사항</title>
 </head>
-<body>
+	<body>
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
+		
 	<div class="container">
+	<div class="panel panel-default"
+			style="width: 60vw; margin-left: 20vw;">
+		
 		<table class="table table-striped">
 			<colgroup>
-				<col width="15%" />
-				<col width="35%" />
-				<col width="15%" />
+				<col width="5%" />
+				<col width="5%" />
+				<col width="5%" />
+				<col width="5%" />
 				<col />
 			</colgroup>
 				<tr>
 					<th>제목</th>
 					<td>${notice.nt_title}</td>
+				</tr>
+				<tr>
 					<th>조회수</th>
 					<td>${notice.nt_hit}</td>
 				</tr>
@@ -44,23 +51,21 @@
 					<td colspan="3">${notice.nt_content}</td>
 				</tr>
 		</table>
-			</div>
+		</div>
+			
 		<c:if test="${notice != null }">
 			<div class="row">
-				<a href="noticeList.do" class="btn btn-default btn-sm">회원 목록</a> <a
-					href="noticeEdit.do?nt_no=${noticeVO.nt_no}"
-					class="btn btn-primary btn-sm"> <span
-					class="glyphicon glyphicon-plus" aria-hidden="true"></span> 수정
-				</a>
+				<a href="noticeList" class="btn btn-default btn-sm">목록</a> 
+				<a href="noticeEdit?nt_no=${notice.nt_no}"class="btn btn-primary btn-sm"> 
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 수정 </a>
 			</div>
 		</c:if>
+</div>
 
-
-	<!-- container -->
-			<div class="container_footer">
+		<div class="container_footer">
 				<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 		</div>
-
-</body>
+		
+	</body>
 </html>
 

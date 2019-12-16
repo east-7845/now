@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.now.service.INoticeService;
 import com.now.vo.NoticeVO;
+import com.now.vo.ResultMessageVO;
 
 
 @Controller
@@ -54,8 +57,6 @@ public class NoticeController {
 		return "notice/noticeView";
 	}
 	
-
-	
 	@RequestMapping(value="/notice/noticeRegist")
 	public String noticeRegist(HttpServletRequest req
             , ModelMap model
@@ -68,7 +69,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value = "/notice/noticeEdit", params = "nt_no")
-	public String boardEdit(ModelMap model, @RequestParam("nt_no") int nt_no) throws Exception {
+	public String noticeEdit(ModelMap model, @RequestParam("nt_no") int nt_no) throws Exception {
 		String view = "notice/noticeEdit";
 
 		NoticeVO vo = noticeService.selectNotice(nt_no, false);
@@ -76,6 +77,38 @@ public class NoticeController {
 
 		return view;
 	}
+	
+	@RequestMapping(value = "/notice/noticeModify", method = RequestMethod.POST)
+	public String noticeModify(ModelMap model,
+																		@ModelAttribute("notice") NoticeVO noticeVO,
+																		BindingResult errors) throws Exception {
+		String view = "notice/message";
+		
+		if(errors.hasErrors()) {
+			return "notice/noticeEdit";
+		}
+		
+		int succ = noticeService.updateNotice(noticeVO);
+		ResultMessageVO messageVO = new ResultMessageVO();
+		if (succ > 0) {
+			messageVO.setResult(true)
+			         .setTitle("수정 성공")
+			         .setMessage("수정에 성공하였습니다")
+			         .setUrl("/notice/noticeList")
+					 .setUrlTitle("목록으로");
+		} else {
+			messageVO.setResult(false)
+			         .setTitle("수정 실패")
+			         .setMessage("수정에 실패하였습니다")
+			         .setUrl("/notice/noticeList")
+					 .setUrlTitle("목록으로");
+		}
+		model.addAttribute("resultMessage", messageVO);
+
+		return view;
+	}
+		
+		
 		
 	
 }
