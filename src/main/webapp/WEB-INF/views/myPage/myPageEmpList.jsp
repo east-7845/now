@@ -42,16 +42,26 @@
 				<tr>
 					<td>${emp.emp_no }</td>
 					<td>${emp.emp_id }</td>
-					<td>${emp.emp_name }</td>
+					<td><a href="myPageEmpInfo?emp_no=${emp.emp_no }">${emp.emp_name }</a></td>
 					<td>${emp.emp_hp }</td>
 					<td>${emp.emp_department }</td>
 					<td>${emp.emp_rank }</td>
 				</tr>
 			</c:forEach>
 		</table>
+		<input type="button" id="emp_btn" value="사원등록">
 	</div>
 	<div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
 </body>
+<script type="text/javascript">
+	document.getElementById("emp_btn").onclick = function() {
+		location.href = "/now/myPage/myPageEmpInsert";
+	};
+// 	var empBtn = document.getElementById("emp_btn");
+// 	empBtn.onclick = function() {
+// 		alert("?");
+// 	}
+</script>
 </html>

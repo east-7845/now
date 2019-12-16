@@ -94,10 +94,10 @@
 				<tr>
 					<td>ID</td>
 					<td>
-						<c:if test="${employee.emp_id == null }">
+						<c:if test="${employee.emp_id == null || sessionEmp.emp_no == 'NOW0000001' }">
 							<form:input path="emp_id"/>
 						</c:if>
-						<c:if test="${employee.emp_id != null }">
+						<c:if test="${employee.emp_id != null && sessionEmp.emp_no != 'NOW0000001'}">
 							${employee.emp_id }
 						</c:if>
 					</td>
@@ -149,20 +149,78 @@
 				</tr>
 				<tr>
 					<td>연봉</td>
-					<td>${employee.emp_salary }</td>
+					<td>
+						<c:if test="${sessionEmp.emp_no == 'NOW0000001' }">
+							<form:input path="emp_salary"/>
+						</c:if>
+						<c:if test="${sessionEmp.emp_no != 'NOW0000001' }">
+							${employee.emp_salary }
+						</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td>연차</td>
 					<td>${employee.emp_vacation }</td>
 				</tr>
 				<tr>
+					<td>부서</td>
+					<td>
+						<c:if test="${sessionEmp.emp_no == 'NOW0000001' }">
+							<select name="emp_department">
+								<c:forEach var="dept" items="${dept }">
+									<c:if test="${employee.emp_department == dept.com_name }">
+										<option value="${dept.com_cd }" selected>${dept.com_name }</option>
+									</c:if>
+									<c:if test="${employee.emp_department != dept.com_name }">
+										<option value="${dept.com_cd }">${dept.com_name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</c:if>
+						<c:if test="${sessionEmp.emp_no != 'NOW0000001' }">
+							${employee.emp_department }
+						</c:if>
+					</td>
+				</tr>
+				<tr>
 					<td>직급</td>
-					<td>${employee.emp_department }</td>
+					<td>
+						<c:if test="${sessionEmp.emp_no == 'NOW0000001' }">
+							<select name="emp_rank">
+								<c:forEach var="rank" items="${rank }">
+									<c:if test="${employee.emp_rank == rank.com_name }">
+										<option value="${rank.com_cd }" selected>${rank.com_name }</option>
+									</c:if>
+									<c:if test="${employee.emp_rank != rank.com_name }">
+										<option value="${rank.com_cd }">${rank.com_name }</option>
+									</c:if>
+								</c:forEach>
+							</select>
+						</c:if>
+						<c:if test="${sessionEmp.emp_no != 'NOW0000001' }">
+							${employee.emp_rank }
+						</c:if>
+					</td>
 				</tr>
 				<tr>
 					<td>입사일</td>
 					<td>${employee.emp_hiredate }</td>
 				</tr>
+				<c:if test="${sessionEmp.emp_no == 'NOW0000001' }">
+					<tr>
+						<td>퇴사여부</td>
+						<td>
+							<c:if test="${employee.emp_yn == 'Y'}">
+								<label>Y  <input type="radio" name="emp_yn" value="Y" checked></label>&nbsp;&nbsp;
+								<label>N  <input type="radio" name="emp_yn" value="N"></label>
+							</c:if>
+							<c:if test="${employee.emp_yn == 'N'}">
+								<label>Y  <input type="radio" name="emp_yn" value="Y"></label>&nbsp;&nbsp;
+								<label>N  <input type="radio" name="emp_yn" value="N" checked></label>
+							</c:if>
+						</td>
+					</tr>
+				</c:if>
 				<tr>
 					<td colspan="2"><input type="submit" value="수정완료"></td>
 				</tr>
