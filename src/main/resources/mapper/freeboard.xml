@@ -39,6 +39,7 @@
 			</choose>
 		</if>
 	</sql>
+	
 	<!-- OR fr_writer LIKE '%' || #{searchWord} || '%' -->
 	<select id="selectFreeBoardCount"
 		parameterType="com.now.vo.FreeBoardSearchVO" resultType="int">

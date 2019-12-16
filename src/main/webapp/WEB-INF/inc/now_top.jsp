@@ -24,6 +24,7 @@
 	text-align: center;
 	padding-right: 0px;
 	padding-left: 0px;
+	overflow: auto;
 }
 
 .top_menu {
@@ -34,15 +35,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	document.getElementsByClassName("top_menu")[0].onclick = function(){ // 홈
-		location.href="/now/now";
+
+		location.href="/now/main";
 	}
 	
-<<<<<<< HEAD
-	document.getElementsByClassName("top_menu")[7].onclick = function(){
-		location.href="myPage";
-=======
 	document.getElementsByClassName("top_menu")[1].onclick = function(){ // 게시판
-		location.href="/now/freeBoard/freeBoardList";
+		location.href="/now/freeboard/freeBoardList";
 	}
 	
 	document.getElementsByClassName("top_menu")[2].onclick = function(){ // 전자결재
@@ -61,13 +59,12 @@ $(document).ready(function(){
 // 		location.href="/now/pollboard/pollBoardList";
 // 	}
 	
-// 	document.getElementsByClassName("top_menu")[6].onclick = function(){ // 채팅
-// 		location.href="/now/pollboard/pollBoardList";
-// 	}
+ 	document.getElementsByClassName("top_menu")[6].onclick = function(){ // 채팅
+ 		location.href="/now/chat/chatView";
+ 	}
 	
 	document.getElementsByClassName("top_menu")[7].onclick = function(){ // 마이페이지
 		location.href="/now/myPage/myPage";
->>>>>>> refs/heads/master
 	}
 });
 
@@ -77,7 +74,7 @@ $(document).ready(function(){
 		<div style="border: 1px solid black; height: 70px;">
 			<a href="#"> <img alt="" style="width: 100px; height: 65px;"
 				src="${pageContext.request.contextPath }/images/logo.png">
-			</a> <span> 한수민 - 신입(인턴1년 6개월) </span>
+			</a> <span> ${sessionEmp.emp_name } - 신입(인턴1년 6개월) </span><a href="/now/logout">logout</a>
 		</div>
 		<div class="top_menu">
 			<a class="top_button btn_home"> <span class="top_button-icon"><i
@@ -131,7 +128,5 @@ $(document).ready(function(){
 	</div>
 </body>
 </html>
-
-
 
 

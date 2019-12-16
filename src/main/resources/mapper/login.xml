@@ -23,13 +23,23 @@
 			 , EMP_BANKNUM
 			 , EMP_SALARY
 			 , EMP_VACATION
-			 , EMP_RANK
-			 , EMP_DEPARTMENT
+			 , (SELECT COM_NAME FROM COMMON WHERE EMP_RANK = COM_CD) EMP_RANK
+			 , (SELECT COM_NAME FROM COMMON WHERE EMP_DEPARTMENT = COM_CD) EMP_DEPARTMENT
 			 , TO_CHAR(EMP_HIREDATE, 'YYYY-MM-DD') EMP_HIREDATE
 			 , TO_CHAR(EMP_FIREDATE, 'YYYY-MM-DD') EMP_FIREDATE
 			 , EMP_YN
 		 FROM EMPLOYEE
-		WHERE EMP_NO = #{emp_no}
+		WHERE EMP_YN = 'N'
+		<choose>
+			<when test="emp_no != ''">
+		  AND EMP_NO = #{emp_no}
+			</when>
+		</choose>
+		<choose>
+			<when test="emp_id != ''">
+		  AND EMP_ID = #{emp_id}
+			</when>
+		</choose>
 		<choose>
 			<when test="emp_pass != null">
 		  AND EMP_PASS = #{emp_pass}
@@ -37,12 +47,22 @@
 		</choose>
 	</select>
 	
-	<select id="session" parameterType="String" resultType="com.now.vo.EmployeeVO">
+	<select id="session" parameterType="com.now.vo.EmployeeVO" resultType="com.now.vo.EmployeeVO">
 		SELECT EMP_NO
 			 , EMP_ID
 			 , EMP_NAME
 		 FROM EMPLOYEE
-		WHERE EMP_NO = #{emp_no}
+		WHERE EMP_YN = 'N'
+		<choose>
+			<when test="emp_no != ''">
+		  AND EMP_NO = #{emp_no}
+			</when>
+		</choose>
+		<choose>
+			<when test="emp_id != ''">
+		  AND EMP_ID = #{emp_id}
+			</when>
+		</choose>
 	</select>
 	
 	

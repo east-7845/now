@@ -9,6 +9,6 @@ public interface ILoginDao {
 
 	public EmployeeVO selectEmp(EmployeeVO employee);
 
-	public EmployeeVO session(String emp_no);
+	public EmployeeVO session(EmployeeVO employeeVO);
 
 }

@@ -30,14 +30,27 @@ public class LoginController {
 		}
 		return view;
 	}
+	
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
 	public String session(HttpServletRequest req, EmployeeVO employee) throws Exception {
 		String view = "main";
 		System.out.println("session");
 		HttpSession session = req.getSession();
-		EmployeeVO vo = loginService.session(employee.getEmp_no());
+		EmployeeVO vo = loginService.session(employee);
 		
 		session.setAttribute("sessionEmp", vo);
+
+		return view;
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpServletRequest req, EmployeeVO employee) throws Exception {
+		String view = "forward:/";
+		System.out.println("logout");
+		
+		HttpSession session = req.getSession();
+		session.invalidate();
+
 
 		return view;
 	}
