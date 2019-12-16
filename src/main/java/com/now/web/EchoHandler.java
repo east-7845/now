@@ -3,20 +3,25 @@ package com.now.web;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import com.now.vo.EmployeeVO;
+
 
 public class EchoHandler extends TextWebSocketHandler {
 	
@@ -24,11 +29,16 @@ public class EchoHandler extends TextWebSocketHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EchoHandler.class);
 	
+	private HttpServletRequest req;
+	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		System.out.println("afterConnectionEstablished");
-		System.out.println("나오나요??11");
-		logger.debug("채팅방 연결 성공" + new Date());
+		//System.out.println("afterConnectionEstablished");
+		
+		//logger.debug("채팅방 연결 성공" + new Date());
+		HttpSession session2 = req.getSession();
+		EmployeeVO sessionVO = (EmployeeVO) session2.getAttribute("sessionEmp");
+		System.out.println(sessionVO.getEmp_name());
 		
 		System.out.println(" --"+ session.getAttributes()); // {}
 		System.out.println(" --"+ session.getId()); // 현재 만들어진 websocket의 아이디
@@ -56,15 +66,18 @@ public class EchoHandler extends TextWebSocketHandler {
 		String result = resultObj.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
 		
 		System.out.println(result);
-		FileWriter file = new FileWriter("E:\\test.json");
+		//FileWriter file = new FileWriter("E:\\test.json");
+		//FileWriter file = new FileWriter("/home/pc31//test.json");
+		FileWriter file = new FileWriter("test.json");
 		file.write(resultObj.toJSONString());
 		file.flush();
 		file.close();
 
-		
 		JSONParser parser = new JSONParser();
 
-		Object obj = parser.parse(new FileReader("E:\\test.json"));
+		//Object obj = parser.parse(new FileReader("E:\\test.json"));
+		//Object obj = parser.parse(new FileReader("/home/pc31//test.json"));
+		Object obj = parser.parse(new FileReader("test.json"));
 		 
 		JSONObject jsonObject = (JSONObject) obj;
 		System.out.println(jsonObject);

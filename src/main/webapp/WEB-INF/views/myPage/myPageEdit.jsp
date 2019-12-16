@@ -94,77 +94,6 @@
 				<tr>
 					<td>ID</td>
 					<td>
-<<<<<<< HEAD
-						<c:if test="${employee.emp_id == null }">
-							<form:input path="emp_id"/>
-						</c:if>
-						<c:if test="${employee.emp_id != null }">
-							${employee.emp_id }
-						</c:if>
-					</td>
-				</tr>
-				<tr>
-					<td>주민등록번호</td>
-					<td>
-						<form:input path="emp_regno1"/> - <form:input path="emp_regno2"/>
-					</td>
-				</tr>
-				<tr>
-					<td>주소</td>
-					<td>
-						<input type="text" id="sample4_postcode" placeholder="우편번호" name="emp_zip" value="${employee.emp_zip }" readonly>
-						<input type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" name="emp_add1" value="${employee.emp_add1 }" readonly>
-						<input type="text" id="sample4_detailAddress" placeholder="상세주소" name="emp_add2" value="${employee.emp_add2 }">
-					</td>
-				</tr>
-				<tr>
-					<td>전화번호</td>
-					<td>
-						<form:input path="emp_hp"/>
-					</td>
-				</tr>
-				<tr>
-					<td>비상연락망</td>
-					<td>
-						<form:input path="emp_hp_sub"/>
-					</td>
-				</tr>
-				<tr>
-					<td>메일</td>
-					<td>
-						<form:input path="emp_mail"/>
-					</td>
-				</tr>
-				<tr>
-					<td>은행명</td>
-					<td>
-						<form:input path="emp_bankname"/>
-					</td>
-				</tr>
-				<tr>
-					<td>계좌번호</td>
-					<td>
-						<form:input path="emp_banknum"/>
-					</td>
-				</tr>
-				<tr>
-					<td>연봉</td>
-					<td>${employee.emp_salary }</td>
-				</tr>
-				<tr>
-					<td>연차</td>
-					<td>${employee.emp_vacation }</td>
-				</tr>
-				<tr>
-					<td>직급</td>
-					<td>${employee.emp_department }</td>
-				</tr>
-				<tr>
-					<td>입사일</td>
-					<td>${employee.emp_hiredate }</td>
-				</tr>
-=======
 						<c:if test="${employee.emp_id == null || sessionEmp.emp_no == 'NOW0000001' }">
 							<form:input path="emp_id"/>
 						</c:if>
@@ -292,7 +221,6 @@
 						</td>
 					</tr>
 				</c:if>
->>>>>>> refs/remotes/origin/shinHome
 				<tr>
 					<td colspan="2"><input type="submit" value="수정완료"></td>
 				</tr>

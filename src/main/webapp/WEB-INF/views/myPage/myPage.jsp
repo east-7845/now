@@ -124,12 +124,6 @@
 						</td>
 					</tr>
 					<tr>
-<<<<<<< HEAD
-						<td>직급</td>
-						<td>
-							${employee.emp_department }
-							<form:hidden path="emp_department"/>
-=======
 						<td>부서</td>
 						<td>
 							${employee.emp_department }
@@ -141,7 +135,6 @@
 						<td>
 							${employee.emp_rank }
 							<form:hidden path="emp_rank"/>
->>>>>>> refs/remotes/origin/shinHome
 						</td>
 					</tr>
 					<tr>
