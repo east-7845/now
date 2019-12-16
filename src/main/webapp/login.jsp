@@ -46,7 +46,7 @@
 					<td rowspan="2"><input type="submit" class="login_btn" value="login"></td>
 				</tr>
 				<tr>
-					<td><label>비밀번호  <input type="password" name="emp_pass"></label></td>
+					<td>비밀번호  <input type="password" name="emp_pass"></td>
 				</tr>
 			</table>
 				<c:if test="${resultMessage != null }">
