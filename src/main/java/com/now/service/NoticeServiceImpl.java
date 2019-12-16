@@ -20,10 +20,12 @@ public class NoticeServiceImpl implements INoticeService{
 		return noticeDao.selectNoticeList();
 	}
 
-	public NoticeVO selectBoard(int nt_no, boolean incrementHit) throws Exception{	
+	@Override
+	public NoticeVO selectNotice(int nt_no, boolean incrementHit) throws Exception {
+		if NoticeVO != null &&  = 
 		return noticeDao.selectNotice(nt_no);
 	}
-
+	
 	@Override
 	public int insertNotice(NoticeVO noticeVO) throws Exception {
 		return noticeDao.insertNotice(noticeVO);
@@ -39,10 +41,6 @@ public class NoticeServiceImpl implements INoticeService{
 		return noticeDao.deleteNotice(noticeVO);
 	}
 
-	@Override
-	public NoticeVO selectNotice(int nt_no, boolean b) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
