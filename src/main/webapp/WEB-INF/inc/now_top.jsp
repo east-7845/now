@@ -35,20 +35,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	document.getElementsByClassName("top_menu")[0].onclick = function(){ // 홈
-<<<<<<< HEAD
-		location.href="/now/now";
-=======
+
 		location.href="/now/main";
->>>>>>> refs/remotes/origin/shinHome
 	}
 	
-<<<<<<< HEAD
-<<<<<<< HEAD
-	document.getElementsByClassName("top_menu")[7].onclick = function(){
-		location.href="myPage";
-=======
 	document.getElementsByClassName("top_menu")[1].onclick = function(){ // 게시판
-		location.href="/now/freeBoard/freeBoardList";
+		location.href="/now/freeboard/freeBoardList";
 	}
 	
 	document.getElementsByClassName("top_menu")[2].onclick = function(){ // 전자결재
@@ -67,41 +59,12 @@ $(document).ready(function(){
 // 		location.href="/now/pollboard/pollBoardList";
 // 	}
 	
-// 	document.getElementsByClassName("top_menu")[6].onclick = function(){ // 채팅
-// 		location.href="/now/pollboard/pollBoardList";
-// 	}
+ 	document.getElementsByClassName("top_menu")[6].onclick = function(){ // 채팅
+ 		location.href="/now/chat/chatView";
+ 	}
 	
 	document.getElementsByClassName("top_menu")[7].onclick = function(){ // 마이페이지
 		location.href="/now/myPage/myPage";
->>>>>>> refs/heads/master
-=======
-	document.getElementsByClassName("top_menu")[1].onclick = function(){ // 게시판
-		location.href="/now/freeBoard/freeBoardList";
-	}
-	
-	document.getElementsByClassName("top_menu")[2].onclick = function(){ // 전자결재
-		location.href="/now/approval/approvalList";
-	}
-	
-	document.getElementsByClassName("top_menu")[3].onclick = function(){ // 투표
-		location.href="/now/pollboard/pollBoardList";
-	}
-	
-// 	document.getElementsByClassName("top_menu")[4].onclick = function(){ // 통계
-// 		location.href="/now/pollboard/pollBoardList";
-// 	}
-	
-// 	document.getElementsByClassName("top_menu")[5].onclick = function(){ // 근태
-// 		location.href="/now/pollboard/pollBoardList";
-// 	}
-	
-// 	document.getElementsByClassName("top_menu")[6].onclick = function(){ // 채팅
-// 		location.href="/now/pollboard/pollBoardList";
-// 	}
-	
-	document.getElementsByClassName("top_menu")[7].onclick = function(){ // 마이페이지
-		location.href="/now/myPage/myPage";
->>>>>>> refs/remotes/origin/shinHome
 	}
 });
 

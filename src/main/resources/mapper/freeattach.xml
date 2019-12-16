@@ -7,59 +7,59 @@
 	<select id="selectAttach" parameterType="int"
 		resultType="com.now.vo.AttachVO">
 		SELECT
-		atch_no,
-		atch_parent_no,
-		atch_category,
-		atch_file_name,
-		atch_original_name,
-		atch_file_size,
-		atch_fancy_size,
-		atch_content_type,
-		atch_path,
-		atch_down_cnt,
-		atch_del_yn,
-		atch_reg_date
+			FA_NO,
+			FA_PARENT_NO,
+			FA_CATEGORY,
+			FA_FILE_NAME,
+			FA_ORIGINAL_NAME,
+			FA_FILE_SIZE,
+			FA_FANCY_SIZE,
+			FA_CONTENT_TYPE,
+			FA_PATH,
+			FA_DOWN_CNT,
+			FA_DEL_YN,
+			FA_REG_DATE
 		FROM
-		attach
-		WHERE atch_no = #{atch_no}
-		AND atch_del_yn = 'N'
+			freeattach
+		WHERE fa_no = #{fa_no}
+		AND fa_del_yn = 'N'
 	</select>
 
 	<!-- 리스트인데 알아서 타입 메서드를 체크해서 뿌려줌 -->
 	<select id="selectAttachByParentNo" parameterType="int"
 		resultType="com.now.vo.AttachVO">
 		SELECT
-		atch_no,
-		atch_original_name,
-		atch_fancy_size,
-		atch_down_cnt,
-		TO_CHAR(atch_reg_date, 'YY.MM.DD HH24:MI') AS atch_reg_date
-		FROM attach
-		WHERE atch_parent_no = #{atch_parent_no}
-		AND atch_del_yn = 'N'
+		FA_NO,
+		FA_ORIGINAL_NAME,
+		FA_FANCY_SIZE,
+		FA_DOWN_CNT,
+		TO_CHAR(FA_REG_DATE, 'YY.MM.DD HH24:MI') AS FA_REG_DATE
+		FROM freeattach
+		WHERE FA_PARENT_NO = #{FA_PARENT_NO}
+		AND FA_DEL_YN = 'N'
 	</select>
 
 	<!--                         find replace -->
 	<!-- regexpr \w [0-9a-zA-Z] (\w+) #{$1} -->
 	<insert id="insertAttach"
 		parameterType="com.now.vo.AttachVO">
-		INSERT INTO attach (
-			atch_no, atch_parent_no, atch_category,
-			atch_file_name,	atch_original_name,	atch_file_size,
-			atch_fancy_size, atch_content_type,	atch_path,
-			atch_down_cnt, atch_del_yn,	atch_reg_date
+		INSERT INTO freeattach (
+			fa_no, fa_parent_no, fa_category,
+			fa_file_name,	fa_original_name,	fa_file_size,
+			fa_fancy_size, fa_content_type,	fa_path,
+			fa_down_cnt, fa_del_yn,	fa_reg_date
 		) VALUES (
-			seq_attach.NEXTVAL,	#{atch_parent_no}, #{atch_category},
-			#{atch_file_name}, #{atch_original_name}, #{atch_file_size},
-			#{atch_fancy_size}, #{atch_content_type}, #{atch_path},
-			0, 'N', SYSDATE
+			seq_attach.NEXTVAL,	#{fa_parent_no}, #{fa_category},
+			#{fa_file_name}, #{fa_original_name}, #{fa_file_size},
+			#{fa_fancy_size}, #{fa_content_type}, #{fa_path},
+			0, 'N', sysdate
 		)
 	</insert>
 
 	<update id="increaseDownloadCount" parameterType="int">
-		UPDATE attach
-		   SET atch_down_cnt = atch_down_cnt + 1
-		 WHERE atch_no = #{atch_no}
+		UPDATE freeattach
+		   SET fa_down_cnt = fa_down_cnt + 1
+		 WHERE fa_no = #{fa_no}
 	</update>
 
 	<update id="deleteAttach">

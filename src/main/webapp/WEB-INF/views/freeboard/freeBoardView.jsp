@@ -40,12 +40,12 @@
 				<tr>
 					<th>첨부파일</th>
 					<td colspan="3">
-						<c:forEach var="f" items="${boardVO.attaches}">
+						<c:forEach var="f" items="${board.attaches}">
 							<div>
-								<a href="<c:url value='/attach/download/${f.atch_no}' />"
+								<a href="<c:url value='/attach/download/${f.fa_no}' />"
 									target="_blank"> <span class="glyphicon glyphicon-save"
-									aria-hidden="true"></span> ${f.atch_original_name}
-								</a> Size : ${f.atch_fancy_size} Down : ${f.atch_down_cnt}
+									aria-hidden="true"></span> ${f.fa_original_name}
+								</a> Size : ${f.fa_fancy_size} Down : ${f.fa_down_cnt}
 							</div>
 						</c:forEach>
 						<!-- <div class="form-inline">

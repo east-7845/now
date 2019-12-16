@@ -43,7 +43,6 @@ $(document).ready(function(){
 	<div class="container_content">
 		<div class="panel panel-default"
 			style="width: 60vw; margin-left: 20vw;">
-
 			<form:form commandName="board" action="freeBoardRegist" method="post"
 				enctype="multipart/form-data">
 				<table class="table table-striped">

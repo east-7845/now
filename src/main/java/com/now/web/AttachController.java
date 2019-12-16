@@ -45,9 +45,9 @@ public class AttachController {
 		// 이밑에는 php도 똑같다 https://kkotkkio.tistory.com/9
 		try {
 			// 파일명에 한글이 있는경우 처리
-			String downloadFileName = new String(vo.getFa_Original_Name().getBytes("utf-8"), "iso-8859-1");
-			String absoluteFileName = uploadPath + File.separatorChar + vo.getFa_Path() + File.separatorChar
-					+ vo.getFa_File_Name();
+			String downloadFileName = new String(vo.getFa_original_name().getBytes("utf-8"), "iso-8859-1");
+			String absoluteFileName = uploadPath + File.separatorChar + vo.getFa_path() + File.separatorChar
+					+ vo.getFa_file_name();
 			logger.debug("downloadFileName = {}", downloadFileName);
 			logger.debug("absoluteFileName = {}", absoluteFileName);
 			File f = new File(absoluteFileName);

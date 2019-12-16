@@ -31,15 +31,15 @@ public class StudyAttachUtils {
 			String save_name = UUID.randomUUID().toString();
 			AttachVO vo = new AttachVO();
 			
-			vo.setFa_Original_Name(multipart.getOriginalFilename());
-			vo.setFa_File_Size(multipart.getSize());
-			vo.setFa_Content_Type(multipart.getContentType());
-			vo.setFa_File_Name(save_name);
-			vo.setFa_Category(category);
-			vo.setFa_Path(path);
-			vo.setFa_Fancy_Size(fancySize(multipart.getSize()));
-			String absoluteFileName = uploadPath + File.separatorChar + vo.getFa_Path() + File.separatorChar
-					+ vo.getFa_File_Name();
+			vo.setFa_original_name(multipart.getOriginalFilename());
+			vo.setFa_file_size(multipart.getSize());
+			vo.setFa_content_type(multipart.getContentType());
+			vo.setFa_file_name(save_name);
+			vo.setFa_category(category);
+			vo.setFa_path(path);
+			vo.setFa_fancy_size(fancySize(multipart.getSize()));
+			String absoluteFileName = uploadPath + File.separatorChar + vo.getFa_path() + File.separatorChar
+					+ vo.getFa_file_name();
 			logger.debug("absoluteFileName = {}", absoluteFileName);
 			// transferTo는 디렉토리가 없으면 에러발생, commons-io 사용
 			// multipart.transferTo(new File(absoluteFileName));

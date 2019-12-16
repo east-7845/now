@@ -1,113 +1,93 @@
 package com.now.vo;
 
 public class AttachVO {
-	private int fa_No;
-	private int fa_Parent_No;
-	private String fa_Category = "";
-	private String fa_File_Name = "";
-	private String fa_Original_Name = "";
-	private long fa_File_Size;
-	private String fa_Fancy_Size = "";
-	private String fa_Content_Type = "";
-	private String fa_Path = "";
-	private int fa_Down_Cnt;
-	private String fa_Del_Yn = "";
-	private String fa_Reg_Date = "";
-
-	public int getFa_No() {
-		return fa_No;
+	
+	private int fa_no;
+	private int fa_parent_no;
+	private String fa_category = "";
+	private String fa_file_name = "";
+	private String fa_original_name = "";
+	private long fa_file_size;
+	private String fa_fancy_size = "";
+	private String fa_content_type = "";
+	private String fa_path = "";
+	private int fa_down_cnt;
+	private String fa_del_yn = "";
+	private String fa_reg_date = "";
+	
+	public int getFa_no() {
+		return fa_no;
+	}
+	public void setFa_no(int fa_no) {
+		this.fa_no = fa_no;
+	}
+	public int getFa_parent_no() {
+		return fa_parent_no;
+	}
+	public void setFa_parent_no(int fa_parent_no) {
+		this.fa_parent_no = fa_parent_no;
+	}
+	public String getFa_category() {
+		return fa_category;
+	}
+	public void setFa_category(String fa_category) {
+		this.fa_category = fa_category;
+	}
+	public String getFa_file_name() {
+		return fa_file_name;
+	}
+	public void setFa_file_name(String fa_file_name) {
+		this.fa_file_name = fa_file_name;
+	}
+	public String getFa_original_name() {
+		return fa_original_name;
+	}
+	public void setFa_original_name(String fa_original_name) {
+		this.fa_original_name = fa_original_name;
+	}
+	public long getFa_file_size() {
+		return fa_file_size;
+	}
+	public void setFa_file_size(long fa_file_size) {
+		this.fa_file_size = fa_file_size;
+	}
+	public String getFa_fancy_size() {
+		return fa_fancy_size;
+	}
+	public void setFa_fancy_size(String fa_fancy_size) {
+		this.fa_fancy_size = fa_fancy_size;
+	}
+	public String getFa_content_type() {
+		return fa_content_type;
+	}
+	public void setFa_content_type(String fa_content_type) {
+		this.fa_content_type = fa_content_type;
+	}
+	public String getFa_path() {
+		return fa_path;
+	}
+	public void setFa_path(String fa_path) {
+		this.fa_path = fa_path;
+	}
+	public int getFa_down_cnt() {
+		return fa_down_cnt;
+	}
+	public void setFa_down_cnt(int fa_down_cnt) {
+		this.fa_down_cnt = fa_down_cnt;
+	}
+	public String getFa_del_yn() {
+		return fa_del_yn;
+	}
+	public void setFa_del_yn(String fa_del_yn) {
+		this.fa_del_yn = fa_del_yn;
+	}
+	public String getFa_reg_date() {
+		return fa_reg_date;
+	}
+	public void setFa_reg_date(String fa_reg_date) {
+		this.fa_reg_date = fa_reg_date;
 	}
 
-	public void setFa_No(int fa_No) {
-		this.fa_No = fa_No;
-	}
-
-	public int getFa_Parent_No() {
-		return fa_Parent_No;
-	}
-
-	public void setFa_Parent_No(int fa_Parent_No) {
-		this.fa_Parent_No = fa_Parent_No;
-	}
-
-	public String getFa_Category() {
-		return fa_Category;
-	}
-
-	public void setFa_Category(String fa_Category) {
-		this.fa_Category = fa_Category;
-	}
-
-	public String getFa_File_Name() {
-		return fa_File_Name;
-	}
-
-	public void setFa_File_Name(String fa_File_Name) {
-		this.fa_File_Name = fa_File_Name;
-	}
-
-	public String getFa_Original_Name() {
-		return fa_Original_Name;
-	}
-
-	public void setFa_Original_Name(String fa_Original_Name) {
-		this.fa_Original_Name = fa_Original_Name;
-	}
-
-	public long getFa_File_Size() {
-		return fa_File_Size;
-	}
-
-	public void setFa_File_Size(long fa_File_Size) {
-		this.fa_File_Size = fa_File_Size;
-	}
-
-	public String getFa_Fancy_Size() {
-		return fa_Fancy_Size;
-	}
-
-	public void setFa_Fancy_Size(String fa_Fancy_Size) {
-		this.fa_Fancy_Size = fa_Fancy_Size;
-	}
-
-	public String getFa_Content_Type() {
-		return fa_Content_Type;
-	}
-
-	public void setFa_Content_Type(String fa_Content_Type) {
-		this.fa_Content_Type = fa_Content_Type;
-	}
-
-	public String getFa_Path() {
-		return fa_Path;
-	}
-
-	public void setFa_Path(String fa_Path) {
-		this.fa_Path = fa_Path;
-	}
-
-	public int getFa_Down_Cnt() {
-		return fa_Down_Cnt;
-	}
-
-	public void setFa_Down_Cnt(int fa_Down_Cnt) {
-		this.fa_Down_Cnt = fa_Down_Cnt;
-	}
-
-	public String getFa_Del_Yn() {
-		return fa_Del_Yn;
-	}
-
-	public void setFa_Del_Yn(String fa_Del_Yn) {
-		this.fa_Del_Yn = fa_Del_Yn;
-	}
-
-	public String getFa_Reg_Date() {
-		return fa_Reg_Date;
-	}
-
-	public void setFa_Reg_Date(String fa_Reg_Date) {
-		this.fa_Reg_Date = fa_Reg_Date;
-	}
+	
 
 }

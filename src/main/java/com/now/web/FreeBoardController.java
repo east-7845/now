@@ -1,8 +1,11 @@
 package com.now.web;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,7 +123,7 @@ public class FreeBoardController {
 	 */
 	@RequestMapping(value = "/freeboard/freeBoardRegist", method = RequestMethod.POST)
 	public String freeBoardRegist(HttpServletRequest req
-				, @RequestParam("fr_file") MultipartFile[] fr_file
+				, @RequestParam("fr_files") MultipartFile[] fr_file
 				, @ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
 		String view = "";
 		freeVO.setFr_parent_no("NOW0000005");
@@ -142,6 +145,23 @@ public class FreeBoardController {
 		return "redirect:/freeboard/freeBoardList";
 	}
 	
+	
+	@RequestMapping("/freeboard/upload.do")
+	public void fileUpload(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		resp.setContentType("text/html; charset=utf-8");
+		PrintWriter out = resp.getWriter();
+		out.println("<pre>");
+		out.println("encType : " + req.getContentType());
+		out.println("mehode : " + req.getMethod());
+		out.println("bo_title : " + req.getParameter("fr_title"));
+		// out.println("bo_file : " + req.getParameter("bo_file"));
+		Part p = req.getPart("fr_file"); // 서블릿 3.0 기준
+		out.println("파일명 : " + p.getSubmittedFileName());
+		out.println("사이즈 : " + p.getSize());
+
+		out.println("</pre>");
+		// bo_title, bo_file
+	}
 	
 	
 	
