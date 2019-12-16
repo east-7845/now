@@ -17,41 +17,6 @@
 			, EMP_MAIL = #{emp_mail}
 			, EMP_BANKNAME = #{emp_bankname}
 			, EMP_BANKNUM = #{emp_banknum}
-<<<<<<< HEAD
-		<choose>
-			<when test="emp_id != null">
-			, EMP_ID = #{emp_id}
-			</when>
-		</choose>
-		 WHERE EMP_NO = #{emp_no}
-	</update>
-	
-	<select id="selectEmp" resultType="com.now.vo.EmployeeVO">
-		SELECT EMP_NO
-			 , EMP_ID
-			 , EMP_NAME
-			 , EMP_REGNO1
-			 , EMP_REGNO2
-			 , EMP_ZIP
-			 , EMP_ADD1
-			 , EMP_ADD2
-			 , EMP_HP
-			 , EMP_HP_SUB
-			 , EMP_MAIL
-			 , EMP_IMG
-			 , EMP_BANKNAME
-			 , EMP_BANKNUM
-			 , EMP_SALARY
-			 , EMP_VACATION
-			 , EMP_RANK
-			 , EMP_DEPARTMENT
-			 , EMP_HIREDATE
-			 , EMP_FIREDATE
-			 , EMP_YN
-		 FROM EMPLOYEE
-		WHERE EMP_YN = 'N'
-	</select>
-=======
 			, EMP_YN = #{emp_yn}
 		<choose>
 			<when test="emp_id != null">
@@ -128,6 +93,5 @@
 					  		 , SYSDATE
 					  	)
 	</insert>
->>>>>>> refs/remotes/origin/shinHome
 
 </mapper>

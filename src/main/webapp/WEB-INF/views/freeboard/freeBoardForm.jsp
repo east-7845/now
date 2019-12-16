@@ -12,18 +12,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>부트스트랩 101 템플릿</title>
 <style type="text/css">
-<<<<<<< HEAD
+
 	.textareaBox{
 		min-width: 625px;
 		min-height: 240px;
 	}
 </style>
-=======
-.textareaBox {
-	min-width: 625px;
-	min-height: 240px;
-}
-</style>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -40,7 +35,6 @@ $(document).ready(function(){
 
 });
 </script>
->>>>>>> refs/remotes/origin/shinHome
 </head>
 <body>
 	<div class="container">
@@ -49,21 +43,7 @@ $(document).ready(function(){
 	<div class="container_content">
 		<div class="panel panel-default"
 			style="width: 60vw; margin-left: 20vw;">
-<<<<<<< HEAD
-			<form:form commandName="board" action="freeBoardRegist" method="post">
-				<table class="table table-striped">
-					<colgroup>
-						<col width="20%">
-						<col width="80%">
-					</colgroup>
-					<tr class="text-center">
-						<td>제목</td>
-						<td><form:input path="fr_title" cssStyle="min-width: 625px;"/></td>
-					</tr>
-					<tr class="text-center">
-						<td>내용</td>
-						<td><form:textarea path="fr_content"  cssClass="textareaBox"/></td>
-=======
+
 			<form:form commandName="board" action="freeBoardRegist" method="post"
 				enctype="multipart/form-data">
 				<table class="table table-striped">
@@ -89,7 +69,6 @@ $(document).ready(function(){
 					<tr class="text-center">
 						<td>내용</td>
 						<td><form:textarea path="fr_content" cssClass="textareaBox" /></td>
->>>>>>> refs/remotes/origin/shinHome
 					</tr>
 					<tr>
 						<td colspan="4"><a href="freeBoardList"

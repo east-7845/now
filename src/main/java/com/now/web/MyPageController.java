@@ -1,9 +1,7 @@
 package com.now.web;
 
-<<<<<<< HEAD
-=======
+
 import java.util.HashMap;
->>>>>>> refs/remotes/origin/shinHome
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,38 +54,7 @@ public class MyPageController {
 		String view = "myPage/myPageEdit";
 		System.out.println("/myPage/myPageEdit : myPageConttroller");
 		
-<<<<<<< HEAD
-		if(employeeVO.getEmp_no() == null) {
-			EmployeeVO employee = (EmployeeVO) req.getAttribute("employee");
-			req.setAttribute("employee", employee);
-			return view;
-		}
-		
-		req.setAttribute("employee", employeeVO);
-		return view;
-	}
-	
-	@RequestMapping(value = "/myPage/myPageModify")
-	public String myPageModify(HttpServletRequest req, EmployeeVO employeeVO) throws Exception {
-		String view = "myPage/myPageEdit";
-		System.out.println("/myPage/myPageModify : myPageConttroller");
-		System.out.println(employeeVO.getEmp_id());
-		int updateEmployee = myPageService.updateMyPage(employeeVO);
-		
-		if(updateEmployee == 1) view = "forward:/myPage/myPage";
-		
-		return view;
-	}
-	
-	@RequestMapping(value = "/myPage/myPageEmpList")
-	public String myPageAdmin(HttpServletRequest req) throws Exception {
-		String view = "myPage/myPageEmpList";
-		System.out.println("/myPage/myPageEmpList : myPageConttroller");
-		
-		List<EmployeeVO> employeeList = myPageService.selectEmp();
-		
-		req.setAttribute("employee", employeeList);
-=======
+
 		List<CommonVO> commonRank = myPageService.selectEmpCom("RANK000000");
 		List<CommonVO> commonDept = myPageService.selectEmpCom("DEPT000000");
 		
@@ -170,7 +137,7 @@ public class MyPageController {
 		EmployeeVO employee = loginService.selectEmp(employeeVO);
 		
 		req.setAttribute("employee", employee);
->>>>>>> refs/remotes/origin/shinHome
+
 		
 		return view;
 	}

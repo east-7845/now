@@ -42,20 +42,6 @@
 				<tr>
 					<td>${emp.emp_no }</td>
 					<td>${emp.emp_id }</td>
-<<<<<<< HEAD
-					<td>${emp.emp_name }</td>
-					<td>${emp.emp_hp }</td>
-					<td>${emp.emp_department }</td>
-					<td>${emp.emp_rank }</td>
-				</tr>
-			</c:forEach>
-		</table>
-	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-	</div>
-</body>
-=======
 					<td><a href="myPageEmpInfo?emp_no=${emp.emp_no }">${emp.emp_name }</a></td>
 					<td>${emp.emp_hp }</td>
 					<td>${emp.emp_department }</td>
@@ -78,5 +64,4 @@
 // 		alert("?");
 // 	}
 </script>
->>>>>>> refs/remotes/origin/shinHome
 </html>
