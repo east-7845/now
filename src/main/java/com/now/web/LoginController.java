@@ -36,8 +36,14 @@ public class LoginController {
 		String view = "main";
 		System.out.println("session");
 		HttpSession session = req.getSession();
+<<<<<<< HEAD
 		EmployeeVO vo = loginService.session(employee);
 		
+=======
+		EmployeeVO vo = loginService.session(employee.getEmp_no());
+		System.out.println(session.getId());
+		System.out.println(vo.getEmp_no());
+>>>>>>> refs/heads/shin
 		session.setAttribute("sessionEmp", vo);
 
 		return view;
