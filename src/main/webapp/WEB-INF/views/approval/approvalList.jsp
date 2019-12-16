@@ -10,87 +10,10 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>자유게시판</title>
+<title>전자결재</title>
 <style type="text/css">
-.hit {
-	animation-name: blink;
-	animation-duration: 1.5s;
-	animation-timing-function: ease;
-	animation-iteration-count: infinite;
-	/* 위 속성들을 한 줄로 표기하기 */
-	/* -webkit-animation: blink 1.5s ease infinite; */
-}
 
-@keyframes blink {
-	from {color: white;}
-	30%{color:yellow;}
-	to {
-		color: red;
-		font-weight: bold;
-	}	
-}
 </style>
-<script type="text/javascript">
-	// 폼 서브밋
-	var fn_search_submit = function() {
-		var f = document.forms["frm_boardSearch"];
-		f.submit();
-	}
-	
-	var fn_submit_click = function(ev){
-		ev.preventDefault(); // 이벤트 전파 방지
-		
-		var f = document.forms["frm_boardSearch"];
-		f.curPage.value = 1;
-		fn_search_submit();
-	}
-	
-	// 페이지 변경 후 서브밋 호출
-	var fn_go_page = function(p) {
-		var f = document.forms["frm_boardSearch"];
-		f.curPage.value = p;
-		fn_search_submit();
-	}
-	
-	// 목록 갯수 변경 후 선택버튼 클릭시 서브밋 호출
-	var fn_screen_size_change = function(){
-		var f = document.forms["frm_boardSearch"];
-		var n = document.getElementById("searchNumber");
-		f.setAttribute("action", value);
-		
-		f.screenListSize.value = n.value;
-		fn_search_submit();
-	}
-	
-	// 초기화
-	var fn_search_reset=function(){
-		var f = document.forms["frm_boardSearch"];
-		f.curPage.value = 1;
-		f.searchType.value = "";
-		f.searchWord.value = "";
-		f.searchClass.value = "";
-	}
-	
-	
-	/* $(document).ready(function(){
-		// 전체 체크 박스 클릭
-		$("#id_board_check_all").click(function (){
-			$("input[type=checkbox][name=bo_nos]").prop("checked", $(this).prop("checked") );	// jquery에 this이다.$9소냐
-		});// $("#id_board_check_all").click
-		
-		// 선택 글 삭제 버튼 클릭
-		$("#id_check_delete").click(function(){
-			f = document.forms["frm_board_list"];
-			//f.action = "/admin/board/checkedDelete"
-			f.action = "<c:url value='/admin/board/checkedDelete' />";
-			// c:url 태그를 사용하면  "/study4/admin/board/checkedDelete";
-			f.submit();
-			
-		});// 선택 글 삭제 버튼 클릭
-		
-	}); */
-	
-</script>
 </head>
 <body>
 	<div class="container">
@@ -101,7 +24,7 @@
 			style="width: 60vw; margin-left: 20vw;">
 			<table class="table table-striped table-bordered table-hover">
 				<colgroup>
-					<col width="10%">
+					<col width="10%%">
 					<col width="50%">
 					<col width="15%">
 					<col width="15%">

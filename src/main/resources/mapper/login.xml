@@ -23,13 +23,22 @@
 			 , EMP_BANKNUM
 			 , EMP_SALARY
 			 , EMP_VACATION
+<<<<<<< HEAD
 			 , EMP_RANK
 			 , EMP_DEPARTMENT
+=======
+			 , (SELECT COM_NAME FROM COMMON WHERE EMP_RANK = COM_CD) EMP_RANK
+			 , (SELECT COM_NAME FROM COMMON WHERE EMP_DEPARTMENT = COM_CD) EMP_DEPARTMENT
+>>>>>>> refs/remotes/origin/shinHome
 			 , TO_CHAR(EMP_HIREDATE, 'YYYY-MM-DD') EMP_HIREDATE
 			 , TO_CHAR(EMP_FIREDATE, 'YYYY-MM-DD') EMP_FIREDATE
 			 , EMP_YN
 		 FROM EMPLOYEE
 		WHERE EMP_NO = #{emp_no}
+<<<<<<< HEAD
+=======
+		  AND EMP_YN = 'N'
+>>>>>>> refs/remotes/origin/shinHome
 		<choose>
 			<when test="emp_pass != null">
 		  AND EMP_PASS = #{emp_pass}

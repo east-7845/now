@@ -24,6 +24,13 @@
 			<param-value>classpath:/spring/mvc-servlet.xml</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
+		
+		<multipart-config>
+			<!-- <location>/var/temp/upload</location> WAS에 기본저장소가 있어 디폴트로 거기에 저장된다-->
+			<max-file-size>104857600</max-file-size><!-- 파일당 사이즈 -->
+			<max-request-size>1048576000</max-request-size><!-- 전체 제한 -->
+			<file-size-threshold>8192</file-size-threshold><!-- 메모리에 보관사이즈 -->
+		</multipart-config>
 	</servlet>
 		
 	<servlet-mapping>
