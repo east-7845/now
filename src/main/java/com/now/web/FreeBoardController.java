@@ -1,8 +1,11 @@
 package com.now.web;
 
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +14,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.now.service.IFreeBoardService;
+import com.now.util.StudyAttachUtils;
+import com.now.vo.AttachVO;
 import com.now.vo.FreeBoardSearchVO;
 import com.now.vo.FreeBoardVO;
 
 @Controller
 public class FreeBoardController {
+	
+	@Autowired
+	private StudyAttachUtils attachUtils;
 	
 	@Autowired
 	private IFreeBoardService boardService;
@@ -83,7 +93,8 @@ public class FreeBoardController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value = "/freeboard/freeBoardForm")
-	public String freeBoardForm(HttpServletRequest req,@ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
+	public String freeBoardForm(HttpServletRequest req
+			,@ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
 				
 		return "freeboard/freeBoardForm";
 	}
@@ -92,7 +103,7 @@ public class FreeBoardController {
 	 * 
 	 * @param req
 	 * @return
-	 * @throws Exception 
+	 * @throws Exception
 	 */
 	@RequestMapping(value = "/freeboard/freeBoardEdit", params = "fr_no")
 	public String freeBoardEdit(HttpServletRequest req, int fr_no,Model model) throws Exception {
@@ -112,9 +123,18 @@ public class FreeBoardController {
 	 */
 	@RequestMapping(value = "/freeboard/freeBoardRegist", method = RequestMethod.POST)
 	public String freeBoardRegist(HttpServletRequest req
-				,@ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
+				, @RequestParam("fr_files") MultipartFile[] fr_file
+				, @ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
 		String view = "";
 		freeVO.setFr_parent_no("NOW0000005");
+		
+		// 파일업로드
+		if (fr_file != null) {
+			List<AttachVO> attaches = attachUtils.getAttachListByMultiparts(fr_file, "BOARD", "board");
+			// 중요. 첨부파일 정보를 board에 설정
+			freeVO.setAttaches(attaches);
+		}
+		
 		//BeanUtils.populate(searchVO, req.getParameterMap());
 		int cnt = boardService.insertFreeBoard(freeVO);
 //		if( cnt >= 1) {
@@ -125,6 +145,23 @@ public class FreeBoardController {
 		return "redirect:/freeboard/freeBoardList";
 	}
 	
+	
+	@RequestMapping("/freeboard/upload.do")
+	public void fileUpload(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+		resp.setContentType("text/html; charset=utf-8");
+		PrintWriter out = resp.getWriter();
+		out.println("<pre>");
+		out.println("encType : " + req.getContentType());
+		out.println("mehode : " + req.getMethod());
+		out.println("bo_title : " + req.getParameter("fr_title"));
+		// out.println("bo_file : " + req.getParameter("bo_file"));
+		Part p = req.getPart("fr_file"); // 서블릿 3.0 기준
+		out.println("파일명 : " + p.getSubmittedFileName());
+		out.println("사이즈 : " + p.getSize());
+
+		out.println("</pre>");
+		// bo_title, bo_file
+	}
 	
 	
 	

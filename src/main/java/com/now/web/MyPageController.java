@@ -1,5 +1,6 @@
 package com.now.web;
 
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,6 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.now.service.ILoginService;
 import com.now.service.IMyPageService;
 import com.now.vo.CommonVO;
+import com.now.vo.EmployeeVO;
+
+import com.now.service.ILoginService;
+import com.now.service.IMyPageService;
 import com.now.vo.EmployeeVO;
 
 @Controller
@@ -49,6 +54,7 @@ public class MyPageController {
 		String view = "myPage/myPageEdit";
 		System.out.println("/myPage/myPageEdit : myPageConttroller");
 		
+
 		List<CommonVO> commonRank = myPageService.selectEmpCom("RANK000000");
 		List<CommonVO> commonDept = myPageService.selectEmpCom("DEPT000000");
 		
@@ -131,6 +137,7 @@ public class MyPageController {
 		EmployeeVO employee = loginService.selectEmp(employeeVO);
 		
 		req.setAttribute("employee", employee);
+
 		
 		return view;
 	}

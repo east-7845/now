@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.now.vo.CommonVO;
 import com.now.vo.EmployeeVO;
 
+
 @Mapper
 public interface IMyPageDao {
 
@@ -19,5 +20,6 @@ public interface IMyPageDao {
 	public String selectEmpNo();
 
 	public int insertEmp(EmployeeVO employeeVO);
+
 
 }
