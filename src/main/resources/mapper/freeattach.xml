@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- attach.xml -->
+<mapper namespace="com.now.dao.IAttachDao">
+	<select id="selectAttach" parameterType="int"
+		resultType="com.now.vo.AttachVO">
+		SELECT
+			FA_NO,
+			FA_PARENT_NO,
+			FA_CATEGORY,
+			FA_FILE_NAME,
+			FA_ORIGINAL_NAME,
+			FA_FILE_SIZE,
+			FA_FANCY_SIZE,
+			FA_CONTENT_TYPE,
+			FA_PATH,
+			FA_DOWN_CNT,
+			FA_DEL_YN,
+			FA_REG_DATE
+		FROM
+			freeattach
+		WHERE fa_no = #{fa_no}
+		AND fa_del_yn = 'N'
+	</select>
+
+	<!-- 리스트인데 알아서 타입 메서드를 체크해서 뿌려줌 -->
+	<select id="selectAttachByParentNo" parameterType="int"
+		resultType="com.now.vo.AttachVO">
+		SELECT
+		FA_NO,
+		FA_ORIGINAL_NAME,
+		FA_FANCY_SIZE,
+		FA_DOWN_CNT,
+		TO_CHAR(FA_REG_DATE, 'YY.MM.DD HH24:MI') AS FA_REG_DATE
+		FROM freeattach
+		WHERE FA_PARENT_NO = #{FA_PARENT_NO}
+		AND FA_DEL_YN = 'N'
+	</select>
+
+	<!--                         find replace -->
+	<!-- regexpr \w [0-9a-zA-Z] (\w+) #{$1} -->
+	<insert id="insertAttach"
+		parameterType="com.now.vo.AttachVO">
+		INSERT INTO freeattach (
+			fa_no, fa_parent_no, fa_category,
+			fa_file_name,	fa_original_name,	fa_file_size,
+			fa_fancy_size, fa_content_type,	fa_path,
+			fa_down_cnt, fa_del_yn,	fa_reg_date
+		) VALUES (
+			seq_attach.NEXTVAL,	#{fa_parent_no}, #{fa_category},
+			#{fa_file_name}, #{fa_original_name}, #{fa_file_size},
+			#{fa_fancy_size}, #{fa_content_type}, #{fa_path},
+			0, 'N', sysdate
+		)
+	</insert>
+
+	<update id="increaseDownloadCount" parameterType="int">
+		UPDATE freeattach
+		   SET fa_down_cnt = fa_down_cnt + 1
+		 WHERE fa_no = #{fa_no}
+	</update>
+
+	<update id="deleteAttach">
+	
+	</update>
+	
+	<update id="deleteAttaches">
+	
+	</update>
+	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

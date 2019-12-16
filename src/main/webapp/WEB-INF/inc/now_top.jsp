@@ -35,11 +35,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	document.getElementsByClassName("top_menu")[0].onclick = function(){ // 홈
+
 		location.href="/now/main";
 	}
 	
 	document.getElementsByClassName("top_menu")[1].onclick = function(){ // 게시판
-		location.href="/now/freeBoard/freeBoardList";
+		location.href="/now/freeboard/freeBoardList";
 	}
 	
 	document.getElementsByClassName("top_menu")[2].onclick = function(){ // 전자결재
@@ -58,9 +59,9 @@ $(document).ready(function(){
 // 		location.href="/now/pollboard/pollBoardList";
 // 	}
 	
-// 	document.getElementsByClassName("top_menu")[6].onclick = function(){ // 채팅
-// 		location.href="/now/pollboard/pollBoardList";
-// 	}
+ 	document.getElementsByClassName("top_menu")[6].onclick = function(){ // 채팅
+ 		location.href="/now/chat/chatView";
+ 	}
 	
 	document.getElementsByClassName("top_menu")[7].onclick = function(){ // 마이페이지
 		location.href="/now/myPage/myPage";
@@ -127,7 +128,5 @@ $(document).ready(function(){
 	</div>
 </body>
 </html>
-
-
 
 

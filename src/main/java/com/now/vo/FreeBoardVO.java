@@ -1,5 +1,7 @@
 package com.now.vo;
 
+import java.util.List;
+
 public class FreeBoardVO {
 	
 	private int fr_no; /* 게시글 */
@@ -13,6 +15,25 @@ public class FreeBoardVO {
 	private String fr_mod_date = ""; /* 수정일 */
 	private String fr_del_yn = ""; /* 삭제여부 */
 	private String fr_class = ""; /* 등록분류 */
+	
+	private List<AttachVO> attaches ; /* 첨부파일 리스트 */
+	private int[] del_atch_nos; /* 삭제할 대상 첨부파일 번호 */
+	
+	public List<AttachVO> getAttaches() {
+		return attaches;
+	}
+
+	public void setAttaches(List<AttachVO> attaches) {
+		this.attaches = attaches;
+	}
+
+	public int[] getDel_atch_nos() {
+		return del_atch_nos;
+	}
+
+	public void setDel_atch_nos(int[] del_atch_nos) {
+		this.del_atch_nos = del_atch_nos;
+	}
 
 	public int getFr_no() {
 		return fr_no;

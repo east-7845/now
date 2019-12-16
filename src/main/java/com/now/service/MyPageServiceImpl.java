@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.now.dao.IMyPageDao;
+
 import com.now.vo.CommonVO;
 import com.now.vo.EmployeeVO;
 
@@ -38,6 +39,7 @@ public class MyPageServiceImpl implements IMyPageService {
 	@Override
 	public int insertEmp(EmployeeVO employeeVO) {
 		return myPageDao.insertEmp(employeeVO);
+
 	}
 	
 }
