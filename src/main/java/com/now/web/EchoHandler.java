@@ -7,14 +7,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -28,18 +28,19 @@ public class EchoHandler extends TextWebSocketHandler {
 	private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	
 	private static final Logger logger = LoggerFactory.getLogger(EchoHandler.class);
-	
-	private HttpServletRequest req;
+
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		//System.out.println("afterConnectionEstablished");
 		
 		//logger.debug("채팅방 연결 성공" + new Date());
-		HttpSession session2 = req.getSession();
-		EmployeeVO sessionVO = (EmployeeVO) session2.getAttribute("sessionEmp");
-		System.out.println(sessionVO.getEmp_name());
-		
+		ServletWebRequest servletContainer = (ServletWebRequest)RequestContextHolder.getRequestAttributes();
+		HttpServletRequest request = servletContainer.getRequest();
+		//HttpServletRequest session2 = new HttpServletRequest();
+		// EmployeeVO sessionVO = (EmployeeVO)request.getAttribute("sessionEmp");
+		//  System.out.println("세션아이디."+sessionVO.getEmp_name());
+		 
 		System.out.println(" --"+ session.getAttributes()); // {}
 		System.out.println(" --"+ session.getId()); // 현재 만들어진 websocket의 아이디
 		System.out.println(" --"+ session.getTextMessageSizeLimit()); // 8192
