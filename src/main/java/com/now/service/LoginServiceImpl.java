@@ -19,8 +19,8 @@ public class LoginServiceImpl implements ILoginService {
 	}
 
 	@Override
-	public EmployeeVO session(String emp_no) {
-		return loginDao.session(emp_no);
+	public EmployeeVO session(EmployeeVO employeeVO) {
+		return loginDao.session(employeeVO);
 	}
 
 }
