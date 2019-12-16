@@ -18,59 +18,53 @@
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
 	<div class="container_content">
-		<form:form commandName="board" action="freeBoardModfiy" method="post">
-			<form:hidden path="fr_no"/>
-			<table>
-				<colgroup>
-					<col width="10%">
-					<col width="50%">
-					<col width="15%">
-					<col width="15%">
-				</colgroup>
-				<tr>
-					<td>제목</td>
-					<td>
-						<form:input path="fr_title"/>
-					</td>
-					<td>비밀번호</td>
-					<td>
-						<form:input path="fr_pass"/>
-					</td>
-				</tr>
-				<tr>
-					<td>작성자</td>
-					<td>
-						<form:input path="fr_parent_no" readonly="fr_parent_no"/>
-					</td>
-					<td>작성일</td>
-					<td>
-						<form:input path="fr_reg_date" readonly="fr_reg_date"/>
-					</td>
-				</tr>
-				<tr>
-					<td>아이피</td>
-					<td>
-						<form:input path="fr_ip" readonly="true"/>
-					</td>
-					<td>조회수</td>
-					<td>
-						<form:input path="fr_hit" readonly="true"/>
-					</td>
-				</tr>
-				<tr>
-					<td>내용</td>
-					<td colspan="3">
-						<form:textarea path="fr_content"/>
-					</td>
-				</tr>
-			</table>
-			<div class="row">
-				<a href="freeBoardList" class="btn btn-default btn-sm">회원 목록</a> 
-				<button type="submit" class="btn btn-sm btn-success">수정</button>
+		<div class="container_content" style="min-height: 34vw;">
+			<div class="panel panel-default"
+				style="width: 60vw; margin-left: 20vw;">
+				<form:form commandName="board" action="freeBoardModfiy"
+					method="post">
+					<form:hidden path="fr_no" />
+					<table class="table table-striped table-bordered table-ellipsis">
+						<colgroup>
+							<col width="10%">
+							<col width="50%">
+							<col width="15%">
+							<col width="15%">
+						</colgroup>
+						<tr class="text-center">
+							<td>제목</td>
+							<td><form:input path="fr_title" /></td>
+							<td>비밀번호</td>
+							<td><form:input path="fr_pass" /></td>
+						</tr>
+						<tr class="text-center">
+							<td>작성자</td>
+							<td><form:input path="fr_parent_no" readonly="fr_parent_no" />
+							</td>
+							<td>작성일</td>
+							<td><form:input path="fr_reg_date" readonly="fr_reg_date" />
+							</td>
+						</tr>
+						<tr class="text-center">
+							<td>아이피</td>
+							<td><form:input path="fr_ip" readonly="true" /></td>
+							<td>조회수</td>
+							<td><form:input path="fr_hit" readonly="true" /></td>
+						</tr>
+						<tr class="text-center">
+							<td>내용</td>
+							<td colspan="3"><form:textarea path="fr_content" /></td>
+						</tr>
+					</table>
+					<div class="row">
+						<a href="freeBoardList" class="btn btn-default btn-sm">회원 목록</a>
+						<button type="submit" class="btn btn-sm btn-success">수정</button>
+					</div>
+				</form:form>
 			</div>
-		</form:form>
-		
+		</div>
 	</div>
+	<!-- container_content -->
 	<div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>

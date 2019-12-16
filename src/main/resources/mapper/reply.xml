@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.now.dao.IReplyDao">
+	<sql id="PAGING_PREFIX">
+	select * 
+		from(
+			select rownum rnum , a.*
+				from (
+	</sql>
+	
+	<sql id="PAGING_SUFFIX">
+		<![CDATA[
+				) a where rownum <= #{endRow}
+			) b
+		where rnum >= #{startRow}
+		]]>
+	</sql>
+
+	<select id="selectReplyCount" resultType="int">
+		<![CDATA[
+			select count(*) as cnt
+			from reply
+			where re_category = #{re_category}
+			  and re_parent_no = #{re_parent_no}
+		  ]]>
+	</select>
+	
+	<select id="selectReplyList" parameterType="com.now.vo.ReplySearchVO"
+		resultType="com.now.vo.ReplyVO">
+		<include refid="PAGING_PREFIX"/>
+			select 
+				RE_NO,
+				RE_CATEGORY,
+				RE_PARENT_NO,
+				RE_CONTENT,
+				RE_IP,
+				TO_CHAR(RE_REG_DATE, 'yyyy-mm-dd') AS RE_REG_DATE,
+				TO_CHAR(RE_MOD_DATE, 'yyyy-mm-dd') AS RE_MOD_DATE,
+				RE_MEM_ID 
+			  from reply
+			 where re_category = 'freeboard'
+			   and re_parent_no = #{re_parent_no}
+		<include refid="PAGING_SUFFIX"/>
+	</select>
+	
+	<select id="selectReply">
+	
+	</select>
+	
+	<insert id="insertReply" parameterType="com.now.vo.ReplyVO">
+		insert into reply(   
+			re_no,    re_category,    re_parent_no,
+			re_mem_id,    re_content,    re_ip,
+			re_reg_date)
+			values(
+				seq_reply.nextval, #{re_category}, #{re_parent_no},
+				#{re_mem_id}, #{re_content}, #{re_ip},
+				sysdate
+			)
+	</insert>
+	
+	<update id="updateReply" parameterType="com.now.vo.ReplyVO">
+		update reply set re_content = #{re_content}, re_mod_date = SYSDATE
+		 WHERE re_no = #{re_no} 
+		   and re_parent_no = #{re_parent_no}
+	</update>
+</mapper>
+
+
+
+
+
+
+
+  
+  
+  
