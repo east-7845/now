@@ -36,7 +36,7 @@ public class LoginController {
 		String view = "main";
 		System.out.println("session");
 		HttpSession session = req.getSession();
-		EmployeeVO vo = loginService.session(employee.getEmp_no());
+		EmployeeVO vo = loginService.session(employee);
 		
 		session.setAttribute("sessionEmp", vo);
 
@@ -50,6 +50,7 @@ public class LoginController {
 		
 		HttpSession session = req.getSession();
 		session.invalidate();
+
 
 		return view;
 	}

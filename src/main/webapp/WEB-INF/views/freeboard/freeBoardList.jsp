@@ -56,7 +56,7 @@
 	var fn_screen_size_change = function(){
 		var f = document.forms["frm_boardSearch"];
 		var n = document.getElementById("searchNumber");
-		f.setAttribute("action", value)
+		f.setAttribute("action", value);
 		
 		f.screenListSize.value = n.value;
 		fn_search_submit();
@@ -101,7 +101,7 @@
 			style="width: 60vw; margin-left: 20vw;">
 			<table class="table table-striped table-bordered table-hover">
 				<colgroup>
-					<col width="10%%">
+					<col width="10%">
 					<col width="50%">
 					<col width="15%">
 					<col width="15%">
