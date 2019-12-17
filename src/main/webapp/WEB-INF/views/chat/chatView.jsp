@@ -48,8 +48,6 @@
 				</form>
 			</div>
 		</div>
-
-
 	</div>
 	<div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
