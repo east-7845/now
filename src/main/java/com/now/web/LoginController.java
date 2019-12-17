@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.now.service.ILoginService;
 import com.now.vo.EmployeeVO;
 
@@ -35,11 +36,8 @@ public class LoginController {
 		String view = "main";
 		System.out.println("session");
 		HttpSession session = req.getSession();
-
 		EmployeeVO vo = loginService.session(employee);
-
-		System.out.println(session.getId());
-		System.out.println(vo.getEmp_no());
+		
 		session.setAttribute("sessionEmp", vo);
 
 		return view;
@@ -52,6 +50,7 @@ public class LoginController {
 		
 		HttpSession session = req.getSession();
 		session.invalidate();
+
 
 		return view;
 	}

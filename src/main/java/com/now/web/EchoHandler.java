@@ -3,8 +3,6 @@ package com.now.web;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -16,8 +14,7 @@ import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.RequestContextListener;
-import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -38,22 +35,12 @@ public class EchoHandler extends TextWebSocketHandler {
 		//System.out.println("afterConnectionEstablished");
 		
 		//logger.debug("채팅방 연결 성공" + new Date());
-		
-		/*
-		 * ServletWebRequest request = RequestConditionHolder
-		 * (ServletWebRequest)RequestContextListener(); HttpServletRequest HttpSession
-		 * session2 = req.getSession();
-		 */
-		
-		//HttpServletRequest req = ((ServletRequestAttributes).getRequestAttributes()).getRequest();
-		//HttpServletRequest req = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-		/*
-		 * EmployeeVO sessionVO = (EmployeeVO) req.getAttribute("sessionEmp");
-		 * System.out.println(sessionVO.getEmp_name());
-		 */
-		Map<String, Object> map2 = session.getAttributes();
-		EmployeeVO name = (EmployeeVO) map2.get("userId");
-		System.out.println(name.getEmp_no());
+		ServletWebRequest servletContainer = (ServletWebRequest)RequestContextHolder.getRequestAttributes();
+		HttpServletRequest request = servletContainer.getRequest();
+		//HttpServletRequest session2 = new HttpServletRequest();
+		// EmployeeVO sessionVO = (EmployeeVO)request.getAttribute("sessionEmp");
+		//  System.out.println("세션아이디."+sessionVO.getEmp_name());
+		 
 		System.out.println(" --"+ session.getAttributes()); // {}
 		System.out.println(" --"+ session.getId()); // 현재 만들어진 websocket의 아이디
 		System.out.println(" --"+ session.getTextMessageSizeLimit()); // 8192
@@ -73,6 +60,7 @@ public class EchoHandler extends TextWebSocketHandler {
 		
 		userObj.put("id", session.getId());
 		userObj.put("message", session.getId());
+		
 		
 		jsonArray.add(userObj);
 		resultObj.put("result", jsonArray);
