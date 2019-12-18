@@ -9,12 +9,7 @@
 <meta charset="UTF-8" />
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/js/sockjs.min.js"></script> --%>
 <script src="${pageContext.request.contextPath}/js/sockjs.min.js"></script>
-<!-- <script src="/resources/sockjs.min.js"></script> -->
-<!-- <script src="http://cdn.sockjs.org/sockjs-0.3.4.js"></script> -->
-<!-- <script src="js/sockjs.min.js"></script> -->
-<!-- <script src="resources/sockjs.min.js"></script> -->
 </head>
 <body>
 
