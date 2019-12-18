@@ -38,9 +38,12 @@
 	</context:component-scan>
 	
 	<beans:bean id="chatHandler" class="com.now.web.EchoHandler"/>
-		
+
 	<websocket:handlers>
 		<websocket:mapping handler="chatHandler" path="/echo"/>
+			<websocket:handshake-interceptors>
+	       <beans:bean class="com.now.web.HandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
 		<websocket:sockjs/>
 	</websocket:handlers>	
 	

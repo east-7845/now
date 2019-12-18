@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.now.dao.INoticeDao">
+	<select id="selectNoticeList" resultType="com.now.vo.NoticeVO">	
+			SELECT nt_no,
+		         nt_title,
+		         nt_content,
+		         nt_hit,
+					    TO_CHAR(nt_reg_date, 'yyyy-mm-dd')as nt_reg_date,
+					    TO_CHAR(nt_mod_date, 'yyyy-mm-dd')as nt_mod_date,
+					    nt_class,
+					    nt_del_yn,
+					    nt_writer
+	   	FROM notice	
+	  WHERE nt_del_yn = 'N'
+	
+	</select>
+	
+		<insert id="insertNotice"
+		parameterType="com.now.vo.NoticeVO">
+		<selectKey keyProperty="nt_no" resultType="int" order="BEFORE">
+			select seq_notice.nextval from dual
+		</selectKey>
+		INSERT INTO notice (
+		nt_no, nt_title, nt_writer,
+		nt_content, nt_hit, nt_reg_date,
+		nt_mod_date, nt_del_yn
+		) VALUES (
+		#{nt_no}, #{nt_title}, #{nt_writer},
+		#{nt_content}, 0, sysdate, 
+		null, 'N'
+		)
+	</insert>
+	
+	<update id="increamentNoticeHit" parameterType="int">
+		UPDATE notice
+		SET nt_hit = nt_hit + 1
+		WHERE nt_no = #{nt_no}
+	</update>
+	
+	<update id="updateNotice"
+		parameterType="com.now.vo.NoticeVO">
+		UPDATE notice
+		SET nt_title = #{nt_title}
+		, nt_writer = #{nt_writer}
+		, nt_content = #{nt_content}
+		, nt_mod_date = sysdate
+		, nt_class = #{nt_class}
+		WHERE nt_no = #{nt_no}
+	</update>
+	
+		<select id="selectNotice" parameterType="int"
+		resultType="com.now.vo.NoticeVO">
+		SELECT nt_no,
+		nt_title,
+		nt_writer,
+		nt_content,
+		nt_hit,
+		TO_CHAR(nt_reg_date, 'YYYY.MM.DD') AS NT_reg_date,
+		TO_CHAR(nt_mod_date, 'YYYY.MM.DD') AS NT_mod_date,
+		nt_del_yn,
+		nt_class
+		FROM notice
+		WHERE nt_no = #{nt_no}
+	</select>
+
+	<delete id="deleteNotice"
+		parameterType="com.now.vo.NoticeVO">
+		DELETE FROM notice
+		WHERE nt_no = #{nt_no}
+	</delete>
+
+
+</mapper>
