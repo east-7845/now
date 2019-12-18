@@ -39,6 +39,7 @@
 			<div>2019-12-30</div>
 			<div>5</div>
 		</div>
+		<button onclick="fn_moveForm()" value="방만들기"/>
 		<%-- <c:forEach var="chatList"  items="{}">
 			<c:if test="${chatList != null } ">
 				<div></div>
@@ -52,6 +53,11 @@
 	<div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
+	<script type="text/javascript">
+		function fn_moveForm(){
+			location.href =  "<c:url value='/chat/chatRoom' />";
+		}
+	</script>
 </body>
 </html>
 

@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class ChatController {
 
-	@RequestMapping(value = "chatData")
+	@RequestMapping(value = "chatView")
 	@ResponseBody
 	public String chatView() {
 		
 		
-		return "";
+		return "chat/chatView";
 	}
 	
 	@RequestMapping(value = "/chat/chatList")
@@ -29,4 +29,6 @@ public class ChatController {
 		
 		return "chat/chatRoom";
 	}
+	
+
 }

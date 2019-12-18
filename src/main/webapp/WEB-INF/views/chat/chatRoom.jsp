@@ -39,15 +39,15 @@
 	</div>
 	
 	<script type="text/javascript">
-		$.ajax({
+		/* $.ajax({
 			type:"POST",
-			data:"&target=en&format=html&q=안녕하세요. 저는 넥스트아이티에 김동한입니다.",
+			data:"&target=en&format=html&q=안녕하세요. 저는 넥스트아이티에 한수민입니다",
 			url: "https://www.googleapis.com/language/translate/v2?key=AIzaSyDK-6ADsIFBisy3nAWpHzjCcrVXNrI8TJU",
 			
 			success:function(reponse){
 				alert(reponse.data.translations[0].translatedText);
 			}
-		});
+		}); */
 	</script>
 	
 	

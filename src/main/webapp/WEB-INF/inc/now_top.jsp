@@ -60,7 +60,7 @@ $(document).ready(function(){
 // 	}
 	
  	document.getElementsByClassName("top_menu")[6].onclick = function(){ // 채팅
- 		location.href="/now/chat/chatView";
+ 		location.href="/now/chat/chatList";
  	}
 	
 	document.getElementsByClassName("top_menu")[7].onclick = function(){ // 마이페이지

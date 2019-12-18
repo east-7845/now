@@ -29,6 +29,13 @@ public class EchoHandler extends TextWebSocketHandler {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EchoHandler.class);
 
+	// 저장할 json 데이터 형식
+	JSONObject resultObj = new JSONObject();
+	// json 배열형식
+	JSONArray jsonArray = new JSONArray();
+	// 배열안에 데이터
+	JSONObject userObj = new JSONObject();
+	
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
@@ -50,14 +57,9 @@ public class EchoHandler extends TextWebSocketHandler {
 		
 		Map<String, Object> map = session.getAttributes();
 		System.out.println("나오나요??");
+		JSONParser parser = new JSONParser();
 		
-		// 저장할 json 데이터 형식
-		JSONObject resultObj = new JSONObject();
-		// json 배열형식
-		JSONArray jsonArray = new JSONArray();
-		// 배열안에 데이터
-		JSONObject userObj = new JSONObject();
-		
+		//if()
 		userObj.put("id", session.getId());
 		userObj.put("message", session.getId());
 		
@@ -74,12 +76,12 @@ public class EchoHandler extends TextWebSocketHandler {
 		file.flush();
 		file.close();
 
-		JSONParser parser = new JSONParser();
+		
 
 		//Object obj = parser.parse(new FileReader("E:\\test.json"));
 		//Object obj = parser.parse(new FileReader("/home/pc31//test.json"));
 		Object obj = parser.parse(new FileReader("test.json"));
-		 
+		
 		JSONObject jsonObject = (JSONObject) obj;
 		System.out.println(jsonObject);
 		//String name = (String) jsonObject.get("result");
