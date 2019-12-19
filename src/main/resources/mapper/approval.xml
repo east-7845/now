@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.now.dao.IApprovalDao">
+
+	<select id="selectDraft" resultType="com.now.vo.DraftVO">
+		SELECT DRAFT_NO
+			 , DRAFT_NAME
+			 , DRAFT_CONTENT
+			 , DRAFT_CATEGORY
+			 , DRAFT_DEL
+		 FROM DRAFT
+		WHERE DRAFT_DEL = 'N'
+	</select>
+	
+	<insert id="insertDraft" parameterType="com.now.vo.DraftVO">
+		INSERT INTO DRAFT(DRAFT_NO
+							 , DRAFT_NAME
+							 , DRAFT_CONTENT
+							 , DRAFT_DEL
+					  )
+					  	VALUES('DRAFT' || TRIM(TO_CHAR(SEQ_DRAFT_NO.NEXTVAL, '00000'))
+					  		 , #{draft_name}
+					  		 , #{draft_content}
+					  		 , 'N'
+					  	)
+	</insert>
+	
+	<select id="selectDraftInfo" parameterType="String" resultType="com.now.vo.DraftVO">
+		SELECT DRAFT_NO
+			 , DRAFT_NAME
+			 , DRAFT_CONTENT
+			 , DRAFT_CATEGORY
+			 , DRAFT_DEL
+		  FROM DRAFT
+		 WHERE DRAFT_NO = #{draft_no}
+	</select>
+	
+	<select id="selectCommon" resultType="com.now.vo.CommonVO">
+		SELECT COM_CD
+			 , COM_NAME
+			 , COM_PARENT
+			 , COM_DEL
+		  FROM COMMON
+		 WHERE COM_DEL = 'N'
+		   AND (COM_CD LIKE 'RANK%' OR COM_CD LIKE 'DEPT%')
+		 ORDER BY COM_CD
+	</select>
+	
+	<select id="selectGrantEmployee" resultType="com.now.vo.EmployeeVO">
+		SELECT EMP_NO
+			 , EMP_NAME
+			 , EMP_RANK
+			 , EMP_DEPARTMENT
+		  FROM EMPLOYEE
+		 ORDER BY EMP_DEPARTMENT
+		 		 , EMP_RANK
+	</select>
+	
+</mapper>

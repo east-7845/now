@@ -10,7 +10,7 @@ import com.now.vo.EmployeeVO;
 public class LoginServiceImpl implements ILoginService {
 
 	@Autowired
-	ILoginDao loginDao;
+	private ILoginDao loginDao;
 
 	@Override
 	public EmployeeVO selectEmp(EmployeeVO employee) {

@@ -17,10 +17,6 @@ import com.now.service.IMyPageService;
 import com.now.vo.CommonVO;
 import com.now.vo.EmployeeVO;
 
-import com.now.service.ILoginService;
-import com.now.service.IMyPageService;
-import com.now.vo.EmployeeVO;
-
 @Controller
 public class MyPageController {
 	

@@ -36,9 +36,6 @@
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
 	<div class="container_content">
-		<div class="container_content_item left">
-			ddddd
-		</div>
 		<div class="container_content_item table">
 			<form:form action="myPageEdit" method="post" commandName="employee" class="myPageForm">
 				<table class="table table-striped table-bordered table-ellipsis table-size">
