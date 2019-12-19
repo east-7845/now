@@ -32,6 +32,9 @@
 				<!-- 내 채팅방(리스트) -->
 				<div id="chatRoomList" style="border: 1px solid; width: 230px; height: 200px; display: inline-block;position: absolute;">
 					<!-- <div id="chatRoomList"></div> -->
+<%-- 					<c:forEach var="memList" items="${}"> --%>
+<!-- 						<div>memList.name</div> -->
+<%-- 					</c:forEach> --%>
 				</div>
 				<!-- 현재 채팅방 사용자리스트 -->
 				<div id="chatGuest" style="border: 1px solid; width: 230px;height: 150px;display: inline-block;">

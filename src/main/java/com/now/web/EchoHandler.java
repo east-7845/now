@@ -79,7 +79,7 @@ public class EchoHandler extends TextWebSocketHandler {
 			userObj.put("webSocSession", session.getId());
 			userObj.put("userSession", no.getEmp_no());
 			jsonArray.add(userObj);
-			resultObj.put("chatRoom", jsonArray);
+			resultObj.put("result", jsonArray);
 			String result = resultObj.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
 			
 			file.write(resultObj.toJSONString()); 
