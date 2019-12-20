@@ -15,12 +15,14 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +35,7 @@ import com.now.vo.EmployeeVO;
 import oracle.sql.ARRAY;
 
 @Controller
-public class ChatController<V> {
+public class ChatController {
 
 	// 회원리스트
 	@Autowired
@@ -53,8 +55,25 @@ public class ChatController<V> {
 	Date date;
 	
 	@RequestMapping(value = "/chat/chatView")
-	public String chatView(@RequestParam("data") String[] no) {
+	public String chatView(HttpServletRequest req,Model model, @RequestParam("data") String[] no) throws Exception {
 		
+		// 내 방 정보가져오기.
+		List<Object> list = chatDataList(no);
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("room", no[0]);
+		map.put("id", no[1]);
+		map.put("member", no[2]);
+		
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i));
+		}
+		HttpSession session = req.getSession();
+		//EmployeeVO userId = (EmployeeVO)session.getAttribute("userId");
+		session.setAttribute("roomData", no);
+		model.addAttribute("chatList", list);
+		model.addAttribute("mapRoom", map);
+		model.addAttribute("userId", no[1]);
 		
 		return "chat/chatView";
 	}
@@ -137,13 +156,15 @@ public class ChatController<V> {
 		
 		String memAll = "";
 		// 데이터 값을 한 문자열에 연결
-		for(int i = 0 ; i<empNo.length; i++) {
-			if(i < empNo.length) {
-				memAll += empNo[i]+".";
-			}else {
+		for(int i = 0 ; i<=(empNo.length-1); i++) {
+			if(i < (empNo.length-1)) {
+				memAll += empNo[i];
+			} else {
 				memAll += empNo[i];
 			}
 		}
+		
+		
 		File file = new File("test1.txt");
 		FileWriter fileWriter = new FileWriter("test.json");
 		// 기본 입출력 
@@ -221,6 +242,7 @@ public class ChatController<V> {
 				//JSONObject jsonObject2 = (JSONObject)msg;
 				
 				List<Object> list = new ArrayList<Object>();
+				List<Object> list2 = new ArrayList<Object>();
 				/* list.add(map); */
 				
 				// 선생님 써보라고 하신 UTIL
@@ -233,7 +255,8 @@ public class ChatController<V> {
 					//String val = imsi.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
 					Map<String, Object> map = new HashMap<String, Object>();
 					if(search.length != 0) {
-						if( imsi.get("room") == search[0] && search[1].equals(imsi.get("id"))) {
+						//if( imsi.get("room") == search[0] && search[1].equals(imsi.get("id"))) {
+						if( imsi.get("room").equals(search[0]) && imsi.get("id").equals(search[1]) ) {
 							map.put("room", imsi.get("room"));
 							map.put("id", imsi.get("id"));
 							map.put("member", imsi.get("member"));
@@ -242,8 +265,8 @@ public class ChatController<V> {
 							map.put("userSession", imsi.get("userSession"));
 							map.put("date", imsi.get("date"));
 							map.put("deleteYN", imsi.get("deleteYN"));
-							list.add(map);
-							return list;
+							list2.add(map);
+							return list2;
 						}
 						
 					}else {
@@ -255,9 +278,10 @@ public class ChatController<V> {
 						map.put("userSession", imsi.get("userSession"));
 						map.put("date", imsi.get("date"));
 						map.put("deleteYN", imsi.get("deleteYN"));
+						list.add(map);
 					}
 					
-					list.add(map);
+					
 				}
 				
 				//req.setAttribute("chatListVO", list);
@@ -276,6 +300,12 @@ public class ChatController<V> {
 	public void chatBase() {
 		
 		
+	}
+	
+	@RequestMapping(value = "/chat/chatMain")
+	public String chatMain(HttpServletRequest req) throws Exception {
+		
+		return "chat/main";
 	}
 	
 

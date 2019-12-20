@@ -54,7 +54,7 @@
 					<br>
 				</c:forEach>
 				<input type="text" id="roomName" value="">
-				<button onclick="fn_roomCreBtn();" />
+				<button onclick="fn_roomCreBtn();">방만들기</button>
 			</div>
 			<div id="chatRoomList">
 				<br> <span>채팅방 목록</span> <br>
@@ -84,17 +84,10 @@
 					<br>
 				</c:forEach>
 			</div>
-
+			<button onclick="fn_moveForm()" >방만들</button>
 		</div>
-		<%-- 		<div>${chatListVO.room}</div> --%>
-		<%-- 				<div>${chatListVO.id}</div> --%>
-		<%-- 				<div>${chatListVO.member}</div> --%>
-		<%-- 				<div>${chatListVO.data}</div> --%>
-		<%-- 				<div>${chatListVO.webSocSession}</div> --%>
-		<%-- 				<div>${chatListVO.userSession}</div> --%>
-		<%-- 				<div>${chatListVO.date}</div> --%>
-		<%-- 				<div>${chatListVO.deleteYN}</div> --%>
-		<button onclick="fn_moveForm()" value="방만들기" />
+
+		
 		<%-- <c:forEach var="chatList"  items="{}">
 			<c:if test="${chatList != null } ">
 				<div></div>
@@ -110,26 +103,26 @@
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
 	<script type="text/javascript">
-		//var sock = new SockJS("/now/echo");
+// 		var sock = new SockJS("/now/echo");
 
-		/* sock.onmessage = function(e) {
-			//$("#chat").append(e.data + "<br/>");
-			$("#chat").append(e.data + "\n");
-			console.log("연결메시지");
-		}
+// 		sock.onmessage = function(e) {
+// 			//$("#chat").append(e.data + "<br/>");
+// 			$("#chat").append(e.data + "\n");
+// 			console.log("연결메시지");
+// 		}
 
-		sock.onclose = function() {
-			$("#chat").append("연결 종료");
-			console.log("연결종료");
-		}
+// 		sock.onclose = function() {
+// 			$("#chat").append("연결 종료");
+// 			console.log("연결종료");
+// 		}
 
-		$(document).ready(function() {
-			$("#chatForm").submit(function(event) {
-				event.preventDefault();
-				sock.send($("#message").val());
-				$("#message").val('').focus();
-			});
-		}); */
+// 		$(document).ready(function() {
+// 			$("#chatForm").submit(function(event) {
+// 				event.preventDefault();
+// 				sock.send($("#message").val());
+// 				$("#message").val('').focus();
+// 			});
+// 		});
 
 		// 방클릭시 이동하기.
 		$("div[name=roomList]").dblclick(function() {
@@ -139,6 +132,7 @@
 			var str = [];
 			str[0] = div1[0].innerHTML; //방번호
 			str[1] = div1[1].innerHTML; //계정 아이아이디
+			str[2] = div1[2].innerHTML; //계정 아이아이디
 			location.href = "<c:url value='/chat/chatView?data="+ str +"'/>"
 // 			$.ajax({
 // 				url : "<c:url value='/chat/chatView'/>",

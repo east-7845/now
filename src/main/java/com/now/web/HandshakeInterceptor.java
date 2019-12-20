@@ -32,7 +32,9 @@ public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor{
   
         // HttpSession 에 저장된 이용자의 아이디를 추출하는 경우
         EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
+        String[] roomData = (String[]) req.getSession().getAttribute("roomData");
         attributes.put("userId", attribute);
+        attributes.put("roomData", roomData);
         //System.out.println("HttpSession에 저장된 id:"+attribute.getEmp_no());
 
 		return super.beforeHandshake(request, response, wsHandler, attributes);

@@ -58,51 +58,51 @@ public class EchoHandler extends TextWebSocketHandler {
 		//FileWriter file = new FileWriter("E:\\test.json");
 		//FileWriter file = new FileWriter("/home/pc31//test.json");
 		
-		JSONParser parser = new JSONParser();
-		FileReader reader = new FileReader("test.json");
-		Date date = new Date();
-		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-		String time1 = format1.format(date);
-		System.out.println("현재날짜" + time1);
-		
-		if(reader == null) {
-			System.out.println("json 데이터 생성");
-			// 기본 셋팅
-			file = new FileWriter("test.json");
-			
-			// 처음 방 
-			userObj.put("room", "NO_1");	// 방번호
-			userObj.put("id", session.getId());	// 방개설한 사용자 사원번호
-			userObj.put("member", "");	// 참여중인 참여자(배열)
-			userObj.put("deleteYN", "N");	// 방삭제여부
-			userObj.put("data", "");	// 방데이터(배열)
-			userObj.put("webSocSession", session.getId());
-			userObj.put("userSession", no.getEmp_no());
-			jsonArray.add(userObj);
-			resultObj.put("result", jsonArray);
-			String result = resultObj.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
-			
-			file.write(resultObj.toJSONString()); 
-			file.flush();
-			file.close();
-		}else {
-			// 채팅 USER 체크
-			Object obj = parser.parse(reader);
-			
-			System.out.println("리더값"+obj);
-			// 데이터가 있을 경우.
-			JSONObject jsonObject = (JSONObject) obj;
-			JSONArray msg = (JSONArray) jsonObject.get("result");
-			//JSONObject jsonObject2 = (JSONObject)msg;
-			
-			for(int i = 0; i < msg.size(); i++) {
-				JSONObject imsi = (JSONObject) msg.get(i);
-				System.out.println("jsondata ---"+imsi.get("id"));
-				String val = imsi.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
-				//System.out.println(imsi);
-				//System.out.println(val);
-			}
-		}
+//		JSONParser parser = new JSONParser();
+//		FileReader reader = new FileReader("test.json");
+//		Date date = new Date();
+//		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+//		String time1 = format1.format(date);
+//		System.out.println("현재날짜" + time1);
+//		
+//		if(reader == null) {
+//			System.out.println("json 데이터 생성");
+//			// 기본 셋팅
+//			file = new FileWriter("test.json");
+//			
+//			// 처음 방 
+//			userObj.put("room", "NO_1");	// 방번호
+//			userObj.put("id", session.getId());	// 방개설한 사용자 사원번호
+//			userObj.put("member", "");	// 참여중인 참여자(배열)
+//			userObj.put("deleteYN", "N");	// 방삭제여부
+//			userObj.put("data", "");	// 방데이터(배열)
+//			userObj.put("webSocSession", session.getId());
+//			userObj.put("userSession", no.getEmp_no());
+//			jsonArray.add(userObj);
+//			resultObj.put("result", jsonArray);
+//			String result = resultObj.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
+
+//			file.write(resultObj.toJSONString()); 
+//			file.flush();
+//			file.close();
+//		}else {
+//			// 채팅 USER 체크
+//			Object obj = parser.parse(reader);
+//			
+//			System.out.println("리더값"+obj);
+//			// 데이터가 있을 경우.
+//			JSONObject jsonObject = (JSONObject) obj;
+//			JSONArray msg = (JSONArray) jsonObject.get("result");
+//			//JSONObject jsonObject2 = (JSONObject)msg;
+//			
+//			for(int i = 0; i < msg.size(); i++) {
+//				JSONObject imsi = (JSONObject) msg.get(i);
+//				System.out.println("jsondata ---"+imsi.get("id"));
+//				String val = imsi.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
+//				//System.out.println(imsi);
+//				//System.out.println(val);
+//			}
+//		}
 		
 //		for (Object object : msg) {
 //			JSONObject obj2 = (JSONObject)object;
@@ -117,15 +117,28 @@ public class EchoHandler extends TextWebSocketHandler {
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		System.out.println("handleTextMessage");
 		for(WebSocketSession sess: sessionList) {
-			sess.sendMessage(new TextMessage(session.getId()+": "+message.getPayload()));
+			//sess.sendMessage(new TextMessage(session.getId()+": "+message.getPayload()));
+			
+			//sess.sendMessage(new TextMessage(session.getId() + ": " + message.getPayload()));
 			// 메세지가 10개 이상 들어가면 저장한다.
 			value.put(session.getId(), message.getPayload());
-			if(value.size() >= 10) {
+			Map<String, Object> map = session.getAttributes();
+			EmployeeVO userNO = (EmployeeVO) map.get("userId");
+			String[] roomNO = (String[]) map.get("roomData");
+			
+			String userMsg = message.getPayload();
+			String[] split = userMsg.split("-/-"); // 0 : 방번호, 1 : 계정아이디 , 2 : 데이터
+			
+			if(userNO.getEmp_id() == roomNO[1]){
+				sess.sendMessage(new TextMessage(split[0] + "-/-" + split[1] + "-/-" + message.getPayload()));
+			}
+			
+			/*if(value.size() >= 10) {
 				// json 데이터에 입력
 				
 				// 배열 초기화
 				value.clear();
-			}
+			}*/
 		}
 	}
 	
@@ -134,4 +147,6 @@ public class EchoHandler extends TextWebSocketHandler {
 		System.out.println("afterConnectionClosed");
 		sessionList.remove(session);
 	}
+	
 }
+
