@@ -43,7 +43,6 @@
 <script type="text/javascript">
 	function comNameClick(num) {
 		if(document.getElementById(num).style.display == "none") {
-// 			$("#"+num).prepend("&nbsp;&nbsp;&nbsp;");
 			document.getElementById(num).style.display = "initial";
 		} else {
 			document.getElementById(num).style.display = "none";
@@ -51,7 +50,8 @@
 	}
 	
 	function grant(emp_no, emp_name, com_name) {
-		opener.document.getElementById("grant").value = emp_name + " " + com_name;
+		opener.textInput(emp_no, emp_name, com_name);
+		close();
 	}
 </script>
 </html>

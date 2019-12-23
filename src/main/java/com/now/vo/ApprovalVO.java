@@ -1,6 +1,6 @@
 package com.now.vo;
 
-public class ApprovalVO {
+public class ApprovalVO extends grantVO {
 	
 	private String app_no;
 	private String app_emp_no;
