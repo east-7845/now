@@ -25,33 +25,75 @@
 <script src="${pageContext.request.contextPath }/js/jquery-3.4.1.js"></script>
 <script
 	src="${pageContext.request.contextPath }/bootstrap-3.3.2/js/bootstrap.js"></script>
+<style type="text/css">
+.container_content div {
+	display: inline-block;
+	border: 1px solid black;
+}
+</style>
 </head>
+
 <body>
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
-	<div class="container_content" style="min-height: 34vw;">
-
-		<c:forEach var="chatlist" items="${chatListVO}">
-			<div>
-				<div>${chatlist.room}</div>
-				<div>${chatlist.id}</div>
-				<div>${chatlist.member}</div>
-				<div>${chatlist.data}</div>
-				<div>${chatlist.webSocSession}</div>
-				<div>${chatlist.userSession}</div>
-				<div>${chatlist.date}</div>
-				<div>${chatlist.deleteYN}</div>
+	<div class="container_content"
+		style="min-height: 34vw; text-align: center;">
+		<div style="text-align: center;">
+			<span>사용자 리스트</span> <br>
+			<div style="display: block;">
+				<c:forEach var="memberList" items="${employee}">
+					<div>
+						<div>
+							<input type="checkbox" name="memberCheck"
+								value="${memberList.emp_no}">
+						</div>
+						<div>${memberList.emp_no}</div>
+						<div>${memberList.emp_name}</div>
+					</div>
+					<br>
+				</c:forEach>
+				<input type="text" id="roomName" value="">
+				<button onclick="fn_roomCreBtn();" />
 			</div>
-		</c:forEach>
-<%-- 		<div>${chatListVO.room}</div> --%>
-<%-- 				<div>${chatListVO.id}</div> --%>
-<%-- 				<div>${chatListVO.member}</div> --%>
-<%-- 				<div>${chatListVO.data}</div> --%>
-<%-- 				<div>${chatListVO.webSocSession}</div> --%>
-<%-- 				<div>${chatListVO.userSession}</div> --%>
-<%-- 				<div>${chatListVO.date}</div> --%>
-<%-- 				<div>${chatListVO.deleteYN}</div> --%>
+			<div id="chatRoomList">
+				<br> <span>채팅방 목록</span> <br>
+				<div style="display: block;">
+					<div>방번호</div>
+					<div>방장넘버</div>
+					<div>참여자</div>
+					<div>날짜</div>
+				</div>
+				<c:forEach var="chatlist" items="${chatListVO}">
+					<c:if test="${chatListVO == null}">
+						<div>데이터가 없습니다.</div>
+					</c:if>
+
+					<c:if test="${chatListVO != null}">
+						<div name="roomList">
+							<div>${chatlist.room}</div>
+							<div>${chatlist.id}</div>
+							<div>${chatlist.member}</div>
+							<div>${chatlist.data}</div>
+							<div>${chatlist.webSocSession}</div>
+							<div>${chatlist.userSession}</div>
+							<div>${chatlist.date}</div>
+							<div>${chatlist.deleteYN}</div>
+						</div>
+					</c:if>
+					<br>
+				</c:forEach>
+			</div>
+
+		</div>
+		<%-- 		<div>${chatListVO.room}</div> --%>
+		<%-- 				<div>${chatListVO.id}</div> --%>
+		<%-- 				<div>${chatListVO.member}</div> --%>
+		<%-- 				<div>${chatListVO.data}</div> --%>
+		<%-- 				<div>${chatListVO.webSocSession}</div> --%>
+		<%-- 				<div>${chatListVO.userSession}</div> --%>
+		<%-- 				<div>${chatListVO.date}</div> --%>
+		<%-- 				<div>${chatListVO.deleteYN}</div> --%>
 		<button onclick="fn_moveForm()" value="방만들기" />
 		<%-- <c:forEach var="chatList"  items="{}">
 			<c:if test="${chatList != null } ">
@@ -68,9 +110,9 @@
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
 	<script type="text/javascript">
-		var sock = new SockJS("/now/echo");
+		//var sock = new SockJS("/now/echo");
 
-		sock.onmessage = function(e) {
+		/* sock.onmessage = function(e) {
 			//$("#chat").append(e.data + "<br/>");
 			$("#chat").append(e.data + "\n");
 			console.log("연결메시지");
@@ -87,10 +129,77 @@
 				sock.send($("#message").val());
 				$("#message").val('').focus();
 			});
+		}); */
+
+		// 방클릭시 이동하기.
+		$("div[name=roomList]").dblclick(function() {
+			var div = $(this);
+			var div1 = div.children("div");
+			console.log(div1.innerHTML);
+			var str = [];
+			str[0] = div1[0].innerHTML; //방번호
+			str[1] = div1[1].innerHTML; //계정 아이아이디
+			location.href = "<c:url value='/chat/chatView?data="+ str +"'/>"
+// 			$.ajax({
+// 				url : "<c:url value='/chat/chatView'/>",
+// 				data : {
+// 					"data" : str
+// 				},
+// 				success:function(result){
+					
+// 				}
+// 			});
+			
 		});
 
 		function fn_moveForm() {
 			location.href = "<c:url value='/chat/chatRoom' />";
+		}
+
+		// 체크박스 체크
+		// 		$("input:checkbox[name='memberCheck']").click(function(){
+		// 			var chk = $(this).is(":checked");	// 체크여부확인.
+		// 			alert(chk.val());
+		// 		});
+
+		// 방만들기
+		function fn_roomCreBtn() {
+			var checkVal = [];
+
+			var lenMax = $("input:checkbox[name='memberCheck']:checked").length;
+			var num = 0;
+			// 체크 한 유저 정보
+			$("input:checkbox[name='memberCheck']:checked").each(function() {
+				if (num < lenMax) {
+					checkVal[num] = $(this).val();
+				} else {
+					num = 0;
+					return;
+				}
+				num++;
+			});
+
+			var roomName = $("#roomName").val(); // 방 이름
+
+			$.ajax({
+				data : {
+					"emp" : checkVal
+				},
+				url : "<c:url value='/chat/chatRoom'/>",
+				success : function(result) {
+					var str = "";
+					str = "<div name='roomList'>";
+					str += "<div>" + result.room + "</div>";
+					str += "<div>" + result.id + "</div>";
+					str += "<div>" + result.date + "</div>";
+					/* str += "<div>"+result.id+"</div>";
+					str += "<div>"+result.member+"</div>";
+					str += "<div>"+result.date+"</div>"; */
+					str += "</div>";
+					$("#chatRoomList").append(str);
+				}
+			});
+
 		}
 	</script>
 </body>
