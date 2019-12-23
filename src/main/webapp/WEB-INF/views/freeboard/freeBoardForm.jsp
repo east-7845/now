@@ -13,10 +13,12 @@
 <title>부트스트랩 101 템플릿</title>
 <style type="text/css">
 
+
 	.textareaBox{
 		min-width: 625px;
 		min-height: 240px;
 	}
+
 </style>
 
 <script type="text/javascript">

@@ -104,7 +104,6 @@
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
 	<script type="text/javascript">
-
 		var parentTest ="";
 		function updateBtn(re_no, fr_no){
 			//parentTest = $(this);
