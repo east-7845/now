@@ -33,7 +33,7 @@
 		</div>
 		<c:if test="${sessionEmp.emp_no == 'NOW0000001' }">
 			<div style="width: 30vw; margin-left: auto; margin-right: auto; text-align: center;">
-				<input type="button" value="기안서 등록" id="draftFormInsert">
+				<input type="button" value="기안서 등록" id="draftFormInsert" onclick="draftFormInsert()">
 			</div>
 		</c:if>
 	</div>
@@ -42,11 +42,10 @@
 	</div>
 </body>
 <script type="text/javascript">
-	$(document).ready(function(){
-		document.getElementById("draftFormInsert").onclick = function() {
-			window.open('draftFormInsert','window_name','width=1000,height=900,location=no,status=no,scrollbars=yes');
-		};
-	})
+	function draftFormInsert() {
+		window.open('draftFormInsert','window_name','width=1000,height=900,location=no,status=no,scrollbars=yes');
+		
+	}
 </script>
 </html>
 
