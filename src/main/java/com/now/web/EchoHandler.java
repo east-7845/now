@@ -2,6 +2,7 @@ package com.now.web;
 
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +24,7 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import com.now.vo.EmployeeVO;
 
 public class EchoHandler extends TextWebSocketHandler {
@@ -129,16 +131,38 @@ public class EchoHandler extends TextWebSocketHandler {
 			String userMsg = message.getPayload();
 			String[] split = userMsg.split("-/-"); // 0 : 방번호, 1 : 계정아이디 , 2 : 데이터
 			
-			if(userNO.getEmp_id() == roomNO[1]){
-				sess.sendMessage(new TextMessage(split[0] + "-/-" + split[1] + "-/-" + message.getPayload()));
-			}
+			Date date = new Date();
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			String time1 = format1.format(date);
 			
-			/*if(value.size() >= 10) {
-				// json 데이터에 입력
+			sess.sendMessage(new TextMessage(split[0] + "-/-" + split[1] + "-/-" + message.getPayload()));
+			StringBuffer buffer = new StringBuffer();
+			//buffer.append( "$/id/$" + split[0] + "$/date/$" + time1 + "$/data/$" + message.getPayload() );
+			
+			buffer.append( "$start$" + split[1] + ":" + message.getPayload() + " date :" + time1);
+			if(buffer.length()  >= 10) {
 				
-				// 배열 초기화
-				value.clear();
-			}*/
+				// 데이터 가져오기 ..
+				JSONParser parser = new JSONParser();
+				FileReader reader = new FileReader("test.json");
+				Object obj = parser.parse(reader);
+				JSONObject jsonObject = (JSONObject) obj;
+				JSONArray msg = (JSONArray) jsonObject.get("result");
+				FileWriter fileWriter = new FileWriter("test.json");
+				jsonArray.clear();
+				for(int i = 0; i < msg.size(); i++) {
+					JSONObject imsi = (JSONObject) msg.get(i);
+					if( split[0].equals(imsi.get("room")) ){
+						imsi.put("data", imsi.get("data").toString() + buffer);
+					}
+					//jsonArray.add(imsi);
+				}
+				resultObj.put("result", jsonArray);
+				fileWriter.write(resultObj.toJSONString()); 
+				fileWriter.flush();
+				fileWriter.close();
+				
+			}
 		}
 	}
 	

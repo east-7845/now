@@ -74,7 +74,7 @@
 							<div>${chatlist.room}</div>
 							<div>${chatlist.id}</div>
 							<div>${chatlist.member}</div>
-							<div>${chatlist.data}</div>
+							<%-- <div>${chatlist.data}</div> --%>
 							<div>${chatlist.webSocSession}</div>
 							<div>${chatlist.userSession}</div>
 							<div>${chatlist.date}</div>
@@ -84,10 +84,10 @@
 					<br>
 				</c:forEach>
 			</div>
-			<button onclick="fn_moveForm()" >방만들</button>
+			<button onclick="fn_moveForm()">방만들</button>
 		</div>
 
-		
+
 		<%-- <c:forEach var="chatList"  items="{}">
 			<c:if test="${chatList != null } ">
 				<div></div>
@@ -103,27 +103,26 @@
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
 	<script type="text/javascript">
-// 		var sock = new SockJS("/now/echo");
+		// 		var sock = new SockJS("/now/echo");
 
-// 		sock.onmessage = function(e) {
-// 			//$("#chat").append(e.data + "<br/>");
-// 			$("#chat").append(e.data + "\n");
-// 			console.log("연결메시지");
-// 		}
+		// 		sock.onmessage = function(e) {
+		// 			//$("#chat").append(e.data + "<br/>");
+		// 			$("#chat").append(e.data + "\n");
+		// 			console.log("연결메시지");
+		// 		}
 
-// 		sock.onclose = function() {
-// 			$("#chat").append("연결 종료");
-// 			console.log("연결종료");
-// 		}
+		// 		sock.onclose = function() {
+		// 			$("#chat").append("연결 종료");
+		// 			console.log("연결종료");
+		// 		}
 
-// 		$(document).ready(function() {
-// 			$("#chatForm").submit(function(event) {
-// 				event.preventDefault();
-// 				sock.send($("#message").val());
-// 				$("#message").val('').focus();
-// 			});
-// 		});
-
+		// 		$(document).ready(function() {
+		// 			$("#chatForm").submit(function(event) {
+		// 				event.preventDefault();
+		// 				sock.send($("#message").val());
+		// 				$("#message").val('').focus();
+		// 			});
+		// 		});
 		// 방클릭시 이동하기.
 		$("div[name=roomList]").dblclick(function() {
 			var div = $(this);
@@ -133,17 +132,17 @@
 			str[0] = div1[0].innerHTML; //방번호
 			str[1] = div1[1].innerHTML; //계정 아이아이디
 			str[2] = div1[2].innerHTML; //계정 아이아이디
-			location.href = "<c:url value='/chat/chatView?data="+ str +"'/>"
-// 			$.ajax({
-// 				url : "<c:url value='/chat/chatView'/>",
-// 				data : {
-// 					"data" : str
-// 				},
-// 				success:function(result){
-					
-// 				}
-// 			});
-			
+			location.href = "<c:url value='/chat/chatView?data=" + str + "'/>"
+			//			 			$.ajax({
+			//			 				url : "<c:url value='/chat/chatView'/>",
+			//			 				data : {
+			//			 					"data" : str
+			//			 				},
+			//			 				success:function(result){
+
+			//			 				}
+			//			 			});
+
 		});
 
 		function fn_moveForm() {
@@ -175,24 +174,50 @@
 
 			var roomName = $("#roomName").val(); // 방 이름
 
-			$.ajax({
-				data : {
-					"emp" : checkVal
-				},
-				url : "<c:url value='/chat/chatRoom'/>",
-				success : function(result) {
-					var str = "";
-					str = "<div name='roomList'>";
-					str += "<div>" + result.room + "</div>";
-					str += "<div>" + result.id + "</div>";
-					str += "<div>" + result.date + "</div>";
-					/* str += "<div>"+result.id+"</div>";
-					str += "<div>"+result.member+"</div>";
-					str += "<div>"+result.date+"</div>"; */
-					str += "</div>";
-					$("#chatRoomList").append(str);
-				}
-			});
+			$
+					.ajax({
+						data : {
+							"emp" : checkVal
+						},
+						url : "<c:url value='/chat/chatRoom'/>",
+						success : function(result) {
+							var str = "";
+							str = "<div name='roomList'>";
+							str += "<div>" + result.room + "</div>";
+							str += "<div>" + result.id + "</div>";
+							str += "<div>" + result.date + "</div>";
+							/* str += "<div>"+result.id+"</div>";
+							str += "<div>"+result.member+"</div>";
+							str += "<div>"+result.date+"</div>"; */
+							str += "</div>";
+							$("#chatRoomList").append(str);
+
+							// 방클릭시 이동하기.
+							$("div[name=roomList]")
+									.dblclick(
+											function() {
+												var div = $(this);
+												var div1 = div.children("div");
+												console.log(div1.innerHTML);
+												var str = [];
+												str[0] = div1[0].innerHTML; //방번호
+												str[1] = div1[1].innerHTML; //계정 아이아이디
+												str[2] = div1[2].innerHTML; //계정 아이아이디
+												location.href = "<c:url value='/chat/chatView?data="
+														+ str + "'/>"
+												//			 			$.ajax({
+												//			 				url : "<c:url value='/chat/chatView'/>",
+												//			 				data : {
+												//			 					"data" : str
+												//			 				},
+												//			 				success:function(result){
+
+												//			 				}
+												//			 			});
+
+											});
+						}
+					});
 
 		}
 	</script>

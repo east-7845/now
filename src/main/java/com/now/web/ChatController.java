@@ -109,6 +109,8 @@ public class ChatController {
 				//JSONObject jsonObject2 = (JSONObject)msg;
 				
 				List<Object> list = new ArrayList<Object>();
+				
+				EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
 				/* list.add(map); */
 				
 				// 선생님 써보라고 하신 UTIL
@@ -120,17 +122,21 @@ public class ChatController {
 					JSONObject imsi = (JSONObject) msg.get(i);
 					//String val = imsi.toString().replaceAll("\"\\[" ,"\\[").replaceAll("\\]\"" ,"\\]").replaceAll("\\\\" ,"");
 					Map<String, Object> map = new HashMap<String, Object>();
-					
-					map.put("room", imsi.get("room"));
-					map.put("id", imsi.get("id"));
-					map.put("member", imsi.get("member"));
-					map.put("data", imsi.get("data"));
-					map.put("webSocSession", imsi.get("webSocSession"));
-					map.put("userSession", imsi.get("userSession"));
-					map.put("date", imsi.get("date"));
-					map.put("deleteYN", imsi.get("deleteYN"));
-					
-					list.add(map);
+					String member = (String) imsi.get("member");
+					boolean contains = member.contains(attribute.getEmp_no());
+					System.out.println(contains);
+					if( imsi.get("id").equals(attribute.getEmp_no()) || member.contains(attribute.getEmp_no())   ) {
+						map.put("room", imsi.get("room"));
+						map.put("id", imsi.get("id"));
+						map.put("member", imsi.get("member"));
+						map.put("data", imsi.get("data"));
+						map.put("webSocSession", imsi.get("webSocSession"));
+						map.put("userSession", imsi.get("userSession"));
+						map.put("date", imsi.get("date"));
+						map.put("deleteYN", imsi.get("deleteYN"));
+						
+						list.add(map);
+					}
 				}
 				
 				req.setAttribute("chatListVO", list);
@@ -150,7 +156,7 @@ public class ChatController {
 	
 	@RequestMapping(value = "/chat/chatRoom")
 	@ResponseBody
-	public Map<String, Object> chatRoom( @RequestParam("emp[]") String[] empNo) throws Exception {
+	public Map<String, Object> chatRoom(HttpServletRequest req, @RequestParam("emp[]") String[] empNo) throws Exception {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		
@@ -158,50 +164,75 @@ public class ChatController {
 		// 데이터 값을 한 문자열에 연결
 		for(int i = 0 ; i<=(empNo.length-1); i++) {
 			if(i < (empNo.length-1)) {
-				memAll += empNo[i];
+				memAll += empNo[i] + ".";
 			} else {
 				memAll += empNo[i];
 			}
 		}
+		 EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
+        
+        /*String userId = req.getParameter("userid");
+        System.out.println("param, id:"+userId);
+        attributes.put("userId", userId);*/
+  
+        // HttpSession 에 저장된 이용자의 아이디를 추출하는 경우
 		
 		
-		File file = new File("test1.txt");
-		FileWriter fileWriter = new FileWriter("test.json");
+		File file = new File("test.json");
+		
 		// 기본 입출력 
 		parser = new JSONParser();
 		reader = new FileReader("test.json");
 		date = new Date();
 		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 		String time1 = format1.format(date);
-		
-//		Object obj = parser.parse(reader);	//	 데이터가져옴
-//		JSONObject jsonObject = (JSONObject) obj;	// json 형태로 가져옴
-//		JSONArray msg = (JSONArray) jsonObject.get("result");	// json안에 배열로 가져옴.
-		
-		// 방데이터 입력
-		//userObj.put("room", "NO_"+ (msg.size()+1));	// 방번호
-		userObj.put("room", "NO_"+ 1);	// 방번호
-		userObj.put("id", "NOW0000005");	// 방개설한 사용자 사원번호
-		userObj.put("member", memAll);	// 참여중인 참여자(배열)
-		userObj.put("data", "");	// 방데이터(배열)
-		userObj.put("title", "채팅어려워요");	// 방데이터(배열)
-		userObj.put("webSocSession", "");
-		userObj.put("userSession", "");
-		userObj.put("date", time1);
-		userObj.put("deleteYN", "N");
-		
-		//msg.add(userObj);
-		jsonArray.add(userObj);
-//		resultObj.put("result", msg);
-		resultObj.put("result", jsonArray);
-		
-		fileWriter.write(resultObj.toJSONString()); 
-		fileWriter.flush();
-		fileWriter.close();
-		
-		map.put("member", memAll);
-		map.put("room", "NO_"+ 1);
-		map.put("date", time1);
+		int roomNum = 1;
+		// 파일 존재여부.
+		boolean isExists = file.exists();
+		JSONArray msg = null;
+		if(isExists) {
+			long len = file.length();
+			if(len > 0) {
+				System.out.println("reader 사이즈 ==" + reader);
+				Object obj = parser.parse(reader);	//	 데이터가져옴
+				JSONObject jsonObject = (JSONObject) obj;	// json 형태로 가져옴
+				msg = (JSONArray) jsonObject.get("result");	// json안에 배열로 가져옴.
+				roomNum =  msg.size()+1;
+			}
+			
+			// 방데이터 입력
+			//userObj.put("room", "NO_"+ (msg.size()+1));	// 방번호
+			userObj.put("room", "NO_"+ roomNum);	// 방번호
+			userObj.put("id", attribute.getEmp_no());	// 방개설한 사용자 사원번호
+			userObj.put("member", memAll);	// 참여중인 참여자(배열)
+			userObj.put("data", "");	// 방데이터(배열)
+			userObj.put("title", "채팅어려워요");	// 방데이터(배열)
+			userObj.put("webSocSession", "");
+			userObj.put("userSession", "");
+			userObj.put("date", time1);
+			userObj.put("deleteYN", "N");
+			
+			//msg.add(userObj);
+			if(len == 0) {
+				jsonArray.add(userObj);
+				resultObj.put("result", jsonArray);
+			}else {
+				msg.add(userObj);
+				resultObj.put("result", msg);
+			}
+			FileWriter fileWriter = new FileWriter("test.json");
+			
+			fileWriter.write(resultObj.toJSONString()); 
+			fileWriter.flush();
+			fileWriter.close();
+			
+			map.put("member", memAll);
+			map.put("room", "NO_"+ 1);
+			map.put("date", time1);
+			map.put("id", "NOW0000005");
+		}else {
+			
+		}
 		//JSONObject jsonObject2 = (JSONObject)msg;
 		
 		return map;
