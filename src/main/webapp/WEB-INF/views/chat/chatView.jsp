@@ -59,7 +59,7 @@
 			//$("#chat").append(e.data + "<br/>");
 			console.log("들어와요");
 			var data = e.data;
-			var split = data.split("-/-");
+			var split = data.split("-|-");
 			var member ="${mapRoom.member}";
 			var room = "${mapRoom.room}";
 			memMap = member.split(".");
@@ -71,10 +71,10 @@
 			//if(split[0] == ${mapRoom.room} && split[1] == ${userId} ){
 			//for(var i = 0; i < (splitChildren.length); i++ ){
 			//if(split[0] == "${mapRoom.room}" && split[1] == "${userId}" || split[1] == splitChildren[i]){
-			if(split[0] == "${mapRoom.room}" && split[1] == "${userId}" || splitChildren.test(split[1])){
+			if(split[0] == "${mapRoom.room}" && split[1] == "${userId}" || splitParent.test(split[1])){
 				//if(split[0] == room){
 				console.log("메세지전송했습니다.");
-				$("#chat").append(split[4] + "\n");	
+				$("#chat").append(split[1] + " : " + split[4] + "\n");	
 				return true;
 			}
 			//}
@@ -103,7 +103,7 @@
 		$(document).ready(function(){
 			$("#chatForm").submit(function(event){
 				event.preventDefault();
-				sock.send( "${mapRoom.room}" +"-/-"+ "${userId}" + "-/-" +$("#message").val() );
+				sock.send( "${mapRoom.room}" +"-.-"+ "${userId}" + "-.-" +$("#message").val() );
 				$("#message").val('').focus();
 			});
 		});
