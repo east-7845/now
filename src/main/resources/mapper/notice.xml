@@ -7,6 +7,7 @@
 	<select id="selectNoticeList" resultType="com.now.vo.NoticeVO">	
 			SELECT nt_no,
 		         nt_title,
+
 		         nt_content,
 		         nt_hit,
 					    TO_CHAR(nt_reg_date, 'yyyy-mm-dd')as nt_reg_date,
@@ -14,9 +15,10 @@
 					    nt_class,
 					    nt_del_yn,
 					    nt_writer
-	   	FROM notice	
+	   	FROM notice	, employee
 	  WHERE nt_del_yn = 'N'
-	
+
+
 	</select>
 	
 		<insert id="insertNotice"

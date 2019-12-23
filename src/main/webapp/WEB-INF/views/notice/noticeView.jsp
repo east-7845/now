@@ -11,7 +11,6 @@
 	<body>
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 		
-	<div class="container">
 	<div class="panel panel-default"
 			style="width: 60vw; margin-left: 20vw;">
 		

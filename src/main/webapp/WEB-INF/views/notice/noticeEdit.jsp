@@ -10,7 +10,7 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/inc/now_top.jsp"%>
-	<div class="container">
+	<div>
 		<div class="panel panel-default"
 			style="width: 60vw; margin-left: 20vw;">
 
@@ -72,7 +72,7 @@
 					<td colspan="4"><a href="noticeList"
 						class="btn btn-default btn-sm">목록</a>
 						<button type="submit" class="btn btn-sm btn-success">수정</button>
-						 	<a href="noticeList?nt_no=${notice.nt_no}&nt_del=Y" class="btn btn-default btn-sm" />삭제
+						 	<a href="noticeList?nt_no=${notice.nt_no}&nt_del_yn=Y" class="btn btn-default btn-sm" />삭제
 						</button>
 					</td>
 				</tr>

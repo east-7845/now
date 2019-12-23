@@ -10,10 +10,8 @@
 </head>
 <body>
 	<%@include file="/WEB-INF/inc/now_top.jsp"%>
-	<div class="container">
-		
-<!--  try로 묶음 -->
-<c:catch var="ex">
+	<div>
+
 	<c:if test="${cnt > 0 }">
 	<h3>수정성공</h3>
 	<div>
@@ -38,7 +36,7 @@
 			href="noticeForm">목록으로 돌아가기</a>
 	</div>
 	</c:if>
-</c:catch>
+
 <!--  catch문은 에러가 발생했을 경우를 의미한다. -->
 <c:if test="${not empty ex }">
 	<h3>수정실패</h3>

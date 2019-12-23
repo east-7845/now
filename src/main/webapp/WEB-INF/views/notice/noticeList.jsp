@@ -22,21 +22,15 @@
 			<div class="panel panel-default"
 			style="width: 60vw; margin-left: 20vw;">
 			<h3>공지사항</h3>
-
 					<form name="frm_board_list" action="" method="post">
 						<table class="table table-striped table-bordered table-ellipsis">
 							<colgroup>
 									<col width="5%" />
-									<col width="5%" />
 									<col width="60%" />
-				<%-- 					<col /> --%>
 									<col width="30%" />
 									<col width="20%" />
-<%-- 									<col width="10%" /> --%>
 							</colgroup>
-							<tr>
 							<tr class="text-center">
-							  <th class="text-center"><input type="checkbox" id="id_board_check_all"> </th>
 								<th>번호</th>
 								<th>제목</th>
 								<th>작성자</th>
@@ -44,8 +38,7 @@
 							</tr>
 							<c:forEach var="notice" items="${noticeList}">
 								<tr class="text-center">
-										<td><input type="checkbox" name="bo_nos" value="${notice.nt_no}"> </td>
-										<td>${notice.nt_no}</td>
+											<td>${notice.nt_no}</td>
 											<td class="text-left">
 													<a href="noticeView?nt_no=${notice.nt_no}">
 																${notice.nt_title}
@@ -57,43 +50,39 @@
 							</c:forEach>
 						</table>
 						</form>
-
-	
-
-	<%-- 	<nav class="text-center">
+						
+		<nav class="text-center">
 		  <ul class="pagination">
 		<!--  이전 페이지 -->
-		    <li>
-		      <a href="#" aria-label="Previous">
+		    <li><a href="?curPage=${searchVO.curPage-1}" aria-label="Previous">
 		        <span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
 		<!--  페이징 처리  -->
-				<c:forEach var="i" begin="${searchVO.startPage}" end="${searchVO.endPage}">
-						<c:if test="${i == searchVO.curPage}">
-							<li class="active"><a href="#">${i}</a></li>
-						</c:if>
-						
-						<c:if test="${i != searchVO.curPage}">
-							<li><a href="#" onclick="fn_go_page(${i})">${i}</a></li>
-						</c:if>
+				<c:forEach var="i" begin="${searchVO.startPage}"
+					end="${searchVO.endPage}">
+					<c:if test="${i ==searchVO.curPage}">
+						<li class="active"><a href="#">${i}</a></li>
+					</c:if>
+					<c:if test="${i!= searchVO.curPage}">
+						<li><a href="#" onclick="fn_go_page(${i})">${i}</a></li>
+					</c:if>
 				</c:forEach>
-				
-				
-		    
+
 		<!-- 다음 페이지  -->
 		    <li>
-		      <a href="#" aria-label="Next">
-		        <span aria-hidden="true">&raquo;</span>
-		      </a>
+			      <a href="?curPage=${searchVO.curPage+1}" aria-label="Next">
+			        <span aria-hidden="true">&raquo;</span>
+			      </a>
 		    </li>
 		  </ul>
-		</nav>	 --%>
-	<div class="pull-right">
-			<a href="noticeForm" class="btn btn-primary btn-sm"> 
-					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 글 작성
-			</a>
-	</div>
+		</nav>	
+		
+		<div class="pull-right">
+				<a href="noticeForm" class="btn btn-primary btn-sm"> 
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 글 작성
+				</a>
+		</div>
 			</div>
 		<div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%></div>
