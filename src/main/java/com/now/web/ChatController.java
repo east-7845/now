@@ -4,13 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -28,11 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.now.service.IMyPageService;
 import com.now.vo.EmployeeVO;
-
-import oracle.sql.ARRAY;
 
 @Controller
 public class ChatController {
@@ -55,7 +49,7 @@ public class ChatController {
 	Date date;
 	
 	@RequestMapping(value = "/chat/chatView")
-	public String chatView(HttpServletRequest req,Model model, @RequestParam("data") String[] no) throws Exception {
+	public String chatView(HttpServletRequest req,Model model, @RequestParam("data") String[] no, String mini) throws Exception {
 		
 		// 내 방 정보가져오기.
 		List<Object> list = chatDataList(no);
@@ -75,11 +69,17 @@ public class ChatController {
 		model.addAttribute("mapRoom", map);
 		model.addAttribute("userId", no[1]);
 		
-		return "chat/chatView";
+		System.out.println("채팅 view --- " + mini);
+		if(mini == null) {
+			return "chat/chatView";
+		}else {
+			return "chat/chatMiniView";
+		}
+		
 	}
 	
-	@RequestMapping(value = "/chat/chatList" )
-	public String chatList(HttpServletRequest req,ModelMap model) throws Exception {
+	@RequestMapping(value = "/chat/chatList")
+	public String chatList(HttpServletRequest req,ModelMap model, String mini) throws Exception {
 		
 		File file = new File("test.json");
 		// 파일 존재여부.
@@ -150,13 +150,18 @@ public class ChatController {
 		List<EmployeeVO> employeeList = myPageService.selectEmp();
 		req.setAttribute("employee", employeeList);
 		
+		System.out.println("리스트 mini " + mini);
+		if(mini == null) {
+			return "chat/chatList";
+		}else {
+			return "chat/chatMini";
+		}
 		
-		return "chat/chatList";
 	}
 	
 	@RequestMapping(value = "/chat/chatRoom")
 	@ResponseBody
-	public Map<String, Object> chatRoom(HttpServletRequest req, @RequestParam("emp[]") String[] empNo) throws Exception {
+	public Map<String, Object> chatRoom(HttpServletRequest req, @RequestParam("emp[]") String[] empNo, String mini) throws Exception {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		
@@ -169,15 +174,13 @@ public class ChatController {
 				memAll += empNo[i];
 			}
 		}
-		 EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
+		EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
         
         /*String userId = req.getParameter("userid");
         System.out.println("param, id:"+userId);
         attributes.put("userId", userId);*/
   
         // HttpSession 에 저장된 이용자의 아이디를 추출하는 경우
-		
-		
 		File file = new File("test.json");
 		
 		// 기본 입출력 
@@ -234,8 +237,11 @@ public class ChatController {
 			
 		}
 		//JSONObject jsonObject2 = (JSONObject)msg;
-		
-		return map;
+		if(mini == null) {
+			return map;
+		}else {
+			return map;
+		}
 	}
 	
 	// 파일 데이터 입력

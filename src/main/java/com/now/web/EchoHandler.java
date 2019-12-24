@@ -129,19 +129,19 @@ public class EchoHandler extends TextWebSocketHandler {
 			String[] roomNO = (String[]) map.get("roomData");
 			
 			String userMsg = message.getPayload();
-			String[] split = userMsg.split("-/-"); // 0 : 방번호, 1 : 계정아이디 , 2 : 데이터
+			String[] split = userMsg.split("-.-"); // 0 : 방번호, 1 : 계정아이디 , 2 : 데이터
 			
 			Date date = new Date();
 			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 			String time1 = format1.format(date);
 			
-			sess.sendMessage(new TextMessage(split[0] + "-/-" + split[1] + "-/-" + message.getPayload()));
+			sess.sendMessage(new TextMessage(split[0] + "-.-" + userNO.getEmp_no() + "-.-" + message.getPayload()));
 			StringBuffer buffer = new StringBuffer();
 			//buffer.append( "$/id/$" + split[0] + "$/date/$" + time1 + "$/data/$" + message.getPayload() );
+			//buffer.append( "$start$" + split[1] + ":" + message.getPayload() + " date :" + time1);
+			buffer.append( "[start]"+ message.getPayload() + "[date]" + time1 + "[end]");
 			
-			buffer.append( "$start$" + split[1] + ":" + message.getPayload() + " date :" + time1);
 			if(buffer.length()  >= 10) {
-				
 				// 데이터 가져오기 ..
 				JSONParser parser = new JSONParser();
 				FileReader reader = new FileReader("test.json");
@@ -155,7 +155,7 @@ public class EchoHandler extends TextWebSocketHandler {
 					if( split[0].equals(imsi.get("room")) ){
 						imsi.put("data", imsi.get("data").toString() + buffer);
 					}
-					//jsonArray.add(imsi);
+					jsonArray.add(imsi);
 				}
 				resultObj.put("result", jsonArray);
 				fileWriter.write(resultObj.toJSONString()); 

@@ -14,7 +14,7 @@
 <body>
 
 	<div class="container">
-		<%@include file="/WEB-INF/inc/now_top.jsp"%>
+		<%-- <%@include file="/WEB-INF/inc/now_top.jsp"%> --%>
 	</div>
 	<div class="container_content">
 		<!--  채팅 TEXT -->
@@ -56,7 +56,7 @@
 		</div>
 	</div>
 	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
+		<%-- <%@include file="/WEB-INF/inc/now_footer.jsp"%> --%>
 	</div>
 
 	<script>
@@ -120,7 +120,7 @@
 		});
 		
 		function fn_before(){
-			location.href = "<c:url value='/chat/chatList' />"
+			location.href = "<c:url value='/chat/chatList?mini=ok' />"
 		}
 		
 		var openWin;
@@ -129,7 +129,7 @@
 			// 부모창 이름
 			window.name = "parentForm";
 			// window.open("open할 window", "자식창 이름", "팝업창 옵션");
-            openWin = window.open("chatList?mini='ok'",
+            openWin = window.open("chatMini?mini='ok'",
                     "childForm", "width=570, height=350, resizable = no, scrollbars = no");
 
 		}
