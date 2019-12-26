@@ -78,18 +78,24 @@
 	
 	
 	<!-- 글 수정 -->
-	<update id="upadatePollBoard" parameterType="com.now.vo.PollBoardVO">
+	<!-- 비번 틀렸을 때 오류 표시해주기 -->
+<!-- 		     , (select com_name from common where com_cd = po_topic) as PO_TOPIC = #{po_topic}
+			 , (select emp_name from employee where emp_no = po_writer) as PO_WRITER = #{po_writer}
+			 , PO_PASS = #{po_pass}
+ 			 , PO_CONTENT = #{po_content} -->
+	<update id="updatePollBoard" parameterType="com.now.vo.PollBoardVO">
 		UPDATE poll_board
-		   SET PO_TITLE
-		     , (select com_name from common where com_cd = po_topic) as PO_TOPIC
-			 , (select emp_name from employee where emp_no = po_writer) as PO_WRITER
-			 , PO_PASS
-			 , PO_GROUP
-			 , PO_CONTENT
-		  	 , PO_MOD_DATE
-			 , PO_DUE_DATE
+		   SET PO_TITLE = #{po_title}
+			 , PO_WRITER = #{po_writer}
+			 , PO_CONTENT = #{po_content}
 	  	 WHERE po_no   = #{po_no}
 	  	   AND po_pass = #{po_pass}
 	</update>
+	
+	<delete id="deletePollBoard" parameterType="com.now.vo.PollBoardVO">
+		UPDATE poll_board
+		   SET PO_DEL_YN = 'Y'
+	  	 WHERE po_no   = #{po_no}	  	   
+	</delete>
 
 </mapper>

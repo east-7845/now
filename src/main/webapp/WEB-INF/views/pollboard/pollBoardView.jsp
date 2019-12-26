@@ -58,7 +58,7 @@
 					class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 					&nbsp;&nbsp;수 정
 			</a>
-    	    <a href="pollBoardEdit?po_no=${pollBoard.po_no}"
+    	    <a href="pollBoardDelete?po_no=${pollBoard.po_no}"
 				class="btn btn-sm btn-danger"> <span
 					class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 					&nbsp;&nbsp;삭제

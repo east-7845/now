@@ -57,8 +57,6 @@
 				</tr> --%>
 
 				<tr>
-					<th>ip</th>
-					<td>${pollBoard.po_ip}</td>
 					<th>조회수</th>
 					<td>${pollBoard.po_hit}</td>
 				</tr>

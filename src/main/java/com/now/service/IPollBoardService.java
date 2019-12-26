@@ -53,5 +53,5 @@ public interface IPollBoardService {
 	 * @return
 	 * @throws
 	 */
-	public int deletePollBoard(PollBoardVO pollBoard) throws Exception;
+	public int deletePollBoard(int po_no) throws Exception;
 }
