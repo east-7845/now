@@ -1,6 +1,38 @@
 @charset "UTF-8";
-
 body{
-	/* min-height : 2000px; */
-	/* padding-top: 70px; */
+	background-color: whitesmoke;
 }
+
+.container_left {
+    width: 200px;
+    height: 700px;
+    float: left;
+    background-color: gray;
+}
+
+.container_content {
+    width: 80%;
+    height: 46vw;
+    float: left;
+    padding: 10px;
+}
+
+.container_left a {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.container_left > div{
+	padding: 10px;
+	text-align: center;
+}
+
+.container_content .top_menu {
+	display: inline-block;
+}
+
+
+
+
+

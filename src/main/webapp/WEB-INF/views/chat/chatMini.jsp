@@ -12,7 +12,9 @@
 <title>부트스트랩 101 템플릿</title>
 <script src="${pageContext.request.contextPath}/js/sockjs.min.js"></script>
 <!-- 부트스트랩 -->
-<link href="${pageContext.request.contextPath }/bootstrap-3.3.2/css/bootstrap.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath }/bootstrap-3.3.2/css/bootstrap.css"
+	rel="stylesheet">
 
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -33,10 +35,7 @@
 
 <body>
 	<div class="container">
-		<%@include file="/WEB-INF/inc/now_top.jsp"%>
-	</div>
-	<div class="container_left">
-		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+		<%-- <%@include file="/WEB-INF/inc/now_top.jsp"%> --%>
 	</div>
 	<div class="container_content"
 		style="min-height: 34vw; text-align: center;">
@@ -46,8 +45,7 @@
 				<c:forEach var="memberList" items="${employee}">
 					<div>
 						<div>
-							<input type="checkbox" name="memberCheck"
-								value="${memberList.emp_no}">
+							<input type="checkbox" name="memberCheck" value="${memberList.emp_no}">
 						</div>
 						<div>${memberList.emp_no}</div>
 						<div>${memberList.emp_name}</div>
@@ -69,21 +67,23 @@
 					<c:if test="${chatListVO == null}">
 						<div>데이터가 없습니다.</div>
 					</c:if>
+
 					<c:if test="${chatListVO != null}">
 						<div name="roomList">
 							<div>${chatlist.room}</div>
 							<div>${chatlist.id}</div>
 							<div>${chatlist.member}</div>
 							<%-- <div>${chatlist.data}</div> --%>
-<%-- 							<div>${chatlist.webSocSession}</div> --%>
-<%-- 							<div>${chatlist.userSession}</div> --%>
+							<div>${chatlist.webSocSession}</div>
+							<div>${chatlist.userSession}</div>
 							<div>${chatlist.date}</div>
-<%-- 							<div>${chatlist.deleteYN}</div> --%>
+							<div>${chatlist.deleteYN}</div>
 						</div>
 					</c:if>
 					<br>
 				</c:forEach>
 			</div>
+			<button onclick="fn_moveForm()">방만들</button>
 		</div>
 
 
@@ -98,7 +98,9 @@
 	</div>
 	<!-- container_content -->
 
-
+	<div class="container_footer">
+		<%-- <%@include file="/WEB-INF/inc/now_footer.jsp"%> --%>
+	</div>
 	<script type="text/javascript">
 		// 		var sock = new SockJS("/now/echo");
 
@@ -129,32 +131,22 @@
 			str[0] = div1[0].innerHTML; //방번호
 			str[1] = div1[1].innerHTML; //계정 아이아이디
 			str[2] = div1[2].innerHTML; //계정 아이아이디
-			location.href = "<c:url value='/chat/chatView?data=" + str + "'/>"
-
+			location.href = "<c:url value='/chat/chatView?data=" + str + "&mini=ok'/>"
 		});
 
 		function fn_moveForm() {
 			location.href = "<c:url value='/chat/chatRoom' />";
 		}
 
-		// 체크박스 체크
-		// 		$("input:checkbox[name='memberCheck']").click(function(){
-		// 			var chk = $(this).is(":checked");	// 체크여부확인.
-		// 			alert(chk.val());
-		// 		});
-
 		// 방만들기
 		function fn_roomCreBtn() {
 			var checkVal = [];
-			var checkNm = [];
 
 			var lenMax = $("input:checkbox[name='memberCheck']:checked").length;
 			var num = 0;
 			// 체크 한 유저 정보
 			$("input:checkbox[name='memberCheck']:checked").each(function() {
-				var userName = $(this).parentNode.parentNode.children[2].innerText;
 				if (num < lenMax) {
-					checkNm[num] = userName;
 					checkVal[num] = $(this).val();
 				} else {
 					num = 0;
@@ -167,8 +159,7 @@
 
 			$.ajax({
 						data : {
-							"emp" : checkVal,
-							"empUser" : checkNm
+							"emp" : checkVal
 						},
 						url : "<c:url value='/chat/chatRoom'/>",
 						success : function(result) {
@@ -176,7 +167,6 @@
 							str = "<div name='roomList'>";
 							str += "<div>" + result.room + "</div>";
 							str += "<div>" + result.id + "</div>";
-							str += "<div>" + result.memberNm + "</div>";
 							str += "<div>" + result.date + "</div>";
 							/* str += "<div>"+result.id+"</div>";
 							str += "<div>"+result.member+"</div>";
@@ -196,17 +186,7 @@
 												str[1] = div1[1].innerHTML; //계정 아이아이디
 												str[2] = div1[2].innerHTML; //계정 아이아이디
 												location.href = "<c:url value='/chat/chatView?data="
-														+ str + "'/>"
-												//			 			$.ajax({
-												//			 				url : "<c:url value='/chat/chatView'/>",
-												//			 				data : {
-												//			 					"data" : str
-												//			 				},
-												//			 				success:function(result){
-
-												//			 				}
-												//			 			});
-
+														+ str + "&mini=ok'/>"
 											});
 						}
 					});

@@ -135,14 +135,13 @@ public class EchoHandler extends TextWebSocketHandler {
 			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 			String time1 = format1.format(date);
 			
-			sess.sendMessage(new TextMessage(split[0] + "-.-" + split[1] + "-.-" + message.getPayload()));
+			sess.sendMessage(new TextMessage(split[0] + "-.-" + userNO.getEmp_no() + "-.-" + message.getPayload()));
 			StringBuffer buffer = new StringBuffer();
 			//buffer.append( "$/id/$" + split[0] + "$/date/$" + time1 + "$/data/$" + message.getPayload() );
 			//buffer.append( "$start$" + split[1] + ":" + message.getPayload() + " date :" + time1);
 			buffer.append( "[start]"+ message.getPayload() + "[date]" + time1 + "[end]");
 			
 			if(buffer.length()  >= 10) {
-				
 				// 데이터 가져오기 ..
 				JSONParser parser = new JSONParser();
 				FileReader reader = new FileReader("test.json");
