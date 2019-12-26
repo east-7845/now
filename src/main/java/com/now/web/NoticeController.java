@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.now.common.exception.BizNotFoundException;
-import com.now.common.exception.BizNotMatchedException;
 import com.now.service.INoticeService;
 import com.now.vo.NoticeVO;
 import com.now.vo.ResultMessageVO;
@@ -114,31 +112,9 @@ public class NoticeController {
 	public String noticeDelete(Model model,
 																	 NoticeVO noticeVO) throws Exception {
 		String view = "notice/message";
-		ResultMessageVO messageVO = new ResultMessageVO();
-		
-		try {
-			noticeService.deleteNotice(noticeVO);
-			messageVO.setResult(true)
-			         .setTitle("삭제성공")
-			         .setMessage("삭제에 성공하였습니다")
-			         .setUrl("/notice/noticeList.do")
-					.setUrlTitle("목록으로");
-		} catch (BizNotFoundException  e) {
-			e.printStackTrace();
-			messageVO.setResult(false)
-			         .setTitle("삭제실패")
-			         .setMessage("해당글이 존재하지 않습니다.")
-			         .setUrl("/notice/noticeList.do")
-					.setUrlTitle("목록으로");
-		} catch (BizNotMatchedException e) {
-			e.printStackTrace();
-			messageVO.setResult(false)
-			         .setTitle("삭제실패")
-			         .setMessage("비밀번호가 일치하지 않습니다.")
-			         .setUrl("/notice/noticeList.do")
-					 .setUrlTitle("목록으로");
-		}
-		model.addAttribute("resultMessage", messageVO);
+//		ResultMessageVO messageVO = new ResultMessageVO();
+//		
+//		model.addAttribute("resultMessage", messageVO);
 		return view;
 	}
 		

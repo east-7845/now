@@ -20,22 +20,25 @@
 <%@include file="/WEB-INF/inc/now_top.jsp"%>
 	<body>
 			<div class="panel panel-default"
-			style="width: 60vw; margin-left: 20vw;">
+			style="width: 60vw; margin-left:20vw;">
+
 			<h3>공지사항</h3>
-				<form name="frm_board_list" action="" method="post">
+				<form name="frm_notice_list" action="" method="post">
 					<table class="table table-striped table-bordered table-ellipsis">
-						<colgroup>
-							<col width="5%" />
-							<col width="60%" />
-							<col width="30%" />
-							<col width="20%" />
-						</colgroup>
+							<colgroup>
+								<col width="5%" />
+								<col width="60%" />
+								<col width="30%" />
+								<col width="20%" />
+							</colgroup>
+						
 						<tr class="text-center">
 							<th>번호</th>
 							<th>제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 						</tr>
+						
 						<c:forEach var="notice" items="${noticeList}">
 							<tr class="text-center">
 								<td>${notice.nt_no}</td>
@@ -49,9 +52,39 @@
 							</tr>
 						</c:forEach>
 					</table>
-					</form>
+				</form>
+					
+			<div class="form-horizontal">
+				<form name="frm_noticeSearch" action="noticeList">
+					<input type="hidden" name="curPage" value="${searchVO.curPage}">		
+					<input type="hidden" name="screenListSize" value="${searchVO.screenListSize}">		
+							 <label class="col-sm-2 control-label">구분 </label> 
+								 <div class="col-sm-3">
+											<select name="searchType" class="form-control input-sm" >
+													<option value=""> -- 전체 - - </option>
+													<option value="T" ${searchVO.searchType=='T' ? 'selected="selected"' : '' }> 제목 </option>
+													<option value="W" ${searchVO.searchType=='W' ? 'selected="selected"' : '' }> 작성자</option>
+													<option value="C" ${searchVO.searchType=='C' ? 'selected="selected"' : '' }> 내용 </option>
+											</select>
+									</div>
+
+								<label class="col-sm-2 control-label"> 검색어 </label> 
+									<div class="col-sm-3">
+										<input type="text" name="searchWord" class="form-control input-sm" value="${searchVO.searchWord}">
+									</div>
 						
-					<nav class="text-center">
+							 <div class="pull-left">
+									<button type="button" class="btn btn-sm btn-default" onclick="fn_search_reset()">
+									<span class="glyphicon glyphicon-refresh" aria-hidden="true"> </span> &nbsp;초기화 </button>
+						
+									<button type="submit" class="btn btn-sm btn-primary"> 
+									<span class="glyphicon glyphicon-search" aria-hidden="true"> </span> &nbsp; 검색  </button>
+			      	</div>
+				</form>	
+
+	
+						
+					<nav class="text-center" >
 					  <ul class="pagination">
 					<!--  이전 페이지 -->
 					    <li>
@@ -78,16 +111,19 @@
 					    </li>
 					  </ul>
 					</nav>	
-				<c:if test="${sessionEmp.emp_no == 'NOW0000005'}">
+					
+				<c:if test="${sessionEmp.emp_no == 'NOW0000001'}">
 					<div class="pull-right">
 							<a href="noticeForm" class="btn btn-primary btn-sm"> 
 									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 글 작성
 							</a>
 					</div>
 				</c:if>
-			</div>
+						</div>
+	</div>		
 		<div class="container_footer">
 			<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 		</div>
+		
 	</body>
 </html>

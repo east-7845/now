@@ -13,6 +13,7 @@
 		
 	<div class="panel panel-default"
 			style="width: 60vw; margin-left: 20vw;">
+					
 		
 		<table class="table table-striped">
 			<colgroup>
@@ -39,17 +40,19 @@
 					<td colspan="3">${notice.nt_content}</td>
 				</tr>
 		</table>
-		</div>
 			
-		<c:if test="${notice != null }">
-			<div class="row">
-				<a href="noticeList" class="btn btn-default btn-sm">목록</a> 
-				<a href="noticeEdit?nt_no=${notice.nt_no}"class="btn btn-primary btn-sm"> 
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 수정 </a>
-			</div>
-		</c:if>
-</div>
-
+				<div class="row" align="center">
+					<c:if test="${notice != null }">
+							<a href="noticeList" class="btn btn-default btn-sm">목록</a>
+						</c:if>	
+							
+						<c:if test="${sessionEmp.emp_no == 'NOW0000001'}">
+							<a href="noticeEdit?nt_no=${notice.nt_no}"class="btn btn-primary btn-sm"> 
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 수정 </a>
+					</c:if>
+					</div>
+	</div>
+	
 		<div class="container_footer">
 				<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 		</div>

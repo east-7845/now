@@ -4,6 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.now.dao.INoticeDao">
+<sql id="searchCondition">
+		<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchWord)">
+			<choose>
+				<when test='searchType == "T"'>
+					AND nt_title LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test='searchType.equals("W")'>
+					AND nt_writer LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test='searchType eq "C"'>
+					AND nt_content LIKE '%' || #{searchWord} || '%'
+				</when>
+				<otherwise>
+					AND ( nt_title LIKE '%' || #{searchWord} || '%'
+					OR nt_writer LIKE '%' || #{searchWord} || '%'
+					OR nt_content LIKE '%' || #{searchWord} || '%'
+					)
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
+	
 	<select id="selectNoticeList" resultType="com.now.vo.NoticeVO">	
 		SELECT
 			NT_NO
