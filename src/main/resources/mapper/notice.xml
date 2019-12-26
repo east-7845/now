@@ -5,20 +5,22 @@
   
 <mapper namespace="com.now.dao.INoticeDao">
 	<select id="selectNoticeList" resultType="com.now.vo.NoticeVO">	
-			SELECT nt_no,
-		         nt_title,
-
-		         nt_content,
-		         nt_hit,
-					    TO_CHAR(nt_reg_date, 'yyyy-mm-dd')as nt_reg_date,
-					    TO_CHAR(nt_mod_date, 'yyyy-mm-dd')as nt_mod_date,
-					    nt_class,
-					    nt_del_yn,
-					    nt_writer
-	   	FROM notice	, employee
-	  WHERE nt_del_yn = 'N'
-
-
+		SELECT
+			NT_NO
+			, NT_TITLE
+			, NT_CONTENT
+			, NT_HIT
+			, TO_CHAR(NT_REG_DATE, 'yyyy-mm-dd') AS NT_REG_DATE
+			, TO_CHAR(NT_MOD_DATE, 'yyyy-mm-dd') AS NT_MOD_DATE
+			, NT_DEL_YN
+			, EMP_NAME AS NT_WRITER
+		FROM
+			NOTICE
+			, EMPLOYEE
+		WHERE
+			NT_DEL_YN = 'N'
+			AND NT_WRITER = EMP_NO
+		order by nt_no desc
 	</select>
 	
 		<insert id="insertNotice"
@@ -33,46 +35,55 @@
 		) VALUES (
 		#{nt_no}, #{nt_title}, #{nt_writer},
 		#{nt_content}, 0, sysdate, 
-		null, 'N'
+		sysdate, 'N'
 		)
 	</insert>
 	
 	<update id="increamentNoticeHit" parameterType="int">
-		UPDATE notice
-		SET nt_hit = nt_hit + 1
-		WHERE nt_no = #{nt_no}
+		UPDATE 
+			NOTICE
+		SET 
+			NT_HIT = NT_HIT + 1
+		WHERE 
+			NT_NO = #{NT_NO}
 	</update>
 	
 	<update id="updateNotice"
 		parameterType="com.now.vo.NoticeVO">
-		UPDATE notice
-		SET nt_title = #{nt_title}
-		, nt_writer = #{nt_writer}
-		, nt_content = #{nt_content}
-		, nt_mod_date = sysdate
-		, nt_class = #{nt_class}
-		WHERE nt_no = #{nt_no}
+		UPDATE 
+			NOTICE
+		SET 
+			NT_TITLE = #{NT_TITLE}
+			, NT_WRITER = #{NT_WRITER}
+			, NT_CONTENT = #{NT_CONTENT}
+			, NT_MOD_DATE = SYSDATE
+		WHERE 
+			NT_NO = #{NT_NO}
 	</update>
 	
 		<select id="selectNotice" parameterType="int"
 		resultType="com.now.vo.NoticeVO">
-		SELECT nt_no,
-		nt_title,
-		nt_writer,
-		nt_content,
-		nt_hit,
-		TO_CHAR(nt_reg_date, 'YYYY.MM.DD') AS NT_reg_date,
-		TO_CHAR(nt_mod_date, 'YYYY.MM.DD') AS NT_mod_date,
-		nt_del_yn,
-		nt_class
-		FROM notice
-		WHERE nt_no = #{nt_no}
+		SELECT 
+			NT_NO
+			, NT_TITLE
+			, NT_WRITER
+			, NT_CONTENT
+			, NT_HIT
+			, TO_CHAR(NT_REG_DATE, 'yyyy-mm-dd') AS NT_REG_DATE
+			, TO_CHAR(NT_MOD_DATE, 'yyyy-mm-dd') AS NT_MOD_DATE
+			, NT_DEL_YN
+		FROM 
+			NOTICE
+		WHERE 
+			NT_NO = #{NT_NO}
 	</select>
 
 	<delete id="deleteNotice"
 		parameterType="com.now.vo.NoticeVO">
-		DELETE FROM notice
-		WHERE nt_no = #{nt_no}
+		DELETE 
+			FROM NOTICE
+		WHERE 
+			NT_NO = #{NT_NO}
 	</delete>
 
 

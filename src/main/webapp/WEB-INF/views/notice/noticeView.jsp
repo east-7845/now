@@ -34,17 +34,6 @@
 					<th>작성자</th>
 					<td>${notice.nt_writer}</td>
 				</tr>
-<%-- 				<tr>
-					<th>구분</th>
-					<c:forEach var="code" items="${lanList}">
-						<c:choose>
-							<c:when test="${noticeVO.nt_class eq code.com_cd}">
-								<td colspan="3">${code.com_nm }</td>
-							</c:when>
-						</c:choose>
-					</c:forEach>
-				</tr> --%>
-
 				<tr>
 					<th>글내용</th>
 					<td colspan="3">${notice.nt_content}</td>

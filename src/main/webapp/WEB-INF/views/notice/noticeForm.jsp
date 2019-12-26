@@ -11,7 +11,6 @@
 	<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	<div class="container_content">
 <h3>글 작성</h3>
-
 <form action="noticeRegist" method="post" >
 		<table class="table">
 				<colgroup>
@@ -28,22 +27,9 @@
 		</tr>
 		<tr>
 			<th>작성자</th>
-			<td><input type="text" name="nt_writer" value="${notice.nt_writer}">
-				<%-- <span>${errors.nt_writer}</span> --%>
+			<td><input type="text" name="nt_writer" value="${sessionEmp.emp_no}" readonly="readonly">
 			</td>
 		</tr>
-<%-- 		<tr>
-			<th>분류</th>
-			<td colspan="3">
-				<select name="bo_class">
-					<option value="" >게시물 분류를 선택해 주세요 </option>
-						<c:forEach var="code" items="${bcList}">
-							<option value="${code.com_cd}">${code.com_nm}</option>
-						</c:forEach>	
-				</select>
-				<span>${errors.nt_class}</span>
-			</td>
-		</tr> --%>
 		<tr>
 			<th>내용</th>
 			<td colspan="3">

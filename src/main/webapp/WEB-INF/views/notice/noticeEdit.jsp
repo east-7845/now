@@ -38,17 +38,8 @@
 				<tr>
 					<th>작성자</th>
 					<td>
-						<form:input path="nt_writer" /><form:errors path="nt_writer" />
-					</td>
-				</tr>
-				<tr>
-					<th>구분</th>
-					<td colspan="3">
-						<form:select path="nt_class">
-							<option value="">언어 선택</option>
-							<form:options items="${bcList}" itemValue="com_cd"
-								itemLabel="com_nm" />
-						</form:select> <form:errors path="nt_class" />
+						<form:input path="nt_writer" name="nt_writer" value="${sessionEmp.emp_no}" readonly="readonly"/>
+						<form:errors path="nt_writer" />
 					</td>
 				</tr>
 				<tr>
