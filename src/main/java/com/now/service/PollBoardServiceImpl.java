@@ -28,8 +28,7 @@ public class PollBoardServiceImpl implements IPollBoardService{
 
 	@Override
 	public int insertPollBoard(PollBoardVO pollBoard) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return boardDao.insertPollBoard(pollBoard);
 	}
 
 	@Override
