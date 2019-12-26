@@ -161,11 +161,7 @@ public class ChatController {
 	
 	@RequestMapping(value = "/chat/chatRoom")
 	@ResponseBody
-<<<<<<< HEAD
-	public Map<String, Object> chatRoom(HttpServletRequest req, @RequestParam("emp[]") String[] empNo, String mini) throws Exception {
-=======
 	public Map<String, Object> chatRoom(HttpServletRequest req,@RequestParam("empUser[]") String[] empUser, @RequestParam("emp[]") String[] empNo, String mini) throws Exception {
->>>>>>> refs/heads/shin
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		
@@ -184,11 +180,6 @@ public class ChatController {
 				memAll += empNo[i];
 			}
 		}
-<<<<<<< HEAD
-		EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
-=======
-		
->>>>>>> refs/heads/shin
         
         /*String userId = req.getParameter("userid");
         System.out.println("param, id:"+userId);
@@ -332,7 +323,7 @@ public class ChatController {
 						map.put("deleteYN", imsi.get("deleteYN"));
 						list.add(map);
 					}
-					
+					 
 					
 				}
 				

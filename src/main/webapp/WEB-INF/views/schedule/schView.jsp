@@ -24,7 +24,7 @@
 <script src="${pageContext.request.contextPath }/js/jquery-3.4.1.js"></script>
 <script
 	src="${pageContext.request.contextPath }/bootstrap-3.3.2/js/bootstrap.js"></script>
-
+ 
 <!--  스케줄러 -->
 <link href="${pageContext.request.contextPath}/css/schedule.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/css/daygrid.css"	rel="stylesheet">
@@ -84,7 +84,6 @@
 				    			"startStr" : info.startStr,
 				    			"endStr"   : endStr
 				    	},
-				    	url : "<c:url value=''>",
 				    	success : function(result){
 				    		calendar.addEvent({'title':'출근', 'start': info.dateStr, 'end':info.endStr});
 				    	}
