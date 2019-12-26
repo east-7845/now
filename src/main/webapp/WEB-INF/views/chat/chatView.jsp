@@ -16,6 +16,9 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 	<div class="container_content">
 		<!--  채팅 TEXT -->
 		<div style="">
@@ -55,9 +58,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-	</div>
+
 
 	<script>
 		var sock = new SockJS("/now/echo");
@@ -72,7 +73,12 @@
 			var splitParent = chatRoomName.children[0].innerText;
 			var splitChildren = splitParent.split(".");
 			
+<<<<<<< HEAD
 			if(split[0] == "${mapRoom.room}" && split[1] == "${userId}" || member.test(split[1])){
+=======
+			console.log(split);
+			if(split[0] == "${mapRoom.room}" && (split[1] == "${userId}") || (member.search( "/"+ split[1] +"/")) ){
+>>>>>>> refs/heads/shin
 				
 				if(selDivision == "end"){
 					$("#chat").append(split[1] + " : " + split[4] + "\n");	
@@ -131,7 +137,10 @@
 			// window.open("open할 window", "자식창 이름", "팝업창 옵션");
             openWin = window.open("chatList?mini='ok'",
                     "childForm", "width=570, height=350, resizable = no, scrollbars = no");
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/heads/shin
 		}
 		
 		function setChildText(){

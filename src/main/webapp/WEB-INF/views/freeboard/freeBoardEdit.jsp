@@ -17,6 +17,9 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 	<div class="container_content">
 		<div class="container_content" style="min-height: 34vw;">
 			<div class="panel panel-default"
@@ -65,9 +68,9 @@
 		</div>
 	</div>
 	<!-- container_content -->
-	<div class="container_footer">
+	<%-- <div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-	</div>
+	</div> --%>
 </body>
 </html>
 

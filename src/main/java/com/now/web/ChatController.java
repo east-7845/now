@@ -161,20 +161,34 @@ public class ChatController {
 	
 	@RequestMapping(value = "/chat/chatRoom")
 	@ResponseBody
+<<<<<<< HEAD
 	public Map<String, Object> chatRoom(HttpServletRequest req, @RequestParam("emp[]") String[] empNo, String mini) throws Exception {
+=======
+	public Map<String, Object> chatRoom(HttpServletRequest req,@RequestParam("empUser[]") String[] empUser, @RequestParam("emp[]") String[] empNo, String mini) throws Exception {
+>>>>>>> refs/heads/shin
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		
-		String memAll = "";
+		
+		String memNmAll = "";
+		EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
+		
+		String memAll = attribute.getEmp_name() + ".";
 		// 데이터 값을 한 문자열에 연결
 		for(int i = 0 ; i<=(empNo.length-1); i++) {
 			if(i < (empNo.length-1)) {
+				memNmAll += empUser[i] + ".";
 				memAll += empNo[i] + ".";
 			} else {
+				memNmAll += empUser[i] + ".";
 				memAll += empNo[i];
 			}
 		}
+<<<<<<< HEAD
 		EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
+=======
+		
+>>>>>>> refs/heads/shin
         
         /*String userId = req.getParameter("userid");
         System.out.println("param, id:"+userId);
@@ -210,7 +224,7 @@ public class ChatController {
 			userObj.put("member", memAll);	// 참여중인 참여자(배열)
 			userObj.put("data", "");	// 방데이터(배열)
 			userObj.put("title", "채팅어려워요");	// 방데이터(배열)
-			userObj.put("webSocSession", "");
+			userObj.put("memberName", memNmAll);
 			userObj.put("userSession", "");
 			userObj.put("date", time1);
 			userObj.put("deleteYN", "N");
@@ -229,6 +243,7 @@ public class ChatController {
 			fileWriter.flush();
 			fileWriter.close();
 			
+			map.put("memberNm", memNmAll);
 			map.put("member", memAll);
 			map.put("room", "NO_"+ 1);
 			map.put("date", time1);

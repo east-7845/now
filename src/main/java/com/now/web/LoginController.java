@@ -2,12 +2,10 @@ package com.now.web;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import com.now.service.ILoginService;
 import com.now.vo.EmployeeVO;
 
@@ -21,6 +19,14 @@ public class LoginController {
 	public String loginCheck(HttpServletRequest req, EmployeeVO employee) throws Exception {
 		System.out.println("loginController");
 		String view = "forward:/main";
+		
+//		HttpSession session = req.getSession();
+//		EmployeeVO attribute = (EmployeeVO) session.getAttribute("sessionEmp");
+//		if(attribute.getEmp_id() == null || attribute.getEmp_id().equals("")) {
+//			
+//		}else {
+//			
+//		}
 		
 		EmployeeVO vo = loginService.selectEmp(employee);
 		if(vo == null) {
@@ -50,7 +56,6 @@ public class LoginController {
 		
 		HttpSession session = req.getSession();
 		session.invalidate();
-
 
 		return view;
 	}
