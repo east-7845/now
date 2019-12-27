@@ -112,10 +112,9 @@ public class PollBoardController {
 	 */    
 	@RequestMapping(value = "/pollboard/pollBoardDelete")
 	public String pollBoardDelete(int po_no) throws Exception{
-//		if (errors.hasErrors()) {
-//			return "pollboard/pollBoardView";
-//		}
-		System.out.println("delete");
+
+		
+		
 		int cnt = pollBoardService.deletePollBoard(po_no);
 		return "redirect:/pollboard/pollBoardList";
 	}

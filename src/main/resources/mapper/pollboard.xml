@@ -14,7 +14,7 @@
 			 , (select com_name from common where com_cd = po_topic) as po_topic
 			 , (select emp_name from employee where emp_no = po_writer) as po_writer
 			 , po_pass
-			 , po_group
+			 , (select com_name from common where com_cd = po_group) as po_group
 			 , po_content
 			 , po_hit
 			 , po_ip
@@ -39,7 +39,7 @@
 			 , (select com_name from common where com_cd = po_topic) as po_topic
 			 , (select emp_name from employee where emp_no = po_writer) as po_writer
 			 , po_pass
-			 , po_group
+			 , (select com_name from common where com_cd = po_group) as po_group
 			 , po_content
 			 , po_hit
 			 , po_ip
