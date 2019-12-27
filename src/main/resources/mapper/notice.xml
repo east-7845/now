@@ -10,15 +10,11 @@
 				<when test='searchType == "T"'>
 					AND nt_title LIKE '%' || #{searchWord} || '%'
 				</when>
-				<when test='searchType.equals("W")'>
-					AND nt_writer LIKE '%' || #{searchWord} || '%'
-				</when>
 				<when test='searchType eq "C"'>
 					AND nt_content LIKE '%' || #{searchWord} || '%'
 				</when>
 				<otherwise>
 					AND ( nt_title LIKE '%' || #{searchWord} || '%'
-					OR nt_writer LIKE '%' || #{searchWord} || '%'
 					OR nt_content LIKE '%' || #{searchWord} || '%'
 					)
 				</otherwise>
@@ -75,12 +71,12 @@
 		UPDATE 
 			NOTICE
 		SET 
-			NT_TITLE = #{NT_TITLE}
-			, NT_WRITER = #{NT_WRITER}
-			, NT_CONTENT = #{NT_CONTENT}
-			, NT_MOD_DATE = SYSDATE
+			NT_TITLE = #{nt_title}
+			, NT_WRITER = #{nt_writer}
+			, NT_CONTENT = #{nt_content}
+			, NT_MOD_DATE = sysdate
 		WHERE 
-			NT_NO = #{NT_NO}
+			NT_NO = #{nt_no}
 	</update>
 	
 		<select id="selectNotice" parameterType="int"

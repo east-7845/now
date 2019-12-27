@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.now.service.INoticeService;
+import com.now.vo.FreeBoardVO;
 import com.now.vo.NoticeVO;
 import com.now.vo.ResultMessageVO;
 
@@ -78,34 +79,33 @@ public class NoticeController {
 		return view;
 	}
 	
+	@RequestMapping(value = "/freeboard/freeBoardModfiy", method = RequestMethod.POST)
+	public String freeBoardModify(HttpServletRequest req
+				,@ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
+		String view = "";
+		
+		//BeanUtils.populate(searchVO, req.getParameterMap());
+		int freeBoardList = boardService.updateFreeBoard(freeVO);
+		if(freeBoardList >= 1) {
+			return "redirect:/freeboard/freeBoardList";
+		}
+		
+		//return "freeboard/freeBoardList";
+		return "redirect:/freeboard/freeBoardEdit?fr_no="+ freeVO.getFr_no();
+	}
+	
+	
 	@RequestMapping(value = "/notice/noticeModify", method = RequestMethod.POST)
 	public String noticeModify(ModelMap model,
-																		@ModelAttribute("notice") NoticeVO noticeVO,
-																		BindingResult errors) throws Exception {
-		String view = "notice/message";
-		
-		if(errors.hasErrors()) {
-			return "notice/noticeEdit";
-		}
-		
-		int succ = noticeService.updateNotice(noticeVO);
-		ResultMessageVO messageVO = new ResultMessageVO();
-		if (succ > 0) {
-			messageVO.setResult(true)
-			         .setTitle("수정 성공")
-			         .setMessage("수정에 성공하였습니다")
-			         .setUrl("/notice/noticeList")
-					 .setUrlTitle("목록으로");
-		} else {
-			messageVO.setResult(false)
-			         .setTitle("수정 실패")
-			         .setMessage("수정에 실패하였습니다")
-			         .setUrl("/notice/noticeList")
-					 .setUrlTitle("목록으로");
-		}
-		model.addAttribute("resultMessage", messageVO);
+																		@ModelAttribute("notice") NoticeVO noticeVO
+																		) throws Exception {
 
-		return view;
+		int freeBoardList = noticeService.updateBoard(freeVO);
+		if(freeBoardList >= 1) {
+			return "redirect:/freeboard/freeBoardList";
+		}
+
+		return "notice/noticeEdit?nt_no=" + noticeVO.getNt_no();
 	}
 	
 	@RequestMapping(value = "notice/noticeModify")

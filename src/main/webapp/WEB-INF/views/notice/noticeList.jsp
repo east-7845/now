@@ -16,13 +16,24 @@
 	white-space : nowrap;
 }
 </style>
+
+<script type="text/javascript">
+	var fn_search_reset=function(){
+		var f = document.forms["fn_search_reset"];
+		f.curPage.value = 1;
+		f.searchType.value = "";
+		f.searchWord.value = "";
+		f.searchClass.value = "";
+	}
+
+</script>
+
 </head>
 <%@include file="/WEB-INF/inc/now_top.jsp"%>
 	<body>
 			<div class="panel panel-default"
 			style="width: 60vw; margin-left:20vw;">
 
-			<h3>공지사항</h3>
 				<form name="frm_notice_list" action="" method="post">
 					<table class="table table-striped table-bordered table-ellipsis">
 							<colgroup>
@@ -57,13 +68,12 @@
 			<div class="form-horizontal">
 				<form name="frm_noticeSearch" action="noticeList">
 					<input type="hidden" name="curPage" value="${searchVO.curPage}">		
-					<input type="hidden" name="screenListSize" value="${searchVO.screenListSize}">		
+					<input type="hidden" name="screenListSize" value="${searchVO.screenListSize}">	
 							 <label class="col-sm-2 control-label">구분 </label> 
-								 <div class="col-sm-3">
+								 <div class="col-sm-2">
 											<select name="searchType" class="form-control input-sm" >
 													<option value=""> -- 전체 - - </option>
 													<option value="T" ${searchVO.searchType=='T' ? 'selected="selected"' : '' }> 제목 </option>
-													<option value="W" ${searchVO.searchType=='W' ? 'selected="selected"' : '' }> 작성자</option>
 													<option value="C" ${searchVO.searchType=='C' ? 'selected="selected"' : '' }> 내용 </option>
 											</select>
 									</div>
@@ -80,8 +90,16 @@
 									<button type="submit" class="btn btn-sm btn-primary"> 
 									<span class="glyphicon glyphicon-search" aria-hidden="true"> </span> &nbsp; 검색  </button>
 			      	</div>
-				</form>	
+						  <c:if test="${sessionEmp.emp_no == 'NOW0000001'}">
+								<div class="pull-right">
+										<a href="noticeForm" class="btn btn-primary btn-sm"> 
+												<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 글 작성
+										</a>
+								</div>
+							</c:if>
+				</form>
 
+</div>
 	
 						
 					<nav class="text-center" >
@@ -93,15 +111,14 @@
 					        </a>
 					    </li>
 					<!--  페이징 처리  -->
-							<c:forEach var="i" begin="${searchVO.startPage}"
-								end="${searchVO.endPage}">
-								<c:if test="${i ==searchVO.curPage}">
-									<li class="active"><a href="#">${i}</a></li>
-								</c:if>
-								<c:if test="${i != searchVO.curPage}">
-									<li><a href="#" onclick="fn_go_page(${i})">${i}</a></li>
-								</c:if>
-							</c:forEach>
+								<c:forEach var="i" begin="${searchVO.startPage}" end="${searchVO.endPage}">
+									<c:if test="${i == searchVO.curPage}">
+										<li class="active"><a href="#">${i}</a></li>
+									</c:if>
+									<c:if test="${i != searchVO.curPage}">
+										<li><a href="#" onclick="fn_go_page(${i})">${i}</a></li>
+									</c:if>
+								</c:forEach>
 			
 					<!-- 다음 페이지  -->
 					    <li>
@@ -112,14 +129,8 @@
 					  </ul>
 					</nav>	
 					
-				<c:if test="${sessionEmp.emp_no == 'NOW0000001'}">
-					<div class="pull-right">
-							<a href="noticeForm" class="btn btn-primary btn-sm"> 
-									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 글 작성
-							</a>
-					</div>
-				</c:if>
-						</div>
+
+						
 	</div>		
 		<div class="container_footer">
 			<%@include file="/WEB-INF/inc/now_footer.jsp"%>
