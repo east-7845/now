@@ -1,11 +1,19 @@
 package com.now.web;
 
+import java.io.BufferedInputStream;
+import java.net.URL;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import com.now.service.ILoginService;
 import com.now.vo.EmployeeVO;
 
@@ -44,6 +52,32 @@ public class LoginController {
 		HttpSession session = req.getSession();
 		EmployeeVO vo = loginService.session(employee);
 		
+		// 메인페이지 
+		// 공용 API사용하기(미세먼지)
+		
+		URL url = new URL("http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=둔산동&dataTerm=month&pageNo=1&numOfRows=10&ServiceKey=CzzGplsj26NjeJzJmS4tqEvGGYeBeJTlV4iwMfgCew%2BBOyOsWRY67Uk%2BUAUPyxRZ1N78jnvk5PCiCzCcDEujEg%3D%3D&ver=1.3&_returnType=json");
+		BufferedInputStream reader = new BufferedInputStream(url.openStream());
+		
+		StringBuffer buffer = new StringBuffer();
+        int i =0;
+        byte[] b = new byte[4096];
+        while( (i = reader.read(b)) != -1){
+          buffer.append(new String(b, 0, i));
+         System.out.println(buffer);
+        }
+        JSONParser jsonparser = new JSONParser();
+        // API 미세먼지 값 가져오기.
+        JSONObject jsonobject = (JSONObject)jsonparser.parse(buffer.toString());
+        JSONArray array = (JSONArray) jsonobject.get("list");
+        JSONObject entity = (JSONObject)array.get(0);
+        String day = (String) entity.get("dataTime");
+        String dust = (String) entity.get("pm25Grade1h");
+		
+        System.out.println("day"+dust);
+        System.out.println("dust"+day);
+		// 메인페이지 용권 작업
+        req.setAttribute("dust", dust); // 오픈 API 미세먼지
+        req.setAttribute("dustDay", day); // 측정일
 		session.setAttribute("sessionEmp", vo);
 
 		return view;

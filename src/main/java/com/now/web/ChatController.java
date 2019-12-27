@@ -14,6 +14,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.tribes.util.Arrays;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -53,29 +54,35 @@ public class ChatController {
 		
 		// 내 방 정보가져오기.
 		List<Object> list = chatDataList(no);
-		
+		List<String> list2 = new ArrayList<String>();
+		List<String> list3 = new ArrayList<String>();
 		Map<String,String> map = new HashMap<String, String>();
 		map.put("room", no[0]);
 		map.put("id", no[1]);
 		map.put("member", no[2]);
-		
-		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i));
+		System.out.println("리스트값" + list);
+		String val= (String)((Map)list.get(0)).get("member");
+		String valNm= (String)((Map)list.get(0)).get("memberName");
+		String[] split1 = val.split("\\.");
+		String[] split2 = valNm.split("\\.");
+		for(int i = 0; i<split1.length; i++) {
+			list2.add(i, split1[i]);
+			list3.add(i, split2[i]);
 		}
 		HttpSession session = req.getSession();
 		//EmployeeVO userId = (EmployeeVO)session.getAttribute("userId");
 		session.setAttribute("roomData", no);
-		model.addAttribute("chatList", list);
+		model.addAttribute("chatList", list2);
+		model.addAttribute("chatList2", list3);
 		model.addAttribute("mapRoom", map);
 		model.addAttribute("userId", no[1]);
+		model.addAttribute("userNm", split2[0]);
 		
-		System.out.println("채팅 view --- " + mini);
 		if(mini == null) {
 			return "chat/chatView";
 		}else {
 			return "chat/chatMiniView";
 		}
-		
 	}
 	
 	@RequestMapping(value = "/chat/chatList")
@@ -124,13 +131,13 @@ public class ChatController {
 					Map<String, Object> map = new HashMap<String, Object>();
 					String member = (String) imsi.get("member");
 					boolean contains = member.contains(attribute.getEmp_no());
-					System.out.println(contains);
 					if( imsi.get("id").equals(attribute.getEmp_no()) || member.contains(attribute.getEmp_no())   ) {
 						map.put("room", imsi.get("room"));
 						map.put("id", imsi.get("id"));
 						map.put("member", imsi.get("member"));
 						map.put("data", imsi.get("data"));
-						map.put("webSocSession", imsi.get("webSocSession"));
+						map.put("title", imsi.get("title"));
+						map.put("memberName", imsi.get("memberName"));
 						map.put("userSession", imsi.get("userSession"));
 						map.put("date", imsi.get("date"));
 						map.put("deleteYN", imsi.get("deleteYN"));
@@ -150,7 +157,6 @@ public class ChatController {
 		List<EmployeeVO> employeeList = myPageService.selectEmp();
 		req.setAttribute("employee", employeeList);
 		
-		System.out.println("리스트 mini " + mini);
 		if(mini == null) {
 			return "chat/chatList";
 		}else {
@@ -161,15 +167,14 @@ public class ChatController {
 	
 	@RequestMapping(value = "/chat/chatRoom")
 	@ResponseBody
-	public Map<String, Object> chatRoom(HttpServletRequest req,@RequestParam("empUser[]") String[] empUser, @RequestParam("emp[]") String[] empNo, String mini) throws Exception {
+	public Map<String, Object> chatRoom(HttpServletRequest req, @RequestParam("empTile") String empTile, @RequestParam("empUser[]") String[] empUser, @RequestParam("emp[]") String[] empNo, String mini) throws Exception {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		
-		
-		String memNmAll = "";
 		EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
 		
-		String memAll = attribute.getEmp_name() + ".";
+		String memNmAll = attribute.getEmp_name() +".";
+		String memAll = attribute.getEmp_no() + ".";
 		// 데이터 값을 한 문자열에 연결
 		for(int i = 0 ; i<=(empNo.length-1); i++) {
 			if(i < (empNo.length-1)) {
@@ -214,7 +219,7 @@ public class ChatController {
 			userObj.put("id", attribute.getEmp_no());	// 방개설한 사용자 사원번호
 			userObj.put("member", memAll);	// 참여중인 참여자(배열)
 			userObj.put("data", "");	// 방데이터(배열)
-			userObj.put("title", "채팅어려워요");	// 방데이터(배열)
+			userObj.put("title", empTile);	// 방데이터(배열)
 			userObj.put("memberName", memNmAll);
 			userObj.put("userSession", "");
 			userObj.put("date", time1);
@@ -234,11 +239,13 @@ public class ChatController {
 			fileWriter.flush();
 			fileWriter.close();
 			
+			map.put("title", empTile);
 			map.put("memberNm", memNmAll);
 			map.put("member", memAll);
 			map.put("room", "NO_"+ 1);
 			map.put("date", time1);
-			map.put("id", "NOW0000005");
+			map.put("id", attribute.getEmp_no());
+			
 		}else {
 			
 		}
@@ -304,7 +311,8 @@ public class ChatController {
 							map.put("id", imsi.get("id"));
 							map.put("member", imsi.get("member"));
 							map.put("data", imsi.get("data"));
-							map.put("webSocSession", imsi.get("webSocSession"));
+							map.put("title", imsi.get("title"));
+							map.put("memberName", imsi.get("memberName"));
 							map.put("userSession", imsi.get("userSession"));
 							map.put("date", imsi.get("date"));
 							map.put("deleteYN", imsi.get("deleteYN"));
@@ -317,14 +325,18 @@ public class ChatController {
 						map.put("id", imsi.get("id"));
 						map.put("member", imsi.get("member"));
 						map.put("data", imsi.get("data"));
-						map.put("webSocSession", imsi.get("webSocSession"));
+						map.put("title", imsi.get("title"));
+						map.put("memberName", imsi.get("memberName"));
 						map.put("userSession", imsi.get("userSession"));
 						map.put("date", imsi.get("date"));
 						map.put("deleteYN", imsi.get("deleteYN"));
 						list.add(map);
 					}
+<<<<<<< HEAD
 					 
 					
+=======
+>>>>>>> refs/heads/shin
 				}
 				
 				//req.setAttribute("chatListVO", list);
