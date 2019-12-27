@@ -73,7 +73,8 @@
 						<div name="roomList">
 							<div>${chatlist.room}</div>
 							<div>${chatlist.id}</div>
-							<div>${chatlist.member}</div>
+							<div style="display:none;">${chatlist.member}</div>
+							<div>${chatlist.memberName}</div>
 							<%-- <div>${chatlist.data}</div> --%>
 <%-- 							<div>${chatlist.webSocSession}</div> --%>
 <%-- 							<div>${chatlist.userSession}</div> --%>
@@ -100,26 +101,7 @@
 
 
 	<script type="text/javascript">
-		// 		var sock = new SockJS("/now/echo");
 
-		// 		sock.onmessage = function(e) {
-		// 			//$("#chat").append(e.data + "<br/>");
-		// 			$("#chat").append(e.data + "\n");
-		// 			console.log("연결메시지");
-		// 		}
-
-		// 		sock.onclose = function() {
-		// 			$("#chat").append("연결 종료");
-		// 			console.log("연결종료");
-		// 		}
-
-		// 		$(document).ready(function() {
-		// 			$("#chatForm").submit(function(event) {
-		// 				event.preventDefault();
-		// 				sock.send($("#message").val());
-		// 				$("#message").val('').focus();
-		// 			});
-		// 		});
 		// 방클릭시 이동하기.
 		$("div[name=roomList]").dblclick(function() {
 			var div = $(this);
@@ -137,23 +119,17 @@
 			location.href = "<c:url value='/chat/chatRoom' />";
 		}
 
-		// 체크박스 체크
-		// 		$("input:checkbox[name='memberCheck']").click(function(){
-		// 			var chk = $(this).is(":checked");	// 체크여부확인.
-		// 			alert(chk.val());
-		// 		});
-
 		// 방만들기
 		function fn_roomCreBtn() {
 			var checkVal = [];
 			var checkNm = [];
-
+			var title = document.getElementById("roomName").innerText;
 			var lenMax = $("input:checkbox[name='memberCheck']:checked").length;
 			var num = 0;
 			// 체크 한 유저 정보
 			$("input:checkbox[name='memberCheck']:checked").each(function() {
-				var userName = $(this).parentNode.parentNode.children[2].innerText;
-				if (num < lenMax) {
+				var userName = $(this)[0].parentNode.parentNode.children[2].innerText;
+				if(num < lenMax) {
 					checkNm[num] = userName;
 					checkVal[num] = $(this).val();
 				} else {
@@ -166,51 +142,40 @@
 			var roomName = $("#roomName").val(); // 방 이름
 
 			$.ajax({
-						data : {
-							"emp" : checkVal,
-							"empUser" : checkNm
-						},
-						url : "<c:url value='/chat/chatRoom'/>",
-						success : function(result) {
-							var str = "";
-							str = "<div name='roomList'>";
-							str += "<div>" + result.room + "</div>";
-							str += "<div>" + result.id + "</div>";
-							str += "<div>" + result.memberNm + "</div>";
-							str += "<div>" + result.date + "</div>";
-							/* str += "<div>"+result.id+"</div>";
-							str += "<div>"+result.member+"</div>";
-							str += "<div>"+result.date+"</div>"; */
-							str += "</div>";
-							$("#chatRoomList").append(str);
+				data : {
+					"emp" : checkVal,
+					"empUser" : checkNm,
+					"empTile" : title
+				},
+				url : "<c:url value='/chat/chatRoom'/>",
+				success : function(result) {
+					var str = "";
+					str = "<div name='roomList'>";
+					str += "<div>" + result.room + "</div>";
+					str += "<div>" + result.id + "</div>";
+					str += "<div>" + result.memberNm + "</div>";
+					str += "<div>" + result.date + "</div>";
+					/* str += "<div>"+result.id+"</div>";
+					str += "<div>"+result.member+"</div>";
+					str += "<div>"+result.date+"</div>"; */
+					str += "</div>";
+					$("#chatRoomList").append(str);
 
-							// 방클릭시 이동하기.
-							$("div[name=roomList]")
-									.dblclick(
-											function() {
-												var div = $(this);
-												var div1 = div.children("div");
-												console.log(div1.innerHTML);
-												var str = [];
-												str[0] = div1[0].innerHTML; //방번호
-												str[1] = div1[1].innerHTML; //계정 아이아이디
-												str[2] = div1[2].innerHTML; //계정 아이아이디
-												location.href = "<c:url value='/chat/chatView?data="
-														+ str + "'/>"
-												//			 			$.ajax({
-												//			 				url : "<c:url value='/chat/chatView'/>",
-												//			 				data : {
-												//			 					"data" : str
-												//			 				},
-												//			 				success:function(result){
-
-												//			 				}
-												//			 			});
-
-											});
-						}
+					// 방클릭시 이동하기.
+					$("div[name=roomList]").dblclick(
+						function() {
+							var div = $(this);
+							var div1 = div.children("div");
+							console.log(div1.innerHTML);
+							var str = [];
+							str[0] = div1[0].innerHTML; //방번호
+							str[1] = div1[1].innerHTML; //계정 아이아이디
+							str[2] = div1[2].innerHTML; //계정 아이아이디
+							location.href = "<c:url value='/chat/chatView?data="
+									+ str + "'/>"
 					});
-
+				}
+			});
 		}
 	</script>
 </body>

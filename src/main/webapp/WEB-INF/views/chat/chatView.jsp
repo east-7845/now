@@ -35,8 +35,8 @@
 				</textarea>
 				<!-- 내 채팅방(리스트) -->
 				<div id="chatRoomList" style="border: 1px solid; width: 230px; height: 200px; display: inline-block;position: absolute;">
-					<c:forEach var="memList" items="${chatList}">
-						<div>${memList.member}</div>
+					<c:forEach var="memList" items="${chatList2}">
+						<div>${memList}</div>
 					</c:forEach>
 				</div>
 				<!-- 현재 채팅방 사용자리스트 -->
@@ -67,38 +67,33 @@
 		sock.onmessage = function(e) {
 			var data = e.data;
 			var split = data.split("-.-");
-			var member ="${mapRoom.member}";
+			//var member ="${mapRoom.member}";
+			var member ="${chatList}";
 			var room = "${mapRoom.room}";
 			var chatRoomName = document.getElementById("chatRoomList");
 			var splitParent = chatRoomName.children[0].innerText;
 			var splitChildren = splitParent.split(".");
-			
 			console.log(split);
 			if(split[0] == "${mapRoom.room}" && (split[1] == "${userId}") || (member.search( "/"+ split[1] +"/")) ){
 				
 				if(selDivision == "end"){
-					$("#chat").append(split[1] + " : " + split[4] + "\n");	
+					$("#chat").append(split[1] + " : " + split[5] + "\n");	
 				}else{
 					
 					$.ajax({
 						type:"POST",
-						data:"&target="+ selDivision +"&format=html&q=" + split[4],
+						data:"&target="+ selDivision +"&format=html&q=" + split[5],
 						url: "https://www.googleapis.com/language/translate/v2?key=AIzaSyDK-6ADsIFBisy3nAWpHzjCcrVXNrI8TJU",
 						
 						success:function(reponse){
 							//alert(reponse.data.translations[0].translatedText);
-							$("#chat").append(split[1] + " : " + split[4] + "\n");
+							$("#chat").append(split[1] + " : " + split[5] + "\n");
 							$("#chat").append("        (번역)" + reponse.data.translations[0].translatedText + "\n");
 						}
 					});
 				}
 				return true;
 			}	
-			
-			
-			
-			
-			console.log("연결메시지");
 		}
 			
 		// 번역글 체크
@@ -106,17 +101,15 @@
 			selDivision = $(':selected', this).val();
 		});
 		
-
 		sock.onclose = function() {
 			$("#chat").append("연결 종료");
 			console.log("연결종료");
 		}
-
 	
 		$(document).ready(function(){
 			$("#chatForm").submit(function(event){
 				event.preventDefault();
-				sock.send( "${mapRoom.room}" +"-.-"+ "${userId}" + "-.-" +$("#message").val() );
+				sock.send( "${mapRoom.room}" +"-.-"+ "${userNm}"  +"-.-" + "${userId}" + "-.-" +$("#message").val() );
 				$("#message").val('').focus();
 			});
 		});

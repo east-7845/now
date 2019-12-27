@@ -2,11 +2,23 @@
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/inc/common_header.jsp"%>
 <%-- <script src="${pageContext.request.contextPath }/js/jquery-3.4.1.js"></script> --%>
+<!--  스케줄러 -->
+<link href="${pageContext.request.contextPath}/css/schedule.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/daygrid.css"	rel="stylesheet">
+<link href="${pageContext.request.contextPath}/css/timegrid.css" rel="stylesheet">
+
+<script src="${pageContext.request.contextPath}/js/schedule.js"></script>
+<script src="${pageContext.request.contextPath}/js/daygrid.js"></script>
+<script src="${pageContext.request.contextPath}/js/timegrid.js"></script>
+<script src="${pageContext.request.contextPath}/js/interaction.js"></script>
+<script src="${pageContext.request.contextPath}/js/ko.js"></script>
+
 <style>
 .idx_board {
 	display: inline-block;
 	width: 48%;
 	background: #fff;
+	margin-top: 2%;
 }
 
 .idx_board .title {
@@ -44,7 +56,7 @@
 .idx_board .list ul li {
 	margin-top: 10px;
 	padding-left: 7px;
-	background: url(../images/dot.gif) no-repeat 0 7px/2px;
+	/* background: url(../images/dot.gif) no-repeat 0 7px/2px; */
 	font-size: 0;
 }
 
@@ -77,11 +89,11 @@
 		<%@include file="/WEB-INF/inc/now_left.jsp"%>
 	</div>
 	<div class="container_content">
-		<div class="top_menu" style="margin-left: 30px;">
+		<div class="top_menu" style="margin-left:30px;"> 
 			<a class="top_button btn_board"> <span class="top_button-text">게시판</span>
-				<span class="top_button-icon"><i class="fa fa-list"
-					aria-hidden="true"></i> </span>
-
+				<span class="top_button-icon">
+					<i class="fa fa-list" aria-hidden="true"></i>
+				</span>
 			</a>
 		</div>
 		<div class="top_menu" style="margin-left: 30px;">
@@ -158,7 +170,7 @@
 			</div>
 		</div>
 
-		<div class="idx_board" style="margin-left: 3%;">
+		<div class="idx_board" style="margin-left: 2%;">
 			<div class="title">
 				<a href="#" class="name">자유게시판</a> <a href="#" class="more"><img
 					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
@@ -173,45 +185,144 @@
 				</ul>
 			</div>
 		</div>
+    
+		<div class="idx_board" style="width: 200px;margin-left: 2%;">
+			<div class="title">
+				<a href="#" class="name">미세먼지 </a> <a href="#" class="more"><img
+					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
+			</div>
+			<div class="list" style="padding: 0px;">
+				<ul style="margin: 0px; padding: 0px;">
+					<li style="margin: 10px;"><span style="width: 100px; text-align: left; font-size: 15px;">측정값 : ${dust}</span></li>
+					<li style="margin: 10px;"><span style="width: 150px; font-size: 15px; text-align: left;">측정일 : ${dustDay}</span></li>
+					<li><img style="margin-left: 45px; width: 100px; height:100px " alt="" src="${pageContext.request.contextPath }/images/dust1.png"> </li>
+				</ul>
+			</div>
+		</div>
+		
+		<div class="idx_board" style="margin-left: 2%; vertical-align: top; width: 350px;">
+			<div class="title">
+				<a href="#" class="name">캘린더</a> <a href="#" class="more"><img
+					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
+			</div>
+			<div class="list" id="calendar">
+				
+			</div>
+		</div>
+		
 	</div>
 
 	<script>
-		$(document)
-				.ready(
-						function() {
-// 							document.getElementsByClassName("top_menu")[0].onclick = function() { // 홈
+		$(document).ready(function() {
+			// 메뉴 클릭 
+			// 			document.getElementsByClassName("top_menu")[0].onclick = function() { // 홈
+			// 				location.href = "/now/main";
+			// 			}
+		
+			document.getElementsByClassName("top_menu")[0].onclick = function() { // 게시판
+				location.href = "/now/freeboard/freeBoardList";
+			}
+		
+			document.getElementsByClassName("top_menu")[1].onclick = function() { // 전자결재
+				location.href = "/now/approval/approvalList";
+			}
+		
+			document.getElementsByClassName("top_menu")[2].onclick = function() { // 투표
+				location.href = "/now/pollboard/pollBoardList";
+			}
+		
+			document.getElementsByClassName("top_menu")[3].onclick = function() { // 채팅
+				location.href = "/now/chat/chatList";
+			}
+		
+			// 			document.getElementsByClassName("top_menu")[7].onclick = function() { // 마이페이지
+			// 				location.href = "/now/myPage/myPage";
+			// 			}
+			
 
-// 								location.href = "/now/main";
-// 							}
+			// 미니 달력
+			
+			var kCalendar = document.getElementById("calendar");
+			var date = new Date();
+			
+			var currentYear = date.getFullYear(); // 년도
+			var currentMonth = date.getMonth() + 1;	//연을 구함. 월은 0부터 시작하므로 +1, 12월은 11을 출력
+			var currentDate = date.getDate(); // 오늘 일자
+			
+			date.setDate(1);
+			var currentDay = date.getDay();	//이번달 1일의 요일은 출력. 0은 일요일 6은 토요일
+			
+			var dateString = new Array('sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat');
+			var lastDate = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+			// 각 달의 마지막 일을 계산, 윤년의 경우 년도가 4의 배수이고 
+			// 100의 배수가 아닐 때 혹은 400의 배수일 때 2월달이 29일 임.
+			if( (currentYear % 4 === 0 && currentYear % 100 !== 0) || currentYear % 400 === 0 ){
+				lastDate[1] = 29;
+			}
+			
+			//총 몇 주인지 구함.
+			var currentLastDate = lastDate[currentMonth-1];
+			var week = Math.ceil( ( currentDay + currentLastDate ) / 7 );
+			
+			if(currentMonth != 1){
+				var prevDate = currentYear + '-' + ( currentMonth - 1 ) + '-' + currentDate;
+			}else{
+				var prevDate = ( currentYear - 1 ) + '-' + 12 + '-' + currentDate;
+			}
 
-							document.getElementsByClassName("top_menu")[0].onclick = function() { // 게시판
-								location.href = "/now/freeboard/freeBoardList";
-							}
+			//만약 이번달이 1월이라면 1년 전 12월로 출력.
+			if(currentMonth != 12){
+				var nextDate = currentYear + '-' + ( currentMonth + 1 ) + '-' + currentDate;
+			}else{
+				var nextDate = ( currentYear + 1 ) + '-' + 1 + '-' + currentDate;
+			}
+			//만약 이번달이 12월이라면 1년 후 1월로 출력.
+			
+			if( currentMonth < 10 ){
+				var currentMonth = '0' + currentMonth;
+			}
+			
+			var calendar = '';
+			/* calendar += '<div id="header">'; */
+			/* calendar += '			<span><a href="#" class="button left" onclick="kCalendar(\'' +  id + '\', \'' + prevDate + '\')"></a></span>'; */
+			/* calendar += '			<span id="date">' + currentYear + '년 ' + currentMonth + '월</span>'; */
+			/* calendar += '			<span><a href="#" class="button right" onclick="kCalendar(\'' + id + '\', \'' + nextDate + '\')"></a></span>'; */
+			/* calendar += '		</div>'; */
+			calendar += '		<table border="0" cellspacing="0" cellpadding="0" style="width: 100%;">';
+			calendar += '			<caption>' + currentYear + '년 ' + currentMonth + '월 달력</caption>';
+			calendar += '			<thead>';
+			calendar += '				<tr>';
+			calendar += '					<th class="sun" scope="row">일</th>';
+			calendar += '					<th class="mon" scope="row">월</th>';
+			calendar += '					<th class="tue" scope="row">화</th>';
+			calendar += '					<th class="wed" scope="row">수</th>';
+			calendar += '					<th class="thu" scope="row">목</th>';
+			calendar += '					<th class="fri" scope="row">금</th>';
+			calendar += '					<th class="fri" scope="row">토</th>';
+			calendar += '				</tr>';
+			calendar += '			</thead>';
+			calendar += '			<tbody>';
+			
+			var dateNum = 1 - currentDay;
 
-							document.getElementsByClassName("top_menu")[1].onclick = function() { // 전자결재
-								location.href = "/now/approval/approvalList";
-							}
+			for(var i = 0; i < week; i++) {
+				calendar += '			<tr>';
+				for(var j = 0; j < 7; j++, dateNum++) {
+					if( dateNum < 1 || dateNum > currentLastDate ) {
+						calendar += '				<td class="' + dateString[j] + '"> </td>';
+						continue;
+					}
+					calendar += '				<td class="' + dateString[j] + '">' + dateNum + '</td>';
+				}
+				calendar += '			</tr>';
+			}
 
-							document.getElementsByClassName("top_menu")[2].onclick = function() { // 투표
-								location.href = "/now/pollboard/pollBoardList";
-							}
-
-							//	 	document.getElementsByClassName("top_menu")[4].onclick = function(){ // 통계
-							//	 		location.href="/now/pollboard/pollBoardList";
-							//	 	}
-
-							//	 	document.getElementsByClassName("top_menu")[5].onclick = function(){ // 근태
-							//	 		location.href="/now/pollboard/pollBoardList";
-							//	 	}
-
-							document.getElementsByClassName("top_menu")[3].onclick = function() { // 채팅
-								location.href = "/now/chat/chatList";
-							}
-
-// 							document.getElementsByClassName("top_menu")[7].onclick = function() { // 마이페이지
-// 								location.href = "/now/myPage/myPage";
-// 							}
-						});
+			calendar += '			</tbody>';
+			calendar += '		</table>';
+			
+			kCalendar.innerHTML = calendar;
+		});
+		
 	</script>
 </body>
 </html>

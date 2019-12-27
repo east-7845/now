@@ -129,13 +129,13 @@ public class EchoHandler extends TextWebSocketHandler {
 			String[] roomNO = (String[]) map.get("roomData");
 			
 			String userMsg = message.getPayload();
-			String[] split = userMsg.split("-.-"); // 0 : 방번호, 1 : 계정아이디 , 2 : 데이터
+			String[] split = userMsg.split("-.-"); // 0 : 방번호, 1 : 계정이름, 2 : 계정아이디 , 3 : 데이터
 			
 			Date date = new Date();
 			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 			String time1 = format1.format(date);
 			
-			sess.sendMessage(new TextMessage(split[0] + "-.-" + userNO.getEmp_no() + "-.-" + message.getPayload()));
+			sess.sendMessage(new TextMessage(split[0] + "-.-" + userNO.getEmp_name() + "-.-" + message.getPayload()));
 			StringBuffer buffer = new StringBuffer();
 			//buffer.append( "$/id/$" + split[0] + "$/date/$" + time1 + "$/data/$" + message.getPayload() );
 			//buffer.append( "$start$" + split[1] + ":" + message.getPayload() + " date :" + time1);

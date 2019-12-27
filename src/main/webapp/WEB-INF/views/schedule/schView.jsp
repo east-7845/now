@@ -47,9 +47,9 @@
 		</div>
 
 	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-	</div>
+<!-- 	<div class="container_footer"> -->
+<%-- 		<%@include file="/WEB-INF/inc/now_footer.jsp"%> --%>
+<!-- 	</div> -->
 
 	<script>
 		document.addEventListener('DOMContentLoaded', function() {
@@ -84,11 +84,10 @@
 				    			"startStr" : info.startStr,
 				    			"endStr"   : endStr
 				    	},
-				    	url : "<c:url value=''>",
 				    	success : function(result){
 				    		calendar.addEvent({'title':'출근', 'start': info.dateStr, 'end':info.endStr});
 				    	}
-				    })
+				    });
 				},
 				select: function (info) {
 					//alert( "data -- " + info.resource.title);
