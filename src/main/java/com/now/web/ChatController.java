@@ -332,11 +332,7 @@ public class ChatController {
 						map.put("deleteYN", imsi.get("deleteYN"));
 						list.add(map);
 					}
-<<<<<<< HEAD
-					 
-					
-=======
->>>>>>> refs/heads/shin
+
 				}
 				
 				//req.setAttribute("chatListVO", list);
