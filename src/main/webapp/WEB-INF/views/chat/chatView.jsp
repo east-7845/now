@@ -31,6 +31,10 @@
 				<!-- <div id="chat"></div> -->
 				<textarea rows="3" cols="10" id="chat"
 					style="width: 400px; height: 400px; display: inline-block;" readonly="readonly" >
+					<c:forEach var="dataList" items="${dataList}">
+						${dataList}
+						
+					</c:forEach>
 					<%-- ${chatList.data} --%>
 				</textarea>
 				<!-- 내 채팅방(리스트) -->

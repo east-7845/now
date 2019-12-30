@@ -1,7 +1,6 @@
 package com.now.web;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
@@ -10,11 +9,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.tribes.util.Arrays;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -56,13 +55,34 @@ public class ChatController {
 		List<Object> list = chatDataList(no);
 		List<String> list2 = new ArrayList<String>();
 		List<String> list3 = new ArrayList<String>();
+		List<String> list4 = new ArrayList<String>();
 		Map<String,String> map = new HashMap<String, String>();
 		map.put("room", no[0]);
 		map.put("id", no[1]);
 		map.put("member", no[2]);
-		System.out.println("리스트값" + list);
 		String val= (String)((Map)list.get(0)).get("member");
 		String valNm= (String)((Map)list.get(0)).get("memberName");
+		// date 분류 하기.
+		String data= (String)((Map)list.get(0)).get("data");
+		String[] data1 = data.split("\\n");	// start 시작 [큰분류]
+		String[] data2 = {};
+		EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
+		
+		for(int i = 0; i < data1.length; i++) {
+			data2 = data1[i].split("-.-"); // -.- 방번호,아이디, 데이터 정보
+			if(attribute.getEmp_no().equals(data2[2])) {
+				list4.add(data2[1] + ":" + data2[3]+"\n");
+			}else {
+				list4.add("					" + data2[1] + ":" + data2[3]+"\n");
+			}
+		}
+		/*
+		String[] data3 = {};
+		for(int i =0; i<data2.length; i++) {
+			data2[i] = data1[i].split("-.-").toString(); // -.- 방번호,아이디, 데이터 정보
+		}*/
+		/****************************************************/
+		
 		String[] split1 = val.split("\\.");
 		String[] split2 = valNm.split("\\.");
 		for(int i = 0; i<split1.length; i++) {
@@ -77,6 +97,7 @@ public class ChatController {
 		model.addAttribute("mapRoom", map);
 		model.addAttribute("userId", no[1]);
 		model.addAttribute("userNm", split2[0]);
+		model.addAttribute("dataList",list4);
 		
 		if(mini == null) {
 			return "chat/chatView";

@@ -132,14 +132,13 @@ public class EchoHandler extends TextWebSocketHandler {
 			String[] split = userMsg.split("-.-"); // 0 : 방번호, 1 : 계정이름, 2 : 계정아이디 , 3 : 데이터
 			
 			Date date = new Date();
-			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String time1 = format1.format(date);
 			
 			sess.sendMessage(new TextMessage(split[0] + "-.-" + userNO.getEmp_name() + "-.-" + message.getPayload()));
 			StringBuffer buffer = new StringBuffer();
-			//buffer.append( "$/id/$" + split[0] + "$/date/$" + time1 + "$/data/$" + message.getPayload() );
-			//buffer.append( "$start$" + split[1] + ":" + message.getPayload() + " date :" + time1);
-			buffer.append( "[start]"+ message.getPayload() + "[date]" + time1 + "[end]");
+			//buffer.append( "[start]"+ message.getPayload() + "[date]" + time1 + "[end]");
+			buffer.append(message.getPayload() + "(" + time1 + ")"+ "\n");
 			
 			if(buffer.length()  >= 10) {
 				// 데이터 가져오기 ..
