@@ -39,9 +39,11 @@
 				RE_IP,
 				TO_CHAR(RE_REG_DATE, 'yyyy-mm-dd') AS RE_REG_DATE,
 				TO_CHAR(RE_MOD_DATE, 'yyyy-mm-dd') AS RE_MOD_DATE,
-				RE_MEM_ID 
-			  from reply
+				RE_MEM_ID, 
+				employee.emp_name as RE_MEM_NAME
+			  from reply, employee
 			 where re_category = 'freeboard'
+			   and re_mem_id = emp_no
 			   and re_parent_no = #{re_parent_no}
 		<include refid="PAGING_SUFFIX"/>
 	</select>

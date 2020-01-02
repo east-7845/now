@@ -14,7 +14,7 @@ public interface IScheduleDao {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ScheduleVO> selectScList() throws Exception;
+	public List<ScheduleVO> selectScList(ScheduleVO sch) throws Exception;
 	
 	/**
 	 * 근태정보 등록(출근, 휴가일)
@@ -39,11 +39,11 @@ public interface IScheduleDao {
 	public int updateSc(ScheduleVO sch) throws Exception;
 	
 	/**
-	 * 근태정보 등록(퇴근)
+	 * 근태정보 등록(취소)
 	 * @return
 	 * @throws Exception
 	 */
-	public int insertScOut(ScheduleVO sch) throws Exception;
+	public int deleteSc(ScheduleVO sch) throws Exception;
 	
 	
 	
