@@ -5,7 +5,7 @@
 
 
 </script>
-	<div><a href="#">공지사항</a></div>	
+	<div><a href="notice/noticeList">공지사항</a></div>	
 	<div><a href="#">자유게시판</a></div>	
 	<div><a href="#">투표게시판</a></div>	
 	<div><a href="#">마이페이지</a></div>	

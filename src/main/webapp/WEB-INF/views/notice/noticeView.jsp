@@ -9,11 +9,17 @@
 	<title>공지사항</title>
 </head>
 	<body>
-		<%@include file="/WEB-INF/inc/now_top.jsp"%>
+	<div>
+	<%@include file="/WEB-INF/inc/now_top.jsp"%>
+	</div>
+
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 		
-	<div class="container">
 	<div class="panel panel-default"
 			style="width: 60vw; margin-left: 20vw;">
+					
 		
 		<table class="table table-striped">
 			<colgroup>
@@ -35,37 +41,38 @@
 					<th>작성자</th>
 					<td>${notice.nt_writer}</td>
 				</tr>
-<%-- 				<tr>
-					<th>구분</th>
-					<c:forEach var="code" items="${lanList}">
-						<c:choose>
-							<c:when test="${noticeVO.nt_class eq code.com_cd}">
-								<td colspan="3">${code.com_nm }</td>
-							</c:when>
-						</c:choose>
-					</c:forEach>
-				</tr> --%>
-
 				<tr>
 					<th>글내용</th>
 					<td colspan="3">${notice.nt_content}</td>
 				</tr>
 		</table>
-		</div>
 			
-		<c:if test="${notice != null }">
-			<div class="row">
-				<a href="noticeList" class="btn btn-default btn-sm">목록</a> 
-				<a href="noticeEdit?nt_no=${notice.nt_no}"class="btn btn-primary btn-sm"> 
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 수정 </a>
-			</div>
-		</c:if>
-</div>
-
-		<div class="container_footer">
-				<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-		</div>
-		
+				<div class="row" align="center">
+					<c:if test="${notice != null }">
+							<a href="noticeList" class="btn btn-default btn-sm">목록</a>
+						</c:if>	
+							
+						<c:if test="${sessionEmp.emp_no == 'NOW0000001'}">
+							<a href="noticeEdit?nt_no=${notice.nt_no}"class="btn btn-primary btn-sm"> 
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 수정 </a>
+						 <button href="#" onclick="deleteCheck(${notice.nt_no})" class="btn btn-default btn-sm" /> 삭제 </button> 
+					</c:if>
+					</div>
+	</div>
+	
 	</body>
+	
+	<script type="text/javascript">
+	function deleteCheck(nt_no){
+		if(confirm("삭제 하시겠습니까?")){
+			alert("삭제가 완료되었습니다");
+			return location.href="noticeDelete?nt_no=" + nt_no;
+		}else{
+			alert("삭제가 취소되었습니다");
+			return;
+		}
+	}
+</script>
+	
 </html>
 

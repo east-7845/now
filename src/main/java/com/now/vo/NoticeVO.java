@@ -68,6 +68,4 @@ public class NoticeVO {
 			this.nt_del_yn = nt_del_yn;
 		}
 
-		
-		
 }

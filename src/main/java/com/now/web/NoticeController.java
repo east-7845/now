@@ -8,16 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.now.service.INoticeService;
+import com.now.vo.NoticeSearchVO;
 import com.now.vo.NoticeVO;
-import com.now.vo.ResultMessageVO;
-
 
 @Controller
 public class NoticeController {
@@ -32,13 +30,17 @@ public class NoticeController {
  //  /notice/edit : 공지사항 수정화면(관리자)
  //  /notice/edit : 공지사항 수정 처리 (관리자)
 	
+
 	@Autowired
 	private INoticeService noticeService;
 	
-	@RequestMapping("/notice/noticeList")
-	public String noticeList(Model model) throws Exception {
-		List<NoticeVO> r = noticeService.selectNoticeList();
+	@RequestMapping(value = "/notice/noticeList")
+	public String noticeList(NoticeSearchVO ntSearchVO, Model model) throws Exception {
+
+		List<NoticeVO> r = noticeService.selectNoticeList(ntSearchVO);
 		model.addAttribute("noticeList", r);
+		model.addAttribute("searchVO", ntSearchVO);
+		
 		return "notice/noticeList";
 	}
 
@@ -65,7 +67,7 @@ public class NoticeController {
 		
 			noticeService.insertNotice(notice);
 		
-			return "redirect:/notice/noticeList";
+		return "redirect:/notice/noticeList";
 	}
 	
 	@RequestMapping(value = "/notice/noticeEdit", params = "nt_no")
@@ -77,38 +79,25 @@ public class NoticeController {
 
 		return view;
 	}
-	
+		
 	@RequestMapping(value = "/notice/noticeModify", method = RequestMethod.POST)
 	public String noticeModify(ModelMap model,
-																		@ModelAttribute("notice") NoticeVO noticeVO,
-																		BindingResult errors) throws Exception {
-		String view = "notice/message";
-		
-		if(errors.hasErrors()) {
-			return "notice/noticeEdit";
-		}
-		
-		int succ = noticeService.updateNotice(noticeVO);
-		ResultMessageVO messageVO = new ResultMessageVO();
-		if (succ > 0) {
-			messageVO.setResult(true)
-			         .setTitle("수정 성공")
-			         .setMessage("수정에 성공하였습니다")
-			         .setUrl("/notice/noticeList")
-					 .setUrlTitle("목록으로");
-		} else {
-			messageVO.setResult(false)
-			         .setTitle("수정 실패")
-			         .setMessage("수정에 실패하였습니다")
-			         .setUrl("/notice/noticeList")
-					 .setUrlTitle("목록으로");
-		}
-		model.addAttribute("resultMessage", messageVO);
+																		@ModelAttribute("notice") NoticeVO noticeVO
+																		) throws Exception {
 
-		return view;
+		int noticeList = noticeService.updateNotice(noticeVO);
+		if(noticeList >= 1) {
+			return "redirect:/notice/noticeList";
+		}
+
+		return "redirect:/notice/noticeEdit?nt_no=" + noticeVO.getNt_no();
+	}
+	
+	@RequestMapping(value = "notice/noticeDelete")
+	public String noticeDelete(int nt_no) throws Exception {
+		int vo = noticeService.deleteNotice(nt_no);
+		
+		return "redirect:/notice/noticeList";
 	}
 		
-		
-		
-	
 }
