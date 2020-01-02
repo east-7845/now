@@ -18,7 +18,7 @@
 <style>
 .idx_board {
 	display: inline-block;
-	width: 48%;
+	width: 600px;
 	background: #fff;
 	margin-top: 2%;
 }
@@ -120,14 +120,14 @@
 		</div> -->
 		<div class="top_menu" style="margin-left: 30px;">
 			<a class="top_button btn_근태"> <span class="top_button-text">근태</span>
-				<span class="top_button-icon"> <i class="fa fa-male"
+				<span class="top_button-icon" style="margin-left: 40px;"> <i class="fa fa-male"
 					aria-hidden="true"></i>
 			</span>
 			</a>
 		</div>
 		<div class="top_menu" style="margin-left: 30px;">
 			<a class="top_button btn_채팅"> <span class="top_button-text">채팅</span>
-				<span class="top_button-icon"> <i class="fa fa-comments-o"
+				<span class="top_button-icon" style="margin-left: 40px;"> <i class="fa fa-comments-o"
 					aria-hidden="true"></i>
 			</span>
 			</a>
@@ -172,8 +172,9 @@
 
 		<div class="idx_board" style="margin-left: 2%;">
 			<div class="title">
-				<a href="#" class="name">자유게시판</a> <a href="#" class="more">
-					<img src="${pageContext.request.contextPath}/images/arrow-right.png" alt="더 보기"></a>
+
+				<a href="freeboard/freeBoardList" class="name">자유게시판</a> <a href="#" class="more"><img
+					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
 			</div>
 			<div class="list">
 				<ul>
@@ -226,7 +227,7 @@
 			}
 		
 			document.getElementsByClassName("top_menu")[2].onclick = function() { // 투표
-				location.href = "/now/pollboard/pollBoardList";
+				location.href = "/now/schedule/schList";
 			}
 		
 			document.getElementsByClassName("top_menu")[3].onclick = function() { // 채팅

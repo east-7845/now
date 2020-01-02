@@ -4,11 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.now.dao.IScheduleDao">
+	<sql id="scheduleCondition">
+		<!-- <if	test="@org.apache.commons.lang3.StringUtils@isNotBlank(sc_emp_no)"> -->
+		<choose>
+			<when test='SC_STATUS == "출근"'>
+			</when>
+			<when test='SC_STATUS.equals("퇴근")'>
+			</when>
+			<when test='SC_STATUS eq "C"'>
+			</when>
+			<otherwise>
+			</otherwise>
+		</choose>
+	</sql>
+	
+	
 	<select id="selectScList" resultType="com.now.vo.ScheduleVO">
 		select * 
 		from schedule
+		where sc_emp_no = #{sc_emp_no}
 	</select>
-	<insert id="insertSc" parameterType="com.now.vo.ScheduleVO"></insert>
-	<update id="updateSc" parameterType="com.now.vo.ScheduleVO"></update> 
+	<insert id="insertSc" parameterType="com.now.vo.ScheduleVO">
+		insert into schedule(
+			sc_emp_no, sc_date, sc_attendance, 
+			sc_leave, sc_date_leng, sc_division, 
+			sc_status
+		)values(
+			#{sc_emp_no}, #{sc_date}, to_date( #{sc_attendance},'yyyy-mm-dd hh24:mi:ss' ), 
+			'', 0, '',
+			#{sc_status}
+		)
+	</insert>
+	<update id="updateSc" parameterType="com.now.vo.ScheduleVO">
+		update schedule
+		   set sc_leave = to_date( #{sc_leave},'yyyy-mm-dd hh24:mi:ss' ), sc_status = #{sc_status}
+		 where sc_emp_no = #{sc_emp_no}
+		   and sc_date = #{sc_date}
+	</update> 
 </mapper>
 

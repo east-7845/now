@@ -15,8 +15,8 @@ public class ScheduleServiceImpl implements IScheduleService{
 	public IScheduleDao scheduledao;
 	
 	@Override
-	public List<ScheduleVO> selectScList(String no) throws Exception {
-		List<ScheduleVO> list = scheduledao.selectScList();
+	public List<ScheduleVO> selectScList(ScheduleVO sch) throws Exception {
+		List<ScheduleVO> list = scheduledao.selectScList(sch);
 		
 		return list;
 	}
@@ -33,6 +33,18 @@ public class ScheduleServiceImpl implements IScheduleService{
 		int cnt = scheduledao.updateSc(sch);
 		
 		return cnt;
+	}
+
+	@Override
+	public int insertScHoliday(ScheduleVO sch) throws Exception {
+		
+		return 0;
+	}
+
+	@Override
+	public int deleteSc(ScheduleVO sch) throws Exception {
+		
+		return 0;
 	}
 }
 

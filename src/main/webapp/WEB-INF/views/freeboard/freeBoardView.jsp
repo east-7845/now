@@ -185,7 +185,7 @@
 							
 							$.each(data.data, function(index, item){
 								v_str += "<div class='row'>";
-								v_str += "<div class='col-sm-2'>"+ item.re_mem_name +"</div>";
+								v_str += "<div class='col-sm-2'>"+ item.re_mem_name +"</div>"; 
 								v_str += "<div class='col-sm-5'>"+ item.re_content +"</div>";
 								v_str += "<div class='col-sm-2'>"+ item.re_reg_date+"</div>";
 								v_str += "<div class='col-sm-3'>";
@@ -208,7 +208,7 @@
 									alert("다른 곳에 수정창이 열려있습니다.");
 									return false;
 								}else if( check == 1){
-									alert("다른 곳에 수정창이 열려있습니다.");
+									
 						        	return false;
 								}
 								var areatest = "<textarea rows='3' name='re_contentCheck' class='form-control'>"+ parent0.children()[1].innerText +"</textarea>";

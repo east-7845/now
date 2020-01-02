@@ -309,7 +309,7 @@ select.filter {
 <script src="${pageContext.request.contextPath }/js/jquery-3.4.1.js"></script>
 <script
 	src="${pageContext.request.contextPath }/bootstrap-3.3.2/js/bootstrap.js"></script>
- 
+
 <!--  스케줄러 -->
 <link href="${pageContext.request.contextPath}/css/schedule.css"
 	rel="stylesheet">
@@ -328,7 +328,10 @@ select.filter {
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
-	<div class="container_content" style="width: 80vw; margin-left: 10vw;">
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
+	<div class="container_content" style="width: 80vw; margin-left: 20px;">
 		<!-- 일자 클릭시 메뉴오픈 -->
 		<div id="contextMenu" class="dropdown clearfix">
 			<ul class="dropdown-menu dropNewEvent" role="menu"
@@ -342,7 +345,7 @@ select.filter {
 			</ul>
 		</div>
 		<div id="wrapper">
-		 	<div id="loading"></div>
+			<div id="loading"></div>
 			<div id="calendar"></div>
 		</div>
 
@@ -352,7 +355,15 @@ select.filter {
 	<!-- 	</div> -->
 
 	<script>
+
+	var start = true;
+	var end = true;
+	var startend = true;
 		document.addEventListener('DOMContentLoaded', function() {
+			
+			
+			
+			
 			var calendarEl = document.getElementById('calendar');
 			var num = 0;
 			var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -366,6 +377,63 @@ select.filter {
 					right : ''
 				},
 				dateClick : function(info) {
+					
+					//날짜 클릭시 카테고리 선택메뉴
+					var $contextMenu = $("#contextMenu");
+					//calendar.addEvent({'title':checkValue, 'start': info.dateStr});
+					
+					//$contextMenu.on("click", "a", function(e) { 
+					$contextMenu.bind("click", "a", function(e) {
+						e.preventDefault();
+						var checkValue = e.target.innerText;	// 출근,퇴근,휴가 체크값
+						//닫기 버튼이 아닐때
+						if ($(this).data().role !== 'close') {
+							console.log("여기로 들어온다");
+							if(checkValue == '출근' && start == true){
+								start = false;
+								calendar.addEvent({'title':checkValue, 'start': info.dateStr, 'end':info.endStr});
+								var eventData = {
+										'title':checkValue, 'start': info.dateStr, 'end':info.endStr
+								}
+								
+							}else if(checkValue == '퇴근' && end == true){
+								end = false;
+								calendar.addEvent({'title':checkValue, 'start': info.dateStr, 'end': info.endStr});
+							}else if(checkValue == '휴가' && startend == true){
+								startend = false;
+								calendar.addEvent({'title':checkValue, 'start': info.dateStr, 'end': info.endStr});
+							}
+							//console.log("calendar" + checkValue);
+							//console.log("info.dateStr" + info.dateStr);
+
+							//$("#calendar").fullCalendar('renderEvent', eventData, true);
+							//calendar.addEvent({'title':checkValue, 'start': info.dateStr});
+														
+							 /* $.ajax({
+								 	url : "<c:url value='/schedule/schInput' />",
+									data:{
+											"checkValue" : checkValue,
+											"startStr"   : info.startStr,
+											"endStr"	 : info.startStr
+									},
+									success : function(result){
+										calendar.addEvent({'title':checkValue, 'start': info.dateStr, 'end':info.endStr});
+									}
+								}); */
+						}
+
+						$contextMenu.removeClass("contextOpened");
+						$contextMenu.hide();
+						
+						$('body').on('click', function () {
+					        $contextMenu.removeClass("contextOpened");
+					        $contextMenu.hide();
+					    });
+
+					});
+				
+					
+					
 					//alert( "data -- " + info.resource.activeStart);
 					/*alert('clicked ' +  info.resource.id);
 					alert('clicked1 ' + info.activeStart);
@@ -387,7 +455,6 @@ select.filter {
 					//var v_jsonData = JSON.parse(info.view.props.eventStore.defs);
 					//console.log(v_jsonData);
 
-					console.log(info.view);
 					// console.log(info.view.props.eventStore.defs."2".title);
 					/* $.ajax({
 						data:{
@@ -398,9 +465,11 @@ select.filter {
 							calendar.addEvent({'title':'출근', 'start': info.dateStr, 'end':info.endStr});
 						}
 					}); */
+					
+					
 				},
 				select : function(info) {
-
+					
 					$(".fc-body").unbind('click');
 					$(".fc-body").on('click', 'td', function(e) {
 						$("#contextMenu").addClass("contextOpened").css({
@@ -410,16 +479,17 @@ select.filter {
 						});
 						return false;
 					});
-
-					//날짜 클릭시 카테고리 선택메뉴
-					var $contextMenu = $("#contextMenu");
+					
+					/* var $contextMenu = $("#contextMenu");
 					$contextMenu.on("click", "a", function(e) {
 						e.preventDefault();
 						var checkValue = e.target.innerText;	// 출근,퇴근,휴가 체크값
 						//닫기 버튼이 아닐때
 						if ($(this).data().role !== 'close') {
-							//alert($(this).data());
-							 $.ajax({
+							console.log("여기로 들어온다");
+							calendar.addEvent({'title':checkValue, 'start': info.dateStr, 'end':info.endStr});	
+														
+							  $.ajax({
 								 	url : "<c:url value='/schedule/schInput' />",
 									data:{
 											"checkValue" : checkValue,
@@ -427,20 +497,20 @@ select.filter {
 											"endStr"	 : info.startStr
 									},
 									success : function(result){
-										calendar.addEvent({'title':'출근', 'start': info.dateStr, 'end':info.endStr});
-										
-										
+										calendar.addEvent({'title':checkValue, 'start': info.dateStr, 'end':info.endStr});
 									}
-								});
+								}); 
 						}
 
 						$contextMenu.removeClass("contextOpened");
 						$contextMenu.hide();
-					});
-				    $('body').on('click', function () {
+					}); */
+
+					
+				    /* $('body').on('click', function () {
 				        $contextMenu.removeClass("contextOpened");
 				        $contextMenu.hide();
-				    });
+				    }); */
 				},
 				eventClick : function(event) {
 					var eventObj = event.event;
@@ -454,34 +524,68 @@ select.filter {
 								+ eventObj.url);
 					}
 				},
-				events: function (start, end, timezone, callback) {
-					$.ajax({
-					 	url : "<c:url value='/schedule/schList' />",
-						success : function(result){
-							for( var list in result) {
-								console.log(list.sc_emp_no);
-								console.log(list.sc_date);
-								console.log(list.sc_attendance);
-								console.log(list.sc_leave);
-								console.log(list.sc_date_leng);
-								console.log(list.sc_division);
-								console.log(list.sc_status);
-							}
-							
+//  				events: function (start, end, timezone, callback) {
+
+// 					$.ajax({
+// 					 	url : "<c:url value='/schedule/schList' />",
+// 						success : function(result){
+// 								for( var list in result) {
+// 									console.log(list.sc_emp_no);
+// 									console.log(list.sc_date);
+// 									console.log(list.sc_attendance);
+// 									console.log(list.sc_leave);
+// 									console.log(list.sc_date_leng);
+// 									console.log(list.sc_division);
+// 									console.log(list.sc_status);
+// 								}
+								//calendar.addEvent({'title':'출근', 'start': info.dateStr, 'end':info.endStr});
 // 							for(int i = 0; i<result.length; i++){
-								
 // 							}
 // 							calendar.addEvent({'title':'출근', 'start': info.dateStr, 'end':info.endStr});
-							
-						}
-					});
-					
-				},
-				
+// 						}
+// 					});
+//  				},
+				events: [
+                {
+                      title : "출근"
+                    , start : "2020-01-01"
+                    
+                },
+                {
+                      title : "퇴근"
+                    , start : "2020-01-01"
+                    , end : "2020-01-01"
+                },
+                {
+                    title : "출근"
+                  
+                  , start : "2020-01-02"
+	            },
+	            {
+	                  title : "퇴근"
+	                , start : "2020-01-02"
+	                , end : "2020-01-02"
+	            },
+	            {
+                    title : "출근"
+                  , start : "2020-01-03"
+                  
+	            },
+	            {
+	                  title : "퇴근"
+	                , start : "2020-01-03"
+	                , end : "2020-01-03"
+	            },
+                {
+                      title : "휴가"
+                    , start : "2020-01-04"
+                    , end : "2020-01-25"
+                }
+            ],
 				locale : 'ko'
 			});
 			calendar.render();
-
+			
 		});
 	</script>
 
