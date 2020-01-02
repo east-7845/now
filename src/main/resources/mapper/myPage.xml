@@ -5,7 +5,7 @@
   
 <mapper namespace="com.now.dao.IMyPageDao">
 
-	<select id="selectEmp" parameterType="com.now.vo.EmployeeVO" resultType="com.now.vo.EmployeeVO">
+	<select id="selectEmp" resultType="com.now.vo.EmployeeVO">
 		SELECT EMP_NO
 			 , EMP_ID
 			 , EMP_PASS
@@ -31,6 +31,34 @@
 		 FROM EMPLOYEE
 		WHERE EMP_YN = 'N'
 	</select>
+	
+	<select id="selectEmployee" parameterType="com.now.vo.EmployeeVO" resultType="com.now.vo.EmployeeVO">
+		SELECT EMP_NO
+			 , EMP_ID
+			 , EMP_PASS
+			 , EMP_NAME
+			 , EMP_REGNO1
+			 , EMP_REGNO2
+			 , EMP_ZIP
+			 , EMP_ADD1
+			 , EMP_ADD2
+			 , EMP_HP
+			 , EMP_HP_SUB
+			 , EMP_MAIL
+			 , EMP_IMG
+			 , EMP_BANKNAME
+			 , EMP_BANKNUM
+			 , EMP_SALARY
+			 , EMP_VACATION
+			 , (SELECT COM_NAME FROM COMMON WHERE EMP_RANK = COM_CD) EMP_RANK
+			 , (SELECT COM_NAME FROM COMMON WHERE EMP_DEPARTMENT = COM_CD) EMP_DEPARTMENT
+			 , TO_CHAR(EMP_HIREDATE, 'YYYY-MM-DD') EMP_HIREDATE
+			 , TO_CHAR(EMP_FIREDATE, 'YYYY-MM-DD') EMP_FIREDATE
+			 , EMP_YN
+		 FROM EMPLOYEE
+		WHERE EMP_YN = 'N'
+		  AND EMP_NO = #{emp_no}
+	</select>
 
 	<update id="updateMyPage" parameterType="com.now.vo.EmployeeVO">
 		UPDATE EMPLOYEE
@@ -44,7 +72,11 @@
 			, EMP_MAIL = #{emp_mail}
 			, EMP_BANKNAME = #{emp_bankname}
 			, EMP_BANKNUM = #{emp_banknum}
+		<choose>
+			<when test="emp_yn != null">
 			, EMP_YN = #{emp_yn}
+			</when>
+		</choose>
 		<choose>
 			<when test="emp_id != null">
 			, EMP_ID = #{emp_id}

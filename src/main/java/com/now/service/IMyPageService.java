@@ -19,4 +19,6 @@ public interface IMyPageService {
 
 	public EmployeeVO selectMyPage(EmployeeVO employeeVO);
 
+	public EmployeeVO selectEmployee(EmployeeVO employeeVO);
+
 }

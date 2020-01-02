@@ -23,5 +23,7 @@ public interface IMyPageDao {
 
 	public EmployeeVO selectMyPage(EmployeeVO employeeVO);
 
+	public EmployeeVO selectEmployee(EmployeeVO employeeVO);
+
 
 }
