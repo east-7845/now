@@ -10,7 +10,7 @@ public interface IScheduleService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<ScheduleVO> selectScList(String no) throws Exception;
+	public List<ScheduleVO> selectScList(ScheduleVO sch) throws Exception;
 	
 	/**
 	 * 근태정보 등록(출근, 휴가일)
@@ -26,4 +26,21 @@ public interface IScheduleService {
 	 * @throws Exception
 	 */
 	public int updateSc(ScheduleVO sch) throws Exception;
+	
+	/**
+	 * 근태정보 등록(휴가)
+	 * @return
+	 * @throws Exception
+	 */
+	public int insertScHoliday(ScheduleVO sch) throws Exception;
+	
+	
+	/**
+	 * 근태정보 등록(취소)
+	 * @return
+	 * @throws Exception
+	 */
+	public int deleteSc(ScheduleVO sch) throws Exception;
+	
+	
 }

@@ -2,6 +2,7 @@ package com.now.web;
 
 import java.io.BufferedInputStream;
 import java.net.URL;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,14 +12,32 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.now.service.IFreeBoardService;
 import com.now.service.ILoginService;
+import com.now.service.INoticeService;
+import com.now.service.IPollBoardService;
 import com.now.vo.EmployeeVO;
+import com.now.vo.FreeBoardSearchVO;
+import com.now.vo.FreeBoardVO;
+import com.now.vo.NoticeSearchVO;
+import com.now.vo.NoticeVO;
 
 @Controller
 public class LoginController {
+	
+	@Autowired
+	private IFreeBoardService boardService;
+	
+	@Autowired
+	private IPollBoardService pollBoardService;
+	
+	@Autowired
+	private INoticeService noticeService;
+	
 	
 	@Autowired
 	private ILoginService loginService;
@@ -45,8 +64,9 @@ public class LoginController {
 		return view;
 	}
 	
+
 	@RequestMapping(value = "/session", method = RequestMethod.POST)
-	public String session(HttpServletRequest req, EmployeeVO employee) throws Exception {
+	public String session(HttpServletRequest req, EmployeeVO employee, Model model) throws Exception {
 		String view = "main";
 		System.out.println("session");
 		HttpSession session = req.getSession();
@@ -80,7 +100,26 @@ public class LoginController {
         req.setAttribute("dustDay", day); // 측정일
 		session.setAttribute("sessionEmp", vo);
 
-		return view;
+		// 메인페이지 게시글 불러오기
+		
+		// 투표게시판
+		model.addAttribute("pollBoardList", pollBoardService.selectPollBoardList(null));
+		
+		// 자유게시판
+		FreeBoardSearchVO searchVO = new FreeBoardSearchVO();
+		searchVO.setCurPage(1);
+		searchVO.setScreenListSize(5);
+		List<FreeBoardVO> freeBoardList = boardService.selectFreeBoardList(searchVO);
+		model.addAttribute("freeBoardList", freeBoardList);
+		
+		// 공지사항
+		NoticeSearchVO ntsearchVO = new NoticeSearchVO();
+		ntsearchVO.setCurPage(1);
+		ntsearchVO.setScreenListSize(5);
+		List<NoticeVO> noticeList = noticeService.selectNoticeList(ntsearchVO);
+		model.addAttribute("noticeList", noticeList);
+		
+		return "main";
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

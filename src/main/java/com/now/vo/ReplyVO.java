@@ -10,7 +10,16 @@ public class ReplyVO {
 	private String re_reg_date = ""; /* 등록일 */
 	private String re_mod_date = ""; /* 수정일 */
 	private String re_mem_id= ""; /* 작성자 */
+	private String re_mem_name= "";
 	
+	public String getRe_mem_name() {
+		return re_mem_name;
+	}
+
+	public void setRe_mem_name(String re_mem_name) {
+		this.re_mem_name = re_mem_name;
+	}
+
 	public int getRe_no() {
 		return re_no;
 	}

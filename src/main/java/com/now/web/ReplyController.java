@@ -24,10 +24,8 @@ public class ReplyController {
 	@RequestMapping(path = "/reply/replyList")
 	@ResponseBody
 	public Map<String, Object> replyList(ReplySearchVO reVO) throws Exception{
-		System.out.println("댓글리스");
 		Map<String,Object> map = new HashMap<String, Object>();
 		int cnt = replyService.selectReplyCount(reVO);
-		System.out.println("댓글 갯수 -- " + cnt);
 		reVO.setTotalPageCount(cnt);
 		reVO.pageSetting();
 		
