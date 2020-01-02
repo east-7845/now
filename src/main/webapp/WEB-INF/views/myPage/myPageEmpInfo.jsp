@@ -15,7 +15,6 @@
 		width: 50%;
 	}
 	.container_content {
-		background-color: silver;
 		width: 80vw;
 		text-align: center;
 		padding-right: 0px;
@@ -28,6 +27,9 @@
 <body>
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
+	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
 	</div>
 	<div class="container_content">
 	<form:form action="myPageEdit" method="post" commandName="employee" class="myPageForm">
@@ -149,8 +151,8 @@
 		</table>
 		</form:form>
 	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-	</div>
+<!-- 	<div class="container_footer"> -->
+<%-- 		<%@include file="/WEB-INF/inc/now_footer.jsp"%> --%>
+<!-- 	</div> -->
 </body>
 </html>

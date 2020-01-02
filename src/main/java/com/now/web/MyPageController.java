@@ -72,6 +72,8 @@ public class MyPageController {
 		String view = "myPage/myPageEdit";
 		System.out.println("/myPage/myPageModify : myPageConttroller");
 		System.out.println(employeeVO.getEmp_id());
+		System.out.println(employeeVO.getEmp_no());
+		System.out.println(employeeVO.getEmp_yn());
 		int updateEmployee = myPageService.updateMyPage(employeeVO);
 		
 		if(updateEmployee == 1) view = "forward:/myPage/myPage";
@@ -130,7 +132,7 @@ public class MyPageController {
 		System.out.println("/myPage/myPageEmpInfo : myPageConttroller");
 		System.out.println(employeeVO.getEmp_no());
 		
-		EmployeeVO employee = loginService.selectEmp(employeeVO);
+		EmployeeVO employee = myPageService.selectEmployee(employeeVO);
 		
 		req.setAttribute("employee", employee);
 

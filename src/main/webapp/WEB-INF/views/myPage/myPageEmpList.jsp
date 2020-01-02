@@ -14,7 +14,6 @@
 		width: 50%;
 	}
 	.container_content {
-		background-color: silver;
 		width: 80vw;
 		text-align: center;
 		padding-right: 0px;
@@ -27,6 +26,9 @@
 <body>
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
+	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
 	</div>
 	<div class="container_content">
 		<table class="table table-striped table-bordered table-ellipsis table-size">
@@ -51,9 +53,9 @@
 		</table>
 		<input type="button" id="emp_btn" value="사원등록">
 	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-	</div>
+<!-- 	<div class="container_footer"> -->
+<%-- 		<%@include file="/WEB-INF/inc/now_footer.jsp"%> --%>
+<!-- 	</div> -->
 </body>
 <script type="text/javascript">
 	document.getElementById("emp_btn").onclick = function() {

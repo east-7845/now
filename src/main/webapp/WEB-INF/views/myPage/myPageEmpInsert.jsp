@@ -19,6 +19,9 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 	<div class="container_content">
 		<form:form action="myPageInsert" method="post" commandName="employee">
 			<table class="table table-striped table-bordered table-ellipsis table-size">
@@ -63,9 +66,9 @@
 			</table>
 		</form:form>
 	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-	</div>
+<!-- 	<div class="container_footer"> -->
+<%-- 		<%@include file="/WEB-INF/inc/now_footer.jsp"%> --%>
+<!-- 	</div> -->
 </body>
 <script type="text/javascript">
 	document.getElementById("empNoInsert").onclick = function() {
