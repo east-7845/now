@@ -165,12 +165,12 @@ public class AppController {
 		System.out.println(approvalVO.getGrant_app_no());
 		int grantUpdate = approvalService.updateGrant(approvalVO);
 		
-		if(grantUpdate == 1) {
+		if(approvalVO.getGrant_state().equals("9") && grantUpdate == 1) {
 			int appUpdate = approvalService.updateApproval(approvalVO);
 			if(appUpdate == 1) {
 				System.out.println("성공");
 			}
-			view = "";
+//			view = "";
 		}
 //		List<CommonVO> commonVO = approvalService.selectCommon();
 //		List<EmployeeVO> employeeVO = approvalService.selectGrantEmployee();

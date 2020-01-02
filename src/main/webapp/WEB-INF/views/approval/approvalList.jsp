@@ -30,61 +30,26 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
-	<div class="container_content" style="min-height: 34vw;" id="div_content">
-	<table class="app_table">
-		<tr>
-			<td style="vertical-align: top;">
-				<div style="background-color: silver; height: 60px; width: 200px; margin-right: 20px;" onclick="approval()">결재 양식</div>
-				<div style="background-color: gray; height: 60px; width: 200px; margin-right: 20px;" onclick="myApproval()">나의 결재</div>
-				<div style="background-color: red; height: 60px; width: 200px; margin-right: 20px;" onclick="grantApproval()">결재함</div>
-			</td>
-			<td>
-				<div class="panel panel-default" style="width: 30vw; margin-left: 1vw;" id="list"></div>
-				<div id="admin"></div>
-				<nav class="text-center" id="paging"></nav>
-<!-- 결재 양식 -->
-<!-- 				<div id="approval"> -->
-<!-- 					<div class="panel panel-default" style="width: 30vw; height: 33vw; margin-left: auto; margin-right: auto; overflow: auto;"> -->
-<%-- 						<c:forEach var="draft" items="${draft}"> --%>
-<%-- 							<div class="draft_div" id="draft" onclick="window.open('draftInfo?draft_no=${draft.draft_no}','window_name','width=1000,height=900,location=no,status=no,scrollbars=yes');"> --%>
-<%-- 								<a href="#">${draft.draft_name}</a> --%>
-<!-- 							</div> -->
-<%-- 						</c:forEach> --%>
-<!-- 					</div> -->
-<%-- 					<c:if test="${sessionEmp.emp_no == 'NOW0000001' }"> --%>
-<!-- 						<div style="width: 30vw; margin-left: auto; margin-right: auto; text-align: center;"> -->
-<!-- 							<input type="button" value="기안서 등록" id="draftFormInsert" onclick="draftFormInsert()"> -->
-<!-- 						</div> -->
-<%-- 					</c:if> --%>
-<!-- 				</div> -->
-<!-- <!-- 나의 결재 -->
-<!-- 				<div id="myApproval"> -->
-<!-- 					<div class="panel panel-default" style="width: 30vw; height: 33vw; margin-left: auto; margin-right: auto; overflow: auto;"> -->
-<%-- 						<c:forEach var="approval" items="${approval}"> --%>
-<%-- 							<div class="draft_div" id="approval" onclick="window.open('approval?app_no=${approval.app_no}','window_name','width=1000,height=900,location=no,status=no,scrollbars=yes');"> --%>
-<%-- 								<a href="#">${approval.app_name}</a> --%>
-<!-- 							</div> -->
-<%-- 						</c:forEach> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- <!-- 결재함 -->
-<!-- 				<div id="grantApproval"> -->
-<!-- 					<div class="panel panel-default" style="width: 30vw; height: 33vw; margin-left: auto; margin-right: auto; overflow: auto;"> -->
-<%-- 						<c:forEach var="grant" items="${grant}"> --%>
-<%-- 							<c:if test="${(grant.grant_state == '0' && grant.grant_emp_no1 == sessionEmp.emp_no) || (grant.grant_state == '1' && grant.grant_emp_no2 == sessionEmp.emp_no) || (grant.grant_state == '2' && grant.grant_emp_no3 == sessionEmp.emp_no) || (grant.grant_state == '3' && grant.grant_emp_no4 == sessionEmp.emp_no)}"> --%>
-<%-- 								<div class="draft_div" id="grant" onclick="window.open('approval?app_no=${grant.app_no}','window_name','width=1000,height=900,location=no,status=no,scrollbars=yes');"> --%>
-<%-- 									<a href="#">${grant.app_name}</a> --%>
-<!-- 								</div> -->
-<%-- 							</c:if> --%>
-<%-- 						</c:forEach> --%>
-<!-- 					</div> -->
-<!-- 				</div> -->
-			</td>
-		</tr>
-	</table>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
 	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
+	<div class="container_content" style="min-height: 34vw;" id="div_content">
+		<table class="app_table">
+			<tr>
+				<td style="vertical-align: top;">
+					<div style="background-color: silver; height: 60px; width: 200px; margin-right: 20px;" onclick="approval()">결재 양식</div>
+				</td>
+				<td>
+					<div style="background-color: gray; height: 60px; width: 200px; margin-right: 20px;" onclick="myApproval()">나의 결재</div>
+				</td>
+				<td>
+					<div style="background-color: red; height: 60px; width: 200px; margin-right: 20px;" onclick="grantApproval()">결재함</div>
+				</td>
+			</tr>
+		</table>
+		<div class="panel panel-default" style="width: 30vw; margin-top: 2vw; margin-left: auto; margin-right: auto;" id="list"></div>
+		<div id="admin"></div>
+		<nav class="text-center" id="paging"></nav>
 	</div>
 </body>
 <script type="text/javascript">

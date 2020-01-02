@@ -21,7 +21,7 @@
 		<form:form action="draftInsert">
 			<table border="1">
 				<tr>
-					<td>출장보고서</td>
+					<td>기안서 명</td>
 					<td><input type="text" name="draft_name" style="width: 100%;"></td>
 				</tr>
 				<tr>
