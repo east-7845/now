@@ -24,7 +24,6 @@
 	text-align: center;
 	padding-right: 0px;
 	padding-left: 0px;
-	overflow: auto;
 }
 
 </style>
@@ -33,7 +32,8 @@
 	<div class="container" style="background-color: gainsboro;">
 		<div style="border: 1px solid black; height: 70px;">
 <!-- 			<a href="#" onclick="mainPage()"> <img alt="" style="width: 100px; height: 65px;" -->
-			<a href="${pageContext.request.contextPath }/main"> <img alt="" style="width: 100px; height: 65px;"
+			<a href="${pageContext.request.contextPath }/home">
+			 <img alt="" style="width: 100px; height: 65px;"
 				src="${pageContext.request.contextPath }/images/logo.png">
 			</a> <span> ${sessionEmp.emp_name } - 신입(인턴1년 6개월) </span><a href="/now/logout">logout</a>
 		</div>

@@ -38,13 +38,14 @@ public class LoginController {
 	@Autowired
 	private INoticeService noticeService;
 	
-	
 	@Autowired
 	private ILoginService loginService;
 	
+	
+	EmployeeVO vo;
+	
 	@RequestMapping(value = "/main", method = RequestMethod.POST)
 	public String loginCheck(HttpServletRequest req, EmployeeVO employee) throws Exception {
-		System.out.println("loginController");
 		String view = "forward:/session";
 		
 //		HttpSession session = req.getSession();
@@ -55,7 +56,7 @@ public class LoginController {
 //			
 //		}
 		
-		EmployeeVO vo = loginService.selectEmp(employee);
+		vo = loginService.selectEmp(employee);
 		if(vo == null) {
 			view = "forward:/";
 			employee.setMessage("아이디나 비밀번호가 일치하지 않습니다.");
@@ -64,14 +65,75 @@ public class LoginController {
 		return view;
 	}
 	
-
-	@RequestMapping(value = "/session", method = RequestMethod.POST)
+	//@RequestMapping(value = "/session", method = RequestMethod.POST)
+	@RequestMapping(value = "/session")
 	public String session(HttpServletRequest req, EmployeeVO employee, Model model) throws Exception {
 		String view = "main";
 		System.out.println("session");
 		HttpSession session = req.getSession();
 		EmployeeVO vo = loginService.session(employee);
 		
+		// 메인페이지 
+		// 공용 API사용하기(미세먼지)
+		
+		URL url = new URL("http://openapi.airkorea.or.kr/openapi/services/rest/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?stationName=둔산동&dataTerm=month&pageNo=1&numOfRows=10&ServiceKey=CzzGplsj26NjeJzJmS4tqEvGGYeBeJTlV4iwMfgCew%2BBOyOsWRY67Uk%2BUAUPyxRZ1N78jnvk5PCiCzCcDEujEg%3D%3D&ver=1.3&_returnType=json");
+		BufferedInputStream reader = new BufferedInputStream(url.openStream());
+		
+		StringBuffer buffer = new StringBuffer();
+        int i =0;
+        byte[] b = new byte[4096];
+        while( (i = reader.read(b)) != -1){
+          buffer.append(new String(b, 0, i));
+         System.out.println(buffer);
+        }
+        JSONParser jsonparser = new JSONParser();
+        // API 미세먼지 값 가져오기.
+        JSONObject jsonobject = (JSONObject)jsonparser.parse(buffer.toString());
+        JSONArray array = (JSONArray) jsonobject.get("list");
+        JSONObject entity = (JSONObject)array.get(0);
+        String day = (String) entity.get("dataTime");
+        String dust = (String) entity.get("pm25Grade1h");
+		
+        System.out.println("day"+dust);
+        System.out.println("dust"+day);
+		// 메인페이지 용권 작업
+        req.setAttribute("dust", dust); // 오픈 API 미세먼지
+        req.setAttribute("dustDay", day); // 측정일
+		session.setAttribute("sessionEmp", vo);
+
+		// 메인페이지 게시글 불러오기
+		// 투표게시판
+		model.addAttribute("pollBoardList", pollBoardService.selectPollBoardList(null));
+		
+		// 자유게시판
+		FreeBoardSearchVO searchVO = new FreeBoardSearchVO();
+		searchVO.setCurPage(1);
+		searchVO.setScreenListSize(5);
+		List<FreeBoardVO> freeBoardList = boardService.selectFreeBoardList(searchVO);
+		model.addAttribute("freeBoardList", freeBoardList);
+		
+		// 공지사항
+		NoticeSearchVO ntsearchVO = new NoticeSearchVO();
+		ntsearchVO.setCurPage(1);
+		ntsearchVO.setScreenListSize(5);
+		List<NoticeVO> noticeList = noticeService.selectNoticeList(ntsearchVO);
+		model.addAttribute("noticeList", noticeList);
+		
+		return "main";
+	}
+	
+	@RequestMapping(value = "/home")
+	public String mainHome(HttpServletRequest req, EmployeeVO employee, Model model) throws Exception {
+		String view = "main";
+		HttpSession session = req.getSession();
+//		EmployeeVO vo = loginService.session(employee);
+		try {
+			if(vo.getEmp_no().isEmpty()) {
+				return "redirect:/";
+			}
+		} catch (Exception e) {
+			return "redirect:/";
+		}
 		// 메인페이지 
 		// 공용 API사용하기(미세먼지)
 		
@@ -118,8 +180,8 @@ public class LoginController {
 		ntsearchVO.setScreenListSize(5);
 		List<NoticeVO> noticeList = noticeService.selectNoticeList(ntsearchVO);
 		model.addAttribute("noticeList", noticeList);
-		
-		return "main";
+	
+		return view;
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
