@@ -49,6 +49,8 @@
 						<c:if test="${sessionEmp.emp_no == 'NOW0000001'}">
 							<a href="noticeEdit?nt_no=${notice.nt_no}"class="btn btn-primary btn-sm"> 
 							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 수정 </a>
+<%-- 						 <button href="noticeList?nt_no=${notice.nt_no}&nt_del_yn=Y" onclick="deleteCheck(${notice.nt_no})" class="btn btn-default btn-sm" /> 삭제 </botton> --%> 
+						 <button href="#" onclick="deleteCheck(${notice.nt_no})" class="btn btn-default btn-sm" /> 삭제 </botton> 
 					</c:if>
 					</div>
 	</div>
@@ -58,5 +60,18 @@
 		</div>
 		
 	</body>
+	
+	<script type="text/javascript">
+	function deleteCheck(nt_no){
+		if(confirm("삭제 하시겠습니까?")){
+			alert("삭제가 완료되었습니다");
+			return location.href="noticeDelete?nt_no=" + nt_no;
+		}else{
+			alert("삭제가 취소되었습니다");
+			return;
+		}
+	}
+</script>
+	
 </html>
 

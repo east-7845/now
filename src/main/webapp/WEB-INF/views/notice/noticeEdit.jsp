@@ -56,7 +56,6 @@
 				</tr>
 				<tr>
 					<td colspan="4"><a href="noticeList" class="btn btn-default btn-sm" >목록</a>
-						 <button href="noticeList?nt_no=${notice.nt_no}&nt_del_yn=Y" class="btn btn-default btn-sm" /> 삭제 </botton> 
 					<button type="submit" class="btn btn-sm btn-success right">수정</button></td>
 				</tr>
 			</table>

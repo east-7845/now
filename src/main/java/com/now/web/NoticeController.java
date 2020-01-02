@@ -1,6 +1,5 @@
 package com.now.web;
 
-import java.lang.reflect.Method;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,16 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.now.service.INoticeService;
-import com.now.vo.FreeBoardVO;
+import com.now.vo.NoticeSearchVO;
 import com.now.vo.NoticeVO;
-import com.now.vo.ResultMessageVO;
 
 @Controller
 public class NoticeController {
@@ -33,13 +30,18 @@ public class NoticeController {
  //  /notice/edit : 공지사항 수정화면(관리자)
  //  /notice/edit : 공지사항 수정 처리 (관리자)
 	
+
 	@Autowired
 	private INoticeService noticeService;
 	
-	@RequestMapping("/notice/noticeList")
-	public String noticeList(Model model) throws Exception {
-		List<NoticeVO> r = noticeService.selectNoticeList();
+	@RequestMapping(value = "/notice/noticeList")
+	public String noticeList(NoticeSearchVO ntSearchVO, Model model) throws Exception {
+//		BeanUtils.populate(ntSearchVO, req.getParameterMap());
+		
+		List<NoticeVO> r = noticeService.selectNoticeList(ntSearchVO);
 		model.addAttribute("noticeList", r);
+		model.addAttribute("searchVO", ntSearchVO);
+		
 		return "notice/noticeList";
 	}
 
@@ -78,44 +80,25 @@ public class NoticeController {
 
 		return view;
 	}
-	
-	@RequestMapping(value = "/freeboard/freeBoardModfiy", method = RequestMethod.POST)
-	public String freeBoardModify(HttpServletRequest req
-				,@ModelAttribute("board") FreeBoardVO freeVO) throws Exception {
-		String view = "";
 		
-		//BeanUtils.populate(searchVO, req.getParameterMap());
-		int freeBoardList = boardService.updateFreeBoard(freeVO);
-		if(freeBoardList >= 1) {
-			return "redirect:/freeboard/freeBoardList";
-		}
-		
-		//return "freeboard/freeBoardList";
-		return "redirect:/freeboard/freeBoardEdit?fr_no="+ freeVO.getFr_no();
-	}
-	
-	
 	@RequestMapping(value = "/notice/noticeModify", method = RequestMethod.POST)
 	public String noticeModify(ModelMap model,
 																		@ModelAttribute("notice") NoticeVO noticeVO
 																		) throws Exception {
 
-		int freeBoardList = noticeService.updateBoard(freeVO);
-		if(freeBoardList >= 1) {
-			return "redirect:/freeboard/freeBoardList";
+		int noticeList = noticeService.updateNotice(noticeVO);
+		if(noticeList >= 1) {
+			return "redirect:/notice/noticeList";
 		}
 
-		return "notice/noticeEdit?nt_no=" + noticeVO.getNt_no();
+		return "redirect:/notice/noticeEdit?nt_no=" + noticeVO.getNt_no();
 	}
 	
-	@RequestMapping(value = "notice/noticeModify")
-	public String noticeDelete(Model model,
-																	 NoticeVO noticeVO) throws Exception {
-		String view = "notice/message";
-//		ResultMessageVO messageVO = new ResultMessageVO();
-//		
-//		model.addAttribute("resultMessage", messageVO);
-		return view;
+	@RequestMapping(value = "notice/noticeDelete")
+	public String noticeDelete(int nt_no) throws Exception {
+		int vo = noticeService.deleteNotice(nt_no);
+		
+		return "redirect:/notice/noticeList";
 	}
 		
 	

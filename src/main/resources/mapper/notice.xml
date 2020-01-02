@@ -4,6 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.now.dao.INoticeDao">
+	<sql id="PAGING_PREFIX">
+		SELECT * 
+		  FROM ( SELECT rownum rnum, a.* 
+		           FROM (
+	</sql>
+	
+	<sql id="PAGING_SUFFIX">
+		<![CDATA[
+	                    ) a WHERE rownum <= #{endRow} 
+	           ) b 
+	      WHERE rnum >= #{startRow}
+	    ]]>
+	</sql>
+	
 <sql id="searchCondition">
 		<if test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchWord)">
 			<choose>
@@ -22,7 +36,18 @@
 		</if>
 	</sql>
 	
+	<select id="selectNoticeCount"
+		parameterType="com.now.vo.NoticeVO" resultType="int">
+		SELECT count(*) as cnt
+		FROM notice
+		WHERE NT_DEL_YN = 'N'
+		<include refid="searchCondition" />
+	</select>
+	
+	
+	
 	<select id="selectNoticeList" resultType="com.now.vo.NoticeVO">	
+	<include refid="PAGING_PREFIX" />
 		SELECT
 			NT_NO
 			, NT_TITLE
@@ -38,7 +63,9 @@
 		WHERE
 			NT_DEL_YN = 'N'
 			AND NT_WRITER = EMP_NO
+			<include refid="searchCondition" />
 		order by nt_no desc
+		<include refid="PAGING_SUFFIX" />
 	</select>
 	
 		<insert id="insertNotice"

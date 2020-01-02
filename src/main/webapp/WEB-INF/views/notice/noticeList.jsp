@@ -18,12 +18,41 @@
 </style>
 
 <script type="text/javascript">
+
+var fn_search_submit = function() {
+	var f = document.forms["frm_noticeSearch"];
+	f.submit();
+}
+
+var fn_submit_click = function(){	
+	event.preventDefault(); // 이벤트 전파 방지
+	var f = document.forms["frm_noticeSearch"];
+	f.curPage.value = 1;
+	fn_search_submit();
+}
+
+// 페이지 변경 후 서브밋 호출
+var fn_go_page = function(p) {
+	var f = document.forms["frm_noticeSearch"];
+	f.curPage.value = p;
+	fn_search_submit();
+}
+
+// 목록 갯수 변경 후 선택버튼 클릭 시 서브밋 호출
+var fn_screen_size_change = function(){
+	var f = document.forms["frm_notice_list"];
+	var n = document.getElementById("searchNumber");
+	f.setAttribute("action", value)
+	f.screenListSize.value = n.value;
+	fn_search_submit();
+}
+
+// 초기화 시 검색창 공백, 페이지 1로 되돌림
 	var fn_search_reset=function(){
-		var f = document.forms["fn_search_reset"];
+		var f = document.forms["frm_noticeSearch"];
 		f.curPage.value = 1;
 		f.searchType.value = "";
 		f.searchWord.value = "";
-		f.searchClass.value = "";
 	}
 
 </script>
@@ -34,7 +63,7 @@
 			<div class="panel panel-default"
 			style="width: 60vw; margin-left:20vw;">
 
-				<form name="frm_notice_list" action="" method="post">
+				<form name="frm_notice_list" action="" method="post" >
 					<table class="table table-striped table-bordered table-ellipsis">
 							<colgroup>
 								<col width="5%" />
@@ -87,7 +116,7 @@
 									<button type="button" class="btn btn-sm btn-default" onclick="fn_search_reset()">
 									<span class="glyphicon glyphicon-refresh" aria-hidden="true"> </span> &nbsp;초기화 </button>
 						
-									<button type="submit" class="btn btn-sm btn-primary"> 
+									<button type="button" class="btn btn-sm btn-primary" onclick="fn_submit_click()"> 
 									<span class="glyphicon glyphicon-search" aria-hidden="true"> </span> &nbsp; 검색  </button>
 			      	</div>
 						  <c:if test="${sessionEmp.emp_no == 'NOW0000001'}">
@@ -100,13 +129,12 @@
 				</form>
 
 </div>
-	
-						
+		
 					<nav class="text-center" >
 					  <ul class="pagination">
 					<!--  이전 페이지 -->
 					    <li>
-					    	<a href="?curPage=${searchVO.curPage-1}" aria-label="Previous">
+					    <a href="#" onclick="fn_go_page(${searchVO.startPage - 1})" aria-label="Previous">
 					        	<span aria-hidden="true">&laquo;</span>
 					        </a>
 					    </li>
@@ -122,19 +150,18 @@
 			
 					<!-- 다음 페이지  -->
 					    <li>
-						      <a href="?curPage=${searchVO.curPage+1}" aria-label="Next">
+						      <a href="#" onclick="fn_go_page(${searchVO.endPage + 1})" aria-label="Next">
 						        <span aria-hidden="true">&raquo;</span>
 						      </a>
 					    </li>
 					  </ul>
 					</nav>	
 					
-
-						
 	</div>		
 		<div class="container_footer">
 			<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 		</div>
-		
+
 	</body>
+	
 </html>
