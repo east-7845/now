@@ -17,10 +17,10 @@ public class LoginController {
 	@Autowired
 	private ILoginService loginService;
 	
-	@RequestMapping(value = "/now", method = RequestMethod.POST)
+	@RequestMapping(value = "/main", method = RequestMethod.POST)
 	public String loginCheck(HttpServletRequest req, EmployeeVO employee) throws Exception {
 		System.out.println("loginController");
-		String view = "forward:/main";
+		String view = "forward:/session";
 		
 		EmployeeVO vo = loginService.selectEmp(employee);
 		if(vo == null) {
@@ -31,7 +31,7 @@ public class LoginController {
 		return view;
 	}
 	
-	@RequestMapping(value = "/main", method = RequestMethod.POST)
+	@RequestMapping(value = "/session", method = RequestMethod.POST)
 	public String session(HttpServletRequest req, EmployeeVO employee) throws Exception {
 		String view = "main";
 		System.out.println("session");
@@ -50,9 +50,10 @@ public class LoginController {
 		
 		HttpSession session = req.getSession();
 		session.invalidate();
-
+		
 
 		return view;
 	}
+	
 
 }

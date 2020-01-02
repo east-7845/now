@@ -40,19 +40,6 @@
 	CKEDITOR.replace("draft_content", {
 	    height: 500
 	});
-	
-// 	document.getElementById("btnSubmit").onclick = function() {
-// 		alert(document.getElementById("draft_name").value);
-// 		alert(document.getElementById("draft_content").value);
-// // 		var params = new ComSubmit('editFLForm');
-// 		$.ajax({
-// 			url : "draftInsert",
-// 			data : {"draft_name" : document.getElementById("draft_name").value},
-// 			success : function(a){
-// 						window.close();
-// 				}
-// 		});
-// 	}
 </script>
 </html>
 

@@ -24,7 +24,7 @@ public class MyPageController {
 	private ILoginService loginService;
 	
 	@Autowired
-	IMyPageService myPageService;
+	private IMyPageService myPageService;
 	
 	@RequestMapping(value = "/myPage/myPage")
 	public String loginCheck(HttpServletRequest req) throws Exception {
@@ -37,7 +37,7 @@ public class MyPageController {
 		
 		if(sessionVO.getEmp_no().equals("NOW0000001")) return "forward:/myPage/myPageEmpList";
 		
-		EmployeeVO employeeVO = loginService.selectEmp(sessionVO);
+		EmployeeVO employeeVO = myPageService.selectMyPage(sessionVO);
 		req.setAttribute("employee", employeeVO);
 		
 		if(employeeVO.getEmp_id() == null) return "forward:/myPage/myPageEdit";

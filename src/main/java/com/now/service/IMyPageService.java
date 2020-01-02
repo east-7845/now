@@ -17,4 +17,6 @@ public interface IMyPageService {
 
 	int insertEmp(EmployeeVO employeeVO);
 
+	public EmployeeVO selectMyPage(EmployeeVO employeeVO);
+
 }

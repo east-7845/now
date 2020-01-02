@@ -1,6 +1,6 @@
 package com.now.vo;
 
-public class DraftVO {
+public class DraftVO extends EmployeeVO{
 	
 	private String draft_no;
 	private String draft_name;

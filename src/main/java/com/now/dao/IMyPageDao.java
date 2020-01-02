@@ -21,5 +21,7 @@ public interface IMyPageDao {
 
 	public int insertEmp(EmployeeVO employeeVO);
 
+	public EmployeeVO selectMyPage(EmployeeVO employeeVO);
+
 
 }
