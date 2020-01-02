@@ -31,6 +31,7 @@ public class StudyAttachUtils {
 			String save_name = UUID.randomUUID().toString();
 			AttachVO vo = new AttachVO();
 			
+
 			vo.setFa_original_name(multipart.getOriginalFilename());
 			vo.setFa_file_size(multipart.getSize());
 			vo.setFa_content_type(multipart.getContentType());

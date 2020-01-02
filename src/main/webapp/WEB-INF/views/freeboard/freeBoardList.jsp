@@ -96,9 +96,12 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 	<div class="container_content" style="min-height: 34vw;">
 		<div class="panel panel-default"
-			style="width: 60vw; margin-left: 20vw;">
+			style="width: 60vw; margin-left: 10vw;">
 			<table class="table table-striped table-bordered table-hover">
 				<colgroup>
 					<col width="10%">
@@ -150,7 +153,7 @@
 			</ul>
 		</nav>
 		<div class="panel panel-default"
-			style="width: 60vw; margin-left: 20vw;">
+			style="width: 60vw; margin-left: 10vw;">
 			<div class="panel-body form-horizontal">
 				<form name="frm_boardSearch" action="freeBoardList"
 					onsubmit="return false;" style="text-align: center;">
@@ -192,10 +195,6 @@
 				</form>
 			</div>
 		</div>
-	</div>
-	<!-- container_content -->
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
 	<script type="text/javascript">
 		document.forms["frm_boardSearch"].addEventListener("submit",fn_submit_click );

@@ -17,9 +17,12 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 	<div class="container_content">
 		<div class="panel panel-default"
-			style="width: 60vw; margin-left: 20vw;">
+			style="width: 60vw; margin-left: 10vw;     margin-top: 2vw;">
 			<table class="table table-striped table-bordered table-ellipsis">
 				<colgroup>
 					<col width="10%%">
@@ -61,7 +64,7 @@
 			</table>
 		</div>
 		<div class="panel panel-default"
-			style="width: 60vw; margin-left: 20vw;">
+			style="width: 60vw; margin-left: 10vw;">
 			<div class="panel-body form-horizontal">
 				<div class="form-group">
 					<a href="freeBoardList" class="btn btn-default btn-sm">회원 목록</a> <a
@@ -72,14 +75,14 @@
 				</div>
 			</div>
 		</div>
-		<div class="panel panel-default" style="width: 60vw; margin-left: 20vw;">
+		<div class="panel panel-default" style="width: 60vw; margin-left: 10vw;">
 			<div class="panel-body form-horizontal">
 				<div id="id_reply_list_area">
 		
 				</div>
 			</div>
 		</div>
-		<div class="panel panel-default" style="width: 60vw; margin-left: 20vw;">
+		<div class="panel panel-default" style="width: 60vw; margin-left: 10vw;">
 			<div class="panel-body form-horizontal">
 				<form name="frm_reply" action="<c:url value='/reply/replyRegist'/>"
 					method="post" onclick="return false;">
@@ -100,11 +103,10 @@
 			</div>
 		</div>
 	</div>
-	<div class="container_footer">
+	<%-- <div class="container_footer">
 		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-	</div>
+	</div> --%>
 	<script type="text/javascript">
-
 		var parentTest ="";
 		function updateBtn(re_no, fr_no){
 			//parentTest = $(this);

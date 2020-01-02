@@ -5,12 +5,12 @@
 	cursor: pointer;
 	color: #FFFFFF;
 	font-family: Arial;
-	font-size: 23px;
+	font-size: 35px;
 	border-radius: 5px;
 	border: ridge 1px #ffffff;
 	text-shadow: 1px 1px 0px #528ecc;
 	box-shadow: inset 1px 1px 0px -50px #bbdaf7;
-	width: 100px;
+	width: 200px;
 	height: 100px;
 }
 
@@ -21,9 +21,9 @@
 
 .top_button-icon {
 	border-radius: 5px 5px 0 0;
-	display: block;
+	display: inline-block;
 	text-align: center;
-	font-size: 46px;
+	font-size: 80px;
 	padding: 0px 0px;
 }
 

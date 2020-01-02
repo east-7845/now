@@ -11,7 +11,7 @@
 	<util:properties id= "app" location="classpath:appconfig.properties" />
 	
 	<!-- DataSource -->
-	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" 		
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource"
 	       destroy-method="close">
 		<property name="driverClassName" value="#{app['jdbc.driverClassName']}" />
 		<property name="url"             value="#{app['jdbc.url']}" />
@@ -23,7 +23,7 @@
 		<property name="minIdle"  value="4" />
 		<property name="validationQuery" value="select 1 from dual" />
 	</bean>
-
+ 
 	<!-- myBatis 설정 -->
 	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

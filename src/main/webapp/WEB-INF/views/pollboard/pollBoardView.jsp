@@ -28,34 +28,40 @@
 			<tr>
 				<th>글 제목</th>
 				<!-- PollBoard : Controller에서 준 이름 -->
-				<td>${PollBoard.po_title}</td>
+				<td>${pollBoard.po_title}</td>
 				<th>조회수</th>
-				<td>${PollBoard.po_hit}</td>
+				<td>${pollBoard.po_hit}</td>
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td>${PollBoard.po_writer}</td>
+				<td>${pollBoard.po_writer}</td>
 				<th>작성자 IP</th>
-				<td>${PollBoard.po_ip}</td>
+				<td>${pollBoard.po_ip}</td>
 			</tr>
 			<tr>
 				<th>작성일</th>
-				<td>${PollBoard.po_reg_date}</td>
+				<td>${pollBoard.po_reg_date}</td>
 				<th>수정일</th>
-				<td>${PollBoard.po_mod_date}</td>
+				<td>${pollBoard.po_mod_date}</td>
 			</tr>
 			<tr>
 				<th>글내용</th>
 				<pre>
-					<td colspan="3">${PollBoard.po_content}</td>
+					<td colspan="3">${pollBoard.po_content}</td>
 				</pre>
 			</tr>
 		</table>
 		<div class="row">
 			<a href="pollBoardList" class="btn btn-default btn-sm">글 목록</a> 
-			<a href="pollBoardEdit?po_no=${PollBoard.po_no}"
-				class="btn btn-primary btn-sm"> 
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"> 수정</span>
+			 <a href="pollBoardEdit?po_no=${pollBoard.po_no}"
+				class="btn btn-sm btn-info"> <span
+					class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+					&nbsp;&nbsp;수 정
+			</a>
+    	    <a href="pollBoardEdit?po_no=${pollBoard.po_no}"
+				class="btn btn-sm btn-danger"> <span
+					class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+					&nbsp;&nbsp;삭제
 			</a>
 		</div>
 	</div>

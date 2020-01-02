@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.now.dao.IScheduleDao">
+	<select id="selectScList" resultType="com.now.vo.ScheduleVO">
+		select * 
+		from schedule
+	</select>
+	<insert id="insertSc" parameterType="com.now.vo.ScheduleVO"></insert>
+	<update id="updateSc" parameterType="com.now.vo.ScheduleVO"></update> 
+</mapper>
+

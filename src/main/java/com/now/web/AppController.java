@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.now.service.IApprovalService;
+import com.now.vo.ApprovalVO;
 import com.now.vo.CommonVO;
 import com.now.vo.DraftVO;
 import com.now.vo.EmployeeVO;
@@ -67,7 +68,7 @@ public class AppController {
 	}
 	
 	@RequestMapping(value = "/approval/grantEmployee")
-	public String employee(HttpServletRequest req) throws Exception {
+	public String grantEmployee(HttpServletRequest req) throws Exception {
 		System.out.println("grantEmployee");
 		String view = "approval/grantEmployee";
 		
@@ -77,6 +78,26 @@ public class AppController {
 		req.setAttribute("commonVO", commonVO);
 		req.setAttribute("employeeVO", employeeVO);
 		return view;
+	}
+	
+	@RequestMapping(value = "/approval/approvalInsert")
+	public String approvalInsert(HttpServletRequest req, ApprovalVO approvalVO) throws Exception {
+		System.out.println("approvalInsert");
+		
+		System.out.println(approvalVO.getApp_emp_no());
+		System.out.println(approvalVO.getApp_draft_no());
+		System.out.println(approvalVO.getApp_name());
+		System.out.println(approvalVO.getApp_content());
+		System.out.println(approvalVO.getGrant_emp_no());
+		System.out.println(approvalVO.getGrant_emp_no().length());
+//		String view = "approval/grantEmployee";
+//		
+//		List<CommonVO> commonVO = approvalService.selectCommon();
+//		List<EmployeeVO> employeeVO = approvalService.selectGrantEmployee();
+//		
+//		req.setAttribute("commonVO", commonVO);
+//		req.setAttribute("employeeVO", employeeVO);
+		return null;
 	}
 
 }
