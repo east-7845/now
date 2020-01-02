@@ -1,49 +1,35 @@
 package com.now.vo;
 
+import javax.validation.constraints.Size;
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.hibernate.validator.constraints.NotBlank;
 
 public class PollBoardVO {
 	private int po_no;                 /* 글번호 */
-	private String po_title = "";      /* 제목 */
-	private String po_topic = "";      /* 내용분류 */
-	private String po_writer = "";     /* 작성자 */
-	private String po_pass = "";       /* 비밀번호 */
-	private String po_group = "";      /* 투표해당그룹 */
-	private String po_content = "";    /* 내용 */
-	private int po_hit;                /* 조회수 */
-	private String po_ip = "";         /* IP */
-	private String po_reg_date = "";   /* 등록일 */
-	private String po_mod_date = "";   /* 수정일 */
-	private String po_due_date = "";   /* 만료일 */
-	private String po_comp_yn = "";    /* 완료여부 */
-	private String po_del_yn = "";     /* 삭제여부 */
-	private String po_vaild_yn = "";   /* 만료여부 */
-	private String po_result = "";     /* 투표결과 */
 	
-	public PollBoardVO() {
-	}
-
-	public PollBoardVO(int po_no, String po_title, String po_topic, String po_writer, String po_pass, String po_group,
-			String po_content, int po_hit, String po_ip, String po_reg_date, String po_mod_date, String po_due_date,
-			String po_comp_yn, String po_del_yn, String po_vaild_yn, String po_result) {
-		super();
-		this.po_no = po_no;
-		this.po_title = po_title;
-		this.po_topic = po_topic;
-		this.po_writer = po_writer;
-		this.po_pass = po_pass;
-		this.po_group = po_group;
-		this.po_content = po_content;
-		this.po_hit = po_hit;
-		this.po_ip = po_ip;
-		this.po_reg_date = po_reg_date;
-		this.po_mod_date = po_mod_date;
-		this.po_due_date = po_due_date;
-		this.po_comp_yn = po_comp_yn;
-		this.po_del_yn = po_del_yn;
-		this.po_vaild_yn = po_vaild_yn;
-		this.po_result = po_result;
-	}
+	@NotBlank(message = "제목은 필수입니다.")
+	@Size(min = 2, max = 100, message = "제목은 2 ~ 100자 사이입니다.")
+	private String po_title;      /* 제목 */
+	private String po_topic = "";      /* 내용분류 */
+	@NotBlank(message = "작성자 필수입니다.")
+	@Size(min = 2, max = 100, message = "제목은 2 ~ 100자 사이입니다.")
+	private String po_writer;     /* 작성자 */
+	@NotBlank(message = "비밀번호는 필수입니다.")
+	@Size(min = 4, max = 30, message = "비밀번호 4 ~ 30자 사이입니다.")
+	private String po_pass;       /* 비밀번호 */
+	private String po_group;      /* 투표해당그룹 */
+	private String po_content;    /* 내용 */
+	private int po_hit;                /* 조회수 */
+	private String po_ip;         /* IP */
+	private String po_reg_date;   /* 등록일 */
+	private String po_mod_date;   /* 수정일 */
+	private String po_due_date;   /* 만료일 */
+	private String po_comp_yn;    /* 완료여부 */
+	private String po_del_yn;     /* 삭제여부 */
+	private String po_vaild_yn;   /* 만료여부 */
+	private String po_result;     /* 투표결과 */
+	
 
 	public int getPo_no() {
 		return po_no;

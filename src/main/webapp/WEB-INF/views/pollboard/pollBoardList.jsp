@@ -50,6 +50,11 @@
 			</c:forEach>
 
 		</table>
+		<div class="pull-right">
+			<a href="pollBoardForm" class="btn btn-primary btn-sm"> <span
+				class="glyphicon glyphicon-plus" aria-hidden="true"></span> 글 작성
+			</a>
+		</div>
 	</div> <!-- 게시글 container end -->
 	<!-- footer -->
 	<div class="container_footer">

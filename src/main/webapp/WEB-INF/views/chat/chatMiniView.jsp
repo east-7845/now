@@ -14,10 +14,7 @@
 <body>
 
 	<div class="container">
-		<%@include file="/WEB-INF/inc/now_top.jsp"%>
-	</div>
-	<div class="container_left">
-		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+		<%-- <%@include file="/WEB-INF/inc/now_top.jsp"%> --%>
 	</div>
 	<div class="container_content">
 		<!--  채팅 TEXT -->
@@ -31,16 +28,12 @@
 				<!-- <div id="chat"></div> -->
 				<textarea rows="3" cols="10" id="chat"
 					style="width: 400px; height: 400px; display: inline-block;" readonly="readonly" >
-					<c:forEach var="dataList" items="${dataList}">
-						${dataList}
-						
-					</c:forEach>
 					<%-- ${chatList.data} --%>
 				</textarea>
 				<!-- 내 채팅방(리스트) -->
 				<div id="chatRoomList" style="border: 1px solid; width: 230px; height: 200px; display: inline-block;position: absolute;">
-					<c:forEach var="memList" items="${chatList2}">
-						<div>${memList}</div>
+					<c:forEach var="memList" items="${chatList}">
+						<div>${memList.member}</div>
 					</c:forEach>
 				</div>
 				<!-- 현재 채팅방 사용자리스트 -->
@@ -62,7 +55,9 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="container_footer">
+		<%-- <%@include file="/WEB-INF/inc/now_footer.jsp"%> --%>
+	</div>
 
 	<script>
 		var sock = new SockJS("/now/echo");
@@ -71,41 +66,37 @@
 		sock.onmessage = function(e) {
 			var data = e.data;
 			var split = data.split("-.-");
-			//var member ="${mapRoom.member}";
-			var member ="${chatList}";
+			var member ="${mapRoom.member}";
 			var room = "${mapRoom.room}";
 			var chatRoomName = document.getElementById("chatRoomList");
 			var splitParent = chatRoomName.children[0].innerText;
 			var splitChildren = splitParent.split(".");
-<<<<<<< HEAD
 			
-<<<<<<< HEAD
 			if(split[0] == "${mapRoom.room}" && split[1] == "${userId}" || member.test(split[1])){
-=======
-=======
->>>>>>> refs/heads/shin
-			console.log(split);
-			if(split[0] == "${mapRoom.room}" && (split[1] == "${userId}") || (member.search( "/"+ split[1] +"/")) ){
->>>>>>> refs/heads/shin
 				
 				if(selDivision == "end"){
-					$("#chat").append(split[1] + " : " + split[5] + "\n");	
+					$("#chat").append(split[1] + " : " + split[4] + "\n");	
 				}else{
 					
 					$.ajax({
 						type:"POST",
-						data:"&target="+ selDivision +"&format=html&q=" + split[5],
+						data:"&target="+ selDivision +"&format=html&q=" + split[4],
 						url: "https://www.googleapis.com/language/translate/v2?key=AIzaSyDK-6ADsIFBisy3nAWpHzjCcrVXNrI8TJU",
 						
 						success:function(reponse){
 							//alert(reponse.data.translations[0].translatedText);
-							$("#chat").append(split[1] + " : " + split[5] + "\n");
+							$("#chat").append(split[1] + " : " + split[4] + "\n");
 							$("#chat").append("        (번역)" + reponse.data.translations[0].translatedText + "\n");
 						}
 					});
 				}
 				return true;
 			}	
+			
+			
+			
+			
+			console.log("연결메시지");
 		}
 			
 		// 번역글 체크
@@ -113,21 +104,23 @@
 			selDivision = $(':selected', this).val();
 		});
 		
+
 		sock.onclose = function() {
 			$("#chat").append("연결 종료");
 			console.log("연결종료");
 		}
+
 	
 		$(document).ready(function(){
 			$("#chatForm").submit(function(event){
 				event.preventDefault();
-				sock.send( "${mapRoom.room}" +"-.-"+ "${userNm}"  +"-.-" + "${userId}" + "-.-" +$("#message").val() );
+				sock.send( "${mapRoom.room}" +"-.-"+ "${userId}" + "-.-" +$("#message").val() );
 				$("#message").val('').focus();
 			});
 		});
 		
 		function fn_before(){
-			location.href = "<c:url value='/chat/chatList' />"
+			location.href = "<c:url value='/chat/chatList?mini=ok' />"
 		}
 		
 		var openWin;
@@ -136,12 +129,9 @@
 			// 부모창 이름
 			window.name = "parentForm";
 			// window.open("open할 window", "자식창 이름", "팝업창 옵션");
-            openWin = window.open("chatList?mini='ok'",
+            openWin = window.open("chatMini?mini='ok'",
                     "childForm", "width=570, height=350, resizable = no, scrollbars = no");
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/heads/shin
 		}
 		
 		function setChildText(){
