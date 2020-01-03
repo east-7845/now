@@ -36,4 +36,6 @@ public interface IApprovalService {
 
 	public int updateApproval(ApprovalVO approvalVO);
 
+	public List<EmployeeVO> selectGrantRank();
+
 }

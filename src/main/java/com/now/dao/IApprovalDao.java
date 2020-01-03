@@ -45,4 +45,6 @@ public interface IApprovalDao {
 
 	public int updateApproval(ApprovalVO approvalVO);
 
+	public List<EmployeeVO> selectGrantRank();
+
 }

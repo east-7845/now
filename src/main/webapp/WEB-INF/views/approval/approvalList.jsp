@@ -61,16 +61,6 @@
 		window.open('draftFormInsert','window_name','width=1000,height=900,location=no,status=no,scrollbars=yes');
 	}
 	approval();
-	function ajaxPage(str) {
-		if(str == "approval") {
-			alert("approval");
-			approval();
-		}
-		if(str == "myApproval") {
-			alert("myApproval");
-			myApproval();
-		}
-	}
 	
 	
 	function approval() {

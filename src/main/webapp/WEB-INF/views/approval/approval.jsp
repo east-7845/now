@@ -62,7 +62,7 @@
 					<tr>
 						<td colspan="4" align="center">
 							<c:if test="${approval.emp_name == sessionEmp.emp_name }">
-								<input type="submit" value="삭제" id="appDelete()">
+								<input type="button" value="삭제" id="appDelete()">
 							</c:if>
 							<c:if test="${approval.emp_name != sessionEmp.emp_name }">
 								<input type="submit" value="승인" id="btnSubmit">

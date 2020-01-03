@@ -98,4 +98,9 @@ public class ApprovalServiceImpl implements IApprovalService {
 		return approvalDao.updateApproval(approvalVO);
 	}
 
+	@Override
+	public List<EmployeeVO> selectGrantRank() {
+		return approvalDao.selectGrantRank();
+	}
+
 }

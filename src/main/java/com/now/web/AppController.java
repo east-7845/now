@@ -116,9 +116,11 @@ public class AppController {
 		
 		List<CommonVO> commonVO = approvalService.selectCommon();
 		List<EmployeeVO> employeeVO = approvalService.selectGrantEmployee();
+		List<EmployeeVO> department = approvalService.selectGrantRank();
 		
 		req.setAttribute("commonVO", commonVO);
 		req.setAttribute("employeeVO", employeeVO);
+		req.setAttribute("department", department);
 		return view;
 	}
 	
