@@ -94,7 +94,8 @@
 	
 	document.getElementById("btnSubmit").onclick = function() {
 // 		opener.location.reload();
-		opener.ajaxPage("myApproval");
+		opener.myApproval();
+// 		opener.ajaxPage("myApproval");
 		close();
 	}
 // 	btnSubmit.click(function() {
