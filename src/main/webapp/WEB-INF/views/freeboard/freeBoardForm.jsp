@@ -57,7 +57,7 @@ $(document).ready(function(){
 					</colgroup>
 					<tr class="text-center">
 						<td>제목</td>
-						<td><form:input path="fr_title" cssStyle="min-width: 625px;" /></td>
+						<td><form:input path="fr_title" cssStyle="min-width: 625px; width: 100%;" /></td>
 					</tr>
 					<tr>
 						<td>첨부파일
@@ -72,7 +72,7 @@ $(document).ready(function(){
 					</tr>
 					<tr class="text-center">
 						<td>내용</td>
-						<td><form:textarea path="fr_content" cssClass="textareaBox" /></td>
+						<td><form:textarea path="fr_content" cssClass="textareaBox" style="width: 100%;"/></td>
 					</tr>
 					<tr>
 						<td colspan="4"><a href="freeBoardList"
