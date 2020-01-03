@@ -17,9 +17,12 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 	<div class="container_content">
 			<div class="panel panel-default"
-			style="width: 60vw; margin-left: 20vw;">
+			style="width: 60vw; margin-left: 10vw;">
 		<%-- <form:form commandName="board" action="pollBoardModify.do"> --%>
 		<form:form commandName="pollBoard" action="pollBoardRegist">
 			<!-- Method는 기본적으로 POST  -->
@@ -68,9 +71,6 @@
 		</form:form>
 		<%-- </form:form> --%>
 	</div>
-	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
 </body>
 </html>

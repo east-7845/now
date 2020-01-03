@@ -156,7 +156,7 @@
 
 		<div class="idx_board" style="margin-left: 1%;">
 			<div class="title">
-				<a href="#" class="name">투표게시판</a> <a href="#" class="more">
+				<a href="pollboard/pollBoardList" class="name">투표게시판</a> <a href="#" class="more">
 				<img src="${pageContext.request.contextPath}/images/arrow-right.png" alt="더 보기"></a>
 			</div>
 			<div class="list">
@@ -174,7 +174,7 @@
 			<div class="title">
 
 				<a href="freeboard/freeBoardList" class="name">자유게시판</a> <a href="#" class="more"><img
-					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
+					src="${pageContext.request.contextPath}/images/arrow-right.png" alt="더 보기"></a>
 			</div>
 			<div class="list">
 				<ul>
@@ -188,7 +188,7 @@
 		<div class="idx_board" style="width: 200px;margin-left: 2%;">
 			<div class="title">
 				<a href="#" class="name">미세먼지 </a> <a href="#" class="more"><img
-					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
+					src="${pageContext.request.contextPath}/images/arrow-right.png" alt="더 보기"></a>
 			</div>
 			<div class="list" style="padding: 0px;">
 				<ul style="margin: 0px; padding: 0px;">
@@ -202,7 +202,7 @@
 		<div class="idx_board" style="margin-left: 2%; vertical-align: top; width: 350px;">
 			<div class="title">
 				<a href="#" class="name">캘린더</a> <a href="#" class="more"><img
-					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
+					src="${pageContext.request.contextPath}/images/arrow-right.png" alt="더 보기"></a>
 			</div>
 			<div class="list" id="calendar">
 				

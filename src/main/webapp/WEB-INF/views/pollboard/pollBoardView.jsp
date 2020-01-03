@@ -17,9 +17,12 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 	<div class="container_content">
 			<div class="panel panel-default"
-			style="width: 60vw; margin-left: 20vw;">
+			style="width: 60vw; margin-left: 10vw;">
 		<table class="table table-bordered">
 			<colgroup>
 				<col width="15%" />
@@ -75,9 +78,6 @@
 			</a>
 		</div>
 		</div>
-	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 	</div>
 </body>
 <!-- 글삭제 check 부분 -->

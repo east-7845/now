@@ -110,7 +110,7 @@
 		function fn_roomCreBtn() {
 			var checkVal = [];
 			var checkNm = [];
-			var title = document.getElementById("roomName").innerText;
+			var title = document.getElementById("roomName").value;
 			var lenMax = $("input:checkbox[name='memberCheck']:checked").length;
 			var num = 0;
 			
@@ -127,14 +127,12 @@
 					}
 					num++;
 				});
-			
-			var roomName = $("#roomName").val(); // 방 이름
-			var roomTile = roomName.value;
+
 			$.ajax({
 						data : {
 							"emp" : checkVal,
 							"empUser" : checkNm,
-							"empTile" : roomTile
+							"empTile" : title
 						},
 						url : "<c:url value='/chat/chatRoom'/>",
 						success : function(result) {
@@ -142,7 +140,7 @@
 							str = "<div name='roomList' class='item'>";
 							str += "<div class='num'>" + result.room + "</div>";
 							str += "<div class='num'>" + result.id + "</div>";
-							str += "<div class='title'>" + roomTile + "</div>";
+							str += "<div class='title'>" + title + "</div>";
 							//str += "<div style='display: none;'>" + result.memberNm + "</div>";
 							str += "<div class='writer'>" + result.memberNm + "</div>";
 							str += "<div class='date'>" + result.date + "</div>";

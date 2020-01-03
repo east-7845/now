@@ -18,9 +18,12 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div> <!-- header end -->
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 	<div class="container_content"> <!-- 게시글 container  -->
 			<div class="panel panel-default"
-			style="width: 60vw; margin-left: 20vw;">
+			style="width: 60vw; margin-left: 10vw;">
 		<table class="table table-striped table-bordered table-hover">
 			<colgroup>
 				<col width="5%">
@@ -95,10 +98,7 @@
 			</ul>
 		</nav>
 		</div>
-	<!-- footer -->
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-	</div> <!-- footer end -->
+
 	
 </body>
 <script type="text/javascript">

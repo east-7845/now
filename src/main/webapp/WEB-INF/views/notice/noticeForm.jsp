@@ -8,7 +8,12 @@
 <%@include file="/WEB-INF/inc/common_header.jsp"%>
 </head>
 <body>
-	<%@include file="/WEB-INF/inc/now_top.jsp"%>
+	<div class="container">
+		<%@include file="/WEB-INF/inc/now_top.jsp"%>
+	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 		<div class="panel panel-default" style="width: 60vw; margin-left: 20vw;">
 			<h3>글 작성</h3>
 				<form action="noticeRegist" method="post" >
@@ -45,9 +50,6 @@
 							</tr>
 						</table>
 					</form>
-			</div>
-			<div class="container_footer">
-					<%@include file="/WEB-INF/inc/now_footer.jsp"%>
 			</div>
 </body>
 </html>

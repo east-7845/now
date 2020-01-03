@@ -35,7 +35,7 @@
 			<a href="${pageContext.request.contextPath }/home">
 			 <img alt="" style="width: 100px; height: 65px;"
 				src="${pageContext.request.contextPath }/images/logo.png">
-			</a> <span> ${sessionEmp.emp_name } - 신입(인턴1년 6개월) </span><a href="/now/logout">logout</a>
+			</a> <span> ${sessionEmp.emp_name } </span><a href="/now/logout">logout</a>
 		</div>
 <!-- 		<div class="top_menu"> -->
 <!-- 			<a class="top_button btn_home"> <span class="top_button-icon"><i -->

@@ -9,7 +9,13 @@
 <title>공지 수정</title>
 </head>
 <body>
-	<%@include file="/WEB-INF/inc/now_top.jsp"%>
+
+	<div class="container">
+		<%@include file="/WEB-INF/inc/now_top.jsp"%>
+	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 		<div class="panel panel-default" style="width: 60vw; margin-left: 20vw;">
 			<h3>수정 페이지</h3>
 			<form:form name="frm_notice" commandName="notice" action="noticeModify" method="post">

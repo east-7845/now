@@ -188,7 +188,7 @@ public class ChatController {
 
 	@RequestMapping(value = "/chat/chatRoom")
 	@ResponseBody
-	public Map<String, Object> chatRoom(HttpServletRequest req, String empTile,
+	public Map<String, Object> chatRoom(HttpServletRequest req, @RequestParam("empTile") String empTile,
 			@RequestParam("empUser[]") String[] empUser, @RequestParam("emp[]") String[] empNo, String mini)
 			throws Exception {
 
@@ -258,7 +258,7 @@ public class ChatController {
 			map.put("title", empTile);
 			map.put("memberNm", memNmAll);
 			map.put("member", memAll);
-			map.put("room", roomNum);
+			map.put("room", "NO_"+roomNum);
 			map.put("date", time1);
 			map.put("id", attribute.getEmp_no());
 
