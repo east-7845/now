@@ -22,7 +22,7 @@
 	<div class="container_content">
 		<!--  채팅 TEXT -->
 		<div style="">
-			<div class="panel panel-default" style="width: 60vw; margin-left: 20vw;">
+			<div class="panel panel-default" style="width: 50vw; margin-left: 10vw;">
 				<div>
 					<span>${mapRoom.room}</span>
 					<span>채팅내용</span>
