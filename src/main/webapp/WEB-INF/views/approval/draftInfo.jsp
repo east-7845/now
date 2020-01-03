@@ -93,7 +93,8 @@
 	}
 	
 	document.getElementById("btnSubmit").onclick = function() {
-		opener.myApproval();
+// 		opener.location.reload();
+		opener.ajaxPage("myApproval");
 		close();
 	}
 // 	btnSubmit.click(function() {

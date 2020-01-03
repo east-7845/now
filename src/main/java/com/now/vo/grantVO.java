@@ -15,6 +15,11 @@ public class grantVO extends DraftVO{
 	private String grant_emp_name3;
 	private String grant_emp_name4;
 	
+	private String grant_rank1;
+	private String grant_rank2;
+	private String grant_rank3;
+	private String grant_rank4;
+	
 	public String getGrant_app_no() {
 		return grant_app_no;
 	}
@@ -83,6 +88,32 @@ public class grantVO extends DraftVO{
 	public void setGrant_emp_name4(String grant_emp_name4) {
 		this.grant_emp_name4 = grant_emp_name4;
 	}
+	
+	public String getGrant_rank1() {
+		return grant_rank1;
+	}
+	public void setGrant_rank1(String grant_rank1) {
+		this.grant_rank1 = grant_rank1;
+	}
+	public String getGrant_rank2() {
+		return grant_rank2;
+	}
+	public void setGrant_rank2(String grant_rank2) {
+		this.grant_rank2 = grant_rank2;
+	}
+	public String getGrant_rank3() {
+		return grant_rank3;
+	}
+	public void setGrant_rank3(String grant_rank3) {
+		this.grant_rank3 = grant_rank3;
+	}
+	public String getGrant_rank4() {
+		return grant_rank4;
+	}
+	public void setGrant_rank4(String grant_rank4) {
+		this.grant_rank4 = grant_rank4;
+	}
+	
 	
 	
 }

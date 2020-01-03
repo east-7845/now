@@ -56,7 +56,6 @@ public class MyPageController {
 		
 		req.setAttribute("rank", commonRank);
 		req.setAttribute("dept", commonDept);
-		
 		if(employeeVO.getEmp_no() == null) {
 			EmployeeVO employee = (EmployeeVO) req.getAttribute("employee");
 			req.setAttribute("employee", employee);
