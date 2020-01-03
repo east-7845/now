@@ -31,27 +31,33 @@
 		<%@include file="/WEB-INF/inc/now_left.jsp"%>
 	</div>
 	<div class="container_content">
-		<table class="table table-striped table-bordered table-ellipsis table-size">
-			<tr>
-				<td>사원번호</td>
-				<td>ID</td>
-				<td>이름</td>
-				<td>연락처</td>
-				<td>부서</td>
-				<td>직급</td>
-			</tr>
-			<c:forEach var="emp" items="${employee }">
+		<div class="panel panel-default" style="width: 60vw; margin-left: 10vw;">
+			<table class="table table-striped table-bordered table-hover">
 				<tr>
-					<td>${emp.emp_no }</td>
-					<td>${emp.emp_id }</td>
-					<td><a href="myPageEmpInfo?emp_no=${emp.emp_no }">${emp.emp_name }</a></td>
-					<td>${emp.emp_hp }</td>
-					<td>${emp.emp_department }</td>
-					<td>${emp.emp_rank }</td>
+					<td>사원번호</td>
+					<td>ID</td>
+					<td>이름</td>
+					<td>연락처</td>
+					<td>부서</td>
+					<td>직급</td>
 				</tr>
-			</c:forEach>
-		</table>
-		<input type="button" id="emp_btn" value="사원등록">
+				<c:forEach var="emp" items="${employee }">
+					<tr>
+						<td>${emp.emp_no }</td>
+						<td>${emp.emp_id }</td>
+						<td><a href="myPageEmpInfo?emp_no=${emp.emp_no }">${emp.emp_name }</a></td>
+						<td>${emp.emp_hp }</td>
+						<td>${emp.emp_department }</td>
+						<td>${emp.emp_rank }</td>
+					</tr>
+				</c:forEach>
+				<tr>
+					<td colspan="6" align="center">
+						<input type="button" id="emp_btn" value="사원등록">
+					</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 <!-- 	<div class="container_footer"> -->
 <%-- 		<%@include file="/WEB-INF/inc/now_footer.jsp"%> --%>

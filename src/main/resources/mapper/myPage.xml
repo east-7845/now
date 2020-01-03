@@ -70,6 +70,7 @@
 			, EMP_HP = #{emp_hp}
 			, EMP_HP_SUB = #{emp_hp_sub}
 			, EMP_MAIL = #{emp_mail}
+			, EMP_SALARY = #{emp_salary}
 			, EMP_BANKNAME = #{emp_bankname}
 			, EMP_BANKNUM = #{emp_banknum}
 		<choose>

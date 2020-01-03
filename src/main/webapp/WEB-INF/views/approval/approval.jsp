@@ -30,10 +30,10 @@
 						<td colspan="2" rowspan="2">
 							<table id="tableId" border="1" style="width: 100%;">
 								<tr>
-									<td class="draft">${approval.grant_emp_name1 }</td>
-									<td class="draft">${approval.grant_emp_name2 }</td>
-									<td class="draft">${approval.grant_emp_name3 }</td>
-									<td class="draft">${approval.grant_emp_name4 }</td>
+									<td class="draft" style="font-size: 13px; text-align: center;">${approval.grant_emp_name1 }<br>${approval.grant_rank1 }</td>
+									<td class="draft" style="font-size: 13px; text-align: center;">${approval.grant_emp_name2 }<br>${approval.grant_rank2 }</td>
+									<td class="draft" style="font-size: 13px; text-align: center;">${approval.grant_emp_name3 }<br>${approval.grant_rank3 }</td>
+									<td class="draft" style="font-size: 13px; text-align: center;">${approval.grant_emp_name4 }<br>${approval.grant_rank4 }</td>
 								</tr>
 								<tr>
 									<td id="imgTd0"><input type="hidden" id="emp_no0" name="grant_emp_no1" value="${approval.grant_emp_no1 }"></td>
@@ -89,9 +89,10 @@
 	var draft = document.getElementsByClassName("draft");
 	var grant = document.getElementById("grant");
 	for(var i = 0; i < draft.length; i++) {
-		if(draft[i].innerHTML != "") {
-			if(i == 0) grant.value = draft[i].innerHTML;
-			if(i != 0) grant.value += ", "+draft[i].innerHTML;
+		if(draft[i].innerHTML != "" && draft[i].innerHTML.indexOf("<br>") != 0) {
+			var str = draft[i].innerHTML.replace("<br>", " ")
+			if(i == 0) grant.value = str;
+			if(i != 0) grant.value += ", "+str;
 // 			draft[i].innerHTML = emp_name + " " + com_name;
 // 			document.getElementById("emp_no"+i).value = emp_no;
 // 			return;

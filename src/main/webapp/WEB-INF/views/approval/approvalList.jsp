@@ -20,9 +20,19 @@
 	.app_table {
 		margin-left: auto;
 		margin-right: auto;
+		width: 30vw;
 	}
 	th {
 		text-align: center;
+	}
+	.topTr td {
+		border: 1px solid black;
+		text-align: center;
+		width: 300px;
+		height: 60px;
+		font-size: 25px;
+/*        vertical-align: middle; */
+/*        align-items: initial; */
 	}
 </style>
 </head>
@@ -34,17 +44,11 @@
 		<%@include file="/WEB-INF/inc/now_left.jsp"%>
 	</div>
 	<div class="container_content" style="min-height: 34vw;" id="div_content">
-		<table class="app_table">
-			<tr>
-				<td style="vertical-align: top;">
-					<div style="background-color: silver; height: 60px; width: 200px; margin-right: 20px;" onclick="approval()">결재 양식</div>
-				</td>
-				<td>
-					<div style="background-color: gray; height: 60px; width: 200px; margin-right: 20px;" onclick="myApproval()">나의 결재</div>
-				</td>
-				<td>
-					<div style="background-color: red; height: 60px; width: 200px; margin-right: 20px;" onclick="grantApproval()">결재함</div>
-				</td>
+		<table class="table table-striped table-bordered table-hover app_table">
+			<tr class="topTr">
+				<td onclick="approval()">결재 양식</td>
+				<td onclick="myApproval()">나의 결재</td>
+				<td onclick="grantApproval()">결재함	</td>
 			</tr>
 		</table>
 		<div class="panel panel-default" style="width: 30vw; margin-top: 2vw; margin-left: auto; margin-right: auto;" id="list"></div>
@@ -56,8 +60,18 @@
 	function draftFormInsert() {
 		window.open('draftFormInsert','window_name','width=1000,height=900,location=no,status=no,scrollbars=yes');
 	}
-	
 	approval();
+	function ajaxPage(str) {
+		if(str == "approval") {
+			alert("approval");
+			approval();
+		}
+		if(str == "myApproval") {
+			alert("myApproval");
+			myApproval();
+		}
+	}
+	
 	
 	function approval() {
 		$.ajax({

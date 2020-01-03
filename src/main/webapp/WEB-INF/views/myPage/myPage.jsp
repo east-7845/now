@@ -34,13 +34,17 @@
 		<%@include file="/WEB-INF/inc/now_left.jsp"%>
 	</div>
 	<div class="container_content">
-		<div class="container_content_item table">
+		<div class="panel panel-default" style="width: 60vw; margin-left: 10vw;">
 			<form:form action="myPageEdit" method="post" commandName="employee" class="myPageForm">
-				<table class="table table-striped table-bordered table-ellipsis table-size">
+				<table class="table table-striped table-bordered table-hover">
 					<tr>
 						<td>사원 번호</td>
 						<td>${employee.emp_no }
 							<form:hidden path="emp_no"/>
+						</td>
+						<td>ID</td>
+						<td>${employee.emp_id }
+							<form:hidden path="emp_id"/>
 						</td>
 					</tr>
 					<tr>
@@ -48,14 +52,6 @@
 						<td>${employee.emp_name }
 							<form:hidden path="emp_name"/>
 						</td>
-					</tr>
-					<tr>
-						<td>ID</td>
-						<td>${employee.emp_id }
-							<form:hidden path="emp_id"/>
-						</td>
-					</tr>
-					<tr>
 						<td>주민등록번호</td>
 						<td>
 							${employee.emp_regno1 } - ${employee.emp_regno2 }
@@ -64,7 +60,7 @@
 					</tr>
 					<tr>
 						<td>주소</td>
-						<td>
+						<td colspan="3">
 							${employee.emp_zip } ${employee.emp_add1 } ${employee.emp_add2 }
 							<form:hidden path="emp_zip"/><form:hidden path="emp_add1"/><form:hidden path="emp_add2"/>
 						</td>
@@ -75,8 +71,6 @@
 							${employee.emp_hp }
 							<form:hidden path="emp_hp"/>
 						</td>
-					</tr>
-					<tr>
 						<td>비상연락망</td>
 						<td>
 							${employee.emp_hp_sub }
@@ -89,22 +83,6 @@
 							${employee.emp_mail }
 							<form:hidden path="emp_mail"/>
 						</td>
-					</tr>
-					<tr>
-						<td>은행명</td>
-						<td>
-							${employee.emp_bankname }
-							<form:hidden path="emp_bankname"/>
-						</td>
-					</tr>
-					<tr>
-						<td>계좌번호</td>
-						<td>
-							${employee.emp_banknum }
-							<form:hidden path="emp_banknum"/>
-						</td>
-					</tr>
-					<tr>
 						<td>연봉</td>
 						<td>
 							${employee.emp_salary }
@@ -112,10 +90,15 @@
 						</td>
 					</tr>
 					<tr>
-						<td>연차</td>
+						<td>은행명</td>
 						<td>
-							${employee.emp_vacation }
-							<form:hidden path="emp_vacation"/>
+							${employee.emp_bankname }
+							<form:hidden path="emp_bankname"/>
+						</td>
+						<td>계좌번호</td>
+						<td>
+							${employee.emp_banknum }
+							<form:hidden path="emp_banknum"/>
 						</td>
 					</tr>
 					<tr>
@@ -124,8 +107,6 @@
 							${employee.emp_department }
 							<form:hidden path="emp_department"/>
 						</td>
-					</tr>
-					<tr>
 						<td>직급</td>
 						<td>
 							${employee.emp_rank }
@@ -134,13 +115,13 @@
 					</tr>
 					<tr>
 						<td>입사일</td>
-						<td>
+						<td colspan="3">
 							${employee.emp_hiredate }
 							<form:hidden path="emp_hiredate"/>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" value="수정"></td>
+						<td colspan="4"><input type="submit" value="수정"></td>
 					</tr>
 				</table>
 			</form:form>

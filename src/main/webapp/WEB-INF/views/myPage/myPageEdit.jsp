@@ -158,12 +158,9 @@
 						</c:if>
 						<c:if test="${sessionEmp.emp_no != 'NOW0000001' }">
 							${employee.emp_salary }
+							<form:hidden path="emp_salary"/>
 						</c:if>
 					</td>
-				</tr>
-				<tr>
-					<td>연차</td>
-					<td>${employee.emp_vacation }</td>
 				</tr>
 				<tr>
 					<td>부서</td>
@@ -225,7 +222,7 @@
 					</tr>
 				</c:if>
 				<tr>
-					<td colspan="2"><input type="submit" value="수정완료"></td>
+					<td colspan="2" align="center"><input type="submit" value="수정완료"></td>
 				</tr>
 			</table>
 		</form:form>
