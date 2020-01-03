@@ -4,6 +4,47 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.now.dao.IPollBoardDao">
+	<!-- 페이징 -->
+	<sql id="PAGING_PREFIX">
+		SELECT * 
+		  FROM ( SELECT rownum rnum, a.* 
+		           FROM (
+	</sql>
+	
+	<sql id="PAGING_SUFFIX">
+		<![CDATA[
+	                    ) a WHERE rownum <= #{endRow} 
+	           ) b 
+	      WHERE rnum >= #{startRow}
+	    ]]>
+	</sql>
+
+	<sql id="searchCondition">
+		<if
+			test="@org.apache.commons.lang3.StringUtils@isNotBlank(searchWord)">
+			<choose>
+				<when test='searchType == "T"'>
+					AND fr_title LIKE '%' || #{searchWord} || '%'
+				</when>
+				<when test='searchType.equals("W")'>
+					AND fr_parent_no LIKE '%' || (select emp_no from
+					EMPLOYEE where emp_name = #{searchWord}) || '%'
+				</when>
+				<when test='searchType eq "C"'>
+					AND fr_content LIKE '%' || #{searchWord} || '%'
+				</when>
+				<otherwise>
+					AND ( fr_title LIKE '%' || #{searchWord} || '%'
+					OR
+					fr_parent_no LIKE '%' || (select emp_no from EMPLOYEE where
+					emp_name = #{searchWord}) || '%'
+					OR fr_content LIKE '%' ||
+					#{searchWord} || '%'
+					)
+				</otherwise>
+			</choose>
+		</if>
+	</sql>
 	
 	<!-- 글 목록 -->
 	<select id="selectPollBoardList" parameterType="com.now.vo.PollBoardVO" 
@@ -14,7 +55,7 @@
 			 , (select com_name from common where com_cd = po_topic) as po_topic
 			 , (select emp_name from employee where emp_no = po_writer) as po_writer
 			 , po_pass
-			 , po_group
+			 , (select com_name from common where com_cd = po_group) as po_group
 			 , po_content
 			 , po_hit
 			 , po_ip
@@ -28,7 +69,8 @@
 		  FROM poll_board
 		  
 		 WHERE po_del_yn = 'N'
-		<!-- <include refid="PAGING_SUFFIX"/> -->
+		<!-- <include refid="searchCondition"/>
+		<include refid="PAGING_SUFFIX"/> -->
 	</select>
 
 	<!-- 상세보기 -->
@@ -39,7 +81,7 @@
 			 , (select com_name from common where com_cd = po_topic) as po_topic
 			 , (select emp_name from employee where emp_no = po_writer) as po_writer
 			 , po_pass
-			 , po_group
+			 , (select com_name from common where com_cd = po_group) as po_group
 			 , po_content
 			 , po_hit
 			 , po_ip
@@ -78,18 +120,24 @@
 	
 	
 	<!-- 글 수정 -->
-	<update id="upadatePollBoard" parameterType="com.now.vo.PollBoardVO">
+	<!-- 비번 틀렸을 때 오류 표시해주기 -->
+<!-- 		     , (select com_name from common where com_cd = po_topic) as PO_TOPIC = #{po_topic}
+			 , (select emp_name from employee where emp_no = po_writer) as PO_WRITER = #{po_writer}
+			 , PO_PASS = #{po_pass}
+ 			 , PO_CONTENT = #{po_content} -->
+	<update id="updatePollBoard" parameterType="com.now.vo.PollBoardVO">
 		UPDATE poll_board
-		   SET PO_TITLE
-		     , (select com_name from common where com_cd = po_topic) as PO_TOPIC
-			 , (select emp_name from employee where emp_no = po_writer) as PO_WRITER
-			 , PO_PASS
-			 , PO_GROUP
-			 , PO_CONTENT
-		  	 , PO_MOD_DATE
-			 , PO_DUE_DATE
+		   SET PO_TITLE = #{po_title}
+			 , PO_WRITER = #{po_writer}
+			 , PO_CONTENT = #{po_content}
 	  	 WHERE po_no   = #{po_no}
 	  	   AND po_pass = #{po_pass}
 	</update>
+	
+	<delete id="deletePollBoard" parameterType="com.now.vo.PollBoardVO">
+		UPDATE poll_board
+		   SET PO_DEL_YN = 'Y'
+	  	 WHERE po_no   = #{po_no}	  	   
+	</delete>
 
 </mapper>
