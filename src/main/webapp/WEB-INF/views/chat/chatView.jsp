@@ -22,7 +22,7 @@
 	<div class="container_content">
 		<!--  채팅 TEXT -->
 		<div style="">
-			<div class="panel panel-default" style="width: 60vw; margin-left: 20vw;">
+			<div class="panel panel-default" style="width: 50vw; margin-left: 10vw;">
 				<div>
 					<span>${mapRoom.room}</span>
 					<span>채팅내용</span>
@@ -129,10 +129,7 @@
 			// window.open("open할 window", "자식창 이름", "팝업창 옵션");
             openWin = window.open("chatList?mini='ok'",
                     "childForm", "width=570, height=350, resizable = no, scrollbars = no");
-<<<<<<< HEAD
 
-=======
->>>>>>> refs/heads/shin
 		}
 		
 		function setChildText(){

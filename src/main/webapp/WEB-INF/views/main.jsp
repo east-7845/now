@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/inc/common_header.jsp"%>
+
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%-- <script src="${pageContext.request.contextPath }/js/jquery-3.4.1.js"></script> --%>
 <!--  스케줄러 -->
 <link href="${pageContext.request.contextPath}/css/schedule.css" rel="stylesheet">
@@ -16,7 +18,7 @@
 <style>
 .idx_board {
 	display: inline-block;
-	width: 48%;
+	width: 600px;
 	background: #fff;
 	margin-top: 2%;
 }
@@ -118,14 +120,14 @@
 		</div> -->
 		<div class="top_menu" style="margin-left: 30px;">
 			<a class="top_button btn_근태"> <span class="top_button-text">근태</span>
-				<span class="top_button-icon"> <i class="fa fa-male"
+				<span class="top_button-icon" style="margin-left: 40px;"> <i class="fa fa-male"
 					aria-hidden="true"></i>
 			</span>
 			</a>
 		</div>
 		<div class="top_menu" style="margin-left: 30px;">
 			<a class="top_button btn_채팅"> <span class="top_button-text">채팅</span>
-				<span class="top_button-icon"> <i class="fa fa-comments-o"
+				<span class="top_button-icon" style="margin-left: 40px;"> <i class="fa fa-comments-o"
 					aria-hidden="true"></i>
 			</span>
 			</a>
@@ -140,24 +142,22 @@
 
 		<div class="idx_board" style="margin-left: 30px;">
 			<div class="title">
-				<a href="#" class="name">공지사항</a> <a href="#" class="more"><img
-					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
+				<a href="notice/noticeList" class="name">공지사항</a> <a href="notice/noticeList" class="more">
+				<img src="${pageContext.request.contextPath}/images/arrow-right.png" alt="더 보기"></a>
 			</div>
 			<div class="list">
 				<ul>
-					<li><a href="#">글 제목이 들어갑니다.</a> <span>2019-11-14</span></li>
-					<li><a href="#">글 제목이 들어갑니다.</a> <span>2019-11-14</span></li>
-					<li><a href="#">글 제목이 들어갑니다.</a> <span>2019-11-14</span></li>
-					<li><a href="#">글 제목이 들어갑니다.</a> <span>2019-11-14</span></li>
-					<li><a href="#">글 제목이 들어갑니다.</a> <span>2019-11-14</span></li>
+					<c:forEach var="notice" items="${noticeList}">
+							<li><a href="notice/noticeView?nt_no=${notice.nt_no}">${notice.nt_title}</a><span>${notice.nt_reg_date}</span></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
 
 		<div class="idx_board" style="margin-left: 1%;">
 			<div class="title">
-				<a href="#" class="name">투표게시판</a> <a href="#" class="more"><img
-					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
+				<a href="pollboard/pollBoardList" class="name">투표게시판</a> <a href="#" class="more">
+				<img src="${pageContext.request.contextPath}/images/arrow-right.png" alt="더 보기"></a>
 			</div>
 			<div class="list">
 				<ul>
@@ -172,16 +172,15 @@
 
 		<div class="idx_board" style="margin-left: 2%;">
 			<div class="title">
-				<a href="#" class="name">자유게시판</a> <a href="#" class="more"><img
-					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
+
+				<a href="freeboard/freeBoardList" class="name">자유게시판</a> <a href="#" class="more"><img
+					src="${pageContext.request.contextPath}/images/arrow-right.png" alt="더 보기"></a>
 			</div>
 			<div class="list">
 				<ul>
-					<li><a href="#">글 제목이 들어갑니다.</a> <span>2019-11-14</span></li>
-					<li><a href="#">글 제목이 들어갑니다.</a> <span>2019-11-14</span></li>
-					<li><a href="#">글 제목이 들어갑니다.</a> <span>2019-11-14</span></li>
-					<li><a href="#">글 제목이 들어갑니다.</a> <span>2019-11-14</span></li>
-					<li><a href="#">글 제목이 들어갑니다.</a> <span>2019-11-14</span></li>
+						<c:forEach var="freeboard" items="${freeBoardList}">
+							<li><a href="freeboard/freeBoardView?fr_no=${freeboard.fr_no}">${freeboard.fr_title}</a><span>${freeboard.fr_reg_date}</span></li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
@@ -189,7 +188,7 @@
 		<div class="idx_board" style="width: 200px;margin-left: 2%;">
 			<div class="title">
 				<a href="#" class="name">미세먼지 </a> <a href="#" class="more"><img
-					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
+					src="${pageContext.request.contextPath}/images/arrow-right.png" alt="더 보기"></a>
 			</div>
 			<div class="list" style="padding: 0px;">
 				<ul style="margin: 0px; padding: 0px;">
@@ -203,7 +202,7 @@
 		<div class="idx_board" style="margin-left: 2%; vertical-align: top; width: 350px;">
 			<div class="title">
 				<a href="#" class="name">캘린더</a> <a href="#" class="more"><img
-					src="${pageContext.request.contextPath }/images/dot.gif" alt="더 보기"></a>
+					src="${pageContext.request.contextPath}/images/arrow-right.png" alt="더 보기"></a>
 			</div>
 			<div class="list" id="calendar">
 				
@@ -228,7 +227,6 @@
 			}
 		
 			document.getElementsByClassName("top_menu")[2].onclick = function() { // 투표
-				//location.href = "/now/pollboard/pollBoardList";
 				location.href = "/now/schedule/schList";
 			}
 		
