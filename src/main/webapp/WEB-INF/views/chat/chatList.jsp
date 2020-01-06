@@ -12,7 +12,9 @@
 <title>부트스트랩 101 템플릿</title>
 <script src="${pageContext.request.contextPath}/js/sockjs.min.js"></script>
 <!-- 부트스트랩 -->
-<link href="${pageContext.request.contextPath }/bootstrap-3.3.2/css/bootstrap.css" rel="stylesheet">
+<link
+	href="${pageContext.request.contextPath }/bootstrap-3.3.2/css/bootstrap.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/css/style.css" rel="stylesheet">
 
 <!-- IE8 에서 HTML5 요소와 미디어 쿼리를 위한 HTML5 shim 와 Respond.js -->
 <!-- WARNING: Respond.js 는 당신이 file:// 을 통해 페이지를 볼 때는 동작하지 않습니다. -->
@@ -21,16 +23,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></scrip>
     <![endif]-->
 <script src="${pageContext.request.contextPath }/js/jquery-3.4.1.js"></script>
-<script
-	src="${pageContext.request.contextPath }/bootstrap-3.3.2/js/bootstrap.js"></script>
-<style type="text/css">
-.container_content div {
-	display: inline-block;
-	border: 1px solid black;
-}
-</style>
-</head>
+<script	src="${pageContext.request.contextPath }/bootstrap-3.3.2/js/bootstrap.js"></script>
 
+</head>
 <body>
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
@@ -38,73 +33,65 @@
 	<div class="container_left">
 		<%@include file="/WEB-INF/inc/now_left.jsp"%>
 	</div>
-	<div class="container_content"
-		style="min-height: 34vw; text-align: center;">
-		<div style="text-align: center;">
-			<span>사용자 리스트</span> <br>
-			<div style="display: block;">
-				<c:forEach var="memberList" items="${employee}">
-					<div>
-						<div>
-							<input type="checkbox" name="memberCheck"
-								value="${memberList.emp_no}">
+	<div class="container_content" style="min-height: 34vw;">
+		<div class="board_list_wrap">
+			<div class="board_list">
+				<div class="board_list_head">
+					<div class="num">체크</div>
+                	<div class="num">번호</div>
+                	<div class="writer">사용자</div>
+            	</div>
+				<div class="board_list_body" style="display: block;">
+					<c:forEach var="memberList" items="${employee}">
+						<div class="item">
+							<div class="num">
+								<input type="checkbox" name="memberCheck"
+									value="${memberList.emp_no}">
+							</div>
+							<div class="num">${memberList.emp_no}</div>
+							<div class="writer">${memberList.emp_name}</div>
 						</div>
-						<div>${memberList.emp_no}</div>
-						<div>${memberList.emp_name}</div>
-					</div>
-					<br>
-				</c:forEach>
-				<input type="text" id="roomName" value="">
-				<button onclick="fn_roomCreBtn();">방만들기</button>
-			</div>
-			<div id="chatRoomList">
-				<br> <span>채팅방 목록</span> <br>
-				<div style="display: block;">
-					<div>방번호</div>
-					<div>방장넘버</div>
-					<div>참여자</div>
-					<div>날짜</div>
+					</c:forEach>
+					<input type="text" id="roomName" >
+					<button onclick="fn_roomCreBtn();">방만들기</button>
 				</div>
+			</div>
+		</div>
+		<div class="board_list_wrap">
+			<div class="board_list" id="chatRoomList">
+				<div class="board_list_head">
+					<div class="num">방번호</div>
+					<div class="num">아이디</div>
+	            	<div class="title">방제목</div>
+	            	<div class="writer">참여자</div>
+	            	<div class="date">날자</div>
+        		</div>
+				<div class="board_list_body" id="bodyid">
 				<c:forEach var="chatlist" items="${chatListVO}">
 					<c:if test="${chatListVO == null}">
 						<div>데이터가 없습니다.</div>
 					</c:if>
 					<c:if test="${chatListVO != null}">
-						<div name="roomList">
-							<div>${chatlist.room}</div>
-							<div>${chatlist.id}</div>
-							<div style="display:none;">${chatlist.member}</div>
-							<div>${chatlist.memberName}</div>
-							<%-- <div>${chatlist.data}</div> --%>
-<%-- 							<div>${chatlist.webSocSession}</div> --%>
-<%-- 							<div>${chatlist.userSession}</div> --%>
-							<div>${chatlist.date}</div>
-<%-- 							<div>${chatlist.deleteYN}</div> --%>
+						<div class="item" name="roomList">
+							<div class="num">${chatlist.room}</div>
+							<div class="num">${chatlist.id}</div>
+							<div class="title">${chatlist.title}</div>
+							<div style="display: none;">${chatlist.member}</div>
+							<div class="writer">${chatlist.memberName}</div>
+							<div class="date">${chatlist.date}</div>
 						</div>
 					</c:if>
-					<br>
 				</c:forEach>
+				</div>
 			</div>
 		</div>
-
-
-		<%-- <c:forEach var="chatList"  items="{}">
-			<c:if test="${chatList != null } ">
-				<div></div>
-			</c:if>
-			<c:if test="${chatList == null }">
-				<div>채팅중인 방이 없습니다</div>
-			</c:if>
-		</c:forEach> --%>
 	</div>
 	<!-- container_content -->
-
-
 	<script type="text/javascript">
-
 		// 방클릭시 이동하기.
 		$("div[name=roomList]").dblclick(function() {
 			var div = $(this);
+			console.log(div);
 			var div1 = div.children("div");
 			console.log(div1.innerHTML);
 			var str = [];
@@ -123,59 +110,60 @@
 		function fn_roomCreBtn() {
 			var checkVal = [];
 			var checkNm = [];
-			var title = document.getElementById("roomName").innerText;
+			var title = document.getElementById("roomName").value;
 			var lenMax = $("input:checkbox[name='memberCheck']:checked").length;
 			var num = 0;
+			
 			// 체크 한 유저 정보
-			$("input:checkbox[name='memberCheck']:checked").each(function() {
-				var userName = $(this)[0].parentNode.parentNode.children[2].innerText;
-				if(num < lenMax) {
-					checkNm[num] = userName;
-					checkVal[num] = $(this).val();
-				} else {
-					num = 0;
-					return;
-				}
-				num++;
-			});
-
-			var roomName = $("#roomName").val(); // 방 이름
+			$("input:checkbox[name='memberCheck']:checked").each(
+				function() {
+					var userName = $(this)[0].parentNode.parentNode.children[2].innerText;
+					if (num < lenMax) {
+						checkNm[num] = userName;
+						checkVal[num] = $(this).val();
+					} else {
+						num = 0;
+						return;
+					}
+					num++;
+				});
 
 			$.ajax({
-				data : {
-					"emp" : checkVal,
-					"empUser" : checkNm,
-					"empTile" : title
-				},
-				url : "<c:url value='/chat/chatRoom'/>",
-				success : function(result) {
-					var str = "";
-					str = "<div name='roomList'>";
-					str += "<div>" + result.room + "</div>";
-					str += "<div>" + result.id + "</div>";
-					str += "<div>" + result.memberNm + "</div>";
-					str += "<div>" + result.date + "</div>";
-					/* str += "<div>"+result.id+"</div>";
-					str += "<div>"+result.member+"</div>";
-					str += "<div>"+result.date+"</div>"; */
-					str += "</div>";
-					$("#chatRoomList").append(str);
+						data : {
+							"emp" : checkVal,
+							"empUser" : checkNm,
+							"empTile" : title
+						},
+						url : "<c:url value='/chat/chatRoom'/>",
+						success : function(result) {
+							var str = "";
+							str = "<div name='roomList' class='item'>";
+							str += "<div class='num'>" + result.room + "</div>";
+							str += "<div class='num'>" + result.id + "</div>";
+							str += "<div class='title'>" + title + "</div>";
+							//str += "<div style='display: none;'>" + result.memberNm + "</div>";
+							str += "<div class='writer'>" + result.memberNm + "</div>";
+							str += "<div class='date'>" + result.date + "</div>";
+							str += "</div>";
+							$("#bodyid").append(str);
 
-					// 방클릭시 이동하기.
-					$("div[name=roomList]").dblclick(
-						function() {
-							var div = $(this);
-							var div1 = div.children("div");
-							console.log(div1.innerHTML);
-							var str = [];
-							str[0] = div1[0].innerHTML; //방번호
-							str[1] = div1[1].innerHTML; //계정 아이아이디
-							str[2] = div1[2].innerHTML; //계정 아이아이디
-							location.href = "<c:url value='/chat/chatView?data="
-									+ str + "'/>"
+							// 방클릭시 이동하기.
+							$("div[name=roomList]").dblclick(
+								function() {
+									
+									var div = $(this);
+									console.log(div);
+									var div1 = div.children("div");
+									console.log(div1);
+									var str = [];
+									str[0] = div1[0].innerHTML; //방번호
+									str[1] = div1[1].innerHTML; //계정 아이아이디
+									str[2] = div1[2].innerHTML; //계정 아이아이디
+									location.href = "<c:url value='/chat/chatView?data="
+											+ str + "'/>"
+								});
+							}
 					});
-				}
-			});
 		}
 	</script>
 </body>

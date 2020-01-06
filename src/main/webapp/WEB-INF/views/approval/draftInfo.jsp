@@ -10,6 +10,7 @@
 <style type="text/css">
 	td {
 		height: 40px;
+		text-align: center;
 	}
 </style>
 <script src="${pageContext.request.contextPath }/js/jquery-3.4.1.js"></script>
@@ -21,20 +22,20 @@
 			<form:form action="approvalInsert">
 				<table border="1">
 					<tr>
-						<td colspan="2">${draft.draft_name }</td>
+						<td colspan="2" style="width: 40%;">${draft.draft_name }</td>
 						<td colspan="2" rowspan="2">
-							<table id="tableId" border="1" style="width: 100%;">
+							<table id="tableId" style="width: 100%;" border="1">
 								<tr>
-									<td class="draft"></td>
-									<td class="draft"></td>
-									<td class="draft"></td>
-									<td class="draft"></td>
+									<td class="draft" style="font-size: 13px; text-align: center;"></td>
+									<td class="draft" style="font-size: 13px; text-align: center;"></td>
+									<td class="draft" style="font-size: 13px; text-align: center;"></td>
+									<td class="draft" style="font-size: 13px; text-align: center;"></td>
 								</tr>
 								<tr>
-									<td><input type="hidden" id="emp_no0" name="grant_emp_no"></td>
-									<td><input type="hidden" id="emp_no1" name="grant_emp_no"></td>
-									<td><input type="hidden" id="emp_no2" name="grant_emp_no"></td>
-									<td><input type="hidden" id="emp_no3" name="grant_emp_no"></td>
+									<td><input type="hidden" id="emp_no0" name="grant_emp_no1"></td>
+									<td><input type="hidden" id="emp_no1" name="grant_emp_no2"></td>
+									<td><input type="hidden" id="emp_no2" name="grant_emp_no3"></td>
+									<td><input type="hidden" id="emp_no3" name="grant_emp_no4"></td>
 								</tr>
 							</table>
 						</td>
@@ -56,8 +57,8 @@
 					</tr>
 					<tr>
 						<td colspan="4">
-							<input type="submit" value="결재">
-							<input type="hidden" name="app_draft_no" value="DRAFT00003">
+							<input type="submit" value="결재" id="btnSubmit">
+							<input type="hidden" name="app_draft_no" value="${draft.draft_no }">
 						</td>
 					</tr>
 				</table>
@@ -84,12 +85,23 @@
 
 		for(var i = 0; i < draft.length; i++) {
 			if(draft[i].innerHTML == "") {
-				draft[i].innerHTML = emp_name + " " + com_name;
+				draft[i].innerHTML = emp_name + "<br>" + com_name;
 				document.getElementById("emp_no"+i).value = emp_no;
 				return;
 			}
 		}
 	}
+	
+	document.getElementById("btnSubmit").onclick = function() {
+// 		opener.location.reload();
+		opener.myApproval();
+// 		opener.ajaxPage("myApproval");
+		close();
+	}
+// 	btnSubmit.click(function() {
+// 		alert("d");
+// 		close;
+// 	})
 	
 	
 

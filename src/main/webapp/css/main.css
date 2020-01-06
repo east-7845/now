@@ -5,13 +5,13 @@ body{
 
 .container_left {
     width: 200px;
-    height: 700px;
+    height: 760px;
     float: left;
     background-color: gray;
 }
 
 .container_content {
-    width: 80%;
+    width: 85%;
     height: 46vw;
     float: left;
     padding: 10px;

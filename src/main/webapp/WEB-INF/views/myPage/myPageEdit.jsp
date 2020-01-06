@@ -75,6 +75,9 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 	<div class="container_content">
 		<form:form action="myPageModify" method="post" commandName="employee">
 			<table class="table table-striped table-bordered table-ellipsis table-size">
@@ -155,12 +158,9 @@
 						</c:if>
 						<c:if test="${sessionEmp.emp_no != 'NOW0000001' }">
 							${employee.emp_salary }
+							<form:hidden path="emp_salary"/>
 						</c:if>
 					</td>
-				</tr>
-				<tr>
-					<td>연차</td>
-					<td>${employee.emp_vacation }</td>
 				</tr>
 				<tr>
 					<td>부서</td>
@@ -222,13 +222,13 @@
 					</tr>
 				</c:if>
 				<tr>
-					<td colspan="2"><input type="submit" value="수정완료"></td>
+					<td colspan="2" align="center"><input type="submit" value="수정완료"></td>
 				</tr>
 			</table>
 		</form:form>
 	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
-	</div>
+<!-- 	<div class="container_footer"> -->
+<%-- 		<%@include file="/WEB-INF/inc/now_footer.jsp"%> --%>
+<!-- 	</div> -->
 </body>
 </html>

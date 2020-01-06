@@ -17,7 +17,12 @@
 	<div class="container">
 		<%@include file="/WEB-INF/inc/now_top.jsp"%>
 	</div>
+	<div class="container_left">
+		<%@include file="/WEB-INF/inc/now_left.jsp"%>
+	</div>
 	<div class="container_content">
+			<div class="panel panel-default"
+			style="width: 60vw; margin-left: 10vw;">
 		<table class="table table-bordered">
 			<colgroup>
 				<col width="15%" />
@@ -26,29 +31,37 @@
 				<col />
 			</colgroup>
 			<tr>
+				<th>분류</th>
+				<td>${pollBoard.po_topic}</td>
+				<th>그룹</th>
+				<td>${pollBoard.po_group}</td>
+			</tr>
+			<tr>
 				<th>글 제목</th>
 				<!-- PollBoard : Controller에서 준 이름 -->
-				<td>${pollBoard.po_title}</td>
-				<th>조회수</th>
-				<td>${pollBoard.po_hit}</td>
+				<td colspan="3">${pollBoard.po_title}</td>
 			</tr>
 			<tr>
 				<th>작성자</th>
 				<td>${pollBoard.po_writer}</td>
-				<th>작성자 IP</th>
-				<td>${pollBoard.po_ip}</td>
+				<th>등록일</th>
+				<td>${pollBoard.po_reg_date}</td>
 			</tr>
 			<tr>
-				<th>작성일</th>
-				<td>${pollBoard.po_reg_date}</td>
-				<th>수정일</th>
-				<td>${pollBoard.po_mod_date}</td>
+				<th>만료일</th>
+				<td>${pollBoard.po_due_date}</td>
+				<th>만료여부</th>
+				<td>${pollBoard.po_vaild_yn}</td>
 			</tr>
 			<tr>
 				<th>글내용</th>
 				<pre>
 					<td colspan="3">${pollBoard.po_content}</td>
 				</pre>
+			</tr>
+			<tr>
+				<th>투표 결과</th>
+				<td>${pollBoard.po_result}</td>
 			</tr>
 		</table>
 		<div class="row">
@@ -58,17 +71,27 @@
 					class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 					&nbsp;&nbsp;수 정
 			</a>
-    	    <a href="pollBoardEdit?po_no=${pollBoard.po_no}"
-				class="btn btn-sm btn-danger"> <span
-					class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    	    <a href="#" onclick="deleteCheck(${pollBoard.po_no})"
+				class="btn btn-sm btn-danger">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 					&nbsp;&nbsp;삭제
 			</a>
 		</div>
-	</div>
-	<div class="container_footer">
-		<%@include file="/WEB-INF/inc/now_footer.jsp"%>
+		</div>
 	</div>
 </body>
+<!-- 글삭제 check 부분 -->
+<script type="text/javascript">
+	function deleteCheck(po_no){
+		if(confirm("삭제 하시겠습니까?")){
+			alert("삭제가 완료되었습니다");
+			return location.href="pollBoardDelete?po_no=" + po_no;
+		}else{
+			alert("삭제가 취소되었습니다");
+			return;
+		}
+	}
+</script>
 </html>
 
 

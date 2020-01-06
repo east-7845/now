@@ -11,7 +11,6 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>부트스트랩 101 템플릿</title>
-
 </head>
 <body>
 	<div class="container">
@@ -23,7 +22,7 @@
 	<div class="container_content">
 		<div class="container_content" style="min-height: 34vw;">
 			<div class="panel panel-default"
-				style="width: 60vw; margin-left: 20vw;">
+				style="width: 60vw; margin-left: 10vw;">
 				<form:form commandName="board" action="freeBoardModfiy"
 					method="post">
 					<form:hidden path="fr_no" />
@@ -36,30 +35,32 @@
 						</colgroup>
 						<tr class="text-center">
 							<td>제목</td>
-							<td><form:input path="fr_title" /></td>
-							<td>비밀번호</td>
-							<td><form:input path="fr_pass" /></td>
+							<td><form:input path="fr_title" style="width: 100%;" /></td>
+							<td></td>
+							<td>
+								<form:input path="fr_pass" style="width: 100%;" />
+							</td>
 						</tr>
 						<tr class="text-center">
 							<td>작성자</td>
-							<td><form:input path="fr_parent_no" readonly="fr_parent_no" />
+							<td><form:input path="fr_parent_no" readonly="fr_parent_no" style="width: 100%;"/>
 							</td>
 							<td>작성일</td>
-							<td><form:input path="fr_reg_date" readonly="fr_reg_date" />
+							<td><form:input path="fr_reg_date" readonly="fr_reg_date" style="width: 100%;"/>
 							</td>
 						</tr>
 						<tr class="text-center">
 							<td>아이피</td>
-							<td><form:input path="fr_ip" readonly="true" /></td>
+							<td><form:input path="fr_ip" readonly="true" style="width: 100%;"/></td>
 							<td>조회수</td>
-							<td><form:input path="fr_hit" readonly="true" /></td>
+							<td><form:input path="fr_hit" readonly="true" style="width: 100%;"/></td>
 						</tr>
 						<tr class="text-center">
 							<td>내용</td>
-							<td colspan="3"><form:textarea path="fr_content" /></td>
+							<td colspan="3"><form:textarea path="fr_content" style="width: 100%; height:100%;"/></td>
 						</tr>
 					</table>
-					<div class="row">
+					<div class="row" style="margin-left: 1px;">
 						<a href="freeBoardList" class="btn btn-default btn-sm">회원 목록</a>
 						<button type="submit" class="btn btn-sm btn-success">수정</button>
 					</div>

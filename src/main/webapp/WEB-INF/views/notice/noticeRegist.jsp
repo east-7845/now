@@ -5,8 +5,7 @@
 <html>
 <head>
 <%@include file="/WEB-INF/inc/common_header.jsp"%>
-
-<title>결과</title>
+<title> 결과 </title>
 </head>
 <body>
 	<%@include file="/WEB-INF/inc/now_top.jsp"%>

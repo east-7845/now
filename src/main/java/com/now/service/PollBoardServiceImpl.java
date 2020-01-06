@@ -37,7 +37,7 @@ public class PollBoardServiceImpl implements IPollBoardService{
 	}
 
 	@Override
-	public int deletePollBoard(PollBoardVO pollBoard) throws Exception {
+	public int deletePollBoard(int po_no) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
 	}

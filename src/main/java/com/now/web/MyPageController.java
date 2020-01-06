@@ -24,7 +24,7 @@ public class MyPageController {
 	private ILoginService loginService;
 	
 	@Autowired
-	IMyPageService myPageService;
+	private IMyPageService myPageService;
 	
 	@RequestMapping(value = "/myPage/myPage")
 	public String loginCheck(HttpServletRequest req) throws Exception {
@@ -37,7 +37,7 @@ public class MyPageController {
 		
 		if(sessionVO.getEmp_no().equals("NOW0000001")) return "forward:/myPage/myPageEmpList";
 		
-		EmployeeVO employeeVO = loginService.selectEmp(sessionVO);
+		EmployeeVO employeeVO = myPageService.selectMyPage(sessionVO);
 		req.setAttribute("employee", employeeVO);
 		
 		if(employeeVO.getEmp_id() == null) return "forward:/myPage/myPageEdit";
@@ -56,7 +56,6 @@ public class MyPageController {
 		
 		req.setAttribute("rank", commonRank);
 		req.setAttribute("dept", commonDept);
-		
 		if(employeeVO.getEmp_no() == null) {
 			EmployeeVO employee = (EmployeeVO) req.getAttribute("employee");
 			req.setAttribute("employee", employee);
@@ -72,6 +71,8 @@ public class MyPageController {
 		String view = "myPage/myPageEdit";
 		System.out.println("/myPage/myPageModify : myPageConttroller");
 		System.out.println(employeeVO.getEmp_id());
+		System.out.println(employeeVO.getEmp_no());
+		System.out.println(employeeVO.getEmp_yn());
 		int updateEmployee = myPageService.updateMyPage(employeeVO);
 		
 		if(updateEmployee == 1) view = "forward:/myPage/myPage";
@@ -130,7 +131,7 @@ public class MyPageController {
 		System.out.println("/myPage/myPageEmpInfo : myPageConttroller");
 		System.out.println(employeeVO.getEmp_no());
 		
-		EmployeeVO employee = loginService.selectEmp(employeeVO);
+		EmployeeVO employee = myPageService.selectEmployee(employeeVO);
 		
 		req.setAttribute("employee", employee);
 

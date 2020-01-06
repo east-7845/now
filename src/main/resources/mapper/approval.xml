@@ -4,8 +4,28 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="com.now.dao.IApprovalDao">
+	<sql id="PAGING_PREFIX">
+		SELECT * 
+		  FROM ( SELECT rownum rnum, a.* 
+		           FROM (
+	</sql>
+	
+	<sql id="PAGING_SUFFIX">
+		<![CDATA[
+	                    ) a WHERE rownum <= #{endRow} 
+	           ) b 
+	      WHERE rnum >= #{startRow}
+	    ]]>
+	</sql>
+	
+	<select id="selectDraftCount" parameterType="com.now.vo.FreeBoardSearchVO" resultType="int">
+		SELECT COUNT(*) CNT
+		FROM DRAFT
+		WHERE DRAFT_DEL = 'N'
+	</select>
 
-	<select id="selectDraft" resultType="com.now.vo.DraftVO">
+	<select id="selectDraft" parameterType="com.now.vo.FreeBoardSearchVO" resultType="com.now.vo.DraftVO">
+		<include refid="PAGING_PREFIX"/>
 		SELECT DRAFT_NO
 			 , DRAFT_NAME
 			 , DRAFT_CONTENT
@@ -13,6 +33,7 @@
 			 , DRAFT_DEL
 		 FROM DRAFT
 		WHERE DRAFT_DEL = 'N'
+		<include refid="PAGING_SUFFIX"/>
 	</select>
 	
 	<insert id="insertDraft" parameterType="com.now.vo.DraftVO">
@@ -58,5 +79,206 @@
 		 ORDER BY EMP_DEPARTMENT
 		 		 , EMP_RANK
 	</select>
+	
+	<select id="selectGrantRank" resultType="com.now.vo.EmployeeVO">
+		SELECT DISTINCT(EMP_DEPARTMENT)
+		  FROM EMPLOYEE
+		 ORDER BY EMP_DEPARTMENT
+	</select>
+	
+	<insert id="insertApproval" parameterType="com.now.vo.ApprovalVO">
+		INSERT INTO APPROVAL(APP_NO
+							 , APP_EMP_NO
+							 , APP_DRAFT_NO
+							 , APP_NAME
+							 , APP_CONTENT
+							 , APP_STATE
+							 , APP_DEL )
+						VALUES('APP' || TRIM(TO_CHAR(SEQ_APPROVAL_NO.NEXTVAL, '0000000'))
+							  , #{app_emp_no}
+							  , #{app_draft_no}
+							  , #{app_name}
+							  , #{app_content}
+							  , '0'
+							  , 'N')
+	</insert>
+	
+	<select id="selectAppNo" resultType="String">
+		SELECT MAX(APP_NO)
+		  FROM APPROVAL
+	</select>
+	
+	<insert id="insertGrant" parameterType="com.now.vo.ApprovalVO">
+		INSERT INTO APPROVAL_GRANT(GRANT_APP_NO
+									, GRANT_STATE
+									, GRANT_EMP_NO1
+						<choose>
+							<when test="grant_emp_no2 != ''">
+									, GRANT_EMP_NO2
+							</when>
+						</choose>
+						<choose>
+							<when test="grant_emp_no3 != ''">
+									, GRANT_EMP_NO3
+							</when>
+						</choose>
+						<choose>
+							<when test="grant_emp_no4 != ''">
+									, GRANT_EMP_NO4
+							</when>
+						</choose>
+									)
+						VALUES(#{grant_app_no}
+							  , '0'
+							  , #{grant_emp_no1}
+						<choose>
+							<when test="grant_emp_no2 != ''">
+							  , #{grant_emp_no2}
+							</when>
+						</choose>
+						<choose>
+							<when test="grant_emp_no3 != ''">
+							  , #{grant_emp_no3}
+							</when>
+						</choose>
+						<choose>
+							<when test="grant_emp_no4 != ''">
+							  , #{grant_emp_no4}
+							</when>
+						</choose>
+							  )
+	</insert>
+	
+	<select id="selectApprovalCount" parameterType="com.now.vo.FreeBoardSearchVO" resultType="int">
+		SELECT COUNT(*) CNT
+		  FROM APPROVAL
+		 WHERE APP_DEL = 'N'
+		   AND APP_EMP_NO = #{searchWord}
+	</select>
+	
+	<select id="selectMyApprovalList" parameterType="com.now.vo.FreeBoardSearchVO" resultType="com.now.vo.ApprovalVO">
+		<include refid="PAGING_PREFIX"/>
+		SELECT APP_NO
+			 , APP_EMP_NO
+			 , APP_NAME
+			 , APP_STATE
+		  FROM APPROVAL
+		 WHERE APP_DEL = 'N'
+		   AND APP_EMP_NO = #{searchWord}
+		<include refid="PAGING_SUFFIX"/>
+	</select>
+	
+	<select id="selectMyApproval" parameterType="String" resultType="com.now.vo.ApprovalVO">
+		SELECT A.APP_NO
+			 , A.APP_EMP_NO
+			 , A.APP_NAME
+			 , A.APP_CONTENT
+			 , B.GRANT_STATE
+			 , B.GRANT_APP_NO
+			 , D.EMP_NO
+			 , D.EMP_NAME
+			 , B.GRANT_EMP_NO1
+			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO1) GRANT_EMP_NAME1
+			 , (SELECT E.COM_NAME FROM EMPLOYEE, (SELECT DISTINCT(COM_NAME), COM_CD FROM COMMON, EMPLOYEE WHERE EMP_RANK = COM_CD ORDER BY COM_CD) E WHERE EMP_NO = B.GRANT_EMP_NO1 AND EMP_RANK = E.COM_CD) GRANT_RANK1
+			 , B.GRANT_EMP_NO2
+			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO2) GRANT_EMP_NAME2
+			 , (SELECT E.COM_NAME FROM EMPLOYEE, (SELECT DISTINCT(COM_NAME), COM_CD FROM COMMON, EMPLOYEE WHERE EMP_RANK = COM_CD ORDER BY COM_CD) E WHERE EMP_NO = B.GRANT_EMP_NO2 AND EMP_RANK = E.COM_CD) GRANT_RANK2
+			 , B.GRANT_EMP_NO3
+			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO3) GRANT_EMP_NAME3
+			 , (SELECT E.COM_NAME FROM EMPLOYEE, (SELECT DISTINCT(COM_NAME), COM_CD FROM COMMON, EMPLOYEE WHERE EMP_RANK = COM_CD ORDER BY COM_CD) E WHERE EMP_NO = B.GRANT_EMP_NO3 AND EMP_RANK = E.COM_CD) GRANT_RANK3
+			 , B.GRANT_EMP_NO4
+			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO4) GRANT_EMP_NAME4
+			 , (SELECT E.COM_NAME FROM EMPLOYEE, (SELECT DISTINCT(COM_NAME), COM_CD FROM COMMON, EMPLOYEE WHERE EMP_RANK = COM_CD ORDER BY COM_CD) E WHERE EMP_NO = B.GRANT_EMP_NO4 AND EMP_RANK = E.COM_CD) GRANT_RANK4
+			 , C.DRAFT_NAME
+		  FROM APPROVAL A
+			 , APPROVAL_GRANT B
+			 , DRAFT C
+			 , EMPLOYEE D
+		 WHERE A.APP_DEL = 'N'
+		   AND A.APP_NO = B.GRANT_APP_NO
+		   AND A.APP_DRAFT_NO = C.DRAFT_NO
+		   AND A.APP_EMP_NO = D.EMP_NO
+		   AND A.APP_NO = #{app_no}
+<!-- 		SELECT A.APP_NO -->
+<!-- 			 , A.APP_EMP_NO -->
+<!-- 			 , A.APP_NAME -->
+<!-- 			 , A.APP_CONTENT -->
+<!-- 			 , B.GRANT_STATE -->
+<!-- 			 , B.GRANT_APP_NO -->
+<!-- 			 , D.EMP_NO -->
+<!-- 			 , D.EMP_NAME -->
+<!-- 			 , B.GRANT_EMP_NO1 -->
+<!-- 			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO1) GRANT_EMP_NAME1 -->
+<!-- 			 , B.GRANT_EMP_NO2 -->
+<!-- 			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO2) GRANT_EMP_NAME2 -->
+<!-- 			 , B.GRANT_EMP_NO3 -->
+<!-- 			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO3) GRANT_EMP_NAME3 -->
+<!-- 			 , B.GRANT_EMP_NO4 -->
+<!-- 			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO4) GRANT_EMP_NAME4 -->
+<!-- 			 , C.DRAFT_NAME -->
+<!-- 		  FROM APPROVAL A -->
+<!-- 			 , APPROVAL_GRANT B -->
+<!-- 			 , DRAFT C -->
+<!-- 			 , EMPLOYEE D -->
+<!-- 		 WHERE A.APP_DEL = 'N' -->
+<!-- 		   AND A.APP_NO = B.GRANT_APP_NO -->
+<!-- 		   AND A.APP_DRAFT_NO = C.DRAFT_NO -->
+<!-- 		   AND A.APP_EMP_NO = D.EMP_NO -->
+<!-- 		   AND A.APP_NO = #{app_no} -->
+	</select>
+	
+	<select id="selectGrantCount" parameterType="com.now.vo.FreeBoardSearchVO" resultType="int">
+		SELECT COUNT(*) CNT
+		  FROM APPROVAL A
+			 , APPROVAL_GRANT B
+			 , DRAFT C
+		 WHERE A.APP_DEL = 'N'
+		   AND A.APP_NO = B.GRANT_APP_NO
+		   AND A.APP_DRAFT_NO = C.DRAFT_NO
+		   AND (B.GRANT_EMP_NO1 = #{searchWord}
+			OR B.GRANT_EMP_NO2 = #{searchWord}
+			OR B.GRANT_EMP_NO3 = #{searchWord}
+			OR B.GRANT_EMP_NO4 = #{searchWord} )
+	</select>
+	
+	<select id="selectGrantApproval" parameterType="com.now.vo.FreeBoardSearchVO" resultType="com.now.vo.ApprovalVO">
+		<include refid="PAGING_PREFIX"/>
+		SELECT A.APP_NO
+			 , A.APP_EMP_NO
+			 , A.APP_NAME
+			 , B.GRANT_STATE
+			 , B.GRANT_EMP_NO1
+			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO1) GRANT_EMP_NAME1
+			 , B.GRANT_EMP_NO2
+			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO2) GRANT_EMP_NAME2
+			 , B.GRANT_EMP_NO3
+			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO3) GRANT_EMP_NAME3
+			 , B.GRANT_EMP_NO4
+			 , (SELECT EMP_NAME FROM EMPLOYEE WHERE EMP_NO = B.GRANT_EMP_NO4) GRANT_EMP_NAME4
+			 , C.DRAFT_NAME
+		  FROM APPROVAL A
+			 , APPROVAL_GRANT B
+			 , DRAFT C
+		 WHERE A.APP_DEL = 'N'
+		   AND A.APP_NO = B.GRANT_APP_NO
+		   AND A.APP_DRAFT_NO = C.DRAFT_NO
+		   AND (B.GRANT_EMP_NO1 = #{searchWord}
+			OR B.GRANT_EMP_NO2 = #{searchWord}
+			OR B.GRANT_EMP_NO3 = #{searchWord}
+			OR B.GRANT_EMP_NO4 = #{searchWord} )
+		<include refid="PAGING_SUFFIX"/>
+	</select>
+	
+	<update id="updateGrant" parameterType="com.now.vo.ApprovalVO">
+		UPDATE APPROVAL_GRANT
+		   SET GRANT_STATE = #{grant_state}
+		 WHERE GRANT_APP_NO = #{grant_app_no}
+	</update>
+	
+	<update id="updateApproval" parameterType="com.now.vo.ApprovalVO">
+		UPDATE APPROVAL
+		   SET APP_STATE = '1'
+		 WHERE APP_NO = #{grant_app_no}
+	</update>
 	
 </mapper>

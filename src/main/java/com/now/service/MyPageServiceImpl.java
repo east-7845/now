@@ -41,5 +41,15 @@ public class MyPageServiceImpl implements IMyPageService {
 		return myPageDao.insertEmp(employeeVO);
 
 	}
+
+	@Override
+	public EmployeeVO selectMyPage(EmployeeVO employeeVO) {
+		return myPageDao.selectMyPage(employeeVO);
+	}
+
+	@Override
+	public EmployeeVO selectEmployee(EmployeeVO employeeVO) {
+		return myPageDao.selectEmployee(employeeVO);
+	}
 	
 }

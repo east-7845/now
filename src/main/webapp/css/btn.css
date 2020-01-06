@@ -10,7 +10,7 @@
 	border: ridge 1px #ffffff;
 	text-shadow: 1px 1px 0px #528ecc;
 	box-shadow: inset 1px 1px 0px -50px #bbdaf7;
-	width: 200px;
+	width: 300px;
 	height: 100px;
 }
 
@@ -30,6 +30,10 @@
 .top_button-icon i {
 	position: relative;
 	top: 5px;
+}
+
+.top_button-text{
+	margin-left: 50px;
 }
 
 .btn_home {

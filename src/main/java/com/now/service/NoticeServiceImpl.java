@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.now.dao.INoticeDao;
+import com.now.vo.NoticeSearchVO;
 import com.now.vo.NoticeVO;
 
 @Service
@@ -15,9 +16,15 @@ public class NoticeServiceImpl implements INoticeService{
 	private INoticeDao noticeDao ;	
 	
 	@Override
-	public List<NoticeVO> selectNoticeList() throws Exception {
+	public List<NoticeVO> selectNoticeList(NoticeSearchVO ntSearchVO) throws Exception {
 		
-		return noticeDao.selectNoticeList();
+		int rowCount = noticeDao.selectNoticeCount(ntSearchVO);
+		ntSearchVO.setTotalRowCount(rowCount);
+		ntSearchVO.pageSetting();
+		
+		List<NoticeVO> list = noticeDao.selectNoticeList(ntSearchVO);
+		
+		return list;
 	}
 
 	@Override
@@ -40,9 +47,14 @@ public class NoticeServiceImpl implements INoticeService{
 	}
 
 	@Override
-	public int deleteNotice(NoticeVO noticeVO) throws Exception {
-		return noticeDao.deleteNotice(noticeVO);
+	public int deleteNotice(int nt_no) throws Exception {
+		return noticeDao.deleteNotice(nt_no);
 	}
 
+	@Override
+	public int selectnoticeCount(int nt_no) throws Exception {
+		
+		return noticeDao.deleteNotice(nt_no);
+	}
 
 }
