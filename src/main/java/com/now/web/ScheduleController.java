@@ -24,7 +24,6 @@ public class ScheduleController {
 	
 	
 	@RequestMapping(value="/schedule/schList")
-	@ResponseBody
 	public String scheduleList(HttpServletRequest req) throws Exception {
 		
 		return "schedule/schView";
@@ -47,13 +46,20 @@ public class ScheduleController {
 	
 	@RequestMapping(value="/schedule/schInput")
 	@ResponseBody
-	public String scheduleInput(HttpServletRequest req,String checkValue, String startStr, String endStr) throws Exception {
+	public String scheduleInput(HttpServletRequest req, String checkValue, String startStr, String endStr) throws Exception {
 		
 		Map<String,Object> map = new HashMap<String, Object>();
 		EmployeeVO attribute = (EmployeeVO)req.getSession().getAttribute("sessionEmp");
 		List<ScheduleVO> list = scService.selectScList(attribute.getEmp_no());
-		
 		Date date = new Date(); 	// 현재 날짜
+		
+		if(checkValue == "출근") {
+			
+		}else if(checkValue == "퇴근") {
+			
+		}else if(checkValue == "휴가") {
+			
+		}
 		
 		return "schedule/schView";
 	}

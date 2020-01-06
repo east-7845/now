@@ -69,15 +69,7 @@ public class LoginController {
         // API 미세먼지 값 가져오기.
         JSONObject jsonobject = (JSONObject)jsonparser.parse(buffer.toString());
         JSONArray array = (JSONArray) jsonobject.get("list");
-        JSONObject entity = (JSONObject)array.get(0);
-        String day = (String) entity.get("dataTime");
-        String dust = (String) entity.get("pm25Grade1h");
-		
-        System.out.println("day"+dust);
-        System.out.println("dust"+day);
-		// 메인페이지 용권 작업
-        req.setAttribute("dust", dust); // 오픈 API 미세먼지
-        req.setAttribute("dustDay", day); // 측정일
+
 		session.setAttribute("sessionEmp", vo);
 
 		return view;

@@ -428,8 +428,6 @@ select.filter {
 									},
 									success : function(result){
 										calendar.addEvent({'title':'출근', 'start': info.dateStr, 'end':info.endStr});
-										
-										
 									}
 								});
 						}
@@ -458,14 +456,18 @@ select.filter {
 					$.ajax({
 					 	url : "<c:url value='/schedule/schList' />",
 						success : function(result){
-							for( var list in result) {
-								console.log(list.sc_emp_no);
-								console.log(list.sc_date);
-								console.log(list.sc_attendance);
-								console.log(list.sc_leave);
-								console.log(list.sc_date_leng);
-								console.log(list.sc_division);
-								console.log(list.sc_status);
+							if(result != null){
+								for( var list in result) {
+									console.log(list.sc_emp_no);
+									console.log(list.sc_date);
+									console.log(list.sc_attendance);
+									console.log(list.sc_leave);
+									console.log(list.sc_date_leng);
+									console.log(list.sc_division);
+									console.log(list.sc_status);
+								}	
+							}else{
+								
 							}
 							
 // 							for(int i = 0; i<result.length; i++){

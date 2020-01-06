@@ -228,7 +228,8 @@
 			}
 		
 			document.getElementsByClassName("top_menu")[2].onclick = function() { // 투표
-				location.href = "/now/pollboard/pollBoardList";
+				//location.href = "/now/pollboard/pollBoardList";
+				location.href = "/now/schedule/schList";
 			}
 		
 			document.getElementsByClassName("top_menu")[3].onclick = function() { // 채팅
